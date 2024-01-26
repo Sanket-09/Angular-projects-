@@ -16,7 +16,7 @@ export class ParentComponent implements OnInit {
   constructor() { }
 
   sendInfo(){
-    this.messageSent = true
+    this.messageSent = !this.messageSent  
   }
 
   ngOnInit(): void {
