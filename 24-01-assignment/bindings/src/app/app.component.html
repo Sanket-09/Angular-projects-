@@ -1,0 +1,45 @@
+<h3>Example of interpolation</h3>
+
+<h4>My name is {{myName}}</h4>
+
+<p [innerText]="title"> </p>
+<br>
+<h2>Below button is disabled because of property binding</h2>
+<span>
+  <button [disabled] = "isDisabled" style="width: 200px; height: 40px;">I am disabled using property binding</button>
+  <button [disabled] = false  style="width: 200px; height: 40px;">I am enabled by hardcoding the value inside binding target</button>
+</span>
+
+<br> <br> <br>
+<p>The property binding has special syntaxes for setting the class & styles. Also, both interpolation & property binding does not set the attributes of the HTML elements. Hence we have an attribute binding to such situations</p>
+<br> <br> <br>
+
+<p>the color and background color below is changed using class binding</p>
+<div [className]="cssStringVar">Test</div>
+<br><br>
+
+<p>demostrating Class binding with Class</p>
+<div [class.redColor] = "false" [class.yellowColor] = "true">Test</div>
+
+
+
+<!-- Conditionally binding class
+To dynamically or conditionally bind a class, First create a variable in the component class as shown below.
+
+hasError:false;
+
+<div [class.red]="hasError" [class.size20]="hasError">Test</div>  
+
+You can also create a function hasError(), which should return true or false as shown below.
+
+hasError() {
+   return false
+}
+
+use it like 
+
+<div [class.red]="hasError()" [class.size20]="hasError()">Test</div> -->
+
+
+
+ 

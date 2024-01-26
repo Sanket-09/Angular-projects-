@@ -1,0 +1,82 @@
+h1 h2 h3 h4 h5 h6 label input{
+    font-family: sans-serif;
+}
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 12px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border-top: 0px solid white;
+  border-right: 0px solid white;
+  border-left: 0px solid white;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  display: block;
+  margin: 4vw 0;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+  border-radius: 2vw;
+  align-items: center;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the avatar image inside this container */
+
+/* Avatar image */
+
+/* Add padding to containers */
+.container {
+  padding: 20px;
+  background-color: white;
+  border: 3px solid #f1f1f1;
+  color: black;
+  box-shadow: 2px 2px black;
+  border-radius: 10px;
+  max-width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+}
+
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+
+.grid
+{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;  
+}

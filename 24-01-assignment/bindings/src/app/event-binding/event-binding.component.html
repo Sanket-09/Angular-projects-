@@ -1,0 +1,26 @@
+<p>Event binding allows us to bind events such as keystroke, clicks, hover, touche, etc to a method in component. It is
+  one way from view to component. By tracking the user events in the view and responding to it, we can keep our
+  component in sync with the view. <br><br> <b>For Example, when the user changes to an input in a text box, we can update the model
+    in the component, run some validations, etc. When the user submits the button, we can then save the model to the
+    backend server.</b></p>
+
+  <h3>Views  ~~~>  Components</h3>
+
+
+<h2 [innerHTML]="title"> </h2>
+<h4>Below is example of event binding</h4>
+<button (click) = "clickMe()"> Increment</button>
+<button (click) = "ResetMe()"> Reset</button>
+<h5>You have clicked {{count}} times </h5>
+
+
+<div class="product">
+    <!-- <input class="prodInput" [value]="searchText" (input) = updatedSearchEvent($event)> //this is using event binding and property binding simultaneously -->
+    <input class="prodInput" [(ngModel)]="searchText"> 
+    <button class ="search">Search</button>
+</div>
+
+<div class="information">
+    <p>using double curly brackets<strong> {{searchText}} </strong></p>
+</div>
+

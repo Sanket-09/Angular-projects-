@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HEAPS</title>
+  <link href="style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="icon" href="assets/YNOS431909.jpg" type="HEAPS Logo">
+</head>
+
+<body>
+  <header>
+    <div class="page-header">
+      <div class="logo">
+        <p>
+          <a href="#">
+            <img src="assets/companyLogo.png" alt="HEAPS LOGO" style="width: 70%;" />
+          </a>
+        </p>
+      </div>
+      <div class="menu-items">
+        <a href="#whoAreWe" class="active">Who we are</a>
+        <a href="#teamId">Team</a>
+
+
+        <div class="hover-div">
+          What we do
+          <div class="hover-div-content">
+            <hr style="color: orangered; width: 1%; margin-top: -25px; padding: 0; margin-left: 0;">
+            <br>
+            <a href="pages/whatWeDo/corporate/corporate.html">For Corporates</a>
+
+            <a href="pages/whatWeDo/hospitals/hospital.html">For Hospitals</a>
+
+            <a href="pages/whatWeDo/insurers/insurers.html">For Insurers</a>
+            <br>
+          </div>
+        </div>
+
+        <a href="pages/news/news.html">News</a>
+        <a href="pages/Career/career.html">Careers</a>
+        <a href="pages/contactUs/contactUs.html">Contact us</a>
+      </div>
+      <a id="menu-icon" class="menu-icon" onclick="onMenuClick()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </header>
+
+
+  <div class="content-grid">
+    <div class="content-column">
+      <h2 style="text-align: left; font-weight: bold; flex-wrap: wrap;">A Pioneer In Health Care Management &
+        Coordination</h2>
+      <h3 style="text-align: left; font-size: 1em; font-family: sans-serif; font-weight: 300;">Creating Trust,
+        Transparency & Value For Payers, Providers &
+        Patients</h3>
+      <a href="/pages/contactUs/contactUs.html"><button>Get in Touch</button></a>
+
+    </div>
+    <div class="content-column">
+      <img src="https://smartifysol.com/wp-content/uploads/2023/12/digital-transform.svg" alt="Description of the image"
+        style="float:end;" />
+    </div>
+  </div>
+
+  <div class="statistics-grid">
+    <div class="statistics-column" style="justify-content: start;">
+      <div class="statistics-row">
+        <img
+          src="https://fieldworkhub.com/wp-content/uploads/2021/09/group-of-young-people-viewing-laptop-as-part-of-market-research.jpg"
+          alt="Description of the image" style="width: 100%;" />
+      </div>
+      <div class="statistics-row">
+        <div class="counter">5M+ </div>
+        <div class="counter">25+</div>
+        <div class="counter">5+</div>
+      </div>
+    </div>
+    <div class="statistics-column" id="whoAreWe" style="background-color: #29378c;">
+      <h2>About the company</h2>
+      <p>
+        HEAPS is an expert led AI-driven health tech platform that helps in optimising care management. HEAPS uses
+        cutting-edge technologies, data analytics and artificial intelligence to create highly efficient and effective
+        care management systems for insurers, hospitals, corporates and patients. HEAPS was founded by Dr.Suman
+        Katragadda in the year 2020 and has rapidly evolved in a short span of time to become a transformational leader
+        in the health tech space in India. It is making inroads into the North American market and plans to enter Europe
+        and the MENA region this year.
+        <br><br>
+        The company is backed by a host of marquee investors and has raised a Series A fund of $7.4 million in January
+        2022.
+      </p>
+    </div>
+  </div>
+  <div>
+    <iframe src="frames/news/news.html" id="newsScroll" frameborder="0" scrolling="no" onload="resizeIframe(this)"
+      style=" width: 100%;"></iframe>
+  </div>
+
+  <div>
+    <iframe src="frames/team/team.html" frameborder="0" scrolling="no" onload="resizeIframe(this)" style=" width: 100%;"
+      id="teamId"></iframe>
+  </div>
+
+  <div>
+    <iframe src="frames/whatWeDo/whatWeDo.html" frameborder="0" scrolling="no" onload="resizeIframe(this)"
+      style=" width: 100%;"></iframe>
+  </div>
+
+  <div>
+    <iframe src="frames/heathcareInfo/healthcareInfo.html" frameborder="0" scrolling="no" onload="resizeIframe(this)"
+      style=" width: 100%;"></iframe>
+  </div>
+
+  <div>
+    <iframe src="frames/offices/offices.html" frameborder="0" scrolling="no" onload="resizeIframe(this)"
+      style=" width: 100%;"></iframe>
+  </div>
+
+</body>
+
+<script>
+  function onMenuClick() {
+    var navbar = document.querySelector(".menu-items");
+    var responsive_class_name = "responsive";
+
+    navbar.classList.toggle(responsive_class_name);
+  }
+
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+  }
+</script>
+
+</html>

@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FCFCFD;
+  margin: 20px;
+  padding-top: 1.3vw;
+  padding-bottom: 1.3vw;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 1.5vw;
+}
+
+.main-heading {
+  text-align: center;
+  font-size: 3vw;
+  font-weight: bold;
+  color: #f2534b;
+  font-family: serif;
+  margin-bottom: 5px;
+  text-decoration: underline;
+  text-underline-offset: 1.5vw;
+}
+
+.sub-grid {
+  padding: 0px 150px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 100px;
+}
+
+.grid-item {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+
+}
+
+.grid-item img {
+  width: 80%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.grid-item h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.grid-item p {
+  font-size: 15px;
+  color: #666;
+}
+
+
+
+.statistics-grid {
+
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 2vw;
+  padding: 4vw;
+
+}
+
+.statistics-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.statistics-row {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-around;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.statistics-column button {
+  width: 150px;
+  height: 50px;
+  color: white;
+  background-color: #4b4bdb;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 0;
+  margin-top: 1.8vw;
+  ;
+}
+
+.statistics-column h2 {
+  font-family: serif;
+  font-size: 3vw;
+  margin-bottom: 2vw;
+
+}
+
+@media screen and (max-width: 940px) {
+  .sub-grid {
+    display: block;
+    grid-template-rows: repeat(1, 1fr);
+    gap: 20px;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .statistics-grid {
+    margin-top: 4.7vw;
+    display: block;
+    grid-template-rows: auto;
+
+  }
+
+  .main-heading {
+    font-size: 6vw;
+    margin-bottom: 1.5vw;
+    margin-top: 1.5vw;
+  }
+
+  .grid-item {
+    text-align: center;
+    padding: 0px;
+    background-color: #fff;
+
+  }
+
+  .statistics-column h2 {
+
+    font-size: 6vw;
+    line-height: 7vw;
+
+  }
+
+  .statistics-column p {
+
+    font-size: 1vw;
+
+
+  }
+
+}

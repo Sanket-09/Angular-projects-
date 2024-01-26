@@ -1,0 +1,39 @@
+<!-- <h4>Whole data below is rendered using the parent component and data sharing input tag is used</h4>
+<h5>{{forParent}}</h5>
+<app-child [inputFromParent] = "forChild"></app-child> -->
+<div class="grid">
+
+    <div class="grid-item">
+        <form action="">
+            <div class="container">
+              <h1 style="font-family: sans-serif; justify-content: center; text-align: center;">LOGIN</h1>
+              <br>
+              <label for="uname" style="font-family: sans-serif; font-size: small;"><b>Username</b></label>
+              <input type="text" placeholder="Enter Username" name="uname" required [(ngModel)]="userName">
+              <br><br>
+          
+              <label for="psw" style="font-family: sans-serif; font-size: small;" ><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw" required [(ngModel)]="password">
+              <span class="psw"><a href="#">Forgot password?</a></span>
+              
+              <div class="center">
+                <button (click)="sendInfo()" style="margin-top: 4vw;">Login</button> 
+                <button class="cancelbtn" (click)="this.messageSent = false"  style="margin-top: 1vw;">Cancel</button> 
+              </div>
+              
+                
+              
+             
+            </div>
+          </form>
+    </div>
+
+    <div class="grid-item">
+        <app-child *ngIf="messageSent" [receivedUserName]="userName" [receivedPassword]="password"></app-child>
+    </div>
+
+</div>
+
+
+
+
