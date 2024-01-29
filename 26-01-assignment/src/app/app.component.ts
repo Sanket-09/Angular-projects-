@@ -24,8 +24,8 @@ export class AppComponent {
     });
   }
 
-  editItem(itemId: string) {
-    this.router.navigate([`/edit-item/${itemId}`]);
+  editItem(index: number) {
+    this.router.navigate([`/edit-item/${index}`]);
   }
 
   navigateToAddItem() {

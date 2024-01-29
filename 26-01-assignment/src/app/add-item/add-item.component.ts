@@ -15,6 +15,7 @@ export class AddItemComponent implements OnInit {
   ngOnInit() {
    
     this.newItemForm = this.fb.group({
+      index: ['', [Validators.required]],
       image: ['', [Validators.required]],
       addedBy: ['', [Validators.required]],
       createdDate: ['', [Validators.required]],

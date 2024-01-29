@@ -42,7 +42,7 @@ export class DataService {
   private storeGridItems(items: any[]) {
     localStorage.setItem('gridItems', JSON.stringify(items));
   }
-
+  
   getStoredGridItems(): any[] {
     const storedItems = localStorage.getItem('gridItems');
     return storedItems ? JSON.parse(storedItems) : [];
