@@ -1,0 +1,43 @@
+
+<div>
+  <h2>Edit Item</h2>
+
+  <form [formGroup]="itemForm" (ngSubmit)="saveChanges()">
+    <label for="image">Image:</label>
+    <input
+      type="text"
+      id="image"
+      name="image"
+      formControlName="image"
+      required
+    />
+
+    <label for="addedBy">Added By:</label>
+    <input
+      type="text"
+      id="addedBy"
+      name="addedBy"
+      formControlName="addedBy"
+      required
+    />
+
+    <label for="createdDate">Created Date:</label>
+    <input
+      type="text"
+      id="createdDate"
+      name="createdDate"
+      formControlName="createdDate"
+      required
+    />
+
+    <label for="marketingRights">Marketing Rights:</label>
+    <textarea
+      id="marketingRights"
+      name="marketingRights"
+      formControlName="marketingRights"
+      required
+    ></textarea>
+
+    <button type="submit">Save Changes</button>
+  </form>
+</div>

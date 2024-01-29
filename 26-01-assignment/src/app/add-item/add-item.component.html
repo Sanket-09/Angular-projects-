@@ -1,0 +1,20 @@
+
+
+<div>
+  <h2>Add New Item</h2>
+  <form [formGroup]="newItemForm" (ngSubmit)="onSubmit()">
+    <label for="image">Image:</label>
+    <input type="text" id="image" formControlName="image" />
+
+    <label for="addedBy">Added By:</label>
+    <input type="text" id="addedBy" formControlName="addedBy" />
+
+    <label for="createdDate">Created Date:</label>
+    <input type="date" id="createdDate" formControlName="createdDate" />
+
+    <label for="marketingRights">Marketing Rights:</label>
+    <textarea id="marketingRights" formControlName="marketingRights"></textarea>
+
+    <button type="submit">Add Item</button>
+  </form>
+</div>
