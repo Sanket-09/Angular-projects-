@@ -15,7 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EditItemComponent implements OnInit {
   item: any;
   itemForm!: FormGroup;
-  index!: number;
+  id!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,14 +27,11 @@ export class EditItemComponent implements OnInit {
   ngOnInit() {
 
       console.log('component initialised');
-      this.index = +this.route.snapshot.paramMap.get('index')!;
-      
-      console.log('Index:', this.index);
+      this.id = +this.route.snapshot.params['index'];
+      console.log('Index:', this.id);
 
-     
-
-      if (this.index !== undefined) {
-        this.item = this.dataService.getGridItem(this.index) || {};
+      if (this.id !== undefined) {
+        this.item = this.dataService.getGridItem(this.id) || {};
 
         // Initialize the form with validators as needed
         this.itemForm = this.fb.group({
@@ -50,10 +47,10 @@ export class EditItemComponent implements OnInit {
   }
 
   saveChanges() {
-    if (this.index !== undefined) {
-  
+    if (this.id !== undefined) {
+      
       const updatedItem = { ...this.itemForm.value };
-      this.dataService.updateGridItem(this.index, updatedItem);
+      this.dataService.updateGridItem(this.id, updatedItem);
 
       this.router.navigate(['/']);
     } else {

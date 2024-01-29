@@ -1,9 +1,10 @@
 <!-- app.component.html -->
 
 <body>
-  <div class="logo">
+  <a href="http://localhost:4200/"><div class="logo">
     <img src="../favicon.ico" alt="Your Logo" />
-  </div>
+  </div></a>
+  
 
   <h1 style="font-family: sans-serif">Lorem ipsum dolor sit amet.</h1>
 
@@ -18,28 +19,37 @@
   </p>
 
   <!-- Grid -->
-  <div class="grid-container">
-    <div class="grid-item" *ngFor="let item of gridItems; let i = index">
-      <div class="card" (click)="editItem(item.id)">
-        <!-- Nested Grid for Image and Information -->
-        <div class="nested-grid">
-          <div class="upper-half">
-            <img src="{{ item.image }}" alt="Card Image" class="nested-image" />
-            <div class="overlay">
-              <p>Marketing Rights: {{ item.marketingRights }}</p>
+  <div *ngIf="!showAddItem && !showEditItem">
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let item of gridItems; let i = index">
+        <div class="card" (click)="editItem(item.id)">
+          
+          <!-- Nested Grid for Image and Information -->
+          <div class="nested-grid">
+            <div class="upper-half">
+              <img src="{{ item.image }}" alt="Card Image" class="nested-image" />
+              <div class="overlay">
+                <p>Marketing Rights: {{ item.marketingRights }}</p>
+              </div>
             </div>
-          </div>
-          <div class="lower-half">
-            <!-- Information about Added By and Date -->
-            <div class="user-info">
-              <p class="user-name">{{ item.addedBy }}</p>
-              <p class="user-name">{{ item.createdDate }}</p>
+            <div class="lower-half">
+              <!-- Information about Added By and Date -->
+              <div class="user-info">
+                <p class="user-name">{{ item.addedBy }}</p>
+                <p class="user-name">{{ item.createdDate }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <button (click)="navigateToAddItem()" class="button-3">Add New Item</button>
+    <router-outlet></router-outlet>
   </div>
-  <button (click)="navigateToAddItem()" class="button-3">Add New Item</button>
-  <router-outlet></router-outlet>
-</body>
+
+  <div *ngIf="showAddItem">
+  <app-add-item></app-add-item>
+  </div>
+
+  </body>
+  

@@ -18,9 +18,9 @@ export class DataService {
     return this.gridItemsSubject.value;
   }
 
-  getGridItem(index: number) {
+  getGridItem(id: number) {
     const items = this.gridItemsSubject.value;
-    return items[index];
+    return items[id];
   }
 
   addGridItem(item: any) {
@@ -30,10 +30,10 @@ export class DataService {
     this.storeGridItems(updatedItems);
   }
 
-  updateGridItem(index: number, updatedItem: any) {
+  updateGridItem(id: number, updatedItem: any) {
     const items = this.gridItemsSubject.value;
-    if (index >= 0 && index < items.length) {
-      items[index] = updatedItem;
+    if (id >= 0 && id < items.length) {
+      items[id] = updatedItem;
       this.gridItemsSubject.next([...items]);
       this.storeGridItems(items);
     }
@@ -42,7 +42,7 @@ export class DataService {
   private storeGridItems(items: any[]) {
     localStorage.setItem('gridItems', JSON.stringify(items));
   }
-  
+
   getStoredGridItems(): any[] {
     const storedItems = localStorage.getItem('gridItems');
     return storedItems ? JSON.parse(storedItems) : [];

@@ -9,13 +9,20 @@ import { DataService } from '../data.service';
 })
 export class AddItemComponent implements OnInit {
   newItemForm!: FormGroup;
+  gridItems!: any[];
 
   constructor(private fb: FormBuilder, private dataService: DataService) {}
 
   ngOnInit() {
+
+    this.dataService.gridItems$.subscribe((items) => {
+    
+      this.gridItems = items ? [...items] : [];
+      console.log(this.gridItems);
+    });
    
     this.newItemForm = this.fb.group({
-      index: ['', [Validators.required]],
+      id: [''],
       image: ['', [Validators.required]],
       addedBy: ['', [Validators.required]],
       createdDate: ['', [Validators.required]],
@@ -23,14 +30,18 @@ export class AddItemComponent implements OnInit {
     });
   }
 
-  onSubmit() {
 
+  onSubmit() {
+    debugger
     if (this.newItemForm.valid) {
+      this.newItemForm.value['id'] = this.gridItems.length;
       const newItem = this.newItemForm.value;
 
       this.dataService.addGridItem(newItem);
    
       this.newItemForm.reset();
     }
+
+
   }
 }

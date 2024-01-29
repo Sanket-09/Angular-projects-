@@ -2,7 +2,22 @@
 <div>
   <h2>Edit Item</h2>
 
+
+  
+    
+
   <form [formGroup]="itemForm" (ngSubmit)="saveChanges()">
+
+    <label for="id">Id:</label>
+    <input
+      type="number"
+      id="id"
+      name="id"
+      formControlName="id"
+      value="{{this.id}}"
+      required
+    />
+    
     <label for="image">Image:</label>
     <input
       type="text"
@@ -40,4 +55,5 @@
 
     <button type="submit">Save Changes</button>
   </form>
-</div>
+
+  

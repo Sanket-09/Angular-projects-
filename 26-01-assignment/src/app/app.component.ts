@@ -10,37 +10,45 @@ import { DataService } from './data.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+
+  showAddItem : boolean = false;
+  showEditItem : boolean = false;
+
+
   gridItems: any[] = this.dataService.getStoredGridItems();
 
   constructor(private router: Router, private dataService: DataService) {}
 
+  onItemClick(index:number){
+    console.log('the index is', index)
+  }
   
 
   ngOnInit() {
    
     this.dataService.gridItems$.subscribe((items) => {
     
-      this.gridItems = items ? [...this.getExistingItems(), ...items] : [];
+      this.gridItems = items ? [...items] : [];
+      console.log(this.gridItems);
     });
   }
 
   editItem(index: number) {
     this.router.navigate([`/edit-item/${index}`]);
+    console.log('the index is', index)
   }
 
   navigateToAddItem() {
-    this.router.navigate(['/addItem']);
+   this.showAddItem = true;
+   this.showEditItem = false;
   }
 
   editItemDetails(index: number) {
-    this.router.navigate([`/edit-item/${index}`]);
+    this.showAddItem = false;
+    this.showEditItem = true;
+    console.log('the index is', index)
   }
 
-  private getExistingItems(): any[] {
-    
-    return [
-
-    ];
-  }
+  
 
 }
