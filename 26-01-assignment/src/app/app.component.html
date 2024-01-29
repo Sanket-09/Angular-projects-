@@ -1,6 +1,6 @@
 <!-- app.component.html -->
 
-<body>
+<div *ngIf="!showAddItem && !showEditItem">
   <a href="http://localhost:4200/"><div class="logo">
     <img src="../favicon.ico" alt="Your Logo" />
   </div></a>
@@ -19,7 +19,7 @@
   </p>
 
   <!-- Grid -->
-  <div *ngIf="!showAddItem && !showEditItem">
+  <div >
     <div class="grid-container">
       <div class="grid-item" *ngFor="let item of gridItems; let i = index">
         <div class="card" (click)="editItem(item.id)">
@@ -47,9 +47,11 @@
     <router-outlet></router-outlet>
   </div>
 
-  <div *ngIf="showAddItem">
-  <app-add-item></app-add-item>
-  </div>
 
-  </body>
+
+</div>
+
+<div *ngIf="showAddItem">
+  <app-add-item></app-add-item>
+</div>
   

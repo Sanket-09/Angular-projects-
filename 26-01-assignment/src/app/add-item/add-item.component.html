@@ -1,6 +1,6 @@
 
 
-<div>
+<div *ngIf="!showMain">
   <h2>Add New Item</h2>
   <form [formGroup]="newItemForm" (ngSubmit)="onSubmit()">
 
@@ -16,6 +16,17 @@
     <label for="marketingRights">Marketing Rights:</label>
     <textarea id="marketingRights" formControlName="marketingRights"></textarea>
 
-    <button type="submit">Add Item</button>
+    <div class="bottombtn">
+      <button type="submit">Add Item</button>
+    </div>
+    
   </form>
 </div>
+
+<div class="bottombtn">
+  
+
+</div>
+
+<button (click) = "toggleShowMain()" *ngIf="!showMain" style="margin-left: auto; margin-right: auto; display: flex; justify-content: center; align-items: center;">Back</button>
+<app-root *ngIf="showMain"></app-root>

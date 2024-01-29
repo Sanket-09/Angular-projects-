@@ -126,7 +126,6 @@ p {
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 14px;
@@ -142,6 +141,11 @@ p {
   vertical-align: middle;
   white-space: nowrap;
   margin-top: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .button-3:focus:not(:focus-visible):not(.focus-visible) {

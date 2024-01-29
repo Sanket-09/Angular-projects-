@@ -35,6 +35,7 @@ export class EditItemComponent implements OnInit {
 
         // Initialize the form with validators as needed
         this.itemForm = this.fb.group({
+          id: [this.item.id, [Validators.required]],
           image: [this.item.image, [Validators.required]],
           addedBy: [this.item.addedBy, [Validators.required]],
           createdDate: [this.item.createdDate, [Validators.required]],

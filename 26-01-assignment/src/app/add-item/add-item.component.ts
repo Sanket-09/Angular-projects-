@@ -8,6 +8,10 @@ import { DataService } from '../data.service';
   styleUrls: ['./add-item.component.scss'],
 })
 export class AddItemComponent implements OnInit {
+toggleShowMain() {
+this.showMain = !this.showMain;
+}
+  showMain:boolean = false;
   newItemForm!: FormGroup;
   gridItems!: any[];
 
@@ -32,7 +36,6 @@ export class AddItemComponent implements OnInit {
 
 
   onSubmit() {
-    debugger
     if (this.newItemForm.valid) {
       this.newItemForm.value['id'] = this.gridItems.length;
       const newItem = this.newItemForm.value;
@@ -40,6 +43,7 @@ export class AddItemComponent implements OnInit {
       this.dataService.addGridItem(newItem);
    
       this.newItemForm.reset();
+      
     }
 
 
