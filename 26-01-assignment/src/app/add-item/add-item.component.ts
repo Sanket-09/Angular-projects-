@@ -12,6 +12,7 @@ toggleShowMain() {
 this.showMain = !this.showMain;
 }
   showMain:boolean = false;
+  
   newItemForm!: FormGroup;
   gridItems!: any[];
 
@@ -39,13 +40,19 @@ this.showMain = !this.showMain;
     if (this.newItemForm.valid) {
       this.newItemForm.value['id'] = this.gridItems.length;
       const newItem = this.newItemForm.value;
-
+      
       this.dataService.addGridItem(newItem);
-   
+      alert("Item Added Successfully")
       this.newItemForm.reset();
       
     }
 
+    else
+    {
+      alert("Please fill all the fields");
+    }
+    
+  
 
   }
 }
