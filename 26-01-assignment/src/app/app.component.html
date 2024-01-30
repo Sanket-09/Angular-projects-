@@ -1,6 +1,6 @@
 <!-- app.component.html -->
 
-<div *ngIf="!showAddItem && !showEditItem">
+<div *ngIf="!showAddItem  && showHomePage">
   <a href="http://localhost:4200/"><div class="logo">
     <img src="../favicon.ico" alt="Your Logo" />
   </div></a>
@@ -44,14 +44,20 @@
       </div>
     </div>
     <button (click)="navigateToAddItem()" class="button-3">Add New Item</button>
-    <router-outlet></router-outlet>
+   
   </div>
 
 
 
 </div>
 
+
+
+
 <div *ngIf="showAddItem">
   <app-add-item></app-add-item>
 </div>
+
+<router-outlet></router-outlet>
+
   

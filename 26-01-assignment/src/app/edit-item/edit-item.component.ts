@@ -16,13 +16,23 @@ export class EditItemComponent implements OnInit {
   item: any;
   itemForm!: FormGroup;
   id!: number;
+  
+  homeToggle: boolean = false;
+  editToggle: boolean = true;
+
+  toHome(){
+    this.homeToggle = !this.homeToggle;
+    this.editToggle = !this.editToggle; 
+  }
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataService,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit() {
 
@@ -34,6 +44,7 @@ export class EditItemComponent implements OnInit {
         this.item = this.dataService.getGridItem(this.id) || {};
 
         // Initialize the form with validators as needed
+        
         this.itemForm = this.fb.group({
           id: [this.item.id, [Validators.required]],
           image: [this.item.image, [Validators.required]],
@@ -44,9 +55,8 @@ export class EditItemComponent implements OnInit {
       } else {
         console.error('Index is undefined.');
       }
-
   }
-
+  
   saveChanges() {
     if (this.id !== undefined) {
       
@@ -58,4 +68,6 @@ export class EditItemComponent implements OnInit {
       console.error('Cannot save changes without a valid index.');
     }
   }
+
+  
 }

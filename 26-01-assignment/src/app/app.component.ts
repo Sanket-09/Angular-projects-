@@ -12,7 +12,8 @@ import { DataService } from './data.service';
 export class AppComponent {
 
   showAddItem : boolean = false;
-  showEditItem : boolean = false;
+  showEditItem : boolean = true;
+  showHomePage : boolean = true;
 
 
   gridItems: any[] = this.dataService.getStoredGridItems();
@@ -35,7 +36,9 @@ export class AppComponent {
 
   editItem(index: number) {
     this.router.navigate([`/edit-item/${index}`]);
-    console.log('the index is', index)
+        // this.showEditItem = !this.showEditItem;
+        // this.showHomePage = !this.showHomePage;
+
   }
 
   navigateToAddItem() {
@@ -43,12 +46,9 @@ export class AppComponent {
    this.showEditItem = false;
   }
 
-  editItemDetails(index: number) {
-    this.showAddItem = false;
-    this.showEditItem = true;
-    console.log('the index is', index)
-  }
-
-  
-
+  // editItemDetails(index: number) {
+  //   this.showAddItem = false;
+  //   this.showEditItem = true;
+  //   console.log('the index is', index)
+  // }
 }

@@ -1,11 +1,6 @@
 
-<div>
+<div *ngIf="editToggle">
   <h2>Edit Item</h2>
-
-
-  
-    
-
   <form [formGroup]="itemForm" (ngSubmit)="saveChanges()">
 
     <label for="id">Id:</label>
@@ -56,5 +51,11 @@
 
     <button type="submit">Save Changes</button>
   </form>
+
+</div>
+
+ 
+
+  
 
   
