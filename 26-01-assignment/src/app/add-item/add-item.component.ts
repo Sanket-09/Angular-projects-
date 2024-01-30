@@ -7,12 +7,13 @@ import { DataService } from '../data.service';
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.scss'],
 })
+
 export class AddItemComponent implements OnInit {
 toggleShowMain() {
 this.showMain = !this.showMain;
-}
+} 
+  todayDate: Date = new Date();
   showMain:boolean = false;
-  
   newItemForm!: FormGroup;
   gridItems!: any[];
 
@@ -24,6 +25,7 @@ this.showMain = !this.showMain;
     
       this.gridItems = items ? [...items] : [];
       console.log(this.gridItems);
+ 
     });
    
     this.newItemForm = this.fb.group({
