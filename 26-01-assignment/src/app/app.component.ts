@@ -38,6 +38,8 @@ export class AppComponent {
     this.router.navigate([`/edit-item/${index}`]);
         // this.showEditItem = !this.showEditItem;
         // this.showHomePage = !this.showHomePage;
+        var elem = document.getElementById("EditForm");
+        elem?.scrollIntoView()
   }
 
   navigateToAddItem() {

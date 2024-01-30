@@ -1,12 +1,13 @@
 <!-- app.component.html -->
 
+
 <div *ngIf="!showAddItem  && showHomePage">
   <a href="http://localhost:4200/"><div class="logo">
     <img src="../favicon.ico" alt="Your Logo" />
   </div></a>
   
 
-  <h1 style="font-family: sans-serif">Lorem ipsum dolor sit amet.</h1>
+  <h1 style="font-family: sans-serif" id="EditForm">Lorem ipsum dolor sit amet.</h1>
 
   <p style="font-family: sans-serif">
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic fugit
@@ -19,6 +20,8 @@
   </p>
 
   <!-- Grid -->
+  <router-outlet></router-outlet> 
+
   <div >
     <div class="grid-container">
       <div class="grid-item" *ngFor="let item of gridItems; let i = index">
@@ -48,7 +51,7 @@
   </div>
 
 
-  <router-outlet></router-outlet> 
+  
 
 </div>
 
@@ -60,6 +63,7 @@
 </div>
 
 <div *ngIf="showEditItem">
+   
   <app-edit-item></app-edit-item>
 </div>
 

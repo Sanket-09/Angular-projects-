@@ -40,6 +40,7 @@ p {
 }
 
 .card {
+    
   position: relative;
   border-radius: 15px;
   overflow: hidden;
@@ -183,6 +184,13 @@ p {
     font-family: sans-serif;
     font-size: 1.3vw;
   }
+}
+
+
+h1{
+
+  scroll-behavior: smooth;
+
 }
 
 @media screen and (max-width: 720px) {
