@@ -48,6 +48,7 @@
   </div>
 
 
+  <router-outlet></router-outlet> 
 
 </div>
 
@@ -58,6 +59,9 @@
   <app-add-item></app-add-item>
 </div>
 
-<router-outlet></router-outlet>
+<div *ngIf="showEditItem">
+  <app-edit-item></app-edit-item>
+</div>
+
 
   

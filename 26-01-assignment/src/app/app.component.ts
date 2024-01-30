@@ -12,7 +12,7 @@ import { DataService } from './data.service';
 export class AppComponent {
 
   showAddItem : boolean = false;
-  showEditItem : boolean = true;
+  showEditItem : boolean = false;
   showHomePage : boolean = true;
 
 
@@ -38,7 +38,6 @@ export class AppComponent {
     this.router.navigate([`/edit-item/${index}`]);
         // this.showEditItem = !this.showEditItem;
         // this.showHomePage = !this.showHomePage;
-
   }
 
   navigateToAddItem() {
