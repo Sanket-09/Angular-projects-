@@ -17,11 +17,13 @@ export class CourseDetailComponent{
 
   ngOnInit(){
     // this.courseId = this.activatedRoute.snapshot.params['id'];
+
     // this.courseId = +this.activatedRoute.snapshot.paramMap.get('id');
     this.activatedRoute.params.subscribe((data) => {
       this.courseId = +data['id'];
       this.selectedCourse = this.courseService.courses.find( course => course.id === this.courseId);
     })
     
+
   }
 }
