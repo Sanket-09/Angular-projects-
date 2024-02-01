@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { FormsModule } from '@angular/forms';
+import { AuthGuardService } from './Services/authguard.service';
 
 
 const routes : Routes = [
@@ -29,7 +30,11 @@ const routes : Routes = [
   {path: 'contact', component:ContactComponent},
   {path: 'courses', component:CoursesComponent},
   {path: 'courses/course/:id', component: CourseDetailComponent},
+  {path: 'courses/popular', component: PopularComponent},
+  {path: 'courses/checkout', component: CheckoutComponent, canActivate: [AuthGuardService]},
+  {path: 'login', component:LoginComponent},
   {path: '**', component:NotFoundComponent} //wild card route , positon matter, always be defined at the end of the route list
+  
 ]
 
 
