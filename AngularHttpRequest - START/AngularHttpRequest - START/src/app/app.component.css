@@ -93,6 +93,11 @@ input[type=text], select {
     color: white;
   }
 
+  .btn-edit{
+    background-color: #244979;
+    color: white;
+  }
+
   .btn-fetch{
     background-color: #3498DB;
     color: white;

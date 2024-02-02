@@ -51,4 +51,9 @@ import { map } from "rxjs";
         return this.http.delete('https://procademy-c9684-default-rtdb.firebaseio.com/products.json')
     }
 
+    updateProduct( id : string , value : Product)
+    { 
+      this.http.put('https://procademy-c9684-default-rtdb.firebaseio.com/products/' + id + '.json' , value).subscribe() 
+    }
+
 }

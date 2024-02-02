@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { map } from 'rxjs';
 import { Product } from './model/products';
 import { productService } from './service/products.service';
@@ -12,10 +12,13 @@ import { FormGroup, NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent{
+
   title = 'AngularHttpRequest';
   allProducts : Product[] = [];
   isFetching: boolean;
-  myForm : NgForm;
+  currentProductId : string;
+  editMode: boolean = false;
+  @ViewChild('productsForm') form : NgForm;
   productsForm: any;
   
   constructor(private http: HttpClient, private productService: productService){
@@ -42,7 +45,13 @@ export class AppComponent{
 
   onProductCreate(products: {pName:string, desc:string, price:string},  productsForm)
   {
+   
+   if(this.editMode==false)
    this.productService.createProduct(products)
+
+   else
+   this.productService.updateProduct(this.currentProductId, products);
+
    productsForm.reset()
   }
 
@@ -66,6 +75,23 @@ export class AppComponent{
   onDeletAllProducts(){
     this.productService.clearProduct().subscribe()
   }
+
+  onEditProduct(id: string) {
+    let currentProduct =  this.allProducts.find( (currElement) => {
+          return currElement.id === id
+      })
+
+    this.form.setValue({
+      pName : currentProduct.pName,
+      desc : currentProduct.desc ,
+      price : currentProduct.price,
+  });
+
+     this.editMode = true;
+
+     this.currentProductId = id;
+    
+    }
 
 }
 
