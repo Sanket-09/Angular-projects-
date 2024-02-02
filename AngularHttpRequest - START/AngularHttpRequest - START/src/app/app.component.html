@@ -8,17 +8,17 @@
       <!--Add product form-->
       <div class="form-area">
         <h3>Create Product</h3>
-        <form #productsForm="ngForm" (ngSubmit)="onProductCreate(productsForm.value)">
+        <form #productsForm="ngForm" (ngSubmit)="onProductCreate(productsForm.value,productsForm)">
           <label>Product Name</label>
           <input type="text" name="pName" ngModel>
       
-          <label>Procuct Description</label>
+          <label>Product Description</label>
           <input type="text" name="desc" ngModel>
       
-          <label>Procuct Price</label>
+          <label>Product Price</label>
           <input type="text" name="price" ngModel>
 
-          <input type="submit" value="Add Product">
+          <input type="submit" value="Add Product" >
         </form>
       </div>
 
@@ -34,7 +34,7 @@
             <th></th>
           </tr>
           <tr *ngIf="allProducts.length < 1">
-            <td colspan="5">No products available! && !isFetching</td>
+            <td colspan="5">No products available!</td>
           </tr>
           <tr *ngIf="isFetching">
             <td colspan="5">Loading......</td>
