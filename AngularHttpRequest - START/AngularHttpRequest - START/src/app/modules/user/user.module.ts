@@ -1,39 +1,36 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UserRoutingModule } from './user-routing.module';
+import { UserComponent } from './user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialExampleModule } from './material.module';
+import { MaterialExampleModule } from '../../material.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { productService } from './modules/user/service/products.service';
-import { AppRoutingModule } from './app-routing.module';
-
-
+import { DetailsCardComponent } from './components/details-card/details-card.component';
+import { productService } from './service/products.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    UserComponent,
+    DetailsCardComponent
   ],
-
   imports: [
-    BrowserModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    BrowserAnimationsModule,
     MaterialExampleModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    AppRoutingModule
+    UserRoutingModule
   ],
 
   providers: [productService],
-  bootstrap: [AppComponent]
+  bootstrap: [UserComponent]
 })
-export class AppModule { }
+export class UserModule { }

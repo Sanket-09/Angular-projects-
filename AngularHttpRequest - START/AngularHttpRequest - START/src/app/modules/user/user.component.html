@@ -1,0 +1,167 @@
+<span>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <div class="form-container">
+            <form class="form-horizontal" #productsForm="ngForm"
+              (ngSubmit)="onProductCreate(productsForm.value,productsForm)">
+              <h4 class="title">Manage Entries</h4> <!-- <label>Name</label> -->
+  
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" placeholder="Enter your name" name="Name" ngModel required>
+              </mat-form-field>
+  
+  
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="Enter your Email" name="Email" ngModel required email
+                  #email="ngModel">
+              </mat-form-field>
+              <!--  
+              <div class="form-group">
+                <label for="Name">Name &nbsp;</label>
+                <input class="form-control" type="text" placeholder="Enter your name" name="Name" ngModel required>
+              </div> -->
+  
+              <!-- <label>Email</label> -->
+              <!-- <input type="text" name="Email" ngModel placeholder="Email"> -->
+  
+  
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Phone Number</mat-label>
+                <input matInput type="number" placeholder="Enter your Phone Number" name="PhoneNumber" ngModel required
+                  #PhoneNumber="ngModel">
+              </mat-form-field>
+  
+              <!-- <label>Phone Number</label> -->
+              <!-- <input type="text" name="PhoneNumber" ngModel placeholder="Phone Number"> -->
+  
+  
+              <!-- <label>Gender</label> -->
+              <!-- <input type="text" name="Gender" ngModel placeholder="Gender">    -->
+  
+  
+  
+              <mat-form-field appearance="fill" class="example-full-width">
+                <mat-label>Gender</mat-label>
+                <mat-select name="Gender" [ngModel]="defaultGender" id="Gender" required>
+                  <mat-option value="Female">Female</mat-option>
+                  <mat-option value="Male">Male</mat-option>
+                </mat-select>
+              </mat-form-field>
+                
+              <mat-form-field appearance="fill" class="example-full-width">
+                <mat-label>Date Of Birth</mat-label>
+                <input matInput [matDatepicker]="picker" name="Dob" ngModel required >
+                <mat-hint>mm/dd/yyyy</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+              </mat-form-field>
+              <!-- <label>Date Of Birth</label> -->
+              <!-- <input type="date" name="Dob" ngModel placeholder="Date Of Birth"> -->
+  
+              <!-- <input type="submit" value="{{editMode ? 'Update Product' : 'Add Product'}}" > -->
+  
+              <button mat-raised-button color="primary" [disabled]="!productsForm.valid">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+  
+      <!--Display product area-->
+      <div class="product-display-area">
+        <h3>All Entries</h3>
+        <!-- <table id="products">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Date Of Birth</th>
+            <th>Gender</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr *ngIf="allProducts.length < 1">
+            <td colspan="5">No products available!</td>
+          </tr>
+          <tr *ngIf="isFetching">
+            <td colspan="5">Loading......</td>
+          </tr>
+          <tr *ngFor="let prod of allProducts; index as i">
+            <td>{{i+1}}</td>
+            <td>{{prod.Name}}</td>
+            <td>{{prod.Email}}</td>
+            <td>{{prod.PhoneNumber}}</td>
+            <td>{{prod.Dob}}</td>
+            <td>{{prod.Gender}}</td>
+            <td><button class="btn-delete" (click)="onDeleteProduct(prod.id)">Delete</button></td>
+            <td><button class="btn-edit" (click)="onEditProduct(prod.id)">Edit</button></td>
+          </tr>
+        </table> -->
+  
+  
+        <table mat-table [dataSource]="allProducts" class="mat-elevation-z8">
+  
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+  
+          <!-- Position Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef> Name</th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+          </ng-container>
+  
+          <!-- Name Column -->
+          <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
+          </ng-container>
+  
+          <!-- Weight Column -->
+          <ng-container matColumnDef="PhoneNumber">
+            <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.PhoneNumber}} </td>
+          </ng-container>
+  
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="Gender">
+            <th mat-header-cell *matHeaderCellDef> Gender</th>
+            <td mat-cell *matCellDef="let element"> {{element.Gender}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Dob">
+            <th mat-header-cell *matHeaderCellDef> Date Of Birth </th>
+            <td mat-cell *matCellDef="let element"> {{element.Dob}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="delete-btn">
+            <th mat-header-cell *matHeaderCellDef> Delete/Edit</th>
+            <td mat-cell *matCellDef="let element" class="action">
+              <mat-icon (click)="onDeleteProduct(element.id)" class="btn-delete" style="margin-right: 10px;"> delete
+              </mat-icon>
+              <mat-icon (click)="onEditProduct(element.id)" class="btn-edit"> edit </mat-icon>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="visible">
+            <th mat-header-cell *matHeaderCellDef> See All</th>
+            <td mat-cell *matCellDef="let element" class="action">
+              <mat-icon [routerLink] = "element.id" class="read-more" > read_more</mat-icon>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  
+        <hr>
+      </div>
+    </div>
+  </span>
+  
+  
+  
+  
