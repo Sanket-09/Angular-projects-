@@ -1,10 +1,8 @@
 
 <body>
     
-
-
 <mat-icon routerLink = "/user"  class="read-more" >arrow_back</mat-icon>
-
+<!-- 
 <div class="flip-card">
   <div class="flip-card-inner">
     <div class="flip-card-front">
@@ -21,6 +19,31 @@
       <h3>Gender : {{myData.Gender}}</h3>
     </div>
   </div>
-</div>
+</div> -->
+
+<div class="center">
+    <div class="property-card">
+      <a href="#">
+        <div class="property-image">
+          <div class="property-image-title">
+            <!-- Optional <h5>Card Title</h5> If you want it, turn on the CSS also. -->
+          </div>
+        </div></a>
+      <div class="property-description">
+        <br>
+        <h5>{{myData.Name}}</h5>
+        <br>
+        <h4><strong>Gender : </strong> {{myData.Gender}} </h4>
+        <h4><strong>Phone Number : </strong> {{myData.PhoneNumber}} </h4>
+        <h4><strong>Email Id : </strong> {{myData.Email}} </h4>
+        <h4><strong>Date Of Birth : </strong> {{myData.Dob}} </h4>
+      </div>
+      <a href="#">
+        <div class="property-social-icons">
+            <mat-icon routerLink = "/user"  class="read-more" >arrow_back</mat-icon>
+        </div>
+      </a>
+    </div>
+  </div>
 
 </body>

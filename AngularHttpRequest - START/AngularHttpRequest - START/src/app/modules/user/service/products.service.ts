@@ -4,6 +4,7 @@ import { Product } from "../model/products";
 import { Observable, map } from "rxjs";
 import { DatePipe } from "@angular/common";
 
+
 @Injectable({
   providedIn: "root"
 }) export class productService {
@@ -21,7 +22,8 @@ import { DatePipe } from "@angular/common";
     Dob: Date,
     Gender: string
   }): Observable < any > {
-
+    const datepipe = new DatePipe('en-US');
+    const formattedProducts = {...products, Dob: datepipe.transform(products.Dob, 'yyyy-MM-dd')}
  
     console.log(products);
     const myHeader = new HttpHeaders({
@@ -29,7 +31,7 @@ import { DatePipe } from "@angular/common";
     });
     return this.http.post < {
       name: string
-    } > ('https://procademy-c9684-default-rtdb.firebaseio.com/products.json', products, {
+    } > ('https://procademy-c9684-default-rtdb.firebaseio.com/products.json', formattedProducts , {
       headers: myHeader
     });
 
