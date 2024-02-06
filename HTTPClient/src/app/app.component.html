@@ -1,0 +1,77 @@
+
+
+  <div class="form-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="form-container">
+                    <form class="form-horizontal" #detailsForm="ngForm">
+                        <h3 class="title">Manage Entries</h3>
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-user"></i></span>
+                            <input class="form-control" type="text" placeholder="Name" name="name" ngModel>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-envelope"></i></span>
+                            <input class="form-control" type="email" placeholder="Email Address"  name="email" ngModel>
+                        </div>
+
+                        <div class="form-group">  
+                          <span class="input-icon"><i class="fa fa-calendar-times-o"></i></span>
+                          <input class="form-control" type="date" placeholder="Date Of Birth"  name="dob" ngModel>
+                        </div>
+
+                        <div class="form-group">  
+                          <span class="input-icon"><i class="fa fa-phone"></i></span>
+                          <input class="form-control" type="texr" placeholder="Phone Number"  name="phoneNumber" ngModel>
+                        </div>
+                        
+                        <div class="form-group">  
+                          <span class="input-icon"><i class="fa fa-genderless"></i></span>
+                          <input class="form-control" type="text" placeholder="Gender"  name="gender" ngModel>
+                        </div>
+
+                        <input class="btn signin" type="submit" value="Add Product" >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-display-area">
+      <h3>All Products</h3>
+      <table id="products">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Date Of Birth</th>
+          <th>Phone Number</th>
+          <th>Gender</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <!-- <tr *ngIf="allDetails.length < 1">
+          <td colspan="5">No products available!</td>
+        </tr> -->
+        <tr>
+          <td colspan="5">Loading......</td>
+        </tr>
+        <tr *ngFor="let detail of allDetails; index as i">
+          <td>{{i+1}}</td>
+          <td>{{detail.email}}</td>
+          <td>{{detail.name}}</td>
+          <td>{{detail.dob}}</td>
+          <td>{{detail.phoneNumber}}</td>
+          <td>{{detail.gender}}</td>
+          <td><button class="btn-delete" (click)="onDeleteProduct(detail.id)">Delete</button></td>
+          <td><button class="btn-edit" (click)="onEditProduct(detail.id)">Edit</button></td>
+        </tr>
+      </table>
+      <hr>
+      <div class="action-btn-container">
+        <button class="btn-fetch" (click)="onProductsFetch()">Fetch Product</button>
+        <button class="btn-clear" (click)="onDeletAllProducts()">Clear Product</button>
+      </div>
+    </div>
+</div>

@@ -1,6 +1,8 @@
 export class Product{
-    pName: string;
-    desc: string;
-    price: string
+    Email: string;
+    Name: string;
+    PhoneNumber: string;
+    Dob : Date;
+    Gender : string;
     id?: string;
 }

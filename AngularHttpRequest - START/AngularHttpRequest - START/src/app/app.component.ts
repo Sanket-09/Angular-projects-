@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
-import { map } from 'rxjs';
-import { Product } from './model/products';
-import { productService } from './service/products.service';
-import { FormGroup, NgForm } from '@angular/forms';
+import {HttpClient,HttpHeaders} from '@angular/common/http';
+import {Component,ViewChild} from '@angular/core';
+import {map} from 'rxjs';
+import {Product} from './model/products';
+import {productService} from './service/products.service';
+import {FormGroup,NgForm} from '@angular/forms';
 
 
 @Component({
@@ -11,21 +11,23 @@ import { FormGroup, NgForm } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
 
   title = 'AngularHttpRequest';
-  allProducts : Product[] = [];
+  allProducts: Product[] = [];
   isFetching: boolean;
-  currentProductId : string;
+  currentProductId: string;
   editMode: boolean = false;
-  @ViewChild('productsForm') form : NgForm;
+  @ViewChild('productsForm') form: NgForm;
   productsForm: any;
-  
-  constructor(private http: HttpClient, private productService: productService){
+  defaultGender = 'default';
+  displayedColumns: string[] = ['Name', 'Email', 'PhoneNumber', 'Dob', 'Gender', 'delete-btn', 'visible'];
+ 
 
+  constructor(private http: HttpClient, private productService: productService) { 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.isFetching = true;
     this.productService.fetchProduct().subscribe((response) => {
       console.log(response);
@@ -43,56 +45,73 @@ export class AppComponent{
   //   });
   // }
 
-  onProductCreate(products: {pName:string, desc:string, price:string},  productsForm)
-  {
-   
-   if(this.editMode==false)
-   this.productService.createProduct(products)
+  onProductCreate(products: {
+    Name: string,
+    Email: string,
+    PhoneNumber: string,
+    Dob: Date,
+    Gender: string
+  }, productsForm) {
 
-   else
-   this.productService.updateProduct(this.currentProductId, products);
+    if (this.editMode == false)
+      this.productService.createProduct(products).subscribe(() => {
+        debugger
+        productsForm.resetForm();
+        alert("Form Submitted")
+        this.onProductsFetch();
+      })
 
-   productsForm.reset()
+    else{
+      this.productService.updateProduct(this.currentProductId, products).subscribe(() => {
+        debugger;
+        productsForm.resetForm();
+
+        alert("Form Updated")
+        this.onProductsFetch();
+        this.editMode = false;
+      });}
   }
 
-  
 
-  onProductsFetch(){
+
+  onProductsFetch() {
     this.isFetching = true;
     this.productService.fetchProduct().subscribe((response) => {
       console.log(response);
-      this.allProducts = response;
+      this.allProducts = [...response];
       this.isFetching = false;
     });
   }
 
-  onDeleteProduct(id : string){
-    this.productService.deleteProduct(id).subscribe( (data) => {
+  onDeleteProduct(id: string) {
+    this.productService.deleteProduct(id).subscribe((data) => {
       this.allProducts.filter(product => product.id !== id)
+      this.onProductsFetch();
+      this.productsForm.resetForm();
     });
   }
 
-  onDeletAllProducts(){
+  onDeletAllProducts() {
     this.productService.clearProduct().subscribe()
   }
 
   onEditProduct(id: string) {
-    let currentProduct =  this.allProducts.find( (currElement) => {
-          return currElement.id === id
-      })
+    let currentProduct = this.allProducts.find((currElement) => {
+      return currElement.id === id
+    })
 
     this.form.setValue({
-      pName : currentProduct.pName,
-      desc : currentProduct.desc ,
-      price : currentProduct.price,
-  });
+      Name: currentProduct.Name,
+      Email: currentProduct.Email,
+      PhoneNumber: currentProduct.PhoneNumber,
+      Dob: currentProduct.Dob,
+      Gender: currentProduct.Gender
+    });
 
-     this.editMode = true;
+    this.editMode = true;
 
-     this.currentProductId = id;
-    
-    }
+    this.currentProductId = id;
+
+  }
 
 }
-
-

@@ -819,7 +819,7 @@ body {
   padding-top: 100px;
   border-bottom-left-radius: 10%;
   border-bottom-right-radius: 10%;
-  overflow: hidden;
+  
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1343,7 +1343,7 @@ button {
   max-width: 600px;
   
   border-radius: 16px;
-  overflow: hidden;
+  
   margin: 10px;
 }
 
