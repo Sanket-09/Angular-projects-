@@ -78,7 +78,6 @@ export class UserComponent implements OnInit {
       this.allProducts = [...response];
       this.isFetching = false;
     });
-    this.productsForm.resetForm();
   }
 
   onDeleteProduct(id: string) {
