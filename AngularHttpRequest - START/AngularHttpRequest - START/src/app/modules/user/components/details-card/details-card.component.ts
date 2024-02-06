@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { productService } from '../../service/products.service';
 import { Product } from '../../model/products';
 import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../../service/data.service';
 
 
 
@@ -15,18 +16,31 @@ export class DetailsCardComponent implements OnInit {
 
   selectedCard : Product;
   cardId : string;
+  myData : any;
+  dataLoaded : boolean = false;
 
   cardService : productService = inject(productService);
   activeRoute : ActivatedRoute = inject(ActivatedRoute);
 
-  constructor() { }
+  constructor(private dataservice : DataService) { 
+    this.cardId = this.activeRoute.snapshot.paramMap.get('id');
+    if(this.cardId){
+    this.dataservice.getDataById(this.cardId).subscribe(data=>{
+      this.myData = data;
+      this.dataLoaded = true;
+      console.log('inside',this.myData);
+    });
+  }
+  }
 
   ngOnInit(){
-
-    this.cardId = this.activeRoute.snapshot.paramMap.get('id');
     
-    console.log(this.cardId);
+    console.log('outside',this.myData);
+  }
 
+  
+  isDataLoaded() : boolean {
+    return this.dataLoaded;
   }
 
 }

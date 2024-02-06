@@ -1,3 +1,26 @@
-<h1>{{this.cardId}}</h1>
+
+<body>
+    
 
 
+<mat-icon routerLink = "/user"  class="read-more" >arrow_back</mat-icon>
+
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+        <br>
+      <mat-icon class="read-more" >person</mat-icon>
+      <h1>{{myData.Name}}</h1>
+    </div>
+    <div class="flip-card-back">
+    <br>
+      <h1>Name : {{myData.Name}}</h1> 
+      <h3>Email : {{myData.Email}}</h3>
+      <h3>Phone Number : {{myData.PhoneNumber}}</h3>
+      <h3>Date Of Birth : {{myData.Dob}}</h3>
+      <h3>Gender : {{myData.Gender}}</h3>
+    </div>
+  </div>
+</div>
+
+</body>
