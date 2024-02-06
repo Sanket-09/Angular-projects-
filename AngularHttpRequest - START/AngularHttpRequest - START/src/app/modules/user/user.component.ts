@@ -80,12 +80,12 @@ export class UserComponent implements OnInit {
     });
   }
 
-  onDeleteProduct(id: string) {
-    this.productService.deleteProduct(id).subscribe((data) => {
+onDeleteProduct(id: string) {
+     this.productService.deleteProduct(id).subscribe((data) => {
       this.allProducts.filter(product => product.id !== id)
       this.onProductsFetch();
-      this.productsForm.resetForm();
     });
+    this.productsForm.resetForm();
   }
 
   onDeletAllProducts() {
