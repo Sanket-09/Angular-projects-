@@ -4,6 +4,9 @@ import {map} from 'rxjs';
 import {Product} from './model/products';
 import {productService} from './service/products.service';
 import {FormGroup,NgForm} from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -19,7 +22,7 @@ export class UserComponent implements OnInit {
   productsForm: any;
   defaultGender = 'default';
   displayedColumns: string[] = ['Name', 'Email', 'PhoneNumber', 'Dob', 'Gender', 'delete-btn', 'visible'];
-  constructor(private productService:productService) { }
+  constructor(private productService:productService , private dialog : MatDialog) { }
 
   ngOnInit() {
     this.isFetching = true;
@@ -75,6 +78,7 @@ export class UserComponent implements OnInit {
       this.allProducts = [...response];
       this.isFetching = false;
     });
+    this.productsForm.resetForm();
   }
 
   onDeleteProduct(id: string) {
@@ -106,6 +110,19 @@ export class UserComponent implements OnInit {
 
     this.currentProductId = id;
 
+  }
+
+  openConfirmationDialog(id: string) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+    
+    } )
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.onDeleteProduct(id)
+      }
+    })
   }
 
  

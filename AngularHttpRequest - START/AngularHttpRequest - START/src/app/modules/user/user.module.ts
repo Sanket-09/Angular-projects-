@@ -11,11 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DetailsCardComponent } from './components/details-card/details-card.component';
 import { productService } from './service/products.service';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
     UserComponent,
-    DetailsCardComponent
+    DetailsCardComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,

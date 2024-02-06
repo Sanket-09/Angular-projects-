@@ -138,13 +138,17 @@
           </ng-container>
   
           <ng-container matColumnDef="delete-btn">
-            <th mat-header-cell *matHeaderCellDef> Delete/Edit</th>
+            
+            <th mat-header-cell *matHeaderCellDef> Delete/Edit</th>                                                                                                                                                                                                                   
             <td mat-cell *matCellDef="let element" class="action">
-              <mat-icon (click)="onDeleteProduct(element.id)" class="btn-delete" style="margin-right: 10px;"> delete
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+              <mat-icon (click)="openConfirmationDialog(element.id)" class="btn-delete" style="margin-right: 10px;"> delete
               </mat-icon>
               <mat-icon (click)="onEditProduct(element.id)" class="btn-edit"> edit </mat-icon>
             </td>
           </ng-container>
+
+          
   
           <ng-container matColumnDef="visible">
             <th mat-header-cell *matHeaderCellDef> See All</th>
