@@ -27,7 +27,7 @@ const routes : Routes = [
   {path: '' , component:HomeComponent},
   {path: 'home', component:HomeComponent},
   {path: 'about' , component:AboutComponent},
-  {path: 'contact', component:ContactComponent},
+  {path: 'contact', component:ContactComponent, canDeactivate: [AuthGuardService]},
   {path: 'courses', component:CoursesComponent},
   {path: 'courses/course/:id', component: CourseDetailComponent},
   {path: 'courses/popular', component: PopularComponent},
