@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,28 +9,41 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   title = 'AngularObservables';
 
-  myObservable = new Observable( (observer) => {
-      console.log("observable starts")
-      setTimeout(()=>{ observer.next("1")},2000)
-     
-      setTimeout(()=>{observer.next("2")},4000)
+  //using observable constructor
+  // myObservable = new Observable( (observer) => {
+  //     console.log("observable starts")
+  //     setTimeout(()=>{ observer.next("1")},2000)
+  //     setTimeout(()=>{observer.next("2")},4000)
+  //     setTimeout(()=>{observer.next("3")},6000)
+  //     setTimeout(()=>{observer.error(new Error('Something went wrong'))},6000)
+  //     setTimeout(()=>{observer.complete()},6000)
+  //     setTimeout(()=>{ observer.next("4")},8000)
+  //     setTimeout(()=>{observer.next("5")},10000)
+  //     setTimeout(()=>{observer.complete()},10000)
       
-      setTimeout(()=>{observer.next("3")},6000)
-      setTimeout(()=>{observer.error(new Error('Something went wrong'))},6000)
-      setTimeout(()=>{observer.complete()},6000)
+  // })
 
-      
-      setTimeout(()=>{ observer.next("4")},8000)
-     
-      setTimeout(()=>{observer.next("5")},10000)
-      setTimeout(()=>{observer.complete()},10000)
-      
-  })
+
+  //using create method 
+  // myObservable = Observable.create((observer: { next: (arg0: string) => void; })=>{
+  //     setTimeout(()=>{observer.next("A")},1000)
+  //     setTimeout(()=>{observer.next("B")},2000)
+  //     setTimeout(()=>{observer.next("C")},3000)
+  //     setTimeout(()=>{observer.next("D")},4000)
+  //     setTimeout(()=>{observer.next("E")},5000)
+  // });
+
+  array1 = [1,2,3,4,5];
+  array2 = ['A', 'B', 'C' , 'D', 'E'];
+
+  // myObservable = of(this.array1, this.array2) //emits the iterable as it is , takes n numebr of args
+
+  myObservable = from(this.array1); //emits the value in array1 one by one , takes only one args and that too iterable
 
   ngOnInit(){
-    this.myObservable.subscribe((value)=>{
+    this.myObservable.subscribe((value: any)=>{
       console.log(value);
-    } , (error)=>{
+    } , (error: { message: any; })=>{
         alert(error.message);
     }, ()=>{
         alert("Observable has completed emitting all values")
