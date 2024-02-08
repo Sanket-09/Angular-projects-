@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, from, of } from 'rxjs';
+import { Observable, filter, from, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -33,15 +33,27 @@ export class AppComponent {
   //     setTimeout(()=>{observer.next("E")},5000)
   // });
 
-  array1 = [1,2,3,4,5];
+  array1 = [1,2,3,4,5,6,7,8,9,12];
   array2 = ['A', 'B', 'C' , 'D', 'E'];
 
   // myObservable = of(this.array1, this.array2) //emits the iterable as it is , takes n numebr of args
 
   myObservable = from(this.array1); //emits the value in array1 one by one , takes only one args and that too iterable
 
+  transformedObservable = this.myObservable.pipe(map((value)=>{
+    return value*5;
+  }),filter((value)=>{
+    return value >= 30
+  })
+  )
+
+  filterObservable = this.transformedObservable.pipe(filter((value)=>{
+    return value >= 30
+  }))
+
+
   ngOnInit(){
-    this.myObservable.subscribe((value: any)=>{
+    this.transformedObservable.subscribe((value: any)=>{
       console.log(value);
     } , (error: { message: any; })=>{
         alert(error.message);
