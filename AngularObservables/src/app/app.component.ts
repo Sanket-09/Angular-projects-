@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
 import { Observable, filter, from, map, of } from 'rxjs';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [DataService]
 })
 export class AppComponent {
   title = 'AngularObservables';
+
+  constructor(private dataService : DataService){
+    
+  }
 
   //using observable constructor
   // myObservable = new Observable( (observer) => {
