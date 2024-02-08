@@ -32,7 +32,10 @@ export class CoursesComponent {
       this.searchString = data['search'];
 
       if (this.searchString === undefined || this.searchString === '') {
-        this.AllCourses = this.coursesService.courses;
+        this.coursesService.getAllcourses().subscribe((data : Course[]) => {
+          this.AllCourses = data;
+      
+        });
       } else {
         this.AllCourses = this.coursesService.courses.filter(x => x.title.toLowerCase().includes(this.searchString.toLowerCase()))
       }

@@ -1,8 +1,10 @@
 import { Injectable , inject} from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, Resolve, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
 import { Authservice } from "./auth.services";
 import { ContactComponent } from "../contact/contact.component";
+import { Course } from "../Models/course";
+import { CourseService } from "./course.service";
 
 @Injectable({
     providedIn : 'root',
@@ -10,10 +12,11 @@ import { ContactComponent } from "../contact/contact.component";
 
  
 
-export class AuthGuardService implements CanActivate, CanDeactivate<ContactComponent>{
+export class AuthGuardService implements CanActivate, CanDeactivate<ContactComponent> , Resolve<Course[]>{
 
     authservice: Authservice = inject(Authservice);
     router : Router = inject(Router);
+    courseService : CourseService = inject(CourseService);
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean> |  Promise<boolean> 
     {
@@ -36,5 +39,13 @@ export class AuthGuardService implements CanActivate, CanDeactivate<ContactCompo
         return component.canExit();
     }
 
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Course[] {
+        var courseList = [];
+        this.courseService.getAllcourses().subscribe((data)=>{
+            courseList = data;
+        });
+
+        return courseList;
+    }
 
 }

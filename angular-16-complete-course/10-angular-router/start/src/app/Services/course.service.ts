@@ -21,6 +21,7 @@ export class CourseService{
         { id: 8, title: 'Machine Learning with Python', price: 1299, desc: this.description, image: './../assets/courses/course8.jpg', rating: 4.8, duration: 26.7, author: 'Sarah King'},
     ]
 
+
     getAllcourses(){
         return new Observable<Course[]>((sub) => {
             setTimeout(() => {

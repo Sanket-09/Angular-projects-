@@ -19,7 +19,7 @@ export class ContactComponent {
   }
 
   canExit(){
-    if(( this.firstName || this.lastName || this.message ) && this.isSubmitted )
+    if(( this.firstName || this.lastName || this.message ) && !this.isSubmitted )
     {
       return confirm('You have unsaved changes. Do you want to navigate away?')
     }
