@@ -16,16 +16,24 @@ export class AppComponent {
       setTimeout(()=>{observer.next("2")},4000)
       
       setTimeout(()=>{observer.next("3")},6000)
+      setTimeout(()=>{observer.error(new Error('Something went wrong'))},6000)
+      setTimeout(()=>{observer.complete()},6000)
+
       
       setTimeout(()=>{ observer.next("4")},8000)
      
       setTimeout(()=>{observer.next("5")},10000)
+      setTimeout(()=>{observer.complete()},10000)
       
   })
 
   ngOnInit(){
     this.myObservable.subscribe((value)=>{
       console.log(value);
+    } , (error)=>{
+        alert(error.message);
+    }, ()=>{
+        alert("Observable has completed emitting all values")
     });     //takes optional parameters as callback functions, ie - next, error, complete
   }
 }
