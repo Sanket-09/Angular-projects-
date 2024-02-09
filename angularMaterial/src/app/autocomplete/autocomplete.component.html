@@ -1,0 +1,48 @@
+<div class="outer">
+  <form class="example-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Choose one</mat-label>
+      <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary" style="margin-right: 20px;">Submit</button>
+
+    <button mat-raised-button color="primary" matBadge="{{messages.length}}" matBadgePosition="before"
+      matBadgeColor="accent" (click)="expanded = !expanded" type="button">
+      Show Messages
+    </button>
+  </form>
+  <div>
+    <p>
+    </p>
+    <div *ngIf="expanded" style="color: white;">
+      <div *ngFor="let message of messages"><h3>{{message}}</h3></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="outer">
+  <mat-tab-group>
+    <mat-tab label="Table"><app-table></app-table></mat-tab>
+    <mat-tab label="Snackbar"> <app-snackbar></app-snackbar></mat-tab>
+    <div class="slider">
+      <mat-tab label="Slider"><mat-slider
+        thumbLabel  
+        tickInterval="0.001"
+        step="1"
+        min="0"
+        max="100"
+        aria-label="units"
+        [(ngModel)]="sliderValue"></mat-slider>
+        <h3 style="color: white;">Slider Value: <b>{{sliderValue}}</b></h3></mat-tab>
+    </div>
+
+  </mat-tab-group>
+  
+</div>

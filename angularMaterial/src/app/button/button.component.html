@@ -1,0 +1,79 @@
+<div class="root">
+  <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+    <mat-button-toggle value="red">Single Selection Red</mat-button-toggle>
+    <mat-button-toggle value="green">Single Selection Green</mat-button-toggle>
+    <mat-button-toggle value="blue">Single Selection Blue</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<div class="root">
+
+  <mat-button-toggle-group appearance="legacy" name="ingredients" aria-label="Ingredients" multiple>
+    <mat-button-toggle value="flour">Multiple selection Flour</mat-button-toggle>
+    <mat-button-toggle value="eggs">Multiple selection Eggs</mat-button-toggle>
+    <mat-button-toggle value="sugar">Multiple selection Sugar</mat-button-toggle>
+  </mat-button-toggle-group>
+
+</div>
+
+<div class="root">
+  <button mat-raised-button matTooltip="Info about the action"
+    aria-label="Button that displays a tooltip when focused or hovered over" matTooltipPosition="after">
+    Tooltip
+  </button>
+</div>
+
+<div class="root">
+
+  <mat-form-field class="example-user-input" appearance="fill" style="margin-right: 20px;">
+    <mat-label>Show delay</mat-label>
+    <input matInput type="number" [formControl]="showDelay"
+           aria-label="Adds a delay between hovering over the button and displaying the tooltip">
+    <mat-hint>milliseconds</mat-hint>
+  </mat-form-field>
+  
+  <mat-form-field class="example-user-input" appearance="fill" style="margin-right: 20px;">
+    <mat-label>Hide delay</mat-label>
+    <input matInput type="number" [formControl]="hideDelay"
+           aria-label="Adds a delay between hovering away from the button and hiding the tooltip">
+    <mat-hint>milliseconds</mat-hint>
+  </mat-form-field>
+  
+  <button mat-raised-button matTooltip="Info about the action"
+          [matTooltipShowDelay]="showDelay.value"
+          [matTooltipHideDelay]="hideDelay.value"
+          aria-label="Button that displays a tooltip with a customized delay in showing and hiding">
+    Tooltip with delayed hide and show  
+  </button>
+
+</div>
+
+<div class="root">
+
+  <mat-card>
+    <mat-card-title>Title</mat-card-title>
+    <mat-card-subtitle>Subtitle</mat-card-subtitle>
+    <mat-card-content>Card Content</mat-card-content>
+    <img mat-card-image src="https://picsum.photos/300">
+    <mat-card-footer>Footer</mat-card-footer>
+  </mat-card>
+
+</div>
+
+<div class="root">
+  <mat-card>
+    <mat-card-title-group>
+      <mat-card-title>Mat Card Title &nbsp;</mat-card-title>
+      <mat-card-subtitle>Subtitle</mat-card-subtitle>
+      <img mat-card-sm-image src="https://picsum.photos/300">
+    </mat-card-title-group>
+    <br>
+    <mat-card-title-group>
+      <mat-card-title>Mat Card Title</mat-card-title>
+      <mat-card-subtitle>Subtitle</mat-card-subtitle>
+      <img mat-card-sm-image src="https://picsum.photos/300">
+    </mat-card-title-group>
+  </mat-card>
+
+</div>
+

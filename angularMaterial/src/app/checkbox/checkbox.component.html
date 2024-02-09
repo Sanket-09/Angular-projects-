@@ -1,0 +1,95 @@
+<div class="root">
+
+    <section class="example-section">
+        <mat-checkbox class="example-margin">Check me!</mat-checkbox> &nbsp;
+        <mat-checkbox class="example-margin" [disabled]="true">Disabled</mat-checkbox>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      </section>
+      
+      <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allComplete"
+                        [color]="task.color"
+                        [indeterminate]="someComplete()"
+                        (change)="setAll($event.checked)">
+            {{task.name}}
+          </mat-checkbox>
+          
+        </span>
+        <span class="example-list-section">
+          <ul>
+            <li *ngFor="let subtask of task.subtasks">
+              <mat-checkbox [(ngModel)]="subtask.completed"
+                            [color]="subtask.color"
+                            (ngModelChange)="updateAllComplete()">
+                {{subtask.name}}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+      </section>
+    </div>
+
+
+
+<!-- chips -->
+
+<div class="root">
+    <mat-form-field class="example-chip-list" appearance="fill">
+    <mat-label>Favorite Fruits</mat-label>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+        {{fruit.name}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="New fruit..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field>
+  </div>
+
+
+  <!-- datepicker -->
+  <div class="root">
+    <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+  </div>
+  
+  <div class="root">
+    <mat-card>Selected Date</mat-card>
+    <mat-card>{{selectedDate}}</mat-card>
+  </div>
+
+  <div class="root">
+    <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="pickerr">
+          <input matStartDate formControlName="start" placeholder="Start date">
+          <input matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="pickerr"></mat-datepicker-toggle>
+        <mat-date-range-picker #pickerr></mat-date-range-picker>
+      
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      </mat-form-field>
+ 
+  </div>
+
+  <div class="root">
+    <mat-card>
+        Selected range: {{range.value | json}}
+    </mat-card>
+  </div>
