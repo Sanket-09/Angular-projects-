@@ -62,5 +62,8 @@ sliderValue: any;
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+  onSelectOption(event: any){
+console.log(event)
+  }
 
 }
