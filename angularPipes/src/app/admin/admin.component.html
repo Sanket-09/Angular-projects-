@@ -6,18 +6,21 @@
             <h2>Student Management</h2>
         </div>
         <div class="admin-header-filter">
-            <select name="gender" class="filter-select">
+            <select name="gender" class="filter-select" [value]="filterText" (change)="OnFilterValueChanged($event)">
                 <option value="All">All</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
-        </div>    
+        </div>  
+        <div style="margin: 10px 0px;">
+            Total Students: {{ totalStudents | async }}
+        </div> 
     </div>
     <!--HEADER ENDS-->
 
 
     <div class="admin-content">
-        <table>
+        <table (mouseover)="0">
 
             <!--TABLE HRADER-->
             <tr>
@@ -97,12 +100,12 @@
                     </select>
                 </td>
 
-                <td *ngIf="!isEditing || std.id !== stdIdToEdit">{{ std.dob }}</td>
+                <td *ngIf="!isEditing || std.id !== stdIdToEdit">{{ std.dob | date: 'longDate' | uppercase }}</td>
                 <td *ngIf="isEditing && std.id === stdIdToEdit">
                     <input type="date" [value]="std.dob" #editDob>
                 </td>
 
-                <td *ngIf="!isEditing || std.id !== stdIdToEdit">{{ std.course }}</td>
+                <td *ngIf="!isEditing || std.id !== stdIdToEdit">{{ std.course | uppercase}}</td>
                 <td *ngIf="isEditing && std.id === stdIdToEdit">
                     <select name="course" class="select-gender-course" [value]="std.course" #editCourse>
                         <option value="MBA">MBA</option>
@@ -116,9 +119,9 @@
                     <input type="number" min="0" max="600" [value]="std.marks" #editMarks>
                 </td>
 
-                <td>{{ std.marks / totalMarks }}</td>
+                <td>{{ std.marks | percentage: totalMarks: 2 }}</td>
 
-                <td *ngIf="!isEditing || std.id !== stdIdToEdit">{{ std.fee | currency: 'INR': true: '3.0-0'}}</td>
+                <td *ngIf="!isEditing || std.id !== stdIdToEdit">{{ std.fee | currency: 'INR': true: '2.2-2'}}</td>
                 <td *ngIf="isEditing && std.id === stdIdToEdit">
                     <input type="number" min="0" [value]="std.fee" #editFee>
                 </td>
@@ -147,9 +150,4 @@
         </table>
     </div>
 
-    <!--PAGE FOOTER-->
-    <div class="admin-footer">
-        <p>All rights reserved by procademy. @Copyright 2023.</p>         
-    </div>
-    <!--PAGE FOOTER ENDS-->
 </div>
