@@ -1,2 +1,3 @@
-data read from input.txt: this is a  sample text file which we are going to read from node.js 
- Date created: Tue Feb 13 2024 00:27:40 GMT+0530 (India Standard Time)
+data read from input.txt: This is a  sample text file which we are going to read from node.js
+THIS IS A SAMPLE TEXT FILE WHICH WE ARE GOING TO READ FROM NODE.JS IN CAPITAL LETTERS. 
+ Date created: Tue Feb 13 2024 00:36:36 GMT+0530 (India Standard Time)

@@ -18,10 +18,21 @@ const readline = require('readline');
 
 const fs = require('fs');
 
-//reading and writing to a file
-let textIn = fs.readFileSync('./input.txt', 'utf-8')
-console.log(textIn);
+// //reading and writing to a file
+// let textIn = fs.readFileSync('./input.txt', 'utf-8')
+// console.log(textIn);
 
-let content = `data read from input.txt: ${textIn} \n Date created: ${new Date()}`
+// let content = `data read from input.txt: ${textIn} \n Date created: ${new Date()}`
 
-fs.writeFileSync('./output.txt', content)
+// fs.writeFileSync('./output.txt', content);
+
+// console.log()
+
+//reading and writing file asynchronously
+fs.readFile('./start.txt', 'utf-8' , (error, data) => {
+    console.log(data);
+    fs.readFile(`./${data}.txt`, 'utf-8' , (error1, data1)=>{
+        console.log(data1);
+    })
+});
+console.log('Reading file')
