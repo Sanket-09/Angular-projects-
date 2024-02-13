@@ -64,19 +64,30 @@ const html = fs.readFileSync('./Template/index.html', 'utf-8');
 const server = http.createServer((req,res) => {
     let path = req.url;
     
-    if(path === '/' || path.toLocaleLowerCase()==='/home')
-    res.end(html.replace('{{%CONTENT%}}', 'You are in Home Page'));
+    if(path === '/' || path.toLocaleLowerCase()==='/home'){
+        res.writeHead(200)
+        res.end(html.replace('{{%CONTENT%}}', 'You are in Home Page'));
+    }
+    
 
     else if(path.toLocaleLowerCase()==='/about'){
+        res.writeHead(200,{
+            'Content-Type' : 'text/html',
+            'my-header' : 'Hello world'
+        })
         res.end(html.replace('{{%CONTENT%}}', 'You are in About Page'));
     }
 
     else if(path.toLocaleLowerCase()==='/contact'){
+        res.writeHead(200)
         res.end(html.replace('{{%CONTENT%}}', 'You are in Contact Page'));
     }
 
-    else
+    else{
+        res.writeHead(404);
         res.end(html.replace('{{%CONTENT%}}', 'You are in Default page'));
+    }
+        
 })
 
 server.listen(8000, '127.0.0.1', ()=>{
