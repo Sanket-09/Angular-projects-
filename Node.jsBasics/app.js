@@ -58,6 +58,7 @@ const fs = require('fs');
 const http = require('http');
 const readline = require('readline');
 const url =  require('url') //returns an urk object
+const replaceHtml = require('./modules/replaceHTML')
 
 
 
@@ -67,23 +68,6 @@ const productListHTML = fs.readFileSync('./Template/productList.html' , 'utf-8')
 const productDetailHTML = fs.readFileSync('./Template/product-details.html' , 'utf-8');
 
 
-
-function replaceHtml(template, product){
-    let output = template.replace('{{%IMAGE%}}', product.productImage )
-    output = output.replace('{{%NAME%}}', product.name )
-    output = output.replace('{{%MODELNAME%}}', product.modeName )
-    output = output.replace('{{%MODELNO%}}', product.modelNumber )
-    output = output.replace('{{%SIZE%}}', product.size )
-    output = output.replace('{{%PRICE%}}', product.price )
-    output = output.replace('{{%COLOR%}}', product.color )
-    output = output.replace('{{%CAMERA%}}', product.camera )
-    output = output.replace('{{%ID%}}', product.id )
-    output = output.replace('{{%ROM%}}', product.ROM )
-    output = output.replace('{{%DESC%}}', product.Description )
-
-    return output;
-
-}
 
 const server = http.createServer((req,res) => {
     let {query, pathname: path} = url.parse(req.url, true)
