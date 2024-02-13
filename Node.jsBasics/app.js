@@ -59,15 +59,30 @@ const http = require('http');
 const readline = require('readline');
 
 
+
 const html = fs.readFileSync('./Template/index.html', 'utf-8');
 let products = JSON.parse(fs.readFileSync('./Data/product.json', 'utf-8'));
+const productListHTML = fs.readFileSync('./Template/productList.html' , 'utf-8');
+
+let productHTMLArray = products.map((currentElemet) =>{
+    let output = productListHTML.replace('{{%IMAGE%}}', currentElemet.productImage )
+    output = output.replace('{{%NAME%}}', currentElemet.name )
+    output = output.replace('{{%MODELNAME%}}', currentElemet.modeName )
+    output = output.replace('{{%MODELNO%}}', currentElemet.modelNumber )
+    output = output.replace('{{%SIZE%}}', currentElemet.size )
+    output = output.replace('{{%PRICE%}}', currentElemet.price )
+    output = output.replace('{{%COLOR%}}', currentElemet.color )
+    output = output.replace('{{%CAMERA%}}', currentElemet.camera )
+
+    return output;
+})
 
 const server = http.createServer((req,res) => {
     let path = req.url;
     
     if(path === '/' || path.toLocaleLowerCase()==='/home'){
         res.writeHead(200)
-        res.end(html.replace('{{%CONTENT%}}', 'You are in Home Page'));
+        res.end(html.replace('{{%CONTENT%}}', productHTMLArray));
     }
     
 
