@@ -65,18 +65,18 @@ const server = http.createServer((req,res) => {
     let path = req.url;
     
     if(path === '/' || path.toLocaleLowerCase()==='/home')
-    res.end('You are in the homepage');
+    res.end(html.replace('{{%CONTENT%}}', 'You are in Home Page'));
 
     else if(path.toLocaleLowerCase()==='/about'){
-        res.end('You are in the about page ');
+        res.end(html.replace('{{%CONTENT%}}', 'You are in About Page'));
     }
 
     else if(path.toLocaleLowerCase()==='/contact'){
-        res.end('You are in the contact page');
+        res.end(html.replace('{{%CONTENT%}}', 'You are in Contact Page'));
     }
 
     else
-    res.end('You are in the default page')
+        res.end(html.replace('{{%CONTENT%}}', 'You are in Default page'));
 })
 
 server.listen(8000, '127.0.0.1', ()=>{
