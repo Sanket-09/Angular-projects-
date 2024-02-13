@@ -39,14 +39,46 @@
 
 // const readLine = require('readLine');
 // const fs = require('fs');
+// const http = require('http');
+
+// const server = http.createServer((req,res)=>{
+//     console.log("a new request has been received");
+//     console.log(req);
+// });
+
+// server.listen(8000, '127.0.0.1', () => {
+//     console.log('the server has started')
+// });
+
+
+
+// ************************HTTP REQUEST AND RESPONSE****************
+
+const fs = require('fs');
 const http = require('http');
+const readline = require('readline');
 
-const server = http.createServer((req,res)=>{
-    console.log("a new request has been received");
-    console.log(req);
-});
 
-server.listen(8000, '127.0.0.1', () => {
-    console.log('the server has started')
-});
+const html = fs.readFileSync('./Template/index.html', 'utf-8');
 
+const server = http.createServer((req,res) => {
+    let path = req.url;
+    
+    if(path === '/' || path.toLocaleLowerCase()==='/home')
+    res.end('You are in the homepage');
+
+    else if(path.toLocaleLowerCase()==='/about'){
+        res.end('You are in the about page ');
+    }
+
+    else if(path.toLocaleLowerCase()==='/contact'){
+        res.end('You are in the contact page');
+    }
+
+    else
+    res.end('You are in the default page')
+})
+
+server.listen(8000, '127.0.0.1', ()=>{
+    console.log('The server has been started');
+})
