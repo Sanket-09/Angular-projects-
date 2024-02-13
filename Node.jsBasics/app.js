@@ -60,6 +60,7 @@ const readline = require('readline');
 
 
 const html = fs.readFileSync('./Template/index.html', 'utf-8');
+let products = JSON.parse(fs.readFileSync('./Data/product.json', 'utf-8'));
 
 const server = http.createServer((req,res) => {
     let path = req.url;
@@ -81,6 +82,15 @@ const server = http.createServer((req,res) => {
     else if(path.toLocaleLowerCase()==='/contact'){
         res.writeHead(200)
         res.end(html.replace('{{%CONTENT%}}', 'You are in Contact Page'));
+    }
+
+    else if(path.toLocaleLowerCase()==='/products'){
+        res.writeHead(200,{
+            'Content-Type': 'application.json'
+        })
+        res.end('You are in the product page')
+        console.log(products);
+        
     }
 
     else{
