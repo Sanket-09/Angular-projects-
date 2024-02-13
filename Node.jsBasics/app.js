@@ -64,20 +64,26 @@ const url =  require('url') //returns an urk object
 const html = fs.readFileSync('./Template/index.html', 'utf-8');
 let products = JSON.parse(fs.readFileSync('./Data/product.json', 'utf-8'));
 const productListHTML = fs.readFileSync('./Template/productList.html' , 'utf-8');
+const productDetailHTML = fs.readFileSync('./Template/product-details.html' , 'utf-8');
 
-let productHTMLArray = products.map((currentElemet) =>{
-    let output = productListHTML.replace('{{%IMAGE%}}', currentElemet.productImage )
-    output = output.replace('{{%NAME%}}', currentElemet.name )
-    output = output.replace('{{%MODELNAME%}}', currentElemet.modeName )
-    output = output.replace('{{%MODELNO%}}', currentElemet.modelNumber )
-    output = output.replace('{{%SIZE%}}', currentElemet.size )
-    output = output.replace('{{%PRICE%}}', currentElemet.price )
-    output = output.replace('{{%COLOR%}}', currentElemet.color )
-    output = output.replace('{{%CAMERA%}}', currentElemet.camera )
-    output = output.replace('{{%ID%}}', currentElemet.id )
+
+
+function replaceHtml(template, product){
+    let output = template.replace('{{%IMAGE%}}', product.productImage )
+    output = output.replace('{{%NAME%}}', product.name )
+    output = output.replace('{{%MODELNAME%}}', product.modeName )
+    output = output.replace('{{%MODELNO%}}', product.modelNumber )
+    output = output.replace('{{%SIZE%}}', product.size )
+    output = output.replace('{{%PRICE%}}', product.price )
+    output = output.replace('{{%COLOR%}}', product.color )
+    output = output.replace('{{%CAMERA%}}', product.camera )
+    output = output.replace('{{%ID%}}', product.id )
+    output = output.replace('{{%ROM%}}', product.ROM )
+    output = output.replace('{{%DESC%}}', product.Description )
 
     return output;
-})
+
+}
 
 const server = http.createServer((req,res) => {
     let {query, pathname: path} = url.parse(req.url, true)
@@ -105,12 +111,18 @@ const server = http.createServer((req,res) => {
 
     else if(path.toLocaleLowerCase()==='/products'){
             if(!query.id){
+            let productHTMLArray = products.map((prod)=>{
+                    return replaceHtml(productListHTML, prod)
+                })
             res.writeHead(200)
             res.end(html.replace('{{%CONTENT%}}', productHTMLArray));
             }
 
-            else
-            res.end('This is a product with id = '  + query.id)
+            else{
+                let prod = products[query.id];
+                let productDetailResponseHTML = replaceHtml(productDetailHTML, prod );
+                res.end(html.replace('{{%CONTENT%}}', productDetailResponseHTML))
+            }
         
     }
 
