@@ -57,6 +57,7 @@
 const fs = require('fs');
 const http = require('http');
 const readline = require('readline');
+const url =  require('url') //returns an urk object
 
 
 
@@ -73,16 +74,19 @@ let productHTMLArray = products.map((currentElemet) =>{
     output = output.replace('{{%PRICE%}}', currentElemet.price )
     output = output.replace('{{%COLOR%}}', currentElemet.color )
     output = output.replace('{{%CAMERA%}}', currentElemet.camera )
+    output = output.replace('{{%ID%}}', currentElemet.id )
 
     return output;
 })
 
 const server = http.createServer((req,res) => {
-    let path = req.url;
+    let {query, pathname: path} = url.parse(req.url, true)
+
+    // let path = req.url;
     
     if(path === '/' || path.toLocaleLowerCase()==='/home'){
         res.writeHead(200)
-        res.end(html.replace('{{%CONTENT%}}', productHTMLArray));
+        res.end(html.replace('{{%CONTENT%}}', 'You are in home page'));
     }
     
 
@@ -100,11 +104,13 @@ const server = http.createServer((req,res) => {
     }
 
     else if(path.toLocaleLowerCase()==='/products'){
-        res.writeHead(200,{
-            'Content-Type': 'application.json'
-        })
-        res.end('You are in the product page')
-        console.log(products);
+            if(!query.id){
+            res.writeHead(200)
+            res.end(html.replace('{{%CONTENT%}}', productHTMLArray));
+            }
+
+            else
+            res.end('This is a product with id = '  + query.id)
         
     }
 
