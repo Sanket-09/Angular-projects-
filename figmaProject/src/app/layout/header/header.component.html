@@ -1,0 +1,32 @@
+<mat-toolbar>
+
+
+    <div class="heaps-logo-container">
+        <img src="../../../assets/logo.svg" alt="HEAPS LOGO" id="logo">
+        <div class="vl"></div>
+
+       
+            <mat-form-field appearance="fill">
+            <mat-label>Select Hospitals</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let hospital of hospital" [value]="hospital.value">
+                {{hospital.viewValue}}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+    </div>
+
+    <div class="search-header">
+        <div class="input-icons">
+            <i class="fa fa-search icon"></i>
+            <input class="input-field" type="text" value="Member ID/Name/Phone">
+        </div>
+
+        <a href="" style="margin-top: 6px; margin-left: 5px;">
+            <img src="./../../../assets/Patient_info.fill.svg" alt="patient logo" style="transform: scale(1.1);"  >
+            <!-- <img src="./../../../assets/Chevron.down.svg" alt="down arrow" style="transform: scale(1.1);"> -->
+            
+        </a>        
+    </div>
+
+</mat-toolbar>

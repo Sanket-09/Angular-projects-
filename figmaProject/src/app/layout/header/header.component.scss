@@ -1,0 +1,130 @@
+.mat-toolbar{
+    display: flex;
+    color:  #001333;
+    background: linear-gradient(0deg, #001333, #001333),linear-gradient(0deg, #E0E2E6, #E0E2E6);
+    height: 56px;
+    width: auto;
+    padding: 12px, 30px, 12px, 24px;
+    border: 0px, 0px, 1px, 0px;
+}
+
+
+
+.heaps-logo-container{
+    position: fixed ;
+    display: flex;
+    flex-direction: start;
+    width: auto;
+    height: 26px;
+    top: 15px;
+    left: 24px;
+    gap: 16px;
+
+}
+
+#logo{
+    width: 84.31px;
+    height: 16px;
+    top: 50%;
+    transform: translateY(25%) scale(1.15);
+}
+
+.vl {
+    // border-left: 1px solid rgb(255, 0, 0);
+    // height: 50px;
+    width: 26px;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    color: white;
+    transform: rotate(90deg);
+  }
+
+
+.mat-form-field{
+    color: white;
+    width: 150px;
+    height: 20px;
+    font-size: 15px;
+    padding : 0px !important;
+    margin-top: -14px;
+    margin-left: -40px; 
+}
+
+// .mat-form-field-appearance-fill .mat-form-field-flex {
+//     border-radius: 4px 4px 0 0;
+//     padding: 0px !important;
+//     color: red;
+// }
+
+
+
+
+.search-header-container{
+    display: flex;
+    flex-direction:end;
+    
+}
+
+.search-header{
+    display: flex !important;
+    justify-content: end !important;
+    margin-left: 76vw;
+    margin-top: 5pxx;
+}
+
+#umr-search{
+    
+    border: 1px solid rgba(179, 185, 194, 1);
+
+    height: 35px;
+    line-height: normal;
+    background-color: transparent;
+    color: rgba(179, 185, 194, 1);
+    width: 221px;
+    box-sizing: border-box;
+    user-select: auto;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 0px, 8px, 0px, 8px;
+    padding-left: 12px;
+    font-family: sans-serif;
+    font-size: 15px;
+
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+    color: rgba(179, 185, 194, 1);
+   
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+.icon {
+    padding: 10px;
+    min-width: 40px;
+    transform: scale(0.8);
+}
+
+.input-field {
+    border: 1px solid rgba(179, 185, 194, 1);
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+    color: rgba(179, 185, 194, 1);
+    height: 36px;
+    width: 221px;
+    box-sizing: border-box;
+    font-size: 13px;
+    border-radius: 4px;
+    padding: 0px, 8px, 0px, 8px;    
+    margin-top: 5px;
+    
+    
+}   
+
+
+
+
