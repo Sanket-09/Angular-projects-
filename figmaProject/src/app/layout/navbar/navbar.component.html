@@ -1,6 +1,9 @@
 <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened>
-        <mat-card *ngFor="let hospital of hospital">{{hospital.viewValue}}</mat-card>
+        <mat-card *ngFor="let sideNav of sideNav"  tabindex="0" [ngClass]="{'selected-card': isSelected(sideNav)}" (click)="selectCard(sideNav)">
+            <span class="navValue">{{sideNav.viewValue}} </span>
+            <span class="navChip" >{{sideNav.notif}}</span>
+        </mat-card> 
     </mat-drawer>
-    <mat-drawer-content>Main content</mat-drawer-content>
+    <mat-drawer-content></mat-drawer-content>
 </mat-drawer-container>
