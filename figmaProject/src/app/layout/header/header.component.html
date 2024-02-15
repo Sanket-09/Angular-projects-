@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar >
 
 
     <div class="heaps-logo-container">
@@ -7,7 +7,7 @@
 
        
             <mat-form-field appearance="fill">
-            <mat-label>Select Hospitals</mat-label>
+            <mat-label>Select Hospital</mat-label>
             <mat-select>
                 <mat-option *ngFor="let hospital of hospital" [value]="hospital.value">
                 {{hospital.viewValue}}
@@ -19,7 +19,7 @@
     <div class="search-header">
         <div class="input-icons">
             <i class="fa fa-search icon"></i>
-            <input class="input-field" type="text" value="Member ID/Name/Phone">
+            <input class="input-field" type="text" placeholder="Member ID/Name/Phone" >
         </div>
 
         <a href="" style="margin-top: 6px; margin-left: 5px;">

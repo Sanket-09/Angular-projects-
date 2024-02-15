@@ -1,6 +1,9 @@
 .main-span{
     display: flex;
     flex-direction: row;
+    padding-left: 20px;
+    padding-bottom: 20px;   
+
 }
 
 .mat-card{
@@ -40,6 +43,15 @@
     margin-top: -8px;
     margin-bottom: 0px;
     color: rgba(82, 95, 117, 1);
+}
+
+.selected-card {
+    color: rgba(38, 38, 191, 1) !important;
+    border: 1px solid rgba(64, 64, 217, 1)
+}
+
+.selected-icon{
+    // background-color:  rgba(38, 38, 191, 1) !important;
 }
 
 

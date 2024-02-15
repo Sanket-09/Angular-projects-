@@ -1,4 +1,6 @@
 .mat-toolbar{
+    position: sticky;
+    top: 0;
     display: flex;
     color:  #001333;
     background: linear-gradient(0deg, #001333, #001333),linear-gradient(0deg, #E0E2E6, #E0E2E6);

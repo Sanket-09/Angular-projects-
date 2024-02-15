@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+
+  }
+
+th{
+   font-weight: bold; 
+   border-bottom: 1px solid rgba(224, 226, 230, 1);
+   font-size: 14px;
+   font-family: Mulish;
+}
+
+td{
+    font-size: 14px;
+    font-family: Mulish;
+    font-weight: 500;
+    color: rgba(0, 19, 51, 1);
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+    padding-right: 0px;
+}
+
+.statusUi{
+    background-color: rgba(255, 236, 204, 1);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-family: Mulish;
+    font-size: 12px;
+    align-items: center;
+    color: rgba(0, 19, 51, 1);
+}
+
+
+
+
+
+
