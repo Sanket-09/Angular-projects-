@@ -5,11 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './layout/navbar/navbar.component';
-import { FilterContentComponent } from './modules/dashboard/filter-content/filter-content.component';
-import { TableComponent } from './modules/dashboard/table/table.component';
+import { FilterContentComponent } from './modules/component/filter-content/filter-content.component';
+import { TableComponent } from './modules/component/table/table.component';
+
+import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
+import { RangeDatePickerComponent } from './modules/component/range-date-picker/range-date-picker.component';
 
 
 @NgModule({
@@ -19,6 +22,8 @@ import { TableComponent } from './modules/dashboard/table/table.component';
     NavbarComponent,
     FilterContentComponent,
     TableComponent,
+    DashboardComponent,
+    RangeDatePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,7 @@ import { TableComponent } from './modules/dashboard/table/table.component';
     MaterialModule,
     FormsModule,
     FontAwesomeModule,
-    
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
