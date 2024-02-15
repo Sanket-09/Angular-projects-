@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { FilterContentComponent } from './modules/dashboard/filter-content/filter-content.component';
+import { TableComponent } from './modules/dashboard/table/table.component';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     AppComponent,
     HeaderComponent,
     NavbarComponent,
+    FilterContentComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
