@@ -13,6 +13,8 @@ import { TableComponent } from './modules/component/table/table.component';
 
 import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
 import { RangeDatePickerComponent } from './modules/component/range-date-picker/range-date-picker.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { RangeDatePickerComponent } from './modules/component/range-date-picker/
     MaterialModule,
     FormsModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule, 
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

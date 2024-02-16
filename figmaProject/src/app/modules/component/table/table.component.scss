@@ -1,13 +1,20 @@
+div{
+    overflow:hidden;
+    overflow-y: scroll;
+    height: 26vw; // change this to desired height
+}
+
 table {
     width: 100%;
-
+    overflow: scroll !important;
+    
   }
 
 th{
    font-weight: bold; 
    border-bottom: 1px solid rgba(224, 226, 230, 1);
    font-size: 14px;
-   font-family: Mulish;
+ 
 }
 
 td{
@@ -32,8 +39,8 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
     color: rgba(0, 19, 51, 1);
 }
 
-
-
-
-
+.section {
+    scrollbar-color: #6969dd #e0e0e0 !important;
+    scrollbar-width: thin !important;
+  }
 
