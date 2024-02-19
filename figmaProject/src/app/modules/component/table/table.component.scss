@@ -1,7 +1,12 @@
+.mat-paginator{
+    margin-top: -3px;
+    margin-bottom: -5px;
+}
+
 div{
     overflow:hidden;
     overflow-y: scroll;
-    height: 26vw; // change this to desired height
+    height: 28vw; // change this to desired height
 }
 
 table {
@@ -30,6 +35,9 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
 
 .statusUi{
     background-color: rgba(255, 236, 204, 1);
+    display: inline-block;
+    width: 50px;
+    text-align: center;
     padding: 5px 10px;
     border-radius: 15px;
     font-weight: 700;
@@ -42,5 +50,17 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
 .section {
     scrollbar-color: #6969dd #e0e0e0 !important;
     scrollbar-width: thin !important;
+  }
+
+  .status-pending {
+    background-color: rgba(255, 236, 204, 1);
+  }
+  
+  .status-resolved {
+    background-color: rgba(215, 249, 234, 1);
+  }
+  
+  .status-closed {
+    background-color: rgba(240, 241, 243, 1);
   }
 

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FilterService } from '../../services/filter.service';
+
+
+
 
 @Component({
   selector: 'app-filter-content',
@@ -7,11 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterContentComponent implements OnInit {
 
+  ngOnInit(): void {
+    
+  }
+ 
+  totalCount : number | undefined;
+
+  constructor(private FilterService: FilterService) { 
+
+  }
+  
+  
   cards = [
-    { icon: 'hourglass-half', value1: 10, value2: 'Pending', bgColor: 'white' },
-    { icon: 'thumbs-up', value1: 22, value2: 'Received', bgColor: 'white' },
-    { icon: 'check-circle', value1: 123, value2: 'Closed', bgColor: 'white' },
-    { icon: 'users', value1: 619, value2: 'Total Request', bgColor: 'white' }
+    { icon: 'hourglass-half', value1: 16, value2: 'Pending', bgColor: 'white' },
+    { icon: 'thumbs-up', value1: 6, value2: 'Resolved', bgColor: 'white' },
+    { icon: 'check-circle', value1: 8, value2: 'Closed', bgColor: 'white' },
+    { icon: 'users', value1: 30, value2: 'Total Request', bgColor: 'white' }
   ];
 
   selectedCard: any;
@@ -19,7 +34,13 @@ export class FilterContentComponent implements OnInit {
 
   selectCard(card: any) {
     this.selectedCard = card;
+    this.applyFilter(card.value2);
   }
+
+  applyFilter(status : string){
+    this.FilterService.emitFilter(status);
+  }
+
 
   isSelected(card: any): boolean {
     return this.selectedCard === card;
@@ -33,9 +54,8 @@ export class FilterContentComponent implements OnInit {
     return this.selectedCard === card;
   }
 
-  constructor() { }
+ 
 
-  ngOnInit(): void {
-  }
+ 
 
 }

@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     padding-left: 20px;
-    padding-bottom: 20px;   
+    padding-bottom: 0px;   
 
 }
 
@@ -47,11 +47,20 @@
 
 .selected-card {
     color: rgba(38, 38, 191, 1) !important;
-    border: 1px solid rgba(64, 64, 217, 1)
+    border: 1px solid rgba(64, 64, 217, 1);
 }
 
-.selected-icon{
-    // background-color:  rgba(38, 38, 191, 1) !important;
+.card-icon i {
+    margin-top: 15px; 
+    margin-left: 18px; 
+    color: rgba(97, 109, 129, 1)  ;
 }
 
+.selected-card i {
+    color: white;
+}
+
+.selected-card .card-icon{
+    background-color: rgba(64, 64, 217, 1);
+}
 
