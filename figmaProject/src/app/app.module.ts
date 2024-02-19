@@ -8,13 +8,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './layout/navbar/navbar.component';
-import { FilterContentComponent } from './modules/component/filter-content/filter-content.component';
 import { TableComponent } from './modules/component/table/table.component';
 
 import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
 import { RangeDatePickerComponent } from './modules/component/range-date-picker/range-date-picker.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { FilterDropdownComponent } from './modules/component/filter-dropdown-speciality/filter-dropdown.component';
+import { FilterContentComponent } from './modules/component/filter-content/filter-content.component';
+import { FilterDropdownCategoryComponent } from './modules/component/filter-dropdown-category/filter-dropdown-category.component';
+import { FilterChipsComponent } from './modules/component/filter-chips/filter-chips.component';
+// import { BufferComponentComponent } from './modules/component/buffer-component/buffer-component.component';
 
 
 @NgModule({
@@ -22,10 +27,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AppComponent,
     HeaderComponent,
     NavbarComponent,
-    FilterContentComponent,
     TableComponent,
     DashboardComponent,
     RangeDatePickerComponent,
+    FilterDropdownComponent,
+    FilterContentComponent,
+    FilterDropdownCategoryComponent,
+    FilterChipsComponent
+    // BufferComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +45,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     FontAwesomeModule,
     ReactiveFormsModule,
     MatTableModule, 
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxMatSelectSearchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

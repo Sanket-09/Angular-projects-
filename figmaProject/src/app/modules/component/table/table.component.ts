@@ -79,21 +79,45 @@ export class TableComponent implements AfterViewInit {
 
   
   filterSubscription: Subscription;
+  filterSubscriptionSpeciality : Subscription;
 
   constructor( private filterService : FilterService) { 
     
-    console.log(countPending);
     
     this.filterSubscription = this.filterService.filterChanged$.subscribe(filter => {
-      
-    if(filter !== 'Total Request')
-      this.dataSource.filter = filter; 
+    
+    console.log("event received in the datatable ")
+    
+    // if(filter === 'Total Request')
+    //   this.dataSource.filter = '';
 
-    else
+    // else
+    // this.dataSource.filter = filter;
+    this.applyStatusFilter(filter);
+
+    })
+
+    this.filterSubscriptionSpeciality = this.filterService.filterChangedSpeciality$.subscribe(filter=>{
+      this.applySpecialityFilter(filter)
+    })
+  }
+
+  applyStatusFilter(status:string){
+    if(status === 'Total Request')
       this.dataSource.filter = '';
 
-    this.setValueTotal(countTotal)
-    })
+    else
+    this.dataSource.filter = status;
+  }
+
+  applySpecialityFilter(speciality : any)
+  {  
+    
+    // console.log(speciality);
+    const values = speciality.map((item: { value: any; }) => item.value)
+    const concatenatedString = values.join(',');
+    // console.log(concatenatedString);
+    this.dataSource.filter = concatenatedString;
   }
 
   setValueTotal(countTotal : number){

@@ -1,0 +1,11 @@
+
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)" selectable="false">
+        {{fruit.name}}
+        <button matChipRemove>
+          <i class="fa fa-times"></i>
+        </button>
+      </mat-chip>
+    </mat-chip-list>
+
+  

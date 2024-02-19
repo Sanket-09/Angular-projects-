@@ -44,3 +44,8 @@ body * ::-webkit-scrollbar-thumb
 	width: 95px;
 }
 
+.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+    font-size: 12px !important;
+    line-height: 3em;
+    height: 3em;
+}

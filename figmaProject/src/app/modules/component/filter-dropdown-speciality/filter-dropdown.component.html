@@ -1,0 +1,28 @@
+
+    <mat-form-field appearance="outline" class="specialityDropdownContainer" >
+      <mat-select [(ngModel)]="selectedValues" (selectionChange)="onSelectionChange($event)"  [formControl]="bankMultiCtrl" placeholder="Speciality" [multiple]="true" #multiSelect #spec>
+        <mat-option>
+          <ngx-mat-select-search [formControl]="bankMultiFilterCtrl" placeholderLabel="Find speciality"
+          noEntriesFoundLabel="'no matching speciality found'"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank" >
+          {{bank.value}}
+        </mat-option>
+        <span class="footerBtn">
+          <footer>
+            <span>
+              <button mat-button class="cancelbtn" (click)="cancelAll()">Cancel</button>
+            <button mat-button class="submitbtn" (click)="logSelectedValues()">Apply</button>
+            </span>
+          </footer>
+        </span> 
+      </mat-select>
+    </mat-form-field>
+
+  <!-- <p>
+    Selected Banks:
+  </p>
+  <ul *ngFor="let bank of bankMultiCtrl?.value">
+    <li>{{bank.value}}</li>
+  </ul> -->
+  

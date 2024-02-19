@@ -1,5 +1,5 @@
 {
-  "name": "figma-project",
+  "name": "buffer-project",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,22 +11,15 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.0.0",
-    "@angular/cdk": "^13.0.0",
     "@angular/common": "^14.0.0",
     "@angular/compiler": "^14.0.0",
     "@angular/core": "^14.0.0",
     "@angular/forms": "^14.0.0",
-    "@angular/material": "^13.0.0",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
-    "@fortawesome/angular-fontawesome": "^0.11.1",
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "angular-font-awesome": "^3.1.2",
-    "font-awesome": "^4.7.0",
     "ngx-mat-select-search": "^5.0.0",
-    "primeng": "^17.7.0",
+    "primeng": "^14.2.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
