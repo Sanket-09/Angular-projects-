@@ -1,5 +1,5 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MatChipInputEvent} from '@angular/material/chips';
 
 export interface Fruit {
@@ -13,13 +13,18 @@ export interface Fruit {
 })
 export class FilterChipsComponent {
 
-  constructor() { }
+  constructor() { 
+    
+   }
+
+  @Input() selectedValues : string[] = [];
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   fruits: Fruit[] = [{name: 'General Medicine'}, {name: 'Orthopedic'}, {name: 'Oncology'}];
 
   add(event: MatChipInputEvent): void {
+    console.log(this.selectedValues + "   in input")
     const value = (event.value || '').trim();
 
     // Add our fruit

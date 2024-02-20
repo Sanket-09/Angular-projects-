@@ -19,8 +19,17 @@ import { FilterDropdownComponent } from './modules/component/filter-dropdown-spe
 import { FilterContentComponent } from './modules/component/filter-content/filter-content.component';
 import { FilterDropdownCategoryComponent } from './modules/component/filter-dropdown-category/filter-dropdown-category.component';
 import { FilterChipsComponent } from './modules/component/filter-chips/filter-chips.component';
+import { RouterModule, Routes } from '@angular/router';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LandingPageComponent } from './modules/landing-page/landing-page.component';
+
 // import { BufferComponentComponent } from './modules/component/buffer-component/buffer-component.component';
 
+const appRoute : Routes =  [ 
+  { path: '', pathMatch: 'full', redirectTo: 'homepage' },
+  { path: 'homepage', component: HomePageComponent },
+  { path: 'landing', component: LandingPageComponent}
+]
 
 @NgModule({
   declarations: [
@@ -33,7 +42,10 @@ import { FilterChipsComponent } from './modules/component/filter-chips/filter-ch
     FilterDropdownComponent,
     FilterContentComponent,
     FilterDropdownCategoryComponent,
-    FilterChipsComponent
+    FilterChipsComponent,
+    HomePageComponent,
+    LandingPageComponent,
+
     // BufferComponentComponent,
   ],
   imports: [
@@ -46,7 +58,8 @@ import { FilterChipsComponent } from './modules/component/filter-chips/filter-ch
     ReactiveFormsModule,
     MatTableModule, 
     MatPaginatorModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    RouterModule.forRoot(appRoute)
   ],
   providers: [],
   bootstrap: [AppComponent]

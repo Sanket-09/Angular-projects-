@@ -1,70 +1,15 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FilterService } from '../../services/filter.service';
 import { Subscription } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import { ELEMENT_DATA, PeriodicElement } from '../../services/data';
 
-export interface PeriodicElement {
-  prefDate: Date;
-  status: string;
-  id: string;
-  name: string;
-  reqDate : Date;
-  speciality : string;
-  visitType : string
-}
+ 
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  
-  {status: 'Pending', prefDate: new Date(), id: 'M41232', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Dermatology' , visitType: 'Escalation'},
-  {status: 'Closed', prefDate: new Date(), id: 'M37431', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M12412', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Resolved', prefDate: new Date(), id: 'M24431', name: 'Jane Doe' , reqDate: new Date(), speciality: 'General Medicine' , visitType: 'Escalation'},
-  {status: 'Resolved', prefDate: new Date(), id: 'M37281', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M37421', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Radiology' , visitType: 'Other Appointments'},
-  {status: 'Closed', prefDate: new Date(), id: 'M37281', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Endocrinologist' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M37281', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Dermatology  ' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M32131', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Closed', prefDate: new Date(), id: 'M37123', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Oncologist' , visitType: 'Escalation'},
-  {status: 'Closed', prefDate: new Date(), id: 'M33212', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M32341', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Dermatology' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M35321', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Radiology' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M41232', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Closed', prefDate: new Date(), id: 'M37431', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Endocrinologist' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M12412', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Resolved', prefDate: new Date(), id: 'M24431', name: 'Jane Doe' , reqDate: new Date(), speciality: 'General Medicine' , visitType: 'Escalation'},
-  {status: 'Resolved', prefDate: new Date(), id: 'M37281', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M37421', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Other Appointments'},
-  {status: 'Pending', prefDate: new Date(), id: 'M37281', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Radiology' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M32131', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Closed', prefDate: new Date(), id: 'M37123', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Endocrinologist' , visitType: 'Escalation'},
-  {status: 'Closed', prefDate: new Date(), id: 'M33212', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Oncologist' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M32341', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M35321', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Oncologist' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M41232', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Endocrinologist' , visitType: 'Escalation'},
-  {status: 'Closed', prefDate: new Date(), id: 'M37431', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Resolved', prefDate: new Date(), id: 'M24431', name: 'Jane Doe' , reqDate: new Date(), speciality: 'General Medicine' , visitType: 'Escalation'},
-  {status: 'Resolved', prefDate: new Date(), id: 'M37281', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Escalation'},
-  {status: 'Pending', prefDate: new Date(), id: 'M37421', name: 'Jane Doe' , reqDate: new Date(), speciality: 'Cardiology' , visitType: 'Other Appointments'},
-
-
-
-];
-
-var countTotal = ELEMENT_DATA.length;
-
-var pendingNo = ELEMENT_DATA.filter( item => item.status == 'Pending');
-var countPending = pendingNo.length;
-
-var resolvedNo = ELEMENT_DATA.filter( item => item.status == 'Resolved');
-var countResolved = resolvedNo.length;
-
-var closedNo = ELEMENT_DATA.filter( item => item.status == 'Closed');
-var countClosed = closedNo.length;
-
-
-
+ 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -72,68 +17,73 @@ var countClosed = closedNo.length;
 })
 export class TableComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['status', 'prefDate', 'id', 'name', 'reqDate', 'speciality' , 'visitType'];
+  activeRoute: ActivatedRoute = inject(ActivatedRoute);
+
+
+  getRecord(data: any) : void {
+    console.log(data.id);
+  
+    let queryParams : any = {};
+    queryParams['id'] = data.id; // Create a dictionary containing the query parameter
+    this.router.navigate(['/landing'], { 
+      queryParams: queryParams 
+    });
+  }
+ 
+  displayedColumns: string[] = ['status', 'prefDate', 'id', 'name', 'reqDate', 'speciality', 'visitType'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
-
-
-  
+  currentStatus = ''
+ 
   filterSubscription: Subscription;
-  filterSubscriptionSpeciality : Subscription;
-
-  constructor( private filterService : FilterService) { 
-    
-    
+  filterSubscriptionSpeciality: Subscription;
+ 
+  constructor(private filterService: FilterService, private router: Router) {
+ 
     this.filterSubscription = this.filterService.filterChanged$.subscribe(filter => {
-    
-    console.log("event received in the datatable ")
-    
-    // if(filter === 'Total Request')
-    //   this.dataSource.filter = '';
-
-    // else
-    // this.dataSource.filter = filter;
-    this.applyStatusFilter(filter);
-
+      console.log("event received in the datatable ")
+      this.applyStatusFilter(filter);
     })
-
-    this.filterSubscriptionSpeciality = this.filterService.filterChangedSpeciality$.subscribe(filter=>{
-      this.applySpecialityFilter(filter)
+ 
+    this.filterSubscriptionSpeciality = this.filterService.filterChangedSpeciality$.subscribe(filter => {
+      this.applySpecialityFilter(filter);
+      
     })
   }
-
-  applyStatusFilter(status:string){
-    if(status === 'Total Request')
+ 
+  applyStatusFilter(status: string) {
+    if (status === 'Total Request')
       this.dataSource.filter = '';
-
     else
-    this.dataSource.filter = status;
-  }
+      this.dataSource.filter = status;
 
-  applySpecialityFilter(speciality : any)
-  {  
+
+  }
+ 
+  applySpecialityFilter(specialities: any) {
+    const selectedSpecialities = specialities.map((item: { value: any }) => item.value);
+    console.log( " before predicate  :"  + selectedSpecialities );
     
-    // console.log(speciality);
-    const values = speciality.map((item: { value: any; }) => item.value)
-    const concatenatedString = values.join(',');
-    // console.log(concatenatedString);
-    this.dataSource.filter = concatenatedString;
-  }
+    // Custom filter predicate
+    this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
+      const selectedValues = filter.split(','); 
+      return selectedValues.includes(data.speciality.trim()); 
+    };
 
-  setValueTotal(countTotal : number){
+
+    console.log(typeof(selectedSpecialities))
+  
+    this.dataSource.filter = selectedSpecialities.join(','); 
+ 
+  }
+ 
+  setValueTotal(countTotal: number) {
     this.filterService.totalNo = countTotal;
   }
-
-  
-  
-  @ViewChild(MatPaginator) paginator!: MatPaginator ;
-
+ 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+ 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-
-
- 
-  
-
 }

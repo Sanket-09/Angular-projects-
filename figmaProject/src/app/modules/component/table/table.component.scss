@@ -6,7 +6,7 @@
 div{
     overflow:hidden;
     overflow-y: scroll;
-    height: 28vw; // change this to desired height
+    height: 24vw; // change this to desired height
 }
 
 table {
@@ -16,7 +16,7 @@ table {
   }
 
 th{
-   font-weight: bold; 
+   font-weight: 550; 
    border-bottom: 1px solid rgba(224, 226, 230, 1);
    font-size: 14px;
  
@@ -64,3 +64,9 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
     background-color: rgba(240, 241, 243, 1);
   }
 
+  
+
+  .mat-row:hover {
+    cursor: grab;
+    background-color: rgb(227, 227, 233);
+  }

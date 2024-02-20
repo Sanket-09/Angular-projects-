@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
+import { FilterService } from '../../services/filter.service';
 
 import { Bank, BANKS } from './demo-data';
 
@@ -14,7 +15,29 @@ import { Bank, BANKS } from './demo-data';
 export class FilterDropdownCategoryComponent implements OnInit {
 
   protected banks: Bank[] = BANKS;
+  selectedValues: string[] = [];
 
+  onSelectionChange($event: any) {
+    if($event.isUserInput)
+    {
+     if($event.source.selected){
+       this.selectedValues.push($event.source.value);
+     }
+     else{
+       this.selectedValues = this.selectedValues.filter(value => value !== $event.source.value)
+     }
+    }
+   }
+
+  logSelectedValues(){
+    console.log(this.selectedValues);
+    this.FilterService.emitFilterSpeciality(this.selectedValues);
+  }
+  
+  cancelAll(){
+    this.selectedValues = [];
+  }
+   
   /** control for the selected bank for multi-selection */
   public bankMultiCtrl: FormControl<Bank[] | null> = new FormControl<Bank[]>([]);
 
@@ -30,7 +53,7 @@ export class FilterDropdownCategoryComponent implements OnInit {
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-  constructor() { }
+  constructor(private FilterService: FilterService) { }
 
 
   ngOnInit(): void {

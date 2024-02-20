@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
@@ -14,10 +14,16 @@ import { Bank, BANKS } from './demo-data';
 })
 export class FilterDropdownComponent implements OnInit {
 
+@Output() selectedValuesChange : EventEmitter<string> = new EventEmitter<string>();
+
 selectedValues: string[] = [];
 
 
+
 onSelectionChange($event: any) {
+
+this.selectedValuesChange.emit(this.selectedValues.join(','));
+
  if($event.isUserInput)
  {
   if($event.source.selected){
@@ -30,8 +36,10 @@ onSelectionChange($event: any) {
 }
 
 logSelectedValues(){
-  console.log(this.selectedValues);
+  // console.log(this.selectedValues);
+  // this.FilterService.currentSelectedValues = this.selectedValues;
   this.FilterService.emitFilterSpeciality(this.selectedValues);
+  // this.FilterService.applyFilter();
 }
 
 cancelAll(){

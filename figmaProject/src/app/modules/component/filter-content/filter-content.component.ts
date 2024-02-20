@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FilterService } from '../../services/filter.service';
 
 
@@ -20,6 +20,8 @@ export class FilterContentComponent implements OnInit {
   constructor(private FilterService: FilterService) { 
 
   }
+
+  @Output() currentStatus =  new EventEmitter<string>();
   
   
   cards = [
@@ -39,6 +41,8 @@ export class FilterContentComponent implements OnInit {
 
   applyFilter(status : string){
     this.FilterService.emitFilter(status);
+    // this.FilterService.currentFilterStatus = status;
+    // this.FilterService.applyFilter();
   }
 
 

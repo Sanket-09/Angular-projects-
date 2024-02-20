@@ -1,0 +1,118 @@
+<mat-toolbar class="header">
+
+<span class="back-btn">
+    <a href="#"><img src="../../../assets/Left.arrow.svg" alt="back button"></a>
+</span>
+
+<span class="separator"></span>
+
+<span class="patientDetailHeader">
+    <div class="patientDetailHeaderName">
+        <img class="headerIcon" src="../../../assets/Patient_info.svg" alt="patient_icon">
+        {{currentElement.name}}
+    </div>
+    <div class="patientDetailHeaderId">
+        {{currentElement.id}}
+        <img src="../../../assets/copy.svg" alt="copy-icon">
+    </div>
+</span>
+
+<span class="separator"></span>
+
+<span class="patientDetailHeader">
+    <div class="patientDetailHeaderName">
+        <img class="headerIcon" src="../../../assets/Union.svg" alt="phone_icon">
+        {{currentElement.phoneNumber}}
+        <img class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
+    </div>
+    <div class="patientDetailHeaderId">
+        {{currentElement.language}}
+        
+    </div>
+</span>
+
+<span class="separator"></span>
+
+<span class="patientDetailHeader">
+    <div class="patientDetailHeaderName">
+        <img class="headerIcon" src="../../../assets/Union.svg" alt="phone_icon">
+        {{currentElement.gender}}
+    </div>
+    <div class="patientDetailHeaderId">
+        {{currentElement.age}}
+        
+    </div>
+</span>
+    
+
+</mat-toolbar>
+
+
+
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened>
+            <div class="drawerDiv">
+                Service Request
+            </div>
+
+            <div class="drawerDiv2">
+                <span class="drawerDiv2span">
+                    Pending
+                </span>
+
+                <span class="drawerDiv2span">
+                    Resolved/Closed
+                </span>
+            </div>
+
+            <mat-card>
+                Appointment 1 - {{currentElement.reqDate | date}}
+                <p>Preferred Consultation Date</p>
+                {{currentElement.prefDate | date}}
+            </mat-card>
+
+        </mat-drawer>
+
+
+        <mat-drawer-content>
+            <div class="drawerContentDiv">
+                Appointment 1 - {{currentElement.reqDate | date}}
+            </div>
+
+            <div class="bookingDetails">
+                Booking Details
+            </div>
+
+            <div class="bookingInfo">
+                <div class="bookingInfoRow1">Preferred Consultation Date <br> <span class="bookingInfoDetails">{{currentElement.prefDate | date}}</span></div>
+                <div class="bookingInfoRow1">Physician Visit Type <br> <span class="bookingInfoDetails">{{currentElement.visitType}}</span></div>
+                <div class="bookingInfoRow1">Speciality <br><span class="bookingInfoDetails">{{currentElement.speciality}}</span></div>
+            </div>
+
+            <div class="bookingInfo">
+                <div class="bookingInfoRow1">Physician Name <br> <span class="bookingInfoDetails">-</span></div>
+                <div class="bookingInfoRow1">Physician Category <br> <span class="bookingInfoDetails">{{currentElement.category}}</span></div>
+            </div>
+
+            <div class="bookingInfo">
+                <div class="bookingInfoRowNotes">Notes <br> <span class="bookingInfoDetails">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil nam sed odit? Eos, placeat?</span></div>
+            </div>
+
+            <div>
+                <div class="bookingDetails" style="padding: 10px 20px;">Notes <br> <span class="bookingInfoDetails" style="margin-right: 80px;">Do you need to resolve physician service?</span> <span class="bookingInfoDetailsRadioBtn"><mat-radio-group aria-label="Select an option">
+                    <mat-radio-button disableRipple=true value="1">Yes</mat-radio-button>
+                    <mat-radio-button disableRipple=true value="2">Not Yet</mat-radio-button>
+                    <mat-radio-button disableRipple=true value="3">Not Required</mat-radio-button>
+                  </mat-radio-group>
+                  </span> </div>
+            </div>
+
+        </mat-drawer-content>
+        
+    </mat-drawer-container>
+
+   
+      
+
+
+  

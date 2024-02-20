@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, filter } from 'rxjs';
 
 
 @Injectable({
@@ -7,6 +7,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class FilterService {
   totalNo: number | undefined;
+  currentFilterStatus! : string ;
+  currentSelectedValues: string[] = [];
 
   constructor() { }
 
@@ -15,17 +17,28 @@ export class FilterService {
 
 
   filterChanged$ = this.filterSubject.asObservable();
-  
   filterChangedSpeciality$  =this.filterSubjectObj.asObservable();
+
+
 
   emitFilter(filter : string){
     this.filterSubject.next(filter);
+
+    
   }
 
-  emitFilterSpeciality(speciality : object)
-  {
-    console.log("received event speciality type "  + typeof(speciality))
+  emitFilterSpeciality(speciality : any)
+  { 
+    // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
+    // console.log(filterObj);
+    // speciality.push(filterObj);
+    console.log("received event speciality type "  + typeof(speciality) + "  value of event  " + speciality)
     this.filterSubjectObj.next(speciality);
+  }
+
+  applyFilter(){
+    this.emitFilterSpeciality(this.currentSelectedValues);
+    this.emitFilter(this.currentFilterStatus);
   }
 
   

@@ -44,8 +44,18 @@ body * ::-webkit-scrollbar-thumb
 	width: 95px;
 }
 
-.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+	.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
     font-size: 12px !important;
     line-height: 3em;
     height: 3em;
-}
+	font-family: Mulish;
+	}
+
+
+
+    
+    .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: rgba(64, 64, 217, 1); /*inner circle color change*/  }
+    
+    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: rgba(64, 64, 217, 1) !important; /*outer ring color change*/  }

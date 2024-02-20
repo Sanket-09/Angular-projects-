@@ -1,6 +1,6 @@
 
 <mat-form-field appearance="outline" class="specialityDropdownContainer" >
-    <mat-select [formControl]="bankMultiCtrl" placeholder="Physician Category" [multiple]="true" #multiSelect #spec>
+    <mat-select (selectionChange)="onSelectionChange($event)"  [formControl]="bankMultiCtrl" placeholder="Physician Category" [multiple]="true" #multiSelect #spec>
       <mat-option>
         <ngx-mat-select-search [formControl]="bankMultiFilterCtrl" placeholderLabel="Find Category"
         noEntriesFoundLabel="'no matching categoryfound'"></ngx-mat-select-search>
@@ -11,8 +11,8 @@
       <span class="footerBtn">
         <footer>
           <span>
-            <button mat-button class="cancelbtn">Cancel</button>
-          <button mat-button class="submitbtn" >Apply</button>
+            <button mat-button class="cancelbtn" (click)="cancelAll()">Cancel</button>
+          <button mat-button class="submitbtn" (click)="logSelectedValues()">Apply</button>
           </span>
         </footer>
       </span> 
