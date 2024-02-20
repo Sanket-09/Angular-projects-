@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ELEMENT_DATA } from '../services/data';
 import { PeriodicElement } from '../services/data';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,10 +11,37 @@ import { PeriodicElement } from '../services/data';
 })
 export class LandingPageComponent implements OnInit {
 
+
+  copyPhonefn() {
+    const idContent = document.getElementById('copyPhoneNumber')?.innerText;
+    
+    if(idContent){
+      this.clipboard.copy(idContent);
+      alert("Phone Number Copied")
+    }
+
+    else
+    alert("Error")
+  }
+
+
+
+  copyIdfn(){
+    const idContent = document.getElementById('copyId')?.innerText;
+    
+    if(idContent){
+      this.clipboard.copy(idContent);
+      alert("Id Copied")
+    }
+
+    else
+    alert("Error")
+  }
+
   currentId : any;
   currentElement : any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute , private clipboard: Clipboard) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {

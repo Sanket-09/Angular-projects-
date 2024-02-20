@@ -51,6 +51,10 @@
     margin-right: 5px !important;
 }
 
+.headerIcon:hover{
+    cursor: copy;
+}
+
 .example-container{
     height: 89%;
     box-shadow: 0px 1px 1px 0px rgba(0, 19, 51, 0.1);
@@ -188,6 +192,45 @@
     left: calc(50% - 14px); /*'10px'-same as your required circle radius*/
     top: calc(50% - 14px); /*'10px'-same as your required circle radius*/
   }
+
+  .mat-form-field{
+    padding: 10px 20px;
+    font-size: 12px;
+    width: 420px;
+  }
+
+  .optionalInput{
+    display: block;
+  }
+
+  textarea{
+    margin-left: 20px;
+    border-radius: 5px;
+    border: 2px #e0e0e0 solid;
+    resize: none;
+  }
+
+  textarea:hover{
+    margin-left: 20px;
+    border-radius: 5px;
+    border: 2px black solid;
+    resize: none;
+  }
+
+  .submitBtn{
+    display: flex;
+    justify-content: end;
+    padding: 0px 10px;
+  }
+
+  .submitBtn button{
+    background-color: rgba(64, 64, 217, 1);
+    border-radius: 8px;
+    width: 120px;
+  }
+
+  
+
 
 
 

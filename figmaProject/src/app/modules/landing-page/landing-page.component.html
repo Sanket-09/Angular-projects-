@@ -12,8 +12,9 @@
         {{currentElement.name}}
     </div>
     <div class="patientDetailHeaderId">
-        {{currentElement.id}}
-        <img src="../../../assets/copy.svg" alt="copy-icon">
+        <span id="copyId" >{{currentElement.id}}</span>
+        
+        <img (click)="copyIdfn()" class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
     </div>
 </span>
 
@@ -22,12 +23,11 @@
 <span class="patientDetailHeader">
     <div class="patientDetailHeaderName">
         <img class="headerIcon" src="../../../assets/Union.svg" alt="phone_icon">
-        {{currentElement.phoneNumber}}
-        <img class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
+        <span id="copyPhoneNumber" style="margin: 0px 3px">{{currentElement.phoneNumber}}</span>
+        <img (click)="copyPhonefn()" class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
     </div>
     <div class="patientDetailHeaderId">
         {{currentElement.language}}
-        
     </div>
 </span>
 
@@ -107,8 +107,26 @@
                   </span> </div>
             </div>
 
+            <div class="optionalInput">
+                <mat-form-field appearance="outline" required = "true" [hideRequiredMarker]="false">
+                    <mat-label>Consulted Date</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            
+            <textarea name="notes" id="notes" cols="54" rows="5" placeholder="Notes"></textarea>
+            
+            <div class="submitBtn">
+                <button mat-flat-button color="primary">Submit</button>
+            </div>
+            
+
         </mat-drawer-content>
+
         
+          
     </mat-drawer-container>
 
    
