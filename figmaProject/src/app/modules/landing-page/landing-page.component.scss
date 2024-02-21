@@ -229,6 +229,18 @@
     width: 120px;
   }
 
+
+  .mat-tab-labels {
+      display: flex;
+      justify-content: start;
+  }
+  
+  ::ng-deep .mat-ink-bar {
+    background-color:rgba(64, 64, 217, 1) !important;
+    height: 4px !important ;
+}
+
+
   
 
 

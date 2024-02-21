@@ -75,7 +75,7 @@ export const ELEMENT_DATA: PeriodicElement[] = [
     category: "Tele-Consultation"
   },
   { 
-    status: "Resolved", 
+    status: "Pending", 
     prefDate: new Date("2024-04-05T12:45:00.000Z"), 
     id: "M55555", 
     name: "Sophia Grace Brown", 

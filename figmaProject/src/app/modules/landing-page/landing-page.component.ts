@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ELEMENT_DATA } from '../services/data';
 import { PeriodicElement } from '../services/data';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-landing-page',
@@ -41,7 +42,7 @@ export class LandingPageComponent implements OnInit {
   currentId : any;
   currentElement : any;
 
-  constructor(private route: ActivatedRoute , private clipboard: Clipboard) { }
+  constructor( private router: Router ,private route: ActivatedRoute , private clipboard: Clipboard , private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
@@ -53,8 +54,22 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
+  navigateToDashboard() {
+    // Navigate to the dashboard route
+    console.log("navigate called")
+    this.router.navigate(['/homepage']);
+  }
   
+  openSnackBar(message: string, action: string ) {
+    this._snackBar.open(message, action,{
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
+      verticalPosition: 'bottom',
+      horizontalPosition: 'start'
+    });
+    this.navigateToDashboard();
   
+  }
 
 
 

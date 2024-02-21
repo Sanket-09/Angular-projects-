@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FilterService } from '../../services/filter.service';
@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import { ELEMENT_DATA, PeriodicElement } from '../../services/data';
+import { ChangeDetectorRef } from '@angular/core';
 
  
 
@@ -15,7 +16,7 @@ import { ELEMENT_DATA, PeriodicElement } from '../../services/data';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements AfterViewInit , OnChanges {
 
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
 
@@ -32,16 +33,16 @@ export class TableComponent implements AfterViewInit {
  
   displayedColumns: string[] = ['status', 'prefDate', 'id', 'name', 'reqDate', 'speciality', 'visitType'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  filteredDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   currentStatus = ''
  
   filterSubscription: Subscription;
   filterSubscriptionSpeciality: Subscription;
  
-  constructor(private filterService: FilterService, private router: Router) {
+  constructor(private filterService: FilterService, private router: Router , private cdRef: ChangeDetectorRef) {
  
     this.filterSubscription = this.filterService.filterChanged$.subscribe(filter => {
-      console.log("event received in the datatable ")
       this.applyStatusFilter(filter);
     })
  
@@ -50,40 +51,67 @@ export class TableComponent implements AfterViewInit {
       
     })
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.filterSubscription = this.filterService.filterChanged$.subscribe(filter => {
+      this.applyStatusFilter(filter);
+    })
  
-  applyStatusFilter(status: string) {
-    if (status === 'Total Request')
-      this.dataSource.filter = '';
-    else
-      this.dataSource.filter = status;
+    this.filterSubscriptionSpeciality = this.filterService.filterChangedSpeciality$.subscribe(filter => {
+      this.applySpecialityFilter(filter);
+      
+    })
+  }
 
 
+ 
+  applyStatusFilter(filterValue: string) {
+    console.log(filterValue)
+    if (filterValue.toLowerCase() == 'total request') {
+      // If 'Total Request', show the complete data without filtering
+      this.filteredDataSource.data = this.dataSource.data;
+        this.filteredDataSource.filter = '';
+    } else {
+      // Otherwise, apply the filter
+      filterValue = filterValue.trim().toLowerCase();
+    
+      // Filter the data
+      const filteredData = this.dataSource.data.filter((item) => item.status.toLowerCase().includes(filterValue));
+  
+      // Update the filteredDataSource with the filtered data
+      this.filteredDataSource.data = filteredData;
+      this.filteredDataSource.filter = filterValue;
+    }
+    // Trigger the filter method to update the MatTable
+    console.log(this.filteredDataSource.data);
+    this.cdRef.detectChanges();
   }
  
   applySpecialityFilter(specialities: any) {
+    console.log(specialities)
     const selectedSpecialities = specialities.map((item: { value: any }) => item.value);
     console.log( " before predicate  :"  + selectedSpecialities );
     
     // Custom filter predicate
-    this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
+    this.filteredDataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
       const selectedValues = filter.split(','); 
       return selectedValues.includes(data.speciality.trim()); 
     };
 
+    const filteredData = this.dataSource.data.filter(item =>
+      specialities.some((speciality: { value: string; }) => item.speciality.toLowerCase() === speciality.value.toLowerCase())
+    );
+    
+    
+    this.filteredDataSource.filter = selectedSpecialities.join(','); 
 
-    console.log(typeof(selectedSpecialities))
-  
-    this.dataSource.filter = selectedSpecialities.join(','); 
- 
+    
   }
- 
-  setValueTotal(countTotal: number) {
-    this.filterService.totalNo = countTotal;
-  }
+
  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
  
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.filteredDataSource.paginator = this.paginator;
+    this.cdRef.detectChanges();
   }
 }

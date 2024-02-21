@@ -11,11 +11,15 @@ export interface BankGroup {
 
 /** list of banks */
 export const BANKS: Bank[] = [
-  {key: 1,value: 'General Medicine'},
-  {key: 2,value: 'Cardiology'},
-  {key: 3,value: 'Pediatrics'},
-  {key: 4,value: 'Oncologist'},
-  {key: 5,value: 'Endocrinologist'},
-  {key: 5,value: 'Neurology'},
-  {key: 5,value: 'Radiology'}
-];
+  { key: 1, value: 'Orthopedics' },
+  { key: 2, value: 'Cardiology' },
+  { key: 3, value: 'Dermatology' },
+  { key: 4, value: 'Oncology' },
+  { key: 5, value: 'Radiology' },
+  { key: 6, value: 'Endocrinology' },
+  { key: 7, value: 'General Medicine' },
+  { key: 8, value: 'Pediatrics' },
+  { key: 9, value: 'Neurology' },
+  { key: 10, value: 'Urology' }
+]
+

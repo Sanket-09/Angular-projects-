@@ -55,21 +55,22 @@
                 Service Request
             </div>
 
-            <div class="drawerDiv2">
-                <span class="drawerDiv2span">
-                    Pending
-                </span>
+            <div class="drawerDiv3">
+                <mat-tab-group>
+                    <mat-tab label="Pending">  
+                        <mat-card>
+                            Appointment 1 - {{currentElement.reqDate | date}}
+                            <p>Preferred Consultation Date</p>
+                            {{currentElement.prefDate | date}}
+                        </mat-card>
+                    </mat-tab>
 
-                <span class="drawerDiv2span">
-                    Resolved/Closed
-                </span>
+                    <mat-tab label="Resolved/Closed"> Content 2 </mat-tab>
+                    
+                  </mat-tab-group>
             </div>
 
-            <mat-card>
-                Appointment 1 - {{currentElement.reqDate | date}}
-                <p>Preferred Consultation Date</p>
-                {{currentElement.prefDate | date}}
-            </mat-card>
+            
 
         </mat-drawer>
 
@@ -119,8 +120,10 @@
             <textarea name="notes" id="notes" cols="54" rows="5" placeholder="Notes"></textarea>
             
             <div class="submitBtn">
-                <button mat-flat-button color="primary">Submit</button>
+                <button (click)="openSnackBar('Service Resolved Successfully', 'x')" mat-flat-button color="primary">Submit</button>
             </div>
+
+     
             
 
         </mat-drawer-content>
