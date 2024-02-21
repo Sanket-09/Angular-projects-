@@ -7,8 +7,8 @@
 
        
             <mat-form-field appearance="fill">
-            <mat-label>Select Hospital</mat-label>
-            <mat-select>
+         
+            <mat-select placeholder="Select Hospital">
                 <mat-option *ngFor="let hospital of hospital" [value]="hospital.value">
                 {{hospital.viewValue}}
                 </mat-option>
@@ -19,7 +19,7 @@
     <div class="search-header">
         <div class="input-icons">
             <i class="fa fa-search icon"></i>
-            <input class="input-field" type="text" placeholder="Member ID/Name/Phone" >
+            <input class="input-field-search" type="text" placeholder="Member ID/Name/Phone" (keydown)="search($event, inputSearch)" #inputSearch >
         </div>
 
         <a href="" style="margin-top: 6px; margin-left: 5px;">

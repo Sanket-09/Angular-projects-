@@ -67,7 +67,7 @@
     height: 100%;
     width: 352px;
     border-radius: 8px;
-    margin-top: 1vw;
+    margin-top: 0.1vw;
     margin-bottom: 22vw;
     overflow-y: hidden;
     overflow: hidden;
@@ -75,7 +75,7 @@
 
 .mat-drawer-container{
     
-    padding-top: 1vw;
+    padding-top: 0.1vw;
 }
 
 .mat-drawer-content{
@@ -204,17 +204,28 @@
   }
 
   textarea{
+    padding: 8px;
     margin-left: 20px;
     border-radius: 5px;
     border: 2px #e0e0e0 solid;
     resize: none;
+    font-family: mulish;
   }
 
   textarea:hover{
-    margin-left: 20px;
-    border-radius: 5px;
     border: 2px black solid;
     resize: none;
+  }
+
+  textarea:focus{
+    
+    border: 2px rgba(64, 64, 217, 1) solid;
+    resize: none;
+    outline: none;textarea:focus {
+        border: 2px solid #007bff; /* Change the border color to blue */
+        outline: none; /* Remove the default focus outline */
+        /* Add any other styles you want to apply when the textarea is in focus */
+      }
   }
 
   .submitBtn{

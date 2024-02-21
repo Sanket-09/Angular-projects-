@@ -4,6 +4,7 @@ import { ELEMENT_DATA } from '../services/data';
 import { PeriodicElement } from '../services/data';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,6 +12,41 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
+
+
+
+  
+currentStatusResolved: boolean = false;
+currentStatusPending: boolean = false;
+
+
+
+tabChanged($event: MatTabChangeEvent) {
+  
+this.checkStatus()
+
+}
+
+private checkStatus() : void{
+  if(this.currentElement.status ===  "Pending")
+  this.currentStatusPending = true;
+
+  else
+  this.currentStatusPending = false;
+
+  if(this.currentElement.status === "Closed" || this.currentElement.status === "Resolved")
+  this.currentStatusResolved = true;
+
+  else
+  this.currentStatusResolved = false;
+} 
+
+
+getCurrentStatus(){
+  console.log("asidbiadb")
+  
+
+}
 
 
   copyPhonefn() {
@@ -52,6 +88,9 @@ export class LandingPageComponent implements OnInit {
       this.currentElement = ELEMENT_DATA.find(element => element.id === this.currentId);
       console.log(this.currentElement)
     });
+
+    this.checkStatus();
+    
   }
 
   navigateToDashboard() {

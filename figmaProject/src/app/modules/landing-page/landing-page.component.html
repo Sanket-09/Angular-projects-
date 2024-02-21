@@ -56,16 +56,22 @@
             </div>
 
             <div class="drawerDiv3">
-                <mat-tab-group>
+                <mat-tab-group (selectedTabChange)="tabChanged($event)">
                     <mat-tab label="Pending">  
-                        <mat-card>
+                        <mat-card *ngIf="currentStatusPending">
                             Appointment 1 - {{currentElement.reqDate | date}}
                             <p>Preferred Consultation Date</p>
                             {{currentElement.prefDate | date}}
                         </mat-card>
                     </mat-tab>
 
-                    <mat-tab label="Resolved/Closed"> Content 2 </mat-tab>
+                    <mat-tab label="Resolved/Closed">
+                        <mat-card *ngIf="currentStatusResolved">
+                            Appointment 1 - {{currentElement.reqDate | date}}
+                            <p>Preferred Consultation Date</p>
+                            {{currentElement.prefDate | date}}
+                        </mat-card>
+                    </mat-tab>
                     
                   </mat-tab-group>
             </div>

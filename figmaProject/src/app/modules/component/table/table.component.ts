@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FilterService } from '../../services/filter.service';
@@ -7,6 +7,8 @@ import { DataSource } from '@angular/cdk/collections';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import { ELEMENT_DATA, PeriodicElement } from '../../services/data';
 import { ChangeDetectorRef } from '@angular/core';
+import { TabService } from '../../services/currentStatus.service';
+import { MatTabChangeEvent } from '@angular/material/tabs/tab-group';
 
  
 
@@ -18,18 +20,20 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class TableComponent implements AfterViewInit , OnChanges {
 
+
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
 
 
   getRecord(data: any) : void {
     console.log(data.id);
-  
     let queryParams : any = {};
     queryParams['id'] = data.id; // Create a dictionary containing the query parameter
-    this.router.navigate(['/landing'], { 
+    this.router.navigate(['landing'], { 
       queryParams: queryParams 
     });
   }
+
+  
  
   displayedColumns: string[] = ['status', 'prefDate', 'id', 'name', 'reqDate', 'speciality', 'visitType'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
@@ -39,8 +43,9 @@ export class TableComponent implements AfterViewInit , OnChanges {
  
   filterSubscription: Subscription;
   filterSubscriptionSpeciality: Subscription;
+  // filterSubscriptionSearch : Subscription;
  
-  constructor(private filterService: FilterService, private router: Router , private cdRef: ChangeDetectorRef) {
+  constructor(private tabService: TabService, private filterService: FilterService, private router: Router , private cdRef: ChangeDetectorRef) {
  
     this.filterSubscription = this.filterService.filterChanged$.subscribe(filter => {
       this.applyStatusFilter(filter);
@@ -50,7 +55,12 @@ export class TableComponent implements AfterViewInit , OnChanges {
       this.applySpecialityFilter(filter);
       
     })
+
+    // this.filterSubscriptionSearch = this.filterService.filterChangedSearch$.subscribe(filter => {
+    //   this.applySearchFilter(filter);
+    // })
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.filterSubscription = this.filterService.filterChanged$.subscribe(filter => {
       this.applyStatusFilter(filter);
@@ -60,8 +70,24 @@ export class TableComponent implements AfterViewInit , OnChanges {
       this.applySpecialityFilter(filter);
       
     })
+
+    
   }
 
+
+  // applySearchFilter(searchValue : string){
+  //   console.log("type of searchValue is : "  + typeof searchValue);
+  //   console.log("SearchValue is : "  + searchValue);
+  //   console.log("SearchValue length is : "  + searchValue.length);
+    
+  //   this.filteredDataSource.data=this.dataSource.data.filter(o=>
+  //     o.id.toLowerCase==searchValue.trim().toLowerCase
+  //   )
+  //   this.filteredDataSource._updateChangeSubscription();
+  //   // this.cdRef.detectChanges();
+  //   this.filteredDataSource.filter = searchValue
+  //   console.log("Filter applied with searchValue  : " + searchValue )
+  // }
 
  
   applyStatusFilter(filterValue: string) {
@@ -69,7 +95,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
     if (filterValue.toLowerCase() == 'total request') {
       // If 'Total Request', show the complete data without filtering
       this.filteredDataSource.data = this.dataSource.data;
-        this.filteredDataSource.filter = '';
+      this.filteredDataSource.filter = '';
     } else {
       // Otherwise, apply the filter
       filterValue = filterValue.trim().toLowerCase();

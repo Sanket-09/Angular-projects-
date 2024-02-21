@@ -18,13 +18,14 @@ export class FilterService {
 
   filterChanged$ = this.filterSubject.asObservable();
   filterChangedSpeciality$  =this.filterSubjectObj.asObservable();
+  filterChangedSearch$  =this.filterSubject.asObservable();
 
-
+  emitFilterSearch(search : string){
+    this.filterSubject.next(search);
+  }
 
   emitFilter(filter : string){
     this.filterSubject.next(filter);
-
-    
   }
 
   emitFilterSpeciality(speciality : any)

@@ -57,6 +57,14 @@
 //     color: red;A
 // }
 
+::ng-deep .mat-form-field-flex {
+    border-radius: 4px 4px 0 0;
+    padding: 0px !important;
+    padding-left: 10px !important;
+    
+}
+
+
 
 
 
@@ -65,6 +73,7 @@
     flex-direction:end;
     
 }
+
 
 .search-header{
     display: flex !important;
@@ -111,7 +120,7 @@
     transform: scale(0.8);
 }
 
-.input-field {
+.input-field-search {
     border: 1px solid rgba(179, 185, 194, 1);
     width: 100%;
     text-align: start;
@@ -128,6 +137,31 @@
     
 }   
 
+::ng-deep .mat-form-field-infix{
+    
+    border-bottom: 0px !important;
+    padding: 10px;
+ 
+}
 
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+// ::ng-deep .mat-select-arrow{
+//     margin-top:17px !important;
+// }
+
+:host::ng-deep .mat-select-placeholder {
+    color: white;
+ } 
+
+ ::ng-deep .mat-select-value{
+    height: 10px;
+ }
+
+ ::ng-deep   .ng-tns-c215-1{
+    margin-top:2px !important;
+ }
 
 
