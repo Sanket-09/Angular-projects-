@@ -1,11 +1,11 @@
 <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened>
-        <mat-card *ngFor="let sideNav of sideNav"  tabindex="0" [ngClass]="{'selected-card': isSelected(sideNav)}" (click)="selectCard(sideNav)">
+        <mat-card *ngFor="let sideNav of sideNav" [routerLink]="sideNav.router"  tabindex="0" [ngClass]="{'selected-card': isSelected(sideNav)}" (click)="selectCard(sideNav)">
             <span class="navValue">{{sideNav.viewValue}} </span>
             <span class="navChip" >{{sideNav.notif}}</span>
         </mat-card> 
     </mat-drawer>
     <mat-drawer-content>
-       <app-dashboard></app-dashboard>
+     <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

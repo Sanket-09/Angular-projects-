@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Outpu
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FilterService } from '../../services/filter.service';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import { ELEMENT_DATA, PeriodicElement } from '../../services/data';
@@ -33,6 +33,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
     });
   }
 
+  filteredDataSubject = new BehaviorSubject<PeriodicElement[]>([]);
   
  
   displayedColumns: string[] = ['status', 'prefDate', 'id', 'name', 'reqDate', 'speciality', 'visitType'];
@@ -112,6 +113,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
       // If 'Total Request', show the complete data without filtering
       this.filteredDataSource.data = this.dataSource.data;
       this.filteredDataSource.filter = '';
+      this.cdRef.detectChanges();
     } else {
       // Otherwise, apply the filter
       filterValue = filterValue.trim().toLowerCase();
@@ -122,6 +124,10 @@ export class TableComponent implements AfterViewInit , OnChanges {
       // Update the filteredDataSource with the filtered data
       this.filteredDataSource.data = filteredData;
       this.filteredDataSource.filter = filterValue;
+      this.cdRef.detectChanges();
+
+      
+  
     }
     // Trigger the filter method to update the MatTable
     
@@ -136,7 +142,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
     const selectedSpecialities = specialities.map((item: { value: any }) => item.value);
 
     
-    // Custom filter predicate
+    
     this.filteredDataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
       const selectedValues = filter.split(','); 
       return selectedValues.includes(data.speciality.trim()); 
@@ -148,9 +154,18 @@ export class TableComponent implements AfterViewInit , OnChanges {
     
     
     this.filteredDataSource.filter = selectedSpecialities.join(','); 
-      
-
     this.cdRef.detectChanges();
+  
+    this.filteredDataSource.data = this.filteredDataSource.filteredData;
+      
+    this.cdRef.detectChanges();
+
+    // setTimeout(() => {
+    //   // Access the filtered data after the filter is applied
+    //   const filteredData = this.filteredDataSource.filteredData;
+    //   console.log(filteredData);
+      
+    // }, 0);
 
   }
 
@@ -176,7 +191,9 @@ export class TableComponent implements AfterViewInit , OnChanges {
 
  
   this.filteredDataSource.filter = selectedSpecialities.join(','); 
-
+  this.cdRef.detectChanges();
+  
+  this.filteredDataSource.data = this.filteredDataSource.filteredData;  
 
   this.cdRef.detectChanges();
   

@@ -27,8 +27,12 @@ import { LandingPageComponent } from './modules/landing-page/landing-page.compon
 
 const appRoute : Routes =  [ 
   { path: '', pathMatch: 'full', redirectTo: 'homepage' },
-  { path: 'homepage', component: HomePageComponent },
-  { path: 'landing', component: LandingPageComponent}
+  { path: 'homepage', component: HomePageComponent, children:[
+    { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+    { path: 'dashboard', component: DashboardComponent}
+  ]},
+  { path: 'landing', component: LandingPageComponent},
+  
 ]
 
 @NgModule({
