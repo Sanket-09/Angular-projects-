@@ -22,10 +22,14 @@ selectedValues: string[] = [];
 
 onSelectionChange($event: any) {
 
-this.selectedValuesChange.emit(this.selectedValues.join(','));
+// this.selectedValuesChange.emit(this.selectedValues.join(','));
+  
+  console.log("Event received in specility is  :  " , $event)
 
  if($event.isUserInput)
+ 
  {
+  
   if($event.source.selected){
     this.selectedValues.push($event.source.value);
   }
@@ -33,12 +37,16 @@ this.selectedValuesChange.emit(this.selectedValues.join(','));
     this.selectedValues = this.selectedValues.filter(value => value !== $event.source.value)
   }
  }
+
+ console.log(this.selectedValues)
 }
 
 logSelectedValues(){
   // console.log(this.selectedValues);
   // this.FilterService.currentSelectedValues = this.selectedValues;
+  console.log(this.selectedValues + "   selected values of speciality")
   this.FilterService.emitFilterSpeciality(this.selectedValues);
+
   // this.FilterService.applyFilter();
 }
 

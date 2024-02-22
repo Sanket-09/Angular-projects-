@@ -45,7 +45,7 @@ const appRoute : Routes =  [
     FilterChipsComponent,
     HomePageComponent,
     LandingPageComponent,
-
+    
     // BufferComponentComponent,
   ],
   imports: [

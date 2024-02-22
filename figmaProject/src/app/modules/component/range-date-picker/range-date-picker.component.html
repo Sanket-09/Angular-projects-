@@ -46,7 +46,7 @@
  <span class="filterTile">
   <mat-form-field appearance="outline" class="specialityDropdownContainerStatus"  >
     <mat-label>Status</mat-label>
-    <mat-select class="statusSelect" (selectionChange)="handleFilterDataChange($event)" style="font-size: 13px; margin-left: 0px; ">
+    <mat-select class="statusSelect" (selectionChange)="handleStatusFilterDataChange($event)" style="font-size: 13px; margin-left: 0px; ">
       <mat-option *ngFor="let stat of status" [value]="stat.value" class="specialityDropdown" >{{stat.value}}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -56,14 +56,14 @@
 <span class="filterTile">
   <mat-form-field appearance="outline" class="specialityDropdownContainer"  >
     <mat-label>Physician Visit Type</mat-label>
-    <mat-select [formControl]="speciality" multiple (selectionChange)="handleFilterDataChange($event)">
+    <mat-select [formControl]="speciality" multiple (selectionChange)="handleVisitFilterDataChange($event)">
   
       <mat-option *ngFor="let physicianVisit of physicianVisitType" [value]="physicianVisit.value" class="specialityDropdown" >{{physicianVisit.value}}</mat-option>
       <span class="footerBtn">
         <footer>
           <span>
             <button mat-button class="cancelbtn">Cancel</button>
-          <button mat-button class="submitbtn" >Apply</button>
+          <button (click)="submitVisit()" mat-button class="submitbtn" >Apply</button>
           </span>
         </footer>
       </span> 

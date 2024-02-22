@@ -43,6 +43,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
  
   filterSubscription: Subscription;
   filterSubscriptionSpeciality: Subscription;
+  filterSubscriptionVisit: Subscription;
   // filterSubscriptionSearch : Subscription;
  
   constructor(private tabService: TabService, private filterService: FilterService, private router: Router , private cdRef: ChangeDetectorRef) {
@@ -54,7 +55,14 @@ export class TableComponent implements AfterViewInit , OnChanges {
     this.filterSubscriptionSpeciality = this.filterService.filterChangedSpeciality$.subscribe(filter => {
       this.applySpecialityFilter(filter);
       
+      
     })
+
+    this.filterSubscriptionVisit = this.filterService.filterChangedVisit$.subscribe(filter => {
+      this.applyVisitFilter(filter);
+      console.log('visit filter called in constructor table')
+    })
+    
 
     // this.filterSubscriptionSearch = this.filterService.filterChangedSearch$.subscribe(filter => {
     //   this.applySearchFilter(filter);
@@ -70,6 +78,13 @@ export class TableComponent implements AfterViewInit , OnChanges {
       this.applySpecialityFilter(filter);
       
     })
+
+    this.filterSubscriptionVisit = this.filterService.filterChangedVisit$.subscribe(filter => {
+      this.applyVisitFilter(filter);
+      
+    })
+
+    console.log("ngOnChange is called")
 
     
   }
@@ -91,6 +106,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
 
  
   applyStatusFilter(filterValue: string) {
+
     console.log(filterValue)
     if (filterValue.toLowerCase() == 'total request') {
       // If 'Total Request', show the complete data without filtering
@@ -113,7 +129,10 @@ export class TableComponent implements AfterViewInit , OnChanges {
   }
  
   applySpecialityFilter(specialities: any) {
-    console.log(specialities)
+
+    
+    
+      console.log(specialities)
     const selectedSpecialities = specialities.map((item: { value: any }) => item.value);
     console.log( " before predicate  :"  + selectedSpecialities );
     
@@ -130,8 +149,42 @@ export class TableComponent implements AfterViewInit , OnChanges {
     
     this.filteredDataSource.filter = selectedSpecialities.join(','); 
 
+    console.log(this.filteredDataSource.data);
+    this.cdRef.detectChanges();
+    
+
+    
     
   }
+
+  applyVisitFilter(specialities: any) {
+
+
+    
+  console.log(specialities)
+  const selectedSpecialities = specialities.map((item: { value: any }) => item.value);
+  console.log( " before predicate  :"  + selectedSpecialities );
+  
+  // Custom filter predicate
+  this.filteredDataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
+    const selectedValues = filter.split(','); 
+    return selectedValues.includes(data.visitType.trim()); 
+  };
+
+  const filteredData = this.dataSource.data.filter(item =>
+    specialities.some((speciality: { value: string; }) => item.visitType.toLowerCase() === speciality.value.toLowerCase())
+  );
+  
+  
+  this.filteredDataSource.filter = selectedSpecialities.join(','); 
+
+  console.log(this.filteredDataSource.data);
+  this.cdRef.detectChanges();
+  
+
+  
+  
+}
 
  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -139,5 +192,9 @@ export class TableComponent implements AfterViewInit , OnChanges {
   ngAfterViewInit() {
     this.filteredDataSource.paginator = this.paginator;
     this.cdRef.detectChanges();
+
+    
+
+    console.log("ngAfterViewInit is called")
   }
 }

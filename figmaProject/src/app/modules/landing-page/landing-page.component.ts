@@ -49,12 +49,17 @@ getCurrentStatus(){
 }
 
 
-  copyPhonefn() {
+  copyPhonefn(message: string, action: string) {
     const idContent = document.getElementById('copyPhoneNumber')?.innerText;
     
     if(idContent){
       this.clipboard.copy(idContent);
-      alert("Phone Number Copied")
+      this.copyPhonesnackBar.open(message, action , {
+        duration: 2000,
+        panelClass: ['blue-snackbar'],
+        verticalPosition: 'bottom',
+        horizontalPosition: 'start'
+      });
     }
 
     else
@@ -63,12 +68,17 @@ getCurrentStatus(){
 
 
 
-  copyIdfn(){
+  copyIdfn(message: string, action: string){
     const idContent = document.getElementById('copyId')?.innerText;
     
     if(idContent){
       this.clipboard.copy(idContent);
-      alert("Id Copied")
+      this.copyIdsnackBar.open(message, action , {
+        duration: 2000,
+        panelClass: ['blue-snackbar'],
+        verticalPosition: 'bottom',
+        horizontalPosition: 'start'
+      });
     }
 
     else
@@ -78,7 +88,7 @@ getCurrentStatus(){
   currentId : any;
   currentElement : any;
 
-  constructor( private router: Router ,private route: ActivatedRoute , private clipboard: Clipboard , private _snackBar: MatSnackBar) { }
+  constructor(private copyIdsnackBar: MatSnackBar,private copyPhonesnackBar: MatSnackBar, private router: Router ,private route: ActivatedRoute , private clipboard: Clipboard , private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {

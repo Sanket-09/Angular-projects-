@@ -1,13 +1,16 @@
 import {
-  Component, ViewEncapsulation
+  Component, EventEmitter, Output, ViewEncapsulation
 } from '@angular/core';
 import {
   FormGroup,
   FormControl
 } from '@angular/forms';
 import {
-  MatSelectChange
+ MatSelectChange
 } from '@angular/material/select';
+
+import { FilterService } from '../../services/filter.service';
+
 
 @Component({
   selector: 'app-range-date-picker',
@@ -17,11 +20,62 @@ import {
 })
 export class RangeDatePickerComponent {
   
-  
+@Output() selectedValuesChange : EventEmitter<string> = new EventEmitter<string>();
 
+selectedValues : string[][] = [];
+emittedVisitType : any;
+transformedArray : any;
+
+handleVisitFilterDataChange(event: any) {
+
+
+  this.transformedArray = event.value.map((value: any, index: any) => ({ key: index, value }));
+  console.log(this.transformedArray)
+
+
+//  if(event.isUserInput)
+//  { 
+
+//   console.log("inside event.userinput")
+//   if(event.selected){
+//     console.log("event selected")
+    
+//   }
+//   else{
+//     console.log("event deselected")
+//     this.selectedValues = this.selectedValues.filter(value => value !== event.value)
+//   }
+//  }
+
+
+   
+}
+
+  // logObjectProperties(obj: any){
+  //   if (typeof obj === 'object' && obj !== null) {
+  //     console.log("Received object:");
+  //     Object.keys(obj).forEach((key) => {
+  //       console.log(`${key}:`, obj[key]);
+
+  //       if(typeof obj[key] === 'string')
+  //       this.selectedValues.push(obj[key])
+  //     });
+
+  //     console.log(this.selectedValues  +  "    this is the selected value ");
+  //     this.submitVisit();
+  //   }
+  // }
+  
+ 
+  
   handleFilterDataChange($event: MatSelectChange) {
-    throw new Error('Method not implemented.');
   }
+  
+  handleStatusFilterDataChange($event: MatSelectChange) {
+    
+  }
+
+
     range = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
@@ -34,7 +88,7 @@ export class RangeDatePickerComponent {
     console.log(this.showFilterOptions);
   }
 
-  constructor() {}
+  constructor( private FilterService : FilterService) {}
 
   ngOnInit(): void {
     
@@ -48,8 +102,8 @@ export class RangeDatePickerComponent {
     {key: 3,value: 'Pediatrics'},
     {key: 4,value: 'Oncologist'},
     {key: 5,value: 'Endocrinologist'},
-    {key: 5,value: 'Neurology'},
-    {key: 5,value: 'Radiology'}
+    {key: 6,value: 'Neurology'},
+    {key: 7,value: 'Radiology'}
   ]
 
   status: any = [{key: 1,value: 'Pending'},
@@ -68,9 +122,10 @@ export class RangeDatePickerComponent {
   ]
 
     
-  submit() {
-    // Get the checked values and set them to the input field
-    const checkedValues = this.speciality.value;
+  submitVisit() {
+    // Get the checked values and set them to the input field\
+
+    this.FilterService.emitFilterVisit(this.transformedArray)
     // ...
   }
   

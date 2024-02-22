@@ -14,7 +14,7 @@
     <div class="patientDetailHeaderId">
         <span id="copyId" >{{currentElement.id}}</span>
         
-        <img (click)="copyIdfn()" class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
+        <img (click)="copyIdfn('Id Copied', 'Ok')" class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
     </div>
 </span>
 
@@ -24,7 +24,7 @@
     <div class="patientDetailHeaderName">
         <img class="headerIcon" src="../../../assets/Union.svg" alt="phone_icon">
         <span id="copyPhoneNumber" style="margin: 0px 3px">{{currentElement.phoneNumber}}</span>
-        <img (click)="copyPhonefn()" class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
+        <img (click)="copyPhonefn('Phone number Copied', 'Ok')" class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
     </div>
     <div class="patientDetailHeaderId">
         {{currentElement.language}}
