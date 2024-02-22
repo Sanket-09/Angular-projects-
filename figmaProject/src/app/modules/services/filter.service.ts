@@ -38,7 +38,7 @@
     emitFilter(filter : string){
       this.filterSubject.next(filter);
       this.emitFilterSpeciality(this.currentFilterSpeciality);
-      
+
     }
 
     emitFilterSpeciality(speciality : any )
@@ -59,6 +59,8 @@
           this.data.push(obj[key])
         })
       })
+
+ 
     }
 
     emitFilterVisit(visit: any )

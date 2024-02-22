@@ -72,7 +72,7 @@ handleVisitFilterDataChange(event: any) {
   }
   
   handleStatusFilterDataChange($event: MatSelectChange) {
-    
+    this.FilterService.emitFilter($event.value)
   }
 
 

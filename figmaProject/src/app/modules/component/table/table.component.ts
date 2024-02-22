@@ -60,7 +60,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
 
     this.filterSubscriptionVisit = this.filterService.filterChangedVisit$.subscribe(filter => {
       this.applyVisitFilter(filter);
-      console.log('visit filter called in constructor table')
+   
     })
     
 
@@ -84,7 +84,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
       
     })
 
-    console.log("ngOnChange is called")
+    
 
     
   }
@@ -107,7 +107,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
  
   applyStatusFilter(filterValue: string) {
 
-    console.log(filterValue)
+
     if (filterValue.toLowerCase() == 'total request') {
       // If 'Total Request', show the complete data without filtering
       this.filteredDataSource.data = this.dataSource.data;
@@ -124,7 +124,7 @@ export class TableComponent implements AfterViewInit , OnChanges {
       this.filteredDataSource.filter = filterValue;
     }
     // Trigger the filter method to update the MatTable
-    console.log(this.filteredDataSource.data);
+    
     this.cdRef.detectChanges();
   }
  
@@ -132,9 +132,9 @@ export class TableComponent implements AfterViewInit , OnChanges {
 
     
     
-      console.log(specialities)
+
     const selectedSpecialities = specialities.map((item: { value: any }) => item.value);
-    console.log( " before predicate  :"  + selectedSpecialities );
+
     
     // Custom filter predicate
     this.filteredDataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
@@ -148,22 +148,17 @@ export class TableComponent implements AfterViewInit , OnChanges {
     
     
     this.filteredDataSource.filter = selectedSpecialities.join(','); 
+      
 
-    console.log(this.filteredDataSource.data);
     this.cdRef.detectChanges();
-    
 
-    
-    
   }
 
   applyVisitFilter(specialities: any) {
 
 
-    
-  console.log(specialities)
   const selectedSpecialities = specialities.map((item: { value: any }) => item.value);
-  console.log( " before predicate  :"  + selectedSpecialities );
+
   
   // Custom filter predicate
   this.filteredDataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
@@ -171,14 +166,18 @@ export class TableComponent implements AfterViewInit , OnChanges {
     return selectedValues.includes(data.visitType.trim()); 
   };
 
-  const filteredData = this.dataSource.data.filter(item =>
+  const filteredDataSource = this.dataSource.data.filter(item =>
     specialities.some((speciality: { value: string; }) => item.visitType.toLowerCase() === speciality.value.toLowerCase())
   );
   
   
+  // Update the filteredDataSource with the filtered data
+  
+
+ 
   this.filteredDataSource.filter = selectedSpecialities.join(','); 
 
-  console.log(this.filteredDataSource.data);
+
   this.cdRef.detectChanges();
   
 
@@ -195,6 +194,5 @@ export class TableComponent implements AfterViewInit , OnChanges {
 
     
 
-    console.log("ngAfterViewInit is called")
   }
 }
