@@ -1,113 +1,140 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import { MatSelect, MatSelectChange } from '@angular/material/select';
-import { FilterService } from '../../services/filter.service';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core'
+import { FormControl } from '@angular/forms'
+import { ReplaySubject, Subject, Subscription } from 'rxjs'
+import { take, takeUntil } from 'rxjs/operators'
+import { MatSelect, MatSelectChange } from '@angular/material/select'
+import { FilterService } from '../../services/filter.service'
 
-import { Bank, BANKS } from './demo-data';
+import { Bank, BANKS } from './demo-data'
 
 @Component({
   selector: 'app-filter-dropdown',
   templateUrl: './filter-dropdown.component.html',
-  styleUrls: ['./filter-dropdown.component.scss']
+  styleUrls: ['./filter-dropdown.component.scss'],
 })
 export class FilterDropdownComponent implements OnInit {
+  private subscription: Subscription
 
-@Output() selectedValuesChange : EventEmitter<string> = new EventEmitter<string>();
+  @Output() selectedValuesChange: EventEmitter<string> =
+    new EventEmitter<string>()
 
-selectedValues: string[] = [];
+  selectedValues: string[] = []
 
+  removedValue: any
 
+  onSelectionChange($event: any) {
+    // this.selectedValuesChange.emit(this.selectedValues.join(','));
 
-onSelectionChange($event: any) {
+    console.log('Event received in specility is : ', $event)
 
-// this.selectedValuesChange.emit(this.selectedValues.join(','));
-  
-  console.log("Event received in specility is  :  " , $event)
+    if ($event.isUserInput) {
+      if ($event.source.selected) {
+        this.selectedValues.push($event.source.value)
+      } else {
+        this.selectedValues = this.selectedValues.filter(
+          (value) => value !== $event.source.value
+        )
+      }
+    }
 
- if($event.isUserInput)
- 
- {
-  
-  if($event.source.selected){
-    this.selectedValues.push($event.source.value);
+    this.cdRef.detectChanges()
+    console.log(this.selectedValues)
   }
-  else{
-    this.selectedValues = this.selectedValues.filter(value => value !== $event.source.value)
+
+  logSelectedValues() {
+    // console.log(this.selectedValues);
+    // this.FilterService.currentSelectedValues = this.selectedValues;
+    console.log(this.selectedValues + ' selected values of speciality')
+    this.FilterService.emitFilterSpeciality(this.selectedValues)
+
+    // this.FilterService.applyFilter();
   }
- }
 
- console.log(this.selectedValues)
-}
+  cancelAll() {
+    this.selectedValues = []
+  }
 
-logSelectedValues(){
-  // console.log(this.selectedValues);
-  // this.FilterService.currentSelectedValues = this.selectedValues;
-  console.log(this.selectedValues + "   selected values of speciality")
-  this.FilterService.emitFilterSpeciality(this.selectedValues);
-
-  // this.FilterService.applyFilter();
-}
-
-cancelAll(){
-  this.selectedValues = [];
-}
-
-
-  protected banks: Bank[] = BANKS;
+  protected banks: Bank[] = BANKS
 
   /** control for the selected bank for multi-selection */
-  public bankMultiCtrl: FormControl<Bank[] | null> = new FormControl<Bank[]>([]);
+  public bankMultiCtrl: FormControl<Bank[] | null> = new FormControl<Bank[]>([])
 
   /** control for the MatSelect filter keyword multi-selection */
-  public bankMultiFilterCtrl: FormControl<string | null> = new FormControl<string>('');
+  public bankMultiFilterCtrl: FormControl<string | null> =
+    new FormControl<string>('')
 
   /** list of banks filtered by search keyword */
-  public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
+  public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(
+    1
+  )
 
-  @ViewChild('multiSelect', { static: true })
-  multiSelect!: MatSelect;
+  @ViewChild('multiSelect', {
+    static: true,
+  })
+  multiSelect!: MatSelect
 
   /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
+  protected _onDestroy = new Subject<void>()
 
-  constructor(private FilterService: FilterService) { }
+  constructor(
+    private FilterService: FilterService,
+    private cdRef: ChangeDetectorRef
+  ) {
+    this.subscription = this.FilterService.chipMethodCalled$.subscribe(
+      (chipEmitList: any) => {
+        this.onChipMethodCalled(chipEmitList)
+      }
+    )
+  }
 
+  onChipMethodCalled(chipEmitList: any) {
+    console.log('onChipMethodCalled in spec component : ', chipEmitList)
+    this.selectedValues = [...chipEmitList]
+    console.log('this is selected values : ', this.selectedValues)
+    this.onSelectionChange(chipEmitList)
+    this.cdRef.detectChanges()
+  }
 
   ngOnInit(): void {
-
-    this.bankMultiCtrl.setValue([]);
+    this.bankMultiCtrl.setValue([])
 
     // load the initial bank list
-    this.filteredBanksMulti.next(this.banks.slice());
+    this.filteredBanksMulti.next(this.banks.slice())
 
     // listen for search field value changes
     this.bankMultiFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterBanksMulti();
-      });
+        this.filterBanksMulti()
+      })
   }
 
-  
   protected filterBanksMulti() {
     if (!this.banks) {
-      return;
+      return
     }
     // get the search keyword
-    let search = this.bankMultiFilterCtrl.value;
+    let search = this.bankMultiFilterCtrl.value
     if (!search) {
-      this.filteredBanksMulti.next(this.banks.slice());
-      return;
+      this.filteredBanksMulti.next(this.banks.slice())
+      return
     } else {
-      search = search.toLowerCase();
+      search = search.toLowerCase()
     }
     // filter the banks
     this.filteredBanksMulti.next(
-      this.banks.filter(bank => bank.value.toLowerCase().indexOf(search!) > -1)
-    );
+      this.banks.filter(
+        (bank) => bank.value.toLowerCase().indexOf(search!) > -1
+      )
+    )
   }
-
-
 }

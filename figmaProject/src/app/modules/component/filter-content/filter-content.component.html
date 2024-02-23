@@ -1,13 +1,21 @@
 <span class="main-span">
   <ng-container>
-    <mat-card *ngFor="let card of cards" [ngClass]="{'selected-card': isSelected(card)}" (click)="selectCard(card)">
-      <div class="card-icon" [ngClass]="{'selected-icon': isSelectedIcon(card)}" (click)="selectCardIcon(card)">
-        <i class="fa fa-{{card.icon}} fa-2x"></i>
+    <mat-card
+      *ngFor="let card of cards"
+      [ngClass]="{ 'selected-card': isSelected(card) }"
+      (click)="selectCard(card)"
+    >
+      <div
+        class="card-icon"
+        [ngClass]="{ 'selected-icon': isSelectedIcon(card) }"
+        (click)="selectCardIcon(card)"
+      >
+        <i class="fa fa-{{ card.icon }} fa-2x"></i>
       </div>
 
       <div class="card-icon-content">
-        <h1>{{card.value1}}</h1>
-        <h2>{{card.value2}}</h2>
+        <h1>{{ card.value1 }}</h1>
+        <h2>{{ card.value2 }}</h2>
       </div>
     </mat-card>
   </ng-container>

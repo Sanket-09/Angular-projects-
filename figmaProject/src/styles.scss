@@ -1,95 +1,96 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; font-family: Mulish !important; text-rendering: geometricPrecision;  }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-
-body * ::-webkit-scrollbar-track
-{
-	// -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 100px;
-	background-color: transparent;
+html,
+body {
+  height: 100%;
+  font-family: Mulish !important;
+  text-rendering: geometricPrecision;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-body * ::-webkit-scrollbar
-{
-	width: 8px;
-	background-color: transparent;
+body * ::-webkit-scrollbar-track {
+  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 100px;
+  background-color: transparent;
 }
 
-body * ::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: rgba(179, 185, 194, 1)    ;
+body * ::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
 }
 
-.mat-select-panel{
-    margin-top: 35px;
-    margin-left: 30px;
-	
+body * ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgba(179, 185, 194, 1);
 }
 
-.mat-pseudo-checkbox{
-    border-radius: 5px !important;
+.mat-select-panel {
+  margin-top: 35px;
+  margin-left: 30px;
+}
+
+.mat-pseudo-checkbox {
+  border-radius: 5px !important;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 0.8em 0em ;
+  padding: 0.8em 0em;
 }
 
-.mat-button{
-	padding:7px, 12px, 7px, 12px !important;
-	width: 95px;
+.mat-button {
+  padding: 7px, 12px, 7px, 12px !important;
+  width: 95px;
 }
 
-	.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
-    font-size: 12px !important;
-    line-height: 3em;
-    height: 3em;
-	font-family: Mulish;
-	}
+.mat-select-panel .mat-optgroup-label,
+.mat-select-panel .mat-option {
+  font-size: 12px !important;
+  line-height: 3em;
+  height: 3em;
+  font-family: Mulish;
+}
 
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: rgba(64, 64, 217, 1); /*inner circle color change*/
+}
 
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: rgba(64, 64, 217, 1) !important; /*outer ring color change*/
+}
 
-    
-    .mat-radio-button.mat-accent .mat-radio-inner-circle {
-    background-color: rgba(64, 64, 217, 1); /*inner circle color change*/  }
-    
-    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: rgba(64, 64, 217, 1) !important; /*outer ring color change*/  }
+.blue-snackbar {
+  background-color: rgba(237, 252, 246, 1);
+  width: 60px;
+  color: rgba(20, 133, 82, 1);
+  .mat-simple-snackbar-action {
+    color: rgba(20, 133, 82, 1);
+  }
+}
 
-	.blue-snackbar {
-		background-color: rgba(237, 252, 246, 1);
-		width: 60px;
-		color: rgba(20, 133, 82, 1);
-		.mat-simple-snackbar-action {
-			color:  rgba(20, 133, 82, 1);
-		}
-	  }
-	
-	  .mat-tab-label, .mat-tab-link{
-		font-family: Roboto, "Helvetica Neue", sans-serif;
-		font-size: 14px;
-		font-weight: 550;
-	}
+.mat-tab-label,
+.mat-tab-link {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  font-weight: 550;
+}
 
-	.mat-tab-label{
-		padding: 0px !important;
-		opacity: 1;	
-		justify-content: start !important;
-		min-width: 100px !important;
-		padding-left: 20px !important;
-		color: black;
-	}
+.mat-tab-label {
+  padding: 0px !important;
+  opacity: 1;
+  justify-content: start !important;
+  min-width: 100px !important;
+  padding-left: 20px !important;
+  color: black;
+}
 
-	.mat-select-value{
-		padding-bottom: 0px;
-	}
+.mat-select-value {
+  padding-bottom: 0px;
+}
 
-	#mat-select-value-7{
-		height: 10px;
-	}
-
-	
+#mat-select-value-7 {
+  height: 10px;
+}

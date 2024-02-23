@@ -1,66 +1,63 @@
-.main-span{
-    display: flex;
-    flex-direction: row;
-    padding-left: 20px;
-    padding-bottom: 0px;   
-    margin-top: 20px;
+.main-span {
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-bottom: 0px;
+  margin-top: 20px;
 }
 
-.mat-card{
-    display: flex;
-    flex-direction: row;
-    width: 235px;
-    height: 50px;
-    margin-right: 20px;
+.mat-card {
+  display: flex;
+  flex-direction: row;
+  width: 235px;
+  height: 50px;
+  margin-right: 20px;
 }
 
-.card-icon{
-
-    height: 60px;
-    width: 60px;
-    border-radius: 50px;
-    background-color:  rgba(246, 246, 253, 1);
+.card-icon {
+  height: 60px;
+  width: 60px;
+  border-radius: 50px;
+  background-color: rgba(246, 246, 253, 1);
 }
-
 
 .fa fa-hourglass-half {
-    margin-top: 50%;
-    margin-bottom: 50%;
+  margin-top: 50%;
+  margin-bottom: 50%;
 }
 
-.card-icon-content h1{
-    margin-left: 10px;
-    font-size: 24px;
-    font-family: Mulish;
-    font-weight: 700;
-    margin-bottom: 0px;
+.card-icon-content h1 {
+  margin-left: 10px;
+  font-size: 24px;
+  font-family: Mulish;
+  font-weight: 700;
+  margin-bottom: 0px;
 }
-.card-icon-content h2{
-    margin-left: 10px;
-    font-size: 12px;
-    font-family: Mulish;
-    font-weight: 700;
-    margin-top: -8px;
-    margin-bottom: 0px;
-    color: rgba(82, 95, 117, 1);
+.card-icon-content h2 {
+  margin-left: 10px;
+  font-size: 12px;
+  font-family: Mulish;
+  font-weight: 700;
+  margin-top: -8px;
+  margin-bottom: 0px;
+  color: rgba(82, 95, 117, 1);
 }
 
 .selected-card {
-    color: rgba(38, 38, 191, 1) !important;
-    border: 1px solid rgba(64, 64, 217, 1);
+  color: rgba(38, 38, 191, 1) !important;
+  border: 1px solid rgba(64, 64, 217, 1);
 }
 
 .card-icon i {
-    margin-top: 15px; 
-    margin-left: 18px; 
-    color: rgba(97, 109, 129, 1)  ;
+  margin-top: 15px;
+  margin-left: 18px;
+  color: rgba(97, 109, 129, 1);
 }
 
 .selected-card i {
-    color: white;
+  color: white;
 }
 
-.selected-card .card-icon{
-    background-color: rgba(64, 64, 217, 1);
+.selected-card .card-icon {
+  background-color: rgba(64, 64, 217, 1);
 }
-

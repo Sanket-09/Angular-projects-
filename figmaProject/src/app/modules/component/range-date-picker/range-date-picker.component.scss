@@ -1,103 +1,93 @@
-.top-el{
-    padding-left: 20px;
+.top-el {
+  padding-left: 20px;
 }
 
-.mat-form-field{
-    font-size:11px;
-    font-family: Mulish;
-    font-weight: 500;
-    width: 300px;
-}   
+.mat-form-field {
+  font-size: 11px;
+  font-family: Mulish;
+  font-weight: 500;
+  width: 300px;
+}
 
 .mat-form-field-infix {
-    display: block;
-    position: relative;
-    min-width: 0;
-    width: 180px;
+  display: block;
+  position: relative;
+  min-width: 0;
+  width: 180px;
 }
 
-.filter-icon{
-    padding: 8px 11px;
-    margin-left: 10px;
-    border: 1px solid rgba(224, 226, 230, 1);  
+.filter-icon {
+  padding: 8px 11px;
+  margin-left: 10px;
+  border: 1px solid rgba(224, 226, 230, 1);
 }
 
-.filter-icon:hover
-{
-    cursor: grab;
+.filter-icon:hover {
+  cursor: grab;
 }
 
-.filterTilesDiv{
-    margin-left: 20px;
-    margin-top: -10px;
+.filterTilesDiv {
+  margin-left: 20px;
+  margin-top: -10px;
 }
 
-.specialityDropdownContainer{
-    max-width: 142px !important;
-    font-size: 11px;  
+.specialityDropdownContainer {
+  max-width: 142px !important;
+  font-size: 11px;
 }
 
-.specialityDropdownContainerStatus{
-    max-width: 100px !important;
-    font-size: 11px;  
-    
+.specialityDropdownContainerStatus {
+  max-width: 100px !important;
+  font-size: 11px;
 }
 
-.specialityDropdown{
-    font-size: 13px;
+.specialityDropdown {
+  font-size: 13px;
 }
 
-.filterTile{
-    margin-right: 10px;
+.filterTile {
+  margin-right: 10px;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 0 !important;
+  padding: 0 !important;
 }
-
 
 ::ng-deep .mat-select-arrow {
-    border-left: 15px solid transparent !important;
-    border-right: none !important;
-    border-top: 15px solid transparent !important;
-    border-image-source: url('./../../../../assets/Chevron.down.svg') !important;
-    border-image-repeat: stretch !important;
+  border-left: 15px solid transparent !important;
+  border-right: none !important;
+  border-top: 15px solid transparent !important;
+  border-image-source: url('./../../../../assets/Chevron.down.svg') !important;
+  border-image-repeat: stretch !important;
 }
 
-footer{
-    padding: 7px 0px 7px 12px;
+footer {
+  padding: 7px 0px 7px 12px;
 }
 
-.submitbtn{
-    background-color: rgba(64, 64, 217, 1);
-    color: white;
-    border-radius: 8px;
-    margin-left: 3px;
+.submitbtn {
+  background-color: rgba(64, 64, 217, 1);
+  color: white;
+  border-radius: 8px;
+  margin-left: 3px;
 }
 
-.cancelbtn{
-    background-color: rgba(240, 241, 243, 1);
-    color: rgba(82, 95, 117, 1);
-    border-radius: 8px;
-    margin-right: 3px;
+.cancelbtn {
+  background-color: rgba(240, 241, 243, 1);
+  color: rgba(82, 95, 117, 1);
+  border-radius: 8px;
+  margin-right: 3px;
 }
 
-.footerBtn{
-    display: table;
-    margin: 0 auto;
-
+.footerBtn {
+  display: table;
+  margin: 0 auto;
 }
-
 
 .specialityDropdown:hover {
-    background-color:rgba(234, 234, 251, 1) ;
-}   
-
-
-
-
-::ng-deep .mat-option.mat-selected{
-    background-color:rgba(234, 234, 251, 1) ;
+  background-color: rgba(234, 234, 251, 1);
 }
 
-
+::ng-deep .mat-option.mat-selected {
+  background-color: rgba(234, 234, 251, 1);
+}

@@ -1,263 +1,239 @@
-.header{
-    box-shadow: 0px 2px 3px 0px rgba(0, 19, 51, 0.12);
-    color: rgba(255, 255, 255, 1);
-    height: 64px;
-    padding: 12px;
-    gap: 4px;
-    margin-bottom: 3px;
-   
+.header {
+  box-shadow: 0px 2px 3px 0px rgba(0, 19, 51, 0.12);
+  color: rgba(255, 255, 255, 1);
+  height: 64px;
+  padding: 12px;
+  gap: 4px;
+  margin-bottom: 3px;
 }
 
-
-.back-btn{
-    padding: 10px;
-    margin-top: 8px;
+.back-btn {
+  padding: 10px;
+  margin-top: 8px;
 }
 
-.separator{
-    height: 36px;
-    width: 1px;
-    background-color: rgba(201, 205, 212, 1);
-    color: rgba(201, 205, 212, 1);
-    border: 1px solid rgba(201, 205, 212, 1);
+.separator {
+  height: 36px;
+  width: 1px;
+  background-color: rgba(201, 205, 212, 1);
+  color: rgba(201, 205, 212, 1);
+  border: 1px solid rgba(201, 205, 212, 1);
 }
 
-.patientDetailHeader{
-    padding :0px, 8px, 0px, 8px;
-    margin: 0px 15px;
+.patientDetailHeader {
+  padding: 0px, 8px, 0px, 8px;
+  margin: 0px 15px;
 }
 
-.patientDetailHeader .img{
-    margin-right: 3px;
+.patientDetailHeader .img {
+  margin-right: 3px;
 }
 
-.patientDetailHeaderName{
-    font-size: 14px;
-    color: rgba(0, 19, 51, 1);
-    margin-bottom: -15px;
+.patientDetailHeaderName {
+  font-size: 14px;
+  color: rgba(0, 19, 51, 1);
+  margin-bottom: -15px;
 }
 
-.patientDetailHeaderId{
-    font-size: 12px;
-    color: rgba(82, 95, 117, 1);
-    margin-top: -10px;
-    margin-left: 20px;
-    display: flex;
-    justify-content: space-between;
-    
+.patientDetailHeaderId {
+  font-size: 12px;
+  color: rgba(82, 95, 117, 1);
+  margin-top: -10px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.headerIcon{
-    margin-right: 5px !important;
+.headerIcon {
+  margin-right: 5px !important;
 }
 
-.headerIcon:hover{
-    cursor: copy;
+.headerIcon:hover {
+  cursor: copy;
 }
 
-.example-container{
-    height: 89%;
-    box-shadow: 0px 1px 1px 0px rgba(0, 19, 51, 0.1);
-    padding: 0vw 2vw;
-    
+.example-container {
+  height: 89%;
+  box-shadow: 0px 1px 1px 0px rgba(0, 19, 51, 0.1);
+  padding: 0vw 2vw;
 }
 
-
-.mat-drawer{
-    height: 100%;
-    width: 352px;
-    border-radius: 8px;
-    margin-top: 0.1vw;
-    margin-bottom: 22vw;
-    overflow-y: hidden;
-    overflow: hidden;
+.mat-drawer {
+  height: 100%;
+  width: 352px;
+  border-radius: 8px;
+  margin-top: 0.1vw;
+  margin-bottom: 22vw;
+  overflow-y: hidden;
+  overflow: hidden;
 }
 
-.mat-drawer-container{
-    
-    padding-top: 0.1vw;
+.mat-drawer-container {
+  padding-top: 0.1vw;
 }
 
-.mat-drawer-content{
-   background-color: white;
-   border-radius: 8px;
-   overflow-x: hidden;
+.mat-drawer-content {
+  background-color: white;
+  border-radius: 8px;
+  overflow-x: hidden;
 }
 
-.drawerDiv{
-    padding: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: rgba(0, 19, 51, 1);
+.drawerDiv {
+  padding: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgba(0, 19, 51, 1);
 }
 
-.drawerDiv2{
-    padding: 20px;
-    font-size: 14px;
-    font-weight: bold;
-    color: rgba(0, 19, 51, 1);
+.drawerDiv2 {
+  padding: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0, 19, 51, 1);
 }
 
-.drawerDiv2span{
-    margin-right: 10px;
+.drawerDiv2span {
+  margin-right: 10px;
 }
 
-.mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: none;
-    border-left: 3px solid blue;
-
+.mat-card:not([class*='mat-elevation-z']) {
+  box-shadow: none;
+  border-left: 3px solid blue;
 }
 
-.mat-card{
-    background-color: rgba(246, 246, 253, 1);
-    font-size: 14px;
-    font-weight: 500;
+.mat-card {
+  background-color: rgba(246, 246, 253, 1);
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .mat-card p {
-    font-size: 12px !important;
-    color: rgba(82, 95, 117, 1);
+  font-size: 12px !important;
+  color: rgba(82, 95, 117, 1);
 }
 
-.drawerContentDiv{
-    padding: 20px;
-    font-size: 24px;
-    font-weight: 700;
-    color: rgba(0, 19, 51, 1);
+.drawerContentDiv {
+  padding: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 19, 51, 1);
 }
 
-.bookingDetails{
-    padding: 20px;
-    font-size: 14px;
-    font-weight: 700;
-    color: rgba(0, 19, 51, 1);
-    margin-bottom: -10px;
+.bookingDetails {
+  padding: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(0, 19, 51, 1);
+  margin-bottom: -10px;
 }
 
-.bookingInfo{
-    padding: 10px 20px;
+.bookingInfo {
+  padding: 10px 20px;
 }
 
-.bookingInfoRow1{
-    display: inline-block;
-    width: 250px;
-    margin-right: 50px;
-    font-size: 12px;
-    font-weight: 700;
-    color: rgba(82, 95, 117, 1);
+.bookingInfoRow1 {
+  display: inline-block;
+  width: 250px;
+  margin-right: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(82, 95, 117, 1);
 }
 
-.bookingInfoDetails{
-    font-size:14px ;
-    font-weight: 500;
-    color: rgba(0, 19, 51, 1);
+.bookingInfoDetails {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 19, 51, 1);
 }
 
-.bookingInfoRowNotes{
-    display: inline-block;
-    width: 1000px;
-    margin-right: 50px;
-    font-size: 12px;
-    font-weight: 900;
-    color: rgba(82, 95, 117, 1);
+.bookingInfoRowNotes {
+  display: inline-block;
+  width: 1000px;
+  margin-right: 50px;
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(82, 95, 117, 1);
 }
 
-.bookingInfoDetailsRadioBtn{
-    font-size:13px ;
-    font-weight: 500;
-    color: rgba(0, 19, 51, 1);
+.bookingInfoDetailsRadioBtn {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 19, 51, 1);
 }
 
-
-:host ::ng-deep .mat-radio-container{
-    height: 14px;
-    width: 14px;
-    margin-left: 40px;
-  }
-  :host ::ng-deep .mat-radio-outer-circle{
-    height: 14px;
-    width: 14px;
-    
-   
-  }
-  :host ::ng-deep .mat-radio-inner-circle{
-    height: 14px;
-    width: 14px;
-    
-
-  }
-  :host ::ng-deep .mat-radio-button .mat-radio-ripple{
-    height: 0px; /*double of your required circle radius*/
-    width: 0px;  /*double of your required circle radius*/
-    left: calc(50% - 14px); /*'10px'-same as your required circle radius*/
-    top: calc(50% - 14px); /*'10px'-same as your required circle radius*/
-  }
-
-  .mat-form-field{
-    padding: 10px 20px;
-    font-size: 12px;
-    width: 420px;
-  }
-
-  .optionalInput{
-    display: block;
-  }
-
-  textarea{
-    padding: 8px;
-    margin-left: 20px;
-    border-radius: 5px;
-    border: 2px #e0e0e0 solid;
-    resize: none;
-    font-family: mulish;
-  }
-
-  textarea:hover{
-    border: 2px black solid;
-    resize: none;
-  }
-
-  textarea:focus{
-    
-    border: 2px rgba(64, 64, 217, 1) solid;
-    resize: none;
-    outline: none;textarea:focus {
-        border: 2px solid #007bff; /* Change the border color to blue */
-        outline: none; /* Remove the default focus outline */
-        /* Add any other styles you want to apply when the textarea is in focus */
-      }
-  }
-
-  .submitBtn{
-    display: flex;
-    justify-content: end;
-    padding: 0px 10px;
-  }
-
-  .submitBtn button{
-    background-color: rgba(64, 64, 217, 1);
-    border-radius: 8px;
-    width: 120px;
-  }
-
-
-  .mat-tab-labels {
-      display: flex;
-      justify-content: start;
-  }
-  
-  ::ng-deep .mat-ink-bar {
-    background-color:rgba(64, 64, 217, 1) !important;
-    height: 4px !important ;
+:host ::ng-deep .mat-radio-container {
+  height: 14px;
+  width: 14px;
+  margin-left: 40px;
+}
+:host ::ng-deep .mat-radio-outer-circle {
+  height: 14px;
+  width: 14px;
+}
+:host ::ng-deep .mat-radio-inner-circle {
+  height: 14px;
+  width: 14px;
+}
+:host ::ng-deep .mat-radio-button .mat-radio-ripple {
+  height: 0px; /*double of your required circle radius*/
+  width: 0px; /*double of your required circle radius*/
+  left: calc(50% - 14px); /*'10px'-same as your required circle radius*/
+  top: calc(50% - 14px); /*'10px'-same as your required circle radius*/
 }
 
+.mat-form-field {
+  padding: 10px 20px;
+  font-size: 12px;
+  width: 420px;
+}
 
-  
+.optionalInput {
+  display: block;
+}
 
+textarea {
+  padding: 8px;
+  margin-left: 20px;
+  border-radius: 5px;
+  border: 2px #e0e0e0 solid;
+  resize: none;
+  font-family: mulish;
+}
 
+textarea:hover {
+  border: 2px black solid;
+  resize: none;
+}
 
+textarea:focus {
+  border: 2px rgba(64, 64, 217, 1) solid;
+  resize: none;
+  outline: none;
+  textarea:focus {
+    border: 2px solid #007bff; /* Change the border color to blue */
+    outline: none; /* Remove the default focus outline */
+    /* Add any other styles you want to apply when the textarea is in focus */
+  }
+}
 
+.submitBtn {
+  display: flex;
+  justify-content: end;
+  padding: 0px 10px;
+}
 
+.submitBtn button {
+  background-color: rgba(64, 64, 217, 1);
+  border-radius: 8px;
+  width: 120px;
+}
 
+.mat-tab-labels {
+  display: flex;
+  justify-content: start;
+}
 
-
+::ng-deep .mat-ink-bar {
+  background-color: rgba(64, 64, 217, 1) !important;
+  height: 4px !important ;
+}

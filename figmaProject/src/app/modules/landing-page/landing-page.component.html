@@ -1,145 +1,196 @@
 <mat-toolbar class="header">
+  <span class="back-btn">
+    <a href="#"
+      ><img src="../../../assets/Left.arrow.svg" alt="back button"
+    /></a>
+  </span>
 
-<span class="back-btn">
-    <a href="#"><img src="../../../assets/Left.arrow.svg" alt="back button"></a>
-</span>
+  <span class="separator"></span>
 
-<span class="separator"></span>
-
-<span class="patientDetailHeader">
+  <span class="patientDetailHeader">
     <div class="patientDetailHeaderName">
-        <img class="headerIcon" src="../../../assets/Patient_info.svg" alt="patient_icon">
-        {{currentElement.name}}
+      <img
+        class="headerIcon"
+        src="../../../assets/Patient_info.svg"
+        alt="patient_icon"
+      />
+      {{ currentElement.name }}
     </div>
     <div class="patientDetailHeaderId">
-        <span id="copyId" >{{currentElement.id}}</span>
-        
-        <img (click)="copyIdfn('Id Copied', 'Ok')" class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
+      <span id="copyId">{{ currentElement.id }}</span>
+
+      <img
+        (click)="copyIdfn('Id Copied', 'Ok')"
+        class="headerIcon"
+        src="../../../assets/copy.svg"
+        alt="copy-icon"
+      />
     </div>
-</span>
+  </span>
 
-<span class="separator"></span>
+  <span class="separator"></span>
 
-<span class="patientDetailHeader">
+  <span class="patientDetailHeader">
     <div class="patientDetailHeaderName">
-        <img class="headerIcon" src="../../../assets/Union.svg" alt="phone_icon">
-        <span id="copyPhoneNumber" style="margin: 0px 3px">{{currentElement.phoneNumber}}</span>
-        <img (click)="copyPhonefn('Phone number Copied', 'Ok')" class="headerIcon" src="../../../assets/copy.svg" alt="copy-icon">
+      <img
+        class="headerIcon"
+        src="../../../assets/Union.svg"
+        alt="phone_icon"
+      />
+      <span id="copyPhoneNumber" style="margin: 0px 3px">{{
+        currentElement.phoneNumber
+      }}</span>
+      <img
+        (click)="copyPhonefn('Phone number Copied', 'Ok')"
+        class="headerIcon"
+        src="../../../assets/copy.svg"
+        alt="copy-icon"
+      />
     </div>
     <div class="patientDetailHeaderId">
-        {{currentElement.language}}
+      {{ currentElement.language }}
     </div>
-</span>
+  </span>
 
-<span class="separator"></span>
+  <span class="separator"></span>
 
-<span class="patientDetailHeader">
+  <span class="patientDetailHeader">
     <div class="patientDetailHeaderName">
-        <img class="headerIcon" src="../../../assets/Union.svg" alt="phone_icon">
-        {{currentElement.gender}}
+      <img
+        class="headerIcon"
+        src="../../../assets/Union.svg"
+        alt="phone_icon"
+      />
+      {{ currentElement.gender }}
     </div>
     <div class="patientDetailHeaderId">
-        {{currentElement.age}}
-        
+      {{ currentElement.age }}
     </div>
-</span>
-    
-
+  </span>
 </mat-toolbar>
 
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>
+    <div class="drawerDiv">Service Request</div>
 
+    <div class="drawerDiv3">
+      <mat-tab-group (selectedTabChange)="tabChanged($event)">
+        <mat-tab label="Pending">
+          <mat-card *ngIf="currentStatusPending">
+            Appointment 1 - {{ currentElement.reqDate | date }}
+            <p>Preferred Consultation Date</p>
+            {{ currentElement.prefDate | date }}
+          </mat-card>
+        </mat-tab>
 
-    <mat-drawer-container class="example-container">
-        <mat-drawer mode="side" opened>
-            <div class="drawerDiv">
-                Service Request
-            </div>
+        <mat-tab label="Resolved/Closed">
+          <mat-card *ngIf="currentStatusResolved">
+            Appointment 1 - {{ currentElement.reqDate | date }}
+            <p>Preferred Consultation Date</p>
+            {{ currentElement.prefDate | date }}
+          </mat-card>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </mat-drawer>
 
-            <div class="drawerDiv3">
-                <mat-tab-group (selectedTabChange)="tabChanged($event)">
-                    <mat-tab label="Pending">  
-                        <mat-card *ngIf="currentStatusPending">
-                            Appointment 1 - {{currentElement.reqDate | date}}
-                            <p>Preferred Consultation Date</p>
-                            {{currentElement.prefDate | date}}
-                        </mat-card>
-                    </mat-tab>
+  <mat-drawer-content>
+    <div class="drawerContentDiv">
+      Appointment 1 - {{ currentElement.reqDate | date }}
+    </div>
 
-                    <mat-tab label="Resolved/Closed">
-                        <mat-card *ngIf="currentStatusResolved">
-                            Appointment 1 - {{currentElement.reqDate | date}}
-                            <p>Preferred Consultation Date</p>
-                            {{currentElement.prefDate | date}}
-                        </mat-card>
-                    </mat-tab>
-                    
-                  </mat-tab-group>
-            </div>
+    <div class="bookingDetails">Booking Details</div>
 
-            
+    <div class="bookingInfo">
+      <div class="bookingInfoRow1">
+        Preferred Consultation Date <br />
+        <span class="bookingInfoDetails">{{
+          currentElement.prefDate | date
+        }}</span>
+      </div>
+      <div class="bookingInfoRow1">
+        Physician Visit Type <br />
+        <span class="bookingInfoDetails">{{ currentElement.visitType }}</span>
+      </div>
+      <div class="bookingInfoRow1">
+        Speciality <br /><span class="bookingInfoDetails">{{
+          currentElement.speciality
+        }}</span>
+      </div>
+    </div>
 
-        </mat-drawer>
+    <div class="bookingInfo">
+      <div class="bookingInfoRow1">
+        Physician Name <br />
+        <span class="bookingInfoDetails">-</span>
+      </div>
+      <div class="bookingInfoRow1">
+        Physician Category <br />
+        <span class="bookingInfoDetails">{{ currentElement.category }}</span>
+      </div>
+    </div>
 
+    <div class="bookingInfo">
+      <div class="bookingInfoRowNotes">
+        Notes <br />
+        <span class="bookingInfoDetails"
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil
+          nam sed odit? Eos, placeat?</span
+        >
+      </div>
+    </div>
 
-        <mat-drawer-content>
-            <div class="drawerContentDiv">
-                Appointment 1 - {{currentElement.reqDate | date}}
-            </div>
+    <div>
+      <div class="bookingDetails" style="padding: 10px 20px">
+        Notes <br />
+        <span class="bookingInfoDetails" style="margin-right: 80px"
+          >Do you need to resolve physician service?</span
+        >
+        <span class="bookingInfoDetailsRadioBtn"
+          ><mat-radio-group aria-label="Select an option">
+            <mat-radio-button disableRipple="true" value="1"
+              >Yes</mat-radio-button
+            >
+            <mat-radio-button disableRipple="true" value="2"
+              >Not Yet</mat-radio-button
+            >
+            <mat-radio-button disableRipple="true" value="3"
+              >Not Required</mat-radio-button
+            >
+          </mat-radio-group>
+        </span>
+      </div>
+    </div>
 
-            <div class="bookingDetails">
-                Booking Details
-            </div>
+    <div class="optionalInput">
+      <mat-form-field
+        appearance="outline"
+        required="true"
+        [hideRequiredMarker]="false"
+      >
+        <mat-label>Consulted Date</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
 
-            <div class="bookingInfo">
-                <div class="bookingInfoRow1">Preferred Consultation Date <br> <span class="bookingInfoDetails">{{currentElement.prefDate | date}}</span></div>
-                <div class="bookingInfoRow1">Physician Visit Type <br> <span class="bookingInfoDetails">{{currentElement.visitType}}</span></div>
-                <div class="bookingInfoRow1">Speciality <br><span class="bookingInfoDetails">{{currentElement.speciality}}</span></div>
-            </div>
+    <textarea
+      name="notes"
+      id="notes"
+      cols="54"
+      rows="5"
+      placeholder="Notes"
+    ></textarea>
 
-            <div class="bookingInfo">
-                <div class="bookingInfoRow1">Physician Name <br> <span class="bookingInfoDetails">-</span></div>
-                <div class="bookingInfoRow1">Physician Category <br> <span class="bookingInfoDetails">{{currentElement.category}}</span></div>
-            </div>
-
-            <div class="bookingInfo">
-                <div class="bookingInfoRowNotes">Notes <br> <span class="bookingInfoDetails">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil nam sed odit? Eos, placeat?</span></div>
-            </div>
-
-            <div>
-                <div class="bookingDetails" style="padding: 10px 20px;">Notes <br> <span class="bookingInfoDetails" style="margin-right: 80px;">Do you need to resolve physician service?</span> <span class="bookingInfoDetailsRadioBtn"><mat-radio-group aria-label="Select an option">
-                    <mat-radio-button disableRipple=true value="1">Yes</mat-radio-button>
-                    <mat-radio-button disableRipple=true value="2">Not Yet</mat-radio-button>
-                    <mat-radio-button disableRipple=true value="3">Not Required</mat-radio-button>
-                  </mat-radio-group>
-                  </span> </div>
-            </div>
-
-            <div class="optionalInput">
-                <mat-form-field appearance="outline" required = "true" [hideRequiredMarker]="false">
-                    <mat-label>Consulted Date</mat-label>
-                    <input matInput [matDatepicker]="picker">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
-            
-            <textarea name="notes" id="notes" cols="54" rows="5" placeholder="Notes"></textarea>
-            
-            <div class="submitBtn">
-                <button (click)="openSnackBar('Service Resolved Successfully', 'x')" mat-flat-button color="primary">Submit</button>
-            </div>
-
-     
-            
-
-        </mat-drawer-content>
-
-        
-          
-    </mat-drawer-container>
-
-   
-      
-
-
-  
+    <div class="submitBtn">
+      <button
+        (click)="openSnackBar('Service Resolved Successfully', 'x')"
+        mat-flat-button
+        color="primary"
+      >
+        Submit
+      </button>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
