@@ -1,18 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-
 html,
 body {
   height: 100%;
   font-family: Mulish !important;
   text-rendering: geometricPrecision;
 }
+
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 body * ::-webkit-scrollbar-track {
-  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   border-radius: 100px;
   background-color: transparent;
 }
@@ -25,7 +24,7 @@ body * ::-webkit-scrollbar {
 body * ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: rgba(179, 185, 194, 1);
+  background-color: #b3b9c2;
 }
 
 .mat-select-panel {
@@ -55,20 +54,22 @@ body * ::-webkit-scrollbar-thumb {
 }
 
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
-  background-color: rgba(64, 64, 217, 1); /*inner circle color change*/
+  background-color: #4040d9;
+  /*inner circle color change*/
 }
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-  border-color: rgba(64, 64, 217, 1) !important; /*outer ring color change*/
+  border-color: #4040d9 !important;
+  /*outer ring color change*/
 }
 
 .blue-snackbar {
-  background-color: rgba(237, 252, 246, 1);
+  background-color: #edfcf6;
   width: 60px;
-  color: rgba(20, 133, 82, 1);
-  .mat-simple-snackbar-action {
-    color: rgba(20, 133, 82, 1);
-  }
+  color: #148552;
+}
+.blue-snackbar .mat-simple-snackbar-action {
+  color: #148552;
 }
 
 .mat-tab-label,
@@ -83,7 +84,6 @@ body * ::-webkit-scrollbar-thumb {
   opacity: 1;
   justify-content: start !important;
   min-width: 100px !important;
-  // padding-left: 20px !important;
   color: black;
 }
 

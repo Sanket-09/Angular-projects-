@@ -55,25 +55,33 @@ export class FilterContentComponent implements OnInit {
 
   cards = [
     {
-      icon: 'hourglass-half',
+      icon: './../../../../assets/icons-unselected-filter-content/hour-glass.fill.svg',
+      iconSelected:
+        './../../../../assets/icons-selected-filter-content/hour-glass.fill.svg',
       value1: this.pendingDataCount,
       value2: 'Pending',
       bgColor: 'white',
     },
     {
-      icon: 'thumbs-up',
+      icon: './../../../../assets/icons-unselected-filter-content/Recommend.fill.svg',
+      iconSelected:
+        './../../../../assets/icons-selected-filter-content/Recommend.fill.svg',
       value1: this.resolvedDataCount,
       value2: 'Resolved',
       bgColor: 'white',
     },
     {
-      icon: 'check-circle',
+      icon: './../../../../assets/icons-unselected-filter-content/checkbox.fill.svg',
+      iconSelected:
+        './../../../../assets/icons-selected-filter-content/checkbox.fill.svg',
       value1: this.closedDataCount,
       value2: 'Closed',
       bgColor: 'white',
     },
     {
-      icon: 'users',
+      icon: './../../../../assets/icons-unselected-filter-content/Group.fill.svg',
+      iconSelected:
+        './../../../../assets/icons-selected-filter-content/Group.fill.svg',
       value1: this.allDataCount,
       value2: 'Total Request',
       bgColor: 'white',
@@ -85,6 +93,7 @@ export class FilterContentComponent implements OnInit {
 
   selectCard(card: any) {
     this.selectedCard = card
+
     this.applyFilter(card.value2)
   }
 

@@ -21,22 +21,23 @@ import { FilterDropdownCategoryComponent } from './modules/component/filter-drop
 import { FilterChipsComponent } from './modules/component/filter-chips/filter-chips.component'
 import { RouterModule, Routes } from '@angular/router'
 import { HomePageComponent } from './home-page/home-page.component'
-import { LandingPageComponent } from './modules/landing-page/landing-page.component'
+import { LandingPageComponent, MY_FORMATS } from './modules/landing-page/landing-page.component'
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter'
 
 // import { BufferComponentComponent } from './modules/component/buffer-component/buffer-component.component';
 
-const appRoute: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'homepage' },
-  {
-    path: 'homepage',
-    component: HomePageComponent,
-    children: [
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-      { path: 'dashboard', component: DashboardComponent },
-    ],
-  },
-  { path: 'landing', component: LandingPageComponent },
-]
+// const appRoute: Routes = [
+//   { path: '', pathMatch: 'full', redirectTo: 'homepage' },
+//   {
+//     path: 'homepage',
+//     component: HomePageComponent,
+//     children: [
+//       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+//       { path: 'dashboard', component: DashboardComponent },
+//     ],
+//   },
+//   { path: 'landing', component: LandingPageComponent },
+// ]
 
 @NgModule({
   declarations: [
@@ -66,9 +67,9 @@ const appRoute: Routes = [
     MatTableModule,
     MatPaginatorModule,
     NgxMatSelectSearchModule,
-    RouterModule.forRoot(appRoute),
+    // RouterModule.forRoot(appRoute),
   ],
-  providers: [],
+  providers: [ provideMomentDateAdapter(MY_FORMATS),],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

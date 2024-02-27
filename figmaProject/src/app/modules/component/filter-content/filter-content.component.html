@@ -10,7 +10,11 @@
         [ngClass]="{ 'selected-icon': isSelectedIcon(card) }"
         (click)="selectCardIcon(card)"
       >
-        <i class="fa fa-{{ card.icon }} fa-2x"></i>
+        <img
+          class="icon-svg"
+          [src]="isSelected(card) ? card.iconSelected : card.icon"
+          alt=""
+        />
       </div>
 
       <div class="card-icon-content">

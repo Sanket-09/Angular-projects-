@@ -18,7 +18,7 @@
   height: 40px;
   width: 40px;
   border-radius: 50px;
-  background-color: rgba(246, 246, 253, 1);
+  background-color: #f6f6fd;
 }
 
 .card-icon-content h1 {
@@ -28,6 +28,7 @@
   font-weight: 700;
   margin-bottom: 0px;
 }
+
 .card-icon-content h2 {
   margin-left: 10px;
   font-size: 12px;
@@ -35,18 +36,18 @@
   font-weight: 700;
   margin-top: -8px;
   margin-bottom: 0px;
-  color: rgba(82, 95, 117, 1);
+  color: #525f75;
 }
 
 .selected-card {
-  color: rgba(38, 38, 191, 1) !important;
-  border: 1px solid rgba(64, 64, 217, 1);
+  color: #2626bf !important;
+  border: 1px solid #4040d9;
 }
 
 .card-icon i {
   margin-top: 15px;
   margin-left: 18px;
-  color: rgba(97, 109, 129, 1);
+  color: #616d81;
 }
 
 .selected-card i {
@@ -54,7 +55,7 @@
 }
 
 .selected-card .card-icon {
-  background-color: rgba(64, 64, 217, 1);
+  background-color: #4040d9;
 }
 
 .icon-svg {

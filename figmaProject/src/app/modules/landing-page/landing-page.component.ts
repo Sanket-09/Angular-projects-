@@ -1,10 +1,31 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ELEMENT_DATA } from '../services/data'
 import { PeriodicElement } from '../services/data'
 import { Clipboard } from '@angular/cdk/clipboard'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatTabChangeEvent } from '@angular/material/tabs'
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter'
+import * as _moment from 'moment'
+
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+
+const moment = _moment
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+}
 
 @Component({
   selector: 'app-landing-page',
@@ -12,24 +33,42 @@ import { MatTabChangeEvent } from '@angular/material/tabs'
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
+  physicianServiceBool: boolean = false
+
+  radioYesButtonClicked() {
+    this.physicianServiceBool = true
+  }
+
+  radioNoButtonClicked() {
+    this.physicianServiceBool = false
+  }
+
+  date = new FormControl(moment())
+
   currentStatusResolved: boolean = false
   currentStatusPending: boolean = false
+
+  selectedTabIndex: number = 1
 
   tabChanged($event: MatTabChangeEvent) {
     this.checkStatus()
   }
 
   private checkStatus(): void {
-    if (this.currentElement.status === 'Pending')
+    if (this.currentElement.status === 'Pending') {
+      this.selectedTabIndex = 0
       this.currentStatusPending = true
-    else this.currentStatusPending = false
+    } else {
+      this.currentStatusPending = false
+      this.selectedTabIndex = 1
+    }
 
     if (
       this.currentElement.status === 'Closed' ||
       this.currentElement.status === 'Resolved'
-    )
+    ) {
       this.currentStatusResolved = true
-    else this.currentStatusResolved = false
+    } else this.currentStatusResolved = false
   }
 
   getCurrentStatus() {
