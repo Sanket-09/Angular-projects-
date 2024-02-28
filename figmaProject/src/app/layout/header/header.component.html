@@ -4,7 +4,7 @@
     <div class="vl"></div>
 
     <mat-form-field appearance="fill">
-      <mat-select placeholder="Select Hospital">
+      <mat-select class="hospitalCheck" placeholder="Select Hospital">
         <mat-option *ngFor="let hospital of hospital" [value]="hospital.value">
           {{ hospital.viewValue }}
         </mat-option>
@@ -15,6 +15,7 @@
   <div class="search-header">
     <div class="input-icons">
       <i class="fa fa-search icon"></i>
+
       <input
         class="input-field-search"
         type="text"
@@ -24,13 +25,49 @@
       />
     </div>
 
-    <a href="" style="margin-top: 6px; margin-left: 5px">
-      <img
-        src="./../../../assets/Patient_info.fill.svg"
-        alt="patient logo"
-        style="transform: scale(1.1); margin-top: 5px"
-      />
-      <!-- <img src="./../../../assets/Chevron.down.svg" alt="down arrow" style="transform: scale(1.1);"> -->
-    </a>
+    <span class="headerRight">
+      <button mat-button [matMenuTriggerFor]="beforeMenu">
+        <i style="margin-left: -50px">
+          <img
+            src="../../../assets/profile.svg"
+            alt="patient logo"
+            style="transform: scale(1); margin-top: 12px"
+          />
+          <!-- <img src="./../../../assets/Chevron.down.svg" alt="down arrow" style="transform: scale(1.1);"> -->
+        </i>
+      </button>
+
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <div class="menuDropdowntitle">
+          <span style="display: flex; flex-direction: row">
+            <span>
+              <i
+                class="fa fa-user"
+                style="transform: scale(1.5); padding-right: 10px"
+              ></i>
+            </span>
+
+            <span class="userDetail">
+              <div class="userName">Sanket Jaiswal</div>
+              <div class="userTitle">Team Lead</div>
+            </span>
+          </span>
+        </div>
+
+        <hr />
+        <button mat-menu-item>Switch Module</button>
+        <button mat-menu-item>Add Member</button>
+        <button mat-menu-item>Change Password</button>
+
+        <!-- <button mat-menu-item>
+          <span>
+            <strong>Sanket Jaiswal</strong>
+            <hr />
+          </span>
+        </button> -->
+
+        <!-- <button mat-menu-item>Item 2</button> -->
+      </mat-menu>
+    </span>
   </div>
 </mat-toolbar>

@@ -70,6 +70,8 @@ footer {
   color: white;
   border-radius: 8px;
   margin-left: 3px;
+  width: 88px;
+  height: 32px;
 }
 
 .cancelbtn {
@@ -90,4 +92,19 @@ footer {
 
 ::ng-deep .mat-option.mat-selected {
   background-color: rgba(234, 234, 251, 1);
+}
+
+.footerBtn {
+  position: sticky !important;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+
+  // padding: 10px; /* Adjust the padding as needed */
+  background-color: inherit; /* Optional background color */
+  border-top: 1px solid rgba(224, 226, 230, 1); /* Optional border at the top */
+}
+
+.mat-option[aria-disabled='true'].contains-mat-select-search {
+  position: absolute;
 }

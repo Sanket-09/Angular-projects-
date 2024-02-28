@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  font-family: Mulish;
+}
+
 html,
 body {
   height: 100%;
@@ -28,6 +32,7 @@ body * ::-webkit-scrollbar-thumb {
 }
 
 .mat-select-panel {
+  max-width: 191px !important;
   margin-top: 35px;
   margin-left: 30px;
 }
@@ -37,7 +42,8 @@ body * ::-webkit-scrollbar-thumb {
 }
 
 .mat-form-field-appearance-outline .mat-form-field-infix {
-  padding: 0.8em 0em;
+  padding-bottom: 0.8em;
+  padding-top: 4px;
 }
 
 .mat-button {
@@ -56,6 +62,10 @@ body * ::-webkit-scrollbar-thumb {
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
   background-color: #4040d9;
   /*inner circle color change*/
+}
+
+.mat-form-field {
+  vertical-align: text-top;
 }
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
@@ -93,4 +103,70 @@ body * ::-webkit-scrollbar-thumb {
 
 #mat-select-value-7 {
   height: 10px;
+}
+
+.hospitalCheck .mat-select-arrow {
+  margin-top: 15px !important;
+  padding-right: 10px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  height: 40px !important;
+}
+
+.mat-date-range-input-container {
+  height: 20px !important;
+  font-size: 12px !important;
+  font-weight: 500;
+  align-items: normal !important;
+}
+
+.specialityDropdownContainer .mat-form-field-infix {
+  line-height: 18px !important;
+}
+
+.filterTile1 .mat-form-field-infix {
+  line-height: 18px !important;
+}
+
+.filterTile12 .mat-form-field-infix {
+  line-height: 18px !important;
+}
+
+.mat-select-placeholder {
+  color: #525f75 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #c9cdd4;
+}
+
+.ng-tns-c215-11 {
+  min-width: 100% !important;
+}
+
+.ng-tns-c215-14 {
+  min-width: 100% !important;
+}
+
+.ng-tns-c215-9 {
+  min-width: 100% !important;
+}
+
+.ng-tns-c215-13 {
+  min-width: 100% !important;
+}
+
+.ng-tns-c215-7 .mat-select-panel {
+  margin-left: 10px !important;
+}
+
+.ng-tns-c115-3 {
+  line-height: 8px !important;
+}
+
+.physicianServiceStatus .ng-tns-c115-8 {
+  line-height: 8px !important;
 }

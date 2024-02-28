@@ -3,8 +3,7 @@
   top: 0;
   display: flex;
   color: #001333;
-  background: linear-gradient(0deg, #001333, #001333),
-    linear-gradient(0deg, #e0e2e6, #e0e2e6);
+  background: linear-gradient(0deg, #001333, #001333), linear-gradient(0deg, #e0e2e6, #e0e2e6);
   height: 56px;
   width: auto;
   padding: 12px, 30px, 12px, 24px;
@@ -31,10 +30,8 @@
 }
 
 .vl {
-  // border-left: 1px solid rgb(255, 0, 0);
-  // height: 50px;
   width: 26px;
-  border-bottom: 1px solid rgb(255, 255, 255);
+  border-bottom: 1px solid white;
   color: white;
   transform: rotate(90deg);
 }
@@ -48,12 +45,6 @@
   margin-top: -14px;
   margin-left: -40px;
 }
-
-// .mat-form-field-appearance-fill .mat-form-field-flex {
-//     border-radius: 4px 4px 0 0;
-//     padding: 0px !important;
-//     color: red;A
-// }
 
 ::ng-deep .mat-form-field-flex {
   border-radius: 4px 4px 0 0;
@@ -74,12 +65,11 @@
 }
 
 #umr-search {
-  border: 1px solid rgba(179, 185, 194, 1);
-
+  border: 1px solid #b3b9c2;
   height: 35px;
   line-height: normal;
   background-color: transparent;
-  color: rgba(179, 185, 194, 1);
+  color: #b3b9c2;
   width: 221px;
   box-sizing: border-box;
   user-select: auto;
@@ -94,7 +84,7 @@
 .input-icons {
   width: 100%;
   margin-bottom: 10px;
-  color: rgba(179, 185, 194, 1);
+  color: #b3b9c2;
 }
 
 .input-icons i {
@@ -110,14 +100,13 @@
 }
 
 .input-field-search {
-  border: 1px solid rgba(224, 226, 230, 1);
+  border: 1px solid #e0e2e6;
   outline: none !important;
   width: 221px !important;
   text-align: start;
   background-color: transparent;
-  color: rgba(179, 185, 194, 1);
+  color: #b3b9c2;
   height: 36px;
-
   box-sizing: border-box;
   font-size: 13px;
   border-radius: 4px;
@@ -132,7 +121,7 @@
 }
 
 ::-webkit-input-placeholder {
-  color: rgba(179, 185, 194, 1);
+  color: #b3b9c2;
   font-size: 14px;
 }
 
@@ -146,10 +135,6 @@
 ::ng-deep .mat-form-field-underline {
   display: none;
 }
-
-// ::ng-deep .mat-select-arrow{
-//     margin-top:17px !important;
-// }
 
 :host::ng-deep .mat-select-placeholder {
   color: white !important;

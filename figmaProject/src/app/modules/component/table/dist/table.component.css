@@ -7,7 +7,7 @@
 div {
   overflow: hidden;
   overflow-y: scroll;
-  height: 24vw; // change this to desired height
+  height: 24vw;
 }
 
 table {
@@ -17,7 +17,7 @@ table {
 
 th {
   font-weight: 700;
-  border-bottom: 1px solid rgba(224, 226, 230, 1);
+  border-bottom: 1px solid #e0e2e6;
   font-size: 14px;
 }
 
@@ -26,8 +26,8 @@ th {
   bottom: 18px;
   right: 18px;
   height: 18px;
-  color: rgba(201, 205, 212, 1);
-  background-color: rgba(201, 205, 212, 1);
+  color: #c9cdd4;
+  background-color: #c9cdd4;
   width: 1px;
 }
 
@@ -36,8 +36,8 @@ th {
   bottom: 18px;
   right: 10px;
   height: 18px;
-  color: rgba(201, 205, 212, 1);
-  background-color: rgba(201, 205, 212, 1);
+  color: #c9cdd4;
+  background-color: #c9cdd4;
   width: 1px;
 }
 
@@ -45,7 +45,7 @@ td {
   font-size: 14px;
   font-family: Mulish;
   font-weight: 500;
-  color: rgba(0, 19, 51, 1);
+  color: #001333;
 }
 
 th.mat-header-cell:last-of-type,
@@ -55,7 +55,7 @@ td.mat-footer-cell:last-of-type {
 }
 
 .statusUi {
-  background-color: rgba(255, 236, 204, 1);
+  background-color: #ffeccc;
   display: inline-block;
   width: 50px;
   text-align: center;
@@ -65,7 +65,7 @@ td.mat-footer-cell:last-of-type {
   font-family: Mulish;
   font-size: 12px;
   align-items: center;
-  color: rgba(0, 19, 51, 1);
+  color: #001333;
 }
 
 .section {
@@ -74,18 +74,18 @@ td.mat-footer-cell:last-of-type {
 }
 
 .status-pending {
-  background-color: rgba(255, 236, 204, 1);
+  background-color: #ffeccc;
 }
 
 .status-resolved {
-  background-color: rgba(215, 249, 234, 1);
+  background-color: #d7f9ea;
 }
 
 .status-closed {
-  background-color: rgba(240, 241, 243, 1);
+  background-color: #f0f1f3;
 }
 
 .mat-row:hover {
   cursor: grab;
-  background-color: rgb(227, 227, 233);
+  background-color: #e3e3e9;
 }

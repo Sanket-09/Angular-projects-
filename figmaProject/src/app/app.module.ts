@@ -22,7 +22,8 @@ import { FilterChipsComponent } from './modules/component/filter-chips/filter-ch
 import { RouterModule, Routes } from '@angular/router'
 import { HomePageComponent } from './home-page/home-page.component'
 import { LandingPageComponent, MY_FORMATS } from './modules/landing-page/landing-page.component'
-import { provideMomentDateAdapter } from '@angular/material-moment-adapter'
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.component'
 
 // import { BufferComponentComponent } from './modules/component/buffer-component/buffer-component.component';
 
@@ -53,6 +54,7 @@ import { provideMomentDateAdapter } from '@angular/material-moment-adapter'
     FilterChipsComponent,
     HomePageComponent,
     LandingPageComponent,
+    PageNotFoundComponent,
 
     // BufferComponentComponent,
   ],

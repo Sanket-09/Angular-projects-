@@ -19,7 +19,7 @@ mat-drawer-container {
   width: auto;
   height: 15px;
   font-weight: 700;
-  color: rgba(82, 95, 117, 1);
+  color: #525f75;
   font-size: 14px;
   line-height: 18px;
   font-family: Mulish;
@@ -32,7 +32,7 @@ mat-drawer-container {
 }
 
 .mat-card:focus {
-  color: rgba(64, 64, 217, 1);
+  color: #4040d9;
 }
 
 .navValue {
@@ -45,20 +45,16 @@ mat-drawer-container {
 .navChip {
   height: 18px;
   width: 10px;
-  background-color: rgba(221, 221, 248, 1);
+  background-color: #ddddf8;
   border-radius: 30px;
   padding: 1px 10px;
   position: absolute;
   left: 125px;
 }
 
-.mat-card:not([class*='mat-elevation-z']) {
+.mat-card:not([class*=mat-elevation-z]) {
   box-shadow: none;
 }
-
-// .mat-drawer-content{
-//   padding-left: 20px;
-// }
 
 .mat-drawer-content {
   overflow-y: scroll;

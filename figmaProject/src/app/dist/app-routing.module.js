@@ -12,6 +12,7 @@ var router_1 = require("@angular/router");
 var home_page_component_1 = require("./home-page/home-page.component");
 var dashboard_component_1 = require("./modules/dashboard/dashboard/dashboard.component");
 var landing_page_component_1 = require("./modules/landing-page/landing-page.component");
+var page_not_found_component_1 = require("./modules/page-not-found/page-not-found.component");
 var appRoute = [
     { path: '', pathMatch: 'full', redirectTo: 'homepage' },
     {
@@ -20,6 +21,7 @@ var appRoute = [
         children: [
             { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
             { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
+            { path: 'pageNotFound', component: page_not_found_component_1.PageNotFoundComponent },
         ]
     },
     { path: 'landing', component: landing_page_component_1.LandingPageComponent },

@@ -57,7 +57,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
   filterSubscription: Subscription
   filterSubscriptionSpeciality: Subscription
   filterSubscriptionVisit: Subscription
-  // filterSubscriptionSearch : Subscription;
+  filterSubscriptionSearch: Subscription
 
   constructor(
     private tabService: TabService,
@@ -81,9 +81,10 @@ export class TableComponent implements AfterViewInit, OnChanges {
         this.applyVisitFilter(filter)
       })
 
-    // this.filterSubscriptionSearch = this.filterService.filterChangedSearch$.subscribe(filter => {
-    //   this.applySearchFilter(filter);
-    // })
+    this.filterSubscriptionSearch =
+      this.filterService.filterChangedSearch$.subscribe((filter) => {
+        this.applySearchFilter(filter)
+      })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -104,19 +105,19 @@ export class TableComponent implements AfterViewInit, OnChanges {
       })
   }
 
-  // applySearchFilter(searchValue : string){
-  //   console.log("type of searchValue is : "  + typeof searchValue);
-  //   console.log("SearchValue is : "  + searchValue);
-  //   console.log("SearchValue length is : "  + searchValue.length);
+  applySearchFilter(searchValue: string) {
+    console.log('type of searchValue is : ' + typeof searchValue)
+    console.log('SearchValue is : ' + searchValue)
+    console.log('SearchValue length is : ' + searchValue.length)
 
-  //   this.filteredDataSource.data=this.dataSource.data.filter(o=>
-  //     o.id.toLowerCase==searchValue.trim().toLowerCase
-  //   )
-  //   this.filteredDataSource._updateChangeSubscription();
-  //   // this.cdRef.detectChanges();
-  //   this.filteredDataSource.filter = searchValue
-  //   console.log("Filter applied with searchValue  : " + searchValue )
-  // }
+    this.filteredDataSource.data = this.dataSource.data.filter(
+      (o) => o.id.toLowerCase == searchValue.trim().toLowerCase
+    )
+    this.filteredDataSource._updateChangeSubscription()
+    this.cdRef.detectChanges()
+    // this.filteredDataSource.filter = searchValue
+    // console.log("Filter applied with searchValue  : " + searchValue )
+  }
 
   applyStatusFilter(filterValue: string) {
     if (filterValue.toLowerCase() == 'total request') {

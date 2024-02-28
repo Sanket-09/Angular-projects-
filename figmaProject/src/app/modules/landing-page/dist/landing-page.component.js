@@ -32,16 +32,23 @@ var LandingPageComponent = /** @class */ (function () {
         this.clipboard = clipboard;
         this._snackBar = _snackBar;
         this.physicianServiceBool = false;
+        this.physicianServiceNotesBool = false;
         this.date = new forms_1.FormControl(moment());
         this.currentStatusResolved = false;
         this.currentStatusPending = false;
         this.selectedTabIndex = 1;
     }
+    LandingPageComponent.prototype.radioNotReqButtonClicked = function () {
+        this.physicianServiceBool = false;
+        this.physicianServiceNotesBool = true;
+    };
     LandingPageComponent.prototype.radioYesButtonClicked = function () {
         this.physicianServiceBool = true;
+        this.physicianServiceNotesBool = true;
     };
     LandingPageComponent.prototype.radioNoButtonClicked = function () {
         this.physicianServiceBool = false;
+        this.physicianServiceNotesBool = false;
     };
     LandingPageComponent.prototype.tabChanged = function ($event) {
         this.checkStatus();
@@ -105,6 +112,10 @@ var LandingPageComponent = /** @class */ (function () {
             console.log(_this.currentElement);
         });
         this.checkStatus();
+        this.consultedDateControl = new forms_1.FormControl(null, [forms_1.Validators.required]);
+        this.formGroup = new forms_1.FormGroup({
+            consultedDate: this.consultedDateControl
+        });
     };
     LandingPageComponent.prototype.navigateToDashboard = function () {
         // Navigate to the dashboard route

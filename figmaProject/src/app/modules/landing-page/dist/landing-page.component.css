@@ -38,6 +38,7 @@
   font-size: 14px;
   color: #001333;
   margin-bottom: -15px;
+  font-weight: 500;
 }
 
 .patientDetailHeaderId {
@@ -47,6 +48,7 @@
   margin-left: 20px;
   display: flex;
   justify-content: space-between;
+  font-weight: 500;
 }
 
 .headerIcon {
@@ -67,7 +69,6 @@
   height: 100%;
   width: 352px;
   border-radius: 8px;
-  border-top-right-radius: 0px;
   margin-top: 0.1vw;
   margin-bottom: 22vw;
   overflow-y: hidden;
@@ -106,7 +107,6 @@
 
 .mat-card:not([class*=mat-elevation-z]) {
   box-shadow: none;
-  border-left: 3px solid blue;
 }
 
 .mat-card {
@@ -208,8 +208,13 @@
   width: 420px;
 }
 
+.mat-card {
+  height: 66px;
+}
+
 .optionalInput {
   display: block;
+  margin-bottom: -10px;
 }
 
 textarea {
@@ -219,6 +224,7 @@ textarea {
   border: 2px #e0e0e0 solid;
   resize: none;
   font-family: mulish;
+  margin-top: 10px;
 }
 
 textarea:focus {
@@ -261,4 +267,40 @@ textarea:focus textarea:focus {
 
 .datePickerField {
   outline: 10px solid black;
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  height: 20px;
+  border-top-left-radius: 80px;
+  border-top-right-radius: 80px;
+}
+
+::ng-deep.mat-tab-label.mat-tab-label-active:not(.mat-tab-disabled),
+::ng-deep.mat-tab-label.mat-tab-label-active.cdk-keyboard-focused:not(.mat-tab-disabled) {
+  font-weight: 700;
+  color: #2626bf;
+  opacity: 1;
+}
+
+.mat-card p {
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.mat-card strong {
+  font-weight: 700;
+}
+
+.dateFont {
+  font-weight: 500;
+  color: #001333;
+}
+
+.matCardSideBorder {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 0px;
 }

@@ -3,7 +3,7 @@
 }
 
 .mat-form-field {
-  font-size: 12px;
+  font-size: 11px;
   font-family: Mulish;
   font-weight: 500;
   width: 300px;
@@ -19,7 +19,7 @@
 .filter-icon {
   padding: 8px 11px;
   margin-left: 10px;
-  border: 1px solid rgba(224, 226, 230, 1);
+  border: 1px solid #e0e2e6;
 }
 
 .filter-icon:hover {
@@ -28,7 +28,7 @@
 
 .filterTilesDiv {
   margin-left: 20px;
-  margin-top: 10px;
+  margin-top: -10px;
 }
 
 .specialityDropdownContainer {
@@ -42,18 +42,10 @@
 }
 
 .specialityDropdown {
-  font-size: 13px;
+  font-size: 18px;
 }
 
 .filterTile {
-  margin-right: 10px;
-}
-
-.filterTile1 {
-  margin-right: 10px;
-}
-
-.filterTile12 {
   margin-right: 10px;
 }
 
@@ -62,11 +54,10 @@
 }
 
 ::ng-deep .mat-select-arrow {
-  margin-top: 5px;
   border-left: 15px solid transparent !important;
   border-right: none !important;
   border-top: 15px solid transparent !important;
-  border-image-source: url('./../../../../assets/Chevron.down.svg') !important;
+  border-image-source: url("./../../../../assets/Chevron.down.svg") !important;
   border-image-repeat: stretch !important;
 }
 
@@ -75,15 +66,15 @@ footer {
 }
 
 .submitbtn {
-  background-color: rgba(64, 64, 217, 1);
+  background-color: #4040d9;
   color: white;
   border-radius: 8px;
   margin-left: 3px;
 }
 
 .cancelbtn {
-  background-color: rgba(240, 241, 243, 1);
-  color: rgba(82, 95, 117, 1);
+  background-color: #f0f1f3;
+  color: #525f75;
   border-radius: 8px;
   margin-right: 3px;
 }
@@ -94,35 +85,11 @@ footer {
 }
 
 .specialityDropdown:hover {
-  background-color: rgba(249, 249, 251, 1);
+  background-color: #eaeafb;
 }
 
 ::ng-deep .mat-option.mat-selected {
-  background-color: rgba(234, 234, 251, 1);
-}
-
-::ng-deep .datefilter {
-  display: flex;
-  height: 40px !important;
-  margin-top: -20px;
-  margin-left: 20px;
-}
-
-.filter-icon-container {
-  margin-top: 12px;
-}
-
-.mat-date-range-input-inner {
-  color: rgba(82, 95, 117, 1) !important;
-}
-
-::placeholder {
-  color: rgba(82, 95, 117, 1);
-  opacity: 1; /* Firefox */
-}
-
-.mat-option[aria-disabled='true'].contains-mat-select-search {
-  position: absolute;
+  background-color: #eaeafb;
 }
 
 .footerBtn {
@@ -130,8 +97,13 @@ footer {
   bottom: 0;
   display: flex;
   justify-content: center;
+  background-color: inherit;
+  /* Optional background color */
+  border-top: 1px solid #e0e2e6;
+  /* Optional border at the top */
+}
 
-  // padding: 10px; /* Adjust the padding as needed */
-  background-color: inherit; /* Optional background color */
-  border-top: 1px solid rgba(224, 226, 230, 1); /* Optional border at the top */
+.mat-option[aria-disabled=true].contains-mat-select-search {
+  position: relative;
+  padding: 0;
 }

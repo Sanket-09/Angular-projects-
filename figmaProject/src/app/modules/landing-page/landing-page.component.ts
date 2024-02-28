@@ -7,11 +7,16 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatTabChangeEvent } from '@angular/material/tabs'
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter'
 import * as _moment from 'moment'
-
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import {
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+  FormGroup,
+  Validators,
+} from '@angular/forms'
 
 const moment = _moment
 
@@ -33,14 +38,24 @@ export const MY_FORMATS = {
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
+  formGroup!: FormGroup
+  consultedDateControl!: FormControl
   physicianServiceBool: boolean = false
+  physicianServiceNotesBool: boolean = false
+
+  radioNotReqButtonClicked() {
+    this.physicianServiceBool = false
+    this.physicianServiceNotesBool = true
+  }
 
   radioYesButtonClicked() {
     this.physicianServiceBool = true
+    this.physicianServiceNotesBool = true
   }
 
   radioNoButtonClicked() {
     this.physicianServiceBool = false
+    this.physicianServiceNotesBool = false
   }
 
   date = new FormControl(moment())
@@ -127,6 +142,11 @@ export class LandingPageComponent implements OnInit {
     })
 
     this.checkStatus()
+
+    this.consultedDateControl = new FormControl(null, [Validators.required])
+    this.formGroup = new FormGroup({
+      consultedDate: this.consultedDateControl,
+    })
   }
 
   navigateToDashboard() {

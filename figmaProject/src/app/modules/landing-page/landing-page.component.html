@@ -71,30 +71,53 @@
 
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened>
-    <div class="drawerDiv">Service Request</div>
+    <div class="drawerDiv">Service Requested</div>
     <div class="drawerDiv3">
-      <mat-tab-group
+      <!-- <mat-tab-group
         (selectedTabChange)="tabChanged($event)"
         #tabGroup
         [(selectedIndex)]="selectedTabIndex"
+      > -->
+      <mat-tab-group
+        (selectedTabChange)="tabChanged($event)"
+        #tabGroup
+        fitInkBarToContent
       >
         <mat-tab label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pending">
           <mat-card *ngIf="currentStatusPending" #pendingCard>
-            <strong
-              >Appointment 1 - {{ currentElement.reqDate | date }}
-              <p>Preferred Consultation Date</p>
-            </strong>
-            {{ currentElement.prefDate | date }}
+            <span>
+              <img
+                class="matCardSideBorder"
+                src="./../../../assets/landingPageMatCardBorder.svg"
+                alt=""
+              />
+              <strong
+                >Appointment 1 - {{ currentElement.reqDate | date }}
+                <p>Preferred Consultation Date</p>
+              </strong>
+              <span class="dateFont">
+                {{ currentElement.prefDate | date }}
+              </span>
+            </span>
           </mat-card>
         </mat-tab>
 
         <mat-tab label="Resolved/Closed">
           <mat-card *ngIf="currentStatusResolved" #resolvedCard>
-            <strong>
-              Appointment 1 - {{ currentElement.reqDate | date }}
-              <p>Preferred Consultation Date</p>
-              {{ currentElement.prefDate | date }}
-            </strong>
+            <span>
+              <img
+                class="matCardSideBorder"
+                src="./../../../assets/landingPageMatCardBorder.svg"
+                alt=""
+              />
+              <strong
+                >Appointment 1 - {{ currentElement.reqDate | date }}
+                <p>Preferred Consultation Date</p>
+              </strong>
+              <span class="dateFont">
+                {{ currentElement.prefDate | date }}
+              </span>
+            </span>
           </mat-card>
         </mat-tab>
       </mat-tab-group>
@@ -170,7 +193,7 @@
             <mat-radio-button
               disableRipple="true"
               value="3"
-              (click)="radioNoButtonClicked()"
+              (click)="radioNotReqButtonClicked()"
               >Not Required</mat-radio-button
             >
           </mat-radio-group>
@@ -178,30 +201,31 @@
       </div>
     </div>
 
-    <div class="physicianServiceStatus" *ngIf="physicianServiceBool">
-      <div class="optionalInput">
-        <mat-form-field
-          appearance="outline"
-          required="true"
-          [hideRequiredMarker]="false"
-        >
-          <mat-label>Consulted Date</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker"
-            [disabled]="true"
-            class="datePicker"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-            [disabled]="false"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker [disabled]="false"></mat-datepicker>
-        </mat-form-field>
+    <div class="physicianServiceStatus">
+      <div class="optionalInput" *ngIf="physicianServiceBool">
+        <form [formGroup]="formGroup">
+          <mat-form-field appearance="outline">
+            <mat-label>Consulted Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [formControl]="consultedDateControl"
+              class="datePicker"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="consultedDateControl.hasError('required')"
+              >Consulted Date is required</mat-error
+            >
+          </mat-form-field>
+        </form>
       </div>
 
       <textarea
+        *ngIf="physicianServiceNotesBool"
         name="notes"
         id="notes"
         cols="54"

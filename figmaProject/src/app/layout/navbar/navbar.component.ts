@@ -5,6 +5,7 @@ interface sideNavs {
   viewValue: string
   notif: number
   router: string
+  selected?: boolean
 }
 
 @Component({
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
       value: 'physician-escalations-0',
       viewValue: 'Physician Escalations',
       notif: 8,
-      router: 'dashboard',
+      router: 'pageNotFound',
     },
     {
       value: 'physician-appointments-1',
@@ -30,44 +31,47 @@ export class NavbarComponent implements OnInit {
       value: 'lab-service-2',
       viewValue: 'Lab Service',
       notif: 4,
-      router: 'dashboard',
+      router: 'pageNotFound',
     },
     {
       value: 'nursing-home-visit-3',
       viewValue: 'Nursing  Home Visit',
       notif: 9,
-      router: 'dashboard',
+      router: 'pageNotFound',
     },
     {
       value: 'nursing-care-service-4',
       viewValue: 'Nursing Care Service',
       notif: 7,
-      router: 'dashboard',
+      router: 'pageNotFound',
     },
     {
       value: 'physiotherapy-5',
       viewValue: 'Physiotherapy',
       notif: 1,
-      router: 'dashboard',
+      router: 'pageNotFound',
     },
     {
       value: 'dietician-6',
       viewValue: 'Dietician',
       notif: 0,
-      router: 'dashboard',
+      router: 'pageNotFound',
     },
     {
       value: 'psychologist-7',
       viewValue: 'Psychologist',
       notif: 3,
-      router: 'dashboard',
+      router: 'pageNotFound',
     },
   ]
 
   selectedCard: any
 
-  selectCard(sideNav: any) {
+  selectCard(sideNav: sideNavs): void {
+    this.sideNav.forEach((nav) => (nav.selected = false)) // Deselect all cards
+    sideNav.selected = true // Select the clicked card
     this.selectedCard = sideNav
+    console.log(sideNav.router)
   }
 
   isSelected(sideNav: any): boolean {
