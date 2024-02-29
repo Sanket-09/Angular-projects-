@@ -33,22 +33,34 @@ var LandingPageComponent = /** @class */ (function () {
         this._snackBar = _snackBar;
         this.physicianServiceBool = false;
         this.physicianServiceNotesBool = false;
+        this.matCardStatus = false;
+        this.matCardColor = document.querySelectorAll('.mat-card-status');
+        this.matCardStatusColor = '';
         this.date = new forms_1.FormControl(moment());
         this.currentStatusResolved = false;
         this.currentStatusPending = false;
         this.selectedTabIndex = 1;
     }
     LandingPageComponent.prototype.radioNotReqButtonClicked = function () {
+        this.matCardStatusValue = 'Closed';
         this.physicianServiceBool = false;
         this.physicianServiceNotesBool = true;
+        this.matCardStatus = true;
+        this.matCardStatusColor = '#F0F1F3';
     };
     LandingPageComponent.prototype.radioYesButtonClicked = function () {
+        this.matCardStatusValue = 'Pending';
         this.physicianServiceBool = true;
+        this.matCardStatus = true;
         this.physicianServiceNotesBool = true;
+        this.matCardStatusColor = '#fde9e7';
     };
     LandingPageComponent.prototype.radioNoButtonClicked = function () {
+        this.matCardStatusValue = 'Resolved';
         this.physicianServiceBool = false;
+        this.matCardStatus = true;
         this.physicianServiceNotesBool = false;
+        this.matCardStatusColor = '#D7F9EA';
     };
     LandingPageComponent.prototype.tabChanged = function ($event) {
         this.checkStatus();

@@ -18,7 +18,7 @@
 
       <input
         class="input-field-search"
-        type="text"
+        type="search"
         placeholder="Member ID/Name/Phone"
         (keydown)="search($event, inputSearch)"
         #inputSearch
@@ -39,12 +39,13 @@
 
       <mat-menu #beforeMenu="matMenu" xPosition="before">
         <div class="menuDropdowntitle">
-          <span style="display: flex; flex-direction: row">
+          <span style="display: flex; flex-direction: row; padding-left: 17px">
             <span>
-              <i
-                class="fa fa-user"
-                style="transform: scale(1.5); padding-right: 10px"
-              ></i>
+              <img
+                src="./../../../assets/menuDropdownProfile.svg"
+                alt=""
+                style="margin-top: 4px"
+              />
             </span>
 
             <span class="userDetail">
@@ -55,9 +56,18 @@
         </div>
 
         <hr />
-        <button mat-menu-item>Switch Module</button>
-        <button mat-menu-item>Add Member</button>
-        <button mat-menu-item>Change Password</button>
+        <button mat-menu-item class="menuButton">
+          <img
+            class="mat-menu-img"
+            src="./../../../assets/changePass.svg"
+            alt=""
+          />
+          &nbsp; &nbsp; &nbsp; &nbsp; Change Password
+        </button>
+        <button mat-menu-item class="menuButton">
+          <img class="mat-menu-img" src="./../../../assets/logout.svg" alt="" />
+          &nbsp; &nbsp; &nbsp; &nbsp; Logout
+        </button>
 
         <!-- <button mat-menu-item>
           <span>

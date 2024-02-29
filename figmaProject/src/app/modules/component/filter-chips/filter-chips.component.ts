@@ -29,6 +29,11 @@ interface chipSpecialityEmit {
   styleUrls: ['./filter-chips.component.scss'],
 })
 export class FilterChipsComponent implements OnInit {
+  clearList() {
+    this.showClearButton = false
+    this.fruits = []
+  }
+
   dataChip: any
 
   constructor(private filterService: FilterService) {
@@ -38,6 +43,7 @@ export class FilterChipsComponent implements OnInit {
   }
 
   updateFruits(speciality: any): void {
+    this.showClearButton = true
     this.fruits = []
     this.chipSpeciality = []
     speciality.forEach((obj: { [x: string]: string }) => {
@@ -58,6 +64,9 @@ export class FilterChipsComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const
 
   fruits: Fruit[] = []
+
+  showClearButton: boolean = false
+
   chipSpeciality: chipSpeciality[] = []
   chipSpecialityEmit: chipSpecialityEmit[] = []
   // add(event: MatChipInputEvent): void {
@@ -74,7 +83,11 @@ export class FilterChipsComponent implements OnInit {
   // }
 
   remove(fruit: Fruit): void {
+    console.log('the lenght of the array is  ', this.fruits.length)
+    if (this.fruits.length <= 1) this.showClearButton = false
+
     console.log('chip removed called')
+    console.log(this.showClearButton)
 
     const currentItemDelete = fruit.name
     console.log('item deleted is :  ', currentItemDelete)

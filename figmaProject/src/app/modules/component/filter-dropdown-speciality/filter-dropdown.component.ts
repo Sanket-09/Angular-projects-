@@ -15,6 +15,7 @@ import { MatSelect, MatSelectChange } from '@angular/material/select'
 import { FilterService } from '../../services/filter.service'
 
 import { Bank, BANKS } from './demo-data'
+import { MatOption } from '@angular/material/core'
 
 @Component({
   selector: 'app-filter-dropdown',
@@ -22,6 +23,8 @@ import { Bank, BANKS } from './demo-data'
   styleUrls: ['./filter-dropdown.component.scss'],
 })
 export class FilterDropdownComponent implements OnInit {
+  @ViewChild('select') select!: MatSelect
+
   private subscription: Subscription
 
   @Output() selectedValuesChange: EventEmitter<string> =
@@ -31,6 +34,25 @@ export class FilterDropdownComponent implements OnInit {
 
   removedValue: any
 
+  allSelected = false
+
+  toggleAllSelection() {
+    this.filteredBanksMulti
+      .asObservable()
+      .pipe(take(1))
+      .subscribe((filteredBanks) => {
+        if (this.allSelected) {
+          // Select all options except ngx-mat-select-search
+          const banksToSelect = filteredBanks.filter(
+            (bank) => bank.value !== 'ngx-mat-select-search'
+          )
+          this.bankMultiCtrl.setValue(banksToSelect)
+        } else {
+          this.bankMultiCtrl.setValue([])
+        }
+      })
+  }
+
   onSelectionChange($event: any) {
     // this.selectedValuesChange.emit(this.selectedValues.join(','));
 
@@ -39,6 +61,7 @@ export class FilterDropdownComponent implements OnInit {
     if ($event.isUserInput) {
       if ($event.source.selected) {
         this.selectedValues.push($event.source.value)
+        console.log('this is the selected Values  ', this.selectedValues)
       } else {
         this.selectedValues = this.selectedValues.filter(
           (value) => value !== $event.source.value
@@ -61,6 +84,8 @@ export class FilterDropdownComponent implements OnInit {
 
   cancelAll() {
     this.selectedValues = []
+    this.bankMultiCtrl.setValue([])
+    this.allSelected = false
   }
 
   protected banks: Bank[] = BANKS

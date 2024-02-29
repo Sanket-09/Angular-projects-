@@ -107,3 +107,22 @@ footer {
   position: relative;
   padding: 0;
 }
+
+.mat-checkbox {
+  margin-top: 5px;
+  padding-left: 16px;
+  font: Mulish;
+  font-size: 12px;
+  color: #001333;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+  border-radius: 8px !important;
+}
+
+::ng-deep .customCheckbox {
+  & .mat-checkbox-background,
+  .mat-checkbox-frame {
+    border-radius: 5px !important;
+  }
+}

@@ -6,6 +6,7 @@
     [multiple]="true"
     #multiSelect
     #spec
+    #select
   >
     <mat-option>
       <ngx-mat-select-search
@@ -14,6 +15,15 @@
         noEntriesFoundLabel="'no matching categoryfound'"
       ></ngx-mat-select-search>
     </mat-option>
+
+    <mat-checkbox
+      [(ngModel)]="allSelected"
+      [ngModelOptions]="{ standalone: true }"
+      (change)="toggleAllSelection()"
+      class="customCheckbox"
+      >Select All</mat-checkbox
+    >
+
     <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
       {{ bank.value }}
     </mat-option>

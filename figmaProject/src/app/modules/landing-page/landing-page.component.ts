@@ -42,20 +42,33 @@ export class LandingPageComponent implements OnInit {
   consultedDateControl!: FormControl
   physicianServiceBool: boolean = false
   physicianServiceNotesBool: boolean = false
+  matCardStatus: boolean = false
+  matCardStatusValue: any
+  matCardColor = document.querySelectorAll('.mat-card-status')
+  matCardStatusColor: string = ''
 
   radioNotReqButtonClicked() {
+    this.matCardStatusValue = 'Closed'
     this.physicianServiceBool = false
     this.physicianServiceNotesBool = true
+    this.matCardStatus = true
+    this.matCardStatusColor = '#F0F1F3'
   }
 
   radioYesButtonClicked() {
+    this.matCardStatusValue = 'Pending'
     this.physicianServiceBool = true
+    this.matCardStatus = true
     this.physicianServiceNotesBool = true
+    this.matCardStatusColor = '#fde9e7'
   }
 
   radioNoButtonClicked() {
+    this.matCardStatusValue = 'Resolved'
     this.physicianServiceBool = false
+    this.matCardStatus = true
     this.physicianServiceNotesBool = false
+    this.matCardStatusColor = '#D7F9EA'
   }
 
   date = new FormControl(moment())

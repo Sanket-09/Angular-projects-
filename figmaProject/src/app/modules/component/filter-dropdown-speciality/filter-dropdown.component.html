@@ -7,14 +7,27 @@
     [multiple]="true"
     #multiSelect
     #spec
+    #select
   >
     <mat-option>
       <ngx-mat-select-search
         [formControl]="bankMultiFilterCtrl"
         placeholderLabel="Find speciality"
         noEntriesFoundLabel="'no matching speciality found'"
-      ></ngx-mat-select-search>
+      >
+        <div class="mat-select-search-custom-header-content">
+          something special
+        </div>
+      </ngx-mat-select-search>
     </mat-option>
+
+    <mat-checkbox
+      [(ngModel)]="allSelected"
+      [ngModelOptions]="{ standalone: true }"
+      (change)="toggleAllSelection()"
+      class="customCheckbox"
+      >Select All</mat-checkbox
+    >
 
     <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
       {{ bank.value }}

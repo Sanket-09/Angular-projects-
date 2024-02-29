@@ -170,3 +170,43 @@ body * ::-webkit-scrollbar-thumb {
 .physicianServiceStatus .ng-tns-c115-8 {
   line-height: 8px !important;
 }
+
+.mat-checkbox-inner-container {
+  border-radius: 8px !important;
+}
+
+.mat-option-text {
+  color: #001333 !important;
+}
+
+.mat-paginator-navigation-next,
+.mat-paginator-navigation-previous {
+  width: 32px !important;
+  height: 32px !important;
+  transform: scale(0.7);
+  padding: 0px !important;
+  border: 1px solid #c9cdd4 !important;
+  padding: 4px !important;
+  background-color: transparent;
+  border-radius: 6px !important;
+  /* Set your desired background color */
+  color: #616d81;
+  /* Set your desired text color */
+}
+
+.mat-paginator-icon {
+  position: absolute;
+  top: 1px;
+  right: 0px;
+  transform: scale(1);
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  opacity: 0.03 !important;
+  background-color: #3f51b5 !important;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #3f51b5;
+}

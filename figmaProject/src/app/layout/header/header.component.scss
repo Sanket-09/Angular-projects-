@@ -110,12 +110,12 @@
 }
 
 .input-field-search {
-  border: 1px solid rgba(224, 226, 230, 1);
+  border: 1px solid #e0e2e6;
   outline: none !important;
   width: 221px !important;
   text-align: start;
   background-color: transparent;
-  color: rgba(179, 185, 194, 1);
+  color: #b3b9c2;
   height: 36px;
 
   box-sizing: border-box;
@@ -123,12 +123,17 @@
   border-radius: 4px;
   padding: 0px, 8px, 0px, 8px;
   margin-top: 10px;
-  padding-left: 40px;
+  padding-left: 35px;
   margin-left: -10px;
+}
+
+.input-field-search:hover {
+  color: white !important;
 }
 
 .input-field-search:focus {
   color: white !important;
+  background-color: #47556c;
 }
 
 ::-webkit-input-placeholder {
@@ -180,25 +185,57 @@
   margin-left: 10px;
 }
 
-.menuDropdowntitle {
-  padding-left: 20px;
-  padding-right: 80px;
-}
-
 .userDetail {
   padding-left: 10px;
+}
+
+::ng-deep .mat-menu-panel {
+  min-width: 208px;
+  border-radius: 8px;
+  margin-right: 20px;
 }
 
 .userName {
   font-weight: 700;
   font-size: 14px;
+  color: #525f75;
 }
 
 .userTitle {
+  color: #525f75;
   font-weight: 400px;
   font-size: 12px;
 }
 
 hr {
   width: 200px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #e0e2e6;
+  background-color: #e0e2e6 !important;
+}
+
+.mat-menu-img {
+  position: absolute;
+  left: 20px;
+  top: 16px;
+}
+
+.menuButton {
+  min-width: 222px;
+}
+
+.menuButton:hover {
+  background-color: #eaeafb;
+}
+
+.input-field-search::-webkit-search-clear-button,
+.input-field-search::-webkit-search-cancel-button {
+  appearance: none;
+  display: inline-block;
+  background: url('./../../../assets/inputCancel.svg') center center no-repeat;
+  width: 16px; /* Set the width of your custom icon */
+  height: 16px; /* Set the height of your custom icon */
+  cursor: pointer;
 }

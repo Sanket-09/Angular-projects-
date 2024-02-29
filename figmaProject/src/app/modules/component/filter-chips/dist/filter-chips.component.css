@@ -1,12 +1,12 @@
 .mat-chip {
   font-size: 11px;
-  color: rgba(64, 64, 217, 1);
+  color: #4040d9;
   font-weight: bold;
-  background-color: rgba(221, 221, 248, 1);
+  background-color: #ddddf8;
 }
 
 .fa {
-  color: rgb(0, 0, 160);
+  color: #0000a0;
 }
 
 .clearAllBtn {
@@ -26,7 +26,6 @@
   margin-left: 10px;
   border: 1px solid #c9cdd4;
   border-radius: 4px;
-
   font-weight: 700;
   font-family: Mulish;
   font-size: 14px;

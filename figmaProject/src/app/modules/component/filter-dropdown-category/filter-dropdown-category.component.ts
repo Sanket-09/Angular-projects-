@@ -3,6 +3,9 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ChangeDetectorRef,
+  EventEmitter,
+  Output,
   ViewChild,
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
@@ -21,6 +24,25 @@ import { Bank, BANKS } from './demo-data'
 export class FilterDropdownCategoryComponent implements OnInit {
   protected banks: Bank[] = BANKS
   selectedValues: string[] = []
+  @ViewChild('select') select!: MatSelect
+  allSelected = false
+
+  toggleAllSelection() {
+    this.filteredBanksMulti
+      .asObservable()
+      .pipe(take(1))
+      .subscribe((filteredBanks) => {
+        if (this.allSelected) {
+          // Select all options except ngx-mat-select-search
+          const banksToSelect = filteredBanks.filter(
+            (bank) => bank.value !== 'ngx-mat-select-search'
+          )
+          this.bankMultiCtrl.setValue(banksToSelect)
+        } else {
+          this.bankMultiCtrl.setValue([])
+        }
+      })
+  }
 
   onSelectionChange($event: any) {
     if ($event.isUserInput) {
@@ -41,6 +63,8 @@ export class FilterDropdownCategoryComponent implements OnInit {
 
   cancelAll() {
     this.selectedValues = []
+    this.bankMultiCtrl.setValue([])
+    this.allSelected = false
   }
 
   /** control for the selected bank for multi-selection */

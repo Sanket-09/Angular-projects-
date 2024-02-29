@@ -91,10 +91,21 @@
                 src="./../../../assets/landingPageMatCardBorder.svg"
                 alt=""
               />
-              <strong
-                >Appointment 1 - {{ currentElement.reqDate | date }}
+
+              <strong>
+                <span class="appointmentNo">
+                  Appointment 1 - {{ currentElement.reqDate | date }}
+                  <span
+                    [style.background-color]="matCardStatusColor"
+                    class="mat-card-status"
+                    *ngIf="matCardStatus"
+                    >{{ matCardStatusValue }}</span
+                  ></span
+                >
+
                 <p>Preferred Consultation Date</p>
               </strong>
+
               <span class="dateFont">
                 {{ currentElement.prefDate | date }}
               </span>
@@ -207,6 +218,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Consulted Date</mat-label>
             <input
+              readonly="true"
               matInput
               [matDatepicker]="picker"
               [formControl]="consultedDateControl"
@@ -216,7 +228,14 @@
               matSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker #picker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>
+                  Apply
+                </button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
             <mat-error *ngIf="consultedDateControl.hasError('required')"
               >Consulted Date is required</mat-error
             >
