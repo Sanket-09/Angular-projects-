@@ -10,7 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { NavbarComponent } from './layout/navbar/navbar.component'
 import { TableComponent } from './modules/component/table/table.component'
 
-import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component'
+import { DashboardComponent } from './modules/dashboard/dashboard.component'
 import { RangeDatePickerComponent } from './modules/component/range-date-picker/range-date-picker.component'
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
@@ -21,8 +21,11 @@ import { FilterDropdownCategoryComponent } from './modules/component/filter-drop
 import { FilterChipsComponent } from './modules/component/filter-chips/filter-chips.component'
 import { RouterModule, Routes } from '@angular/router'
 import { HomePageComponent } from './home-page/home-page.component'
-import { LandingPageComponent, MY_FORMATS } from './modules/landing-page/landing-page.component'
-import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import {
+  LandingPageComponent,
+  MY_FORMATS,
+} from './modules/landing-page/landing-page.component'
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter'
 import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.component'
 
 // import { BufferComponentComponent } from './modules/component/buffer-component/buffer-component.component';
@@ -71,7 +74,7 @@ import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.c
     NgxMatSelectSearchModule,
     // RouterModule.forRoot(appRoute),
   ],
-  providers: [ provideMomentDateAdapter(MY_FORMATS),],
+  providers: [provideMomentDateAdapter(MY_FORMATS)],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

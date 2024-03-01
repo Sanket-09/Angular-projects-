@@ -18,7 +18,7 @@ var forms_1 = require("@angular/forms");
 var angular_fontawesome_1 = require("@fortawesome/angular-fontawesome");
 var navbar_component_1 = require("./layout/navbar/navbar.component");
 var table_component_1 = require("./modules/component/table/table.component");
-var dashboard_component_1 = require("./modules/dashboard/dashboard/dashboard.component");
+var dashboard_component_1 = require("./modules/dashboard/dashboard.component");
 var range_date_picker_component_1 = require("./modules/component/range-date-picker/range-date-picker.component");
 var table_1 = require("@angular/material/table");
 var paginator_1 = require("@angular/material/paginator");
@@ -30,6 +30,7 @@ var filter_chips_component_1 = require("./modules/component/filter-chips/filter-
 var home_page_component_1 = require("./home-page/home-page.component");
 var landing_page_component_1 = require("./modules/landing-page/landing-page.component");
 var material_moment_adapter_1 = require("@angular/material-moment-adapter");
+var page_not_found_component_1 = require("./modules/page-not-found/page-not-found.component");
 // import { BufferComponentComponent } from './modules/component/buffer-component/buffer-component.component';
 // const appRoute: Routes = [
 //   { path: '', pathMatch: 'full', redirectTo: 'homepage' },
@@ -61,6 +62,7 @@ var AppModule = /** @class */ (function () {
                 filter_chips_component_1.FilterChipsComponent,
                 home_page_component_1.HomePageComponent,
                 landing_page_component_1.LandingPageComponent,
+                page_not_found_component_1.PageNotFoundComponent,
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -74,7 +76,7 @@ var AppModule = /** @class */ (function () {
                 paginator_1.MatPaginatorModule,
                 ngx_mat_select_search_1.NgxMatSelectSearchModule,
             ],
-            providers: [material_moment_adapter_1.provideMomentDateAdapter(landing_page_component_1.MY_FORMATS),],
+            providers: [material_moment_adapter_1.provideMomentDateAdapter(landing_page_component_1.MY_FORMATS)],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
