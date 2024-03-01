@@ -57,7 +57,7 @@
   border-left: 15px solid transparent !important;
   border-right: none !important;
   border-top: 15px solid transparent !important;
-  border-image-source: url("./../../../../assets/Chevron.down.svg") !important;
+  border-image-source: url("./../../../../../assets/Chevron.down.svg") !important;
   border-image-repeat: stretch !important;
 }
 
