@@ -12,8 +12,10 @@
         src="../../.././assets/sideNavHighlight.svg"
         alt=""
       />
+
       <span class="navValue">{{ sideNav.viewValue }} </span>
-      <span class="navChip">{{ sideNav.notif }}</span>
+
+      <span class="navChip">{{ sideNav.notif | sideNavExcess : '99+' }}</span>
     </mat-card>
   </mat-drawer>
   <mat-drawer-content>

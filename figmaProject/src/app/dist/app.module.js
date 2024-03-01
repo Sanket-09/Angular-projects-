@@ -31,6 +31,8 @@ var home_page_component_1 = require("./modules/dashboard/pages/home-page/home-pa
 var landing_page_component_1 = require("./modules/dashboard/pages/landing-page/landing-page.component");
 var material_moment_adapter_1 = require("@angular/material-moment-adapter");
 var page_not_found_component_1 = require("./modules/dashboard/pages/page-not-found/page-not-found.component");
+var http_1 = require("@angular/common/http");
+var limit99_1 = require("./modules/shared/pipes/limit99");
 // import { BufferComponentComponent } from './modules/component/buffer-component/buffer-component.component';
 // const appRoute: Routes = [
 //   { path: '', pathMatch: 'full', redirectTo: 'homepage' },
@@ -63,6 +65,7 @@ var AppModule = /** @class */ (function () {
                 home_page_component_1.HomePageComponent,
                 landing_page_component_1.LandingPageComponent,
                 page_not_found_component_1.PageNotFoundComponent,
+                limit99_1.SideNavExcessPipe,
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -75,6 +78,7 @@ var AppModule = /** @class */ (function () {
                 table_1.MatTableModule,
                 paginator_1.MatPaginatorModule,
                 ngx_mat_select_search_1.NgxMatSelectSearchModule,
+                http_1.HttpClientModule,
             ],
             providers: [material_moment_adapter_1.provideMomentDateAdapter(landing_page_component_1.MY_FORMATS)],
             bootstrap: [app_component_1.AppComponent]

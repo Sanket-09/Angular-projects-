@@ -30,7 +30,7 @@
     >
 
     <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
-      {{ bank.value }}
+      {{ bank.name }}
     </mat-option>
 
     <span class="footerBtn">

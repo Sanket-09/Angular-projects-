@@ -27,6 +27,8 @@ import {
 } from './modules/dashboard/pages/landing-page/landing-page.component'
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter'
 import { PageNotFoundComponent } from './modules/dashboard/pages/page-not-found/page-not-found.component'
+import { HttpClientModule } from '@angular/common/http'
+import { SideNavExcessPipe } from './modules/shared/pipes/limit99'
 
 // import { BufferComponentComponent } from './modules/component/buffer-component/buffer-component.component';
 
@@ -58,6 +60,7 @@ import { PageNotFoundComponent } from './modules/dashboard/pages/page-not-found/
     HomePageComponent,
     LandingPageComponent,
     PageNotFoundComponent,
+    SideNavExcessPipe,
 
     // BufferComponentComponent,
   ],
@@ -72,6 +75,7 @@ import { PageNotFoundComponent } from './modules/dashboard/pages/page-not-found/
     MatTableModule,
     MatPaginatorModule,
     NgxMatSelectSearchModule,
+    HttpClientModule,
     // RouterModule.forRoot(appRoute),
   ],
   providers: [provideMomentDateAdapter(MY_FORMATS)],

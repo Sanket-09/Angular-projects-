@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.LandingPageComponent = exports.MY_FORMATS = void 0;
 var core_1 = require("@angular/core");
-var data_1 = require("../../../services/data");
+var data_1 = require("../../../shared/services/data");
 var _moment = require("moment");
 var forms_1 = require("@angular/forms");
 var moment = _moment;

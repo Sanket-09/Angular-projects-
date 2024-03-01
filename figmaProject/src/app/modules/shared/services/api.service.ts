@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, catchError, finalize, map, of, throwError } from 'rxjs'
-import { EncryptionDecryptionService } from './../services/encryption-decryption.service'
+import { EncryptionDecryptionService } from './encryption-decryption.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
 
@@ -130,7 +130,7 @@ export class ApiServiceService {
     }
 
     let httpOptions = this.getHttpOptions()
-    debugger
+
     return this.http.get(apiURL, httpOptions).pipe(
       map((result: any) => {
         let resultData: any = {}

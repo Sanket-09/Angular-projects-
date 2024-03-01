@@ -123,7 +123,6 @@ var ApiServiceService = /** @class */ (function () {
             endPoint += '?queryParams=' + encodedQueryParams;
         }
         var httpOptions = this.getHttpOptions();
-        debugger;
         return this.http.get(apiURL, httpOptions).pipe(rxjs_1.map(function (result) {
             var resultData = {};
             resultData = _this.encryptionDecryptionService.getDecryptedData(result.responseObj);

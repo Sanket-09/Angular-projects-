@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { FilterService } from '../../modules/services/filter.service'
+import { FilterService } from '../../modules/shared/services/filter.service'
 
 interface hospital {
   value: string

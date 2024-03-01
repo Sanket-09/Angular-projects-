@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   eid: 'pLlYbBzmRxco94qOx8yXVwdFJ0Dco829iZj12QuI59ibbb3=KhtGPgH6eUd80xkAvT7srW1h6lCfNiaSEMn/+',
   token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiIyOTEiLCJ1c2VybmFtZSI6IktSSVNITkEiLCJtZXRhaWQiOiIzNTMiLCJhcHBfa2V5IjoiaGNtX3NyZCIsImFwcGlkIjoxNDQsImlhdCI6MTcwODM0MTcyNCwiZXhwIjoxNzA4Mzc3NzI0fQ.BuLE0a_sseNGnoiZsoDFMD6fc0v9QQXomnEriag0z2A',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NDEiLCJ1c2VybmFtZSI6IklOVEVSTi1VU0VSIiwibWV0YWlkIjoiMzUzIiwiYXBwX2tleSI6ImhjbV9zcmQiLCJhcHBpZCI6MTQ0LCJpYXQiOjE3MDkyODE2OTIsImV4cCI6MTcwOTMxNzY5Mn0.qz-djbn23uo2-G92YUL3BKfe02HYokuMrJem4Bi2HSc',
   metaid: '353',
   apiOriginCccLink: 'https://dev.in.heaps.ai',
   apiOriginPmpLink: 'https://dev.in.heaps.ai',

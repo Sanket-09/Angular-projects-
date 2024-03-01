@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
-import { FilterService } from '../../../services/filter.service'
-import { ELEMENT_DATA, PeriodicElement } from '../../../services/data'
+import { FilterService } from '../../../shared/services/filter.service'
+import { ELEMENT_DATA, PeriodicElement } from '../../../shared/services/data'
 
 @Component({
   selector: 'app-filter-content',

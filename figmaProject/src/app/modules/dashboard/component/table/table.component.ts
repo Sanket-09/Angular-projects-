@@ -12,13 +12,13 @@ import {
 } from '@angular/core'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
-import { FilterService } from '../../../services/filter.service'
+import { FilterService } from '../../../shared/services/filter.service'
 import { BehaviorSubject, Subscription } from 'rxjs'
 import { DataSource } from '@angular/cdk/collections'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
-import { ELEMENT_DATA, PeriodicElement } from '../../../services/data'
+import { ELEMENT_DATA, PeriodicElement } from '../../../shared/services/data'
 import { ChangeDetectorRef } from '@angular/core'
-import { TabService } from '../../../services/currentStatus.service'
+import { TabService } from '../../../shared/services/currentStatus.service'
 import { MatTabChangeEvent } from '@angular/material/tabs/tab-group'
 
 @Component({
@@ -159,8 +159,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
 
     const filteredData = this.dataSource.data.filter((item) =>
       specialities.some(
-        (speciality: { value: string }) =>
-          item.speciality.toLowerCase() === speciality.value.toLowerCase()
+        (speciality: { value: string }) => item.speciality === speciality.value
       )
     )
 

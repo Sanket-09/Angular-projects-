@@ -12,10 +12,11 @@ import { FormControl } from '@angular/forms'
 import { ReplaySubject, Subject, Subscription } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
 import { MatSelect, MatSelectChange } from '@angular/material/select'
-import { FilterService } from '../../../services/filter.service'
+import { FilterService } from '../../../shared/services/filter.service'
 
 import { Bank, BANKS } from './demo-data'
 import { MatOption } from '@angular/material/core'
+import { DashboardService } from '../../dashboard.service'
 
 @Component({
   selector: 'app-filter-dropdown',
@@ -44,7 +45,7 @@ export class FilterDropdownComponent implements OnInit {
         if (this.allSelected) {
           // Select all options except ngx-mat-select-search
           const banksToSelect = filteredBanks.filter(
-            (bank) => bank.value !== 'ngx-mat-select-search'
+            (bank) => bank.name !== 'ngx-mat-select-search'
           )
           this.bankMultiCtrl.setValue(banksToSelect)
         } else {
@@ -112,7 +113,8 @@ export class FilterDropdownComponent implements OnInit {
 
   constructor(
     private FilterService: FilterService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private dashBoardService: DashboardService
   ) {
     this.subscription = this.FilterService.chipMethodCalled$.subscribe(
       (chipEmitList: any) => {
@@ -120,6 +122,8 @@ export class FilterDropdownComponent implements OnInit {
       }
     )
   }
+
+  specialityList: any
 
   onChipMethodCalled(chipEmitList: any) {
     console.log('onChipMethodCalled in spec component : ', chipEmitList)
@@ -130,17 +134,38 @@ export class FilterDropdownComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bankMultiCtrl.setValue([])
-
-    // load the initial bank list
-    this.filteredBanksMulti.next(this.banks.slice())
-
     // listen for search field value changes
-    this.bankMultiFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterBanksMulti()
-      })
+
+    this.dashBoardService.getSpecialityList().subscribe((data: any) => {
+      console.log(Object.entries(data.data))
+
+      for (let i = 0; i < Math.max(BANKS.length, data.data.length); i++) {
+        const existingList = BANKS[i]
+        const additionalUpdatedList = data.data[i]
+
+        if (existingList && additionalUpdatedList) {
+          existingList.name = additionalUpdatedList.name
+        } else if (additionalUpdatedList) {
+          BANKS.push({
+            key: BANKS.length + i + 1,
+            name: additionalUpdatedList.name,
+          })
+        }
+      }
+
+      console.log(this.banks)
+
+      this.bankMultiCtrl.setValue([])
+
+      // load the initial bank list
+      this.filteredBanksMulti.next(this.banks.slice())
+
+      this.bankMultiFilterCtrl.valueChanges
+        .pipe(takeUntil(this._onDestroy))
+        .subscribe(() => {
+          this.filterBanksMulti()
+        })
+    })
   }
 
   protected filterBanksMulti() {
@@ -157,9 +182,7 @@ export class FilterDropdownComponent implements OnInit {
     }
     // filter the banks
     this.filteredBanksMulti.next(
-      this.banks.filter(
-        (bank) => bank.value.toLowerCase().indexOf(search!) > -1
-      )
+      this.banks.filter((bank) => bank.name.toLowerCase().indexOf(search!) > -1)
     )
   }
 }

@@ -12,7 +12,7 @@ var paginator_1 = require("@angular/material/paginator");
 var table_1 = require("@angular/material/table");
 var rxjs_1 = require("rxjs");
 var router_1 = require("@angular/router");
-var data_1 = require("../../../services/data");
+var data_1 = require("../../../shared/services/data");
 var TableComponent = /** @class */ (function () {
     function TableComponent(tabService, filterService, router, cdRef) {
         var _this = this;
@@ -111,9 +111,7 @@ var TableComponent = /** @class */ (function () {
             return selectedValues.includes(data.speciality.trim());
         };
         var filteredData = this.dataSource.data.filter(function (item) {
-            return specialities.some(function (speciality) {
-                return item.speciality.toLowerCase() === speciality.value.toLowerCase();
-            });
+            return specialities.some(function (speciality) { return item.speciality === speciality.value; });
         });
         this.filteredDataSource.filter = selectedSpecialities.join(',');
         this.cdRef.detectChanges();

@@ -20,10 +20,11 @@ var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var demo_data_1 = require("./demo-data");
 var FilterDropdownComponent = /** @class */ (function () {
-    function FilterDropdownComponent(FilterService, cdRef) {
+    function FilterDropdownComponent(FilterService, cdRef, dashBoardService) {
         var _this = this;
         this.FilterService = FilterService;
         this.cdRef = cdRef;
+        this.dashBoardService = dashBoardService;
         this.selectedValuesChange = new core_1.EventEmitter();
         this.selectedValues = [];
         this.allSelected = false;
@@ -48,7 +49,7 @@ var FilterDropdownComponent = /** @class */ (function () {
             .subscribe(function (filteredBanks) {
             if (_this.allSelected) {
                 // Select all options except ngx-mat-select-search
-                var banksToSelect = filteredBanks.filter(function (bank) { return bank.value !== 'ngx-mat-select-search'; });
+                var banksToSelect = filteredBanks.filter(function (bank) { return bank.name !== 'ngx-mat-select-search'; });
                 _this.bankMultiCtrl.setValue(banksToSelect);
             }
             else {
@@ -91,15 +92,32 @@ var FilterDropdownComponent = /** @class */ (function () {
         this.cdRef.detectChanges();
     };
     FilterDropdownComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.bankMultiCtrl.setValue([]);
-        // load the initial bank list
-        this.filteredBanksMulti.next(this.banks.slice());
         // listen for search field value changes
-        this.bankMultiFilterCtrl.valueChanges
-            .pipe(operators_1.takeUntil(this._onDestroy))
-            .subscribe(function () {
-            _this.filterBanksMulti();
+        var _this = this;
+        this.dashBoardService.getSpecialityList().subscribe(function (data) {
+            console.log(Object.entries(data.data));
+            for (var i = 0; i < Math.max(demo_data_1.BANKS.length, data.data.length); i++) {
+                var existingList = demo_data_1.BANKS[i];
+                var additionalUpdatedList = data.data[i];
+                if (existingList && additionalUpdatedList) {
+                    existingList.name = additionalUpdatedList.name;
+                }
+                else if (additionalUpdatedList) {
+                    demo_data_1.BANKS.push({
+                        key: demo_data_1.BANKS.length + i + 1,
+                        name: additionalUpdatedList.name
+                    });
+                }
+            }
+            console.log(_this.banks);
+            _this.bankMultiCtrl.setValue([]);
+            // load the initial bank list
+            _this.filteredBanksMulti.next(_this.banks.slice());
+            _this.bankMultiFilterCtrl.valueChanges
+                .pipe(operators_1.takeUntil(_this._onDestroy))
+                .subscribe(function () {
+                _this.filterBanksMulti();
+            });
         });
     };
     FilterDropdownComponent.prototype.filterBanksMulti = function () {
@@ -116,7 +134,7 @@ var FilterDropdownComponent = /** @class */ (function () {
             search = search.toLowerCase();
         }
         // filter the banks
-        this.filteredBanksMulti.next(this.banks.filter(function (bank) { return bank.value.toLowerCase().indexOf(search) > -1; }));
+        this.filteredBanksMulti.next(this.banks.filter(function (bank) { return bank.name.toLowerCase().indexOf(search) > -1; }));
     };
     __decorate([
         core_1.ViewChild('select')

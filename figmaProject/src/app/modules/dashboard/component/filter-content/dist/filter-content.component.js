@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.FilterContentComponent = void 0;
 var core_1 = require("@angular/core");
-var data_1 = require("../../../services/data");
+var data_1 = require("../../../shared/services/data");
 var FilterContentComponent = /** @class */ (function () {
     function FilterContentComponent(FilterService) {
         this.FilterService = FilterService;
