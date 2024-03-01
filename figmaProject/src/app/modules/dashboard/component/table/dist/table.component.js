@@ -12,7 +12,7 @@ var paginator_1 = require("@angular/material/paginator");
 var table_1 = require("@angular/material/table");
 var rxjs_1 = require("rxjs");
 var router_1 = require("@angular/router");
-var data_1 = require("../../services/data");
+var data_1 = require("../../../services/data");
 var TableComponent = /** @class */ (function () {
     function TableComponent(tabService, filterService, router, cdRef) {
         var _this = this;

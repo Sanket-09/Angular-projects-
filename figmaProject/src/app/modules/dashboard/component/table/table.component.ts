@@ -12,13 +12,13 @@ import {
 } from '@angular/core'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
-import { FilterService } from '../../services/filter.service'
+import { FilterService } from '../../../services/filter.service'
 import { BehaviorSubject, Subscription } from 'rxjs'
 import { DataSource } from '@angular/cdk/collections'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
-import { ELEMENT_DATA, PeriodicElement } from '../../services/data'
+import { ELEMENT_DATA, PeriodicElement } from '../../../services/data'
 import { ChangeDetectorRef } from '@angular/core'
-import { TabService } from '../../services/currentStatus.service'
+import { TabService } from '../../../services/currentStatus.service'
 import { MatTabChangeEvent } from '@angular/material/tabs/tab-group'
 
 @Component({

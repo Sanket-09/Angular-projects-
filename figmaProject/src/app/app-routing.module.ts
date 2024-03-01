@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { HomePageComponent } from './home-page/home-page.component'
+import { HomePageComponent } from './modules/dashboard/pages/home-page/home-page.component'
 import { DashboardComponent } from './modules/dashboard/dashboard.component'
-import { LandingPageComponent } from './modules/landing-page/landing-page.component'
-import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.component'
+import { LandingPageComponent } from './modules/dashboard/pages/landing-page/landing-page.component'
+import { PageNotFoundComponent } from './modules/dashboard/pages/page-not-found/page-not-found.component'
 
 const appRoute: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'homepage' },

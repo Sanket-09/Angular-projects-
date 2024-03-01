@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms'
 import { ReplaySubject, Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
 import { MatSelect } from '@angular/material/select'
-import { FilterService } from '../../services/filter.service'
+import { FilterService } from '../../../services/filter.service'
 
 import { Bank, BANKS } from './demo-data'
 

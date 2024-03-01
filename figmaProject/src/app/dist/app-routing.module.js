@@ -9,10 +9,10 @@ exports.__esModule = true;
 exports.AppRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var home_page_component_1 = require("./home-page/home-page.component");
+var home_page_component_1 = require("./modules/dashboard/pages/home-page/home-page.component");
 var dashboard_component_1 = require("./modules/dashboard/dashboard.component");
-var landing_page_component_1 = require("./modules/landing-page/landing-page.component");
-var page_not_found_component_1 = require("./modules/page-not-found/page-not-found.component");
+var landing_page_component_1 = require("./modules/dashboard/pages/landing-page/landing-page.component");
+var page_not_found_component_1 = require("./modules/dashboard/pages/page-not-found/page-not-found.component");
 var appRoute = [
     { path: '', pathMatch: 'full', redirectTo: 'homepage' },
     {

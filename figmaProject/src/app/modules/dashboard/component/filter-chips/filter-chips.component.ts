@@ -7,7 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core'
 import { MatChipInputEvent } from '@angular/material/chips'
-import { FilterService } from '../../services/filter.service'
+import { FilterService } from '../../../services/filter.service'
 
 export interface Fruit {
   name: string
