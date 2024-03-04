@@ -68,13 +68,8 @@ var TableComponent = /** @class */ (function () {
         });
     };
     TableComponent.prototype.setTableValue = function (data) {
-        var _this = this;
         this.filteredDataSource = data.data[0].service_list;
         this.dataSource = data.data[0].service_list;
-        setTimeout(function () {
-            console.log('paginator called');
-            _this.filteredDataSource.paginator = _this.paginator;
-        }, 1000);
     };
     // ngDoCheck(): void {
     //   this.filteredDataSource.paginator = this.paginator
@@ -164,9 +159,9 @@ var TableComponent = /** @class */ (function () {
         this.cdRef.detectChanges();
     };
     TableComponent.prototype.ngAfterViewInit = function () {
-        // this.filteredDataSource.paginator = this.paginator
-        // this.cdRef.detectChanges()
-        // console.log('ng afterView init called')
+        this.filteredDataSource.paginator = this.paginator;
+        this.cdRef.detectChanges();
+        console.log('ng afterView init called');
     };
     __decorate([
         core_1.ViewChild(paginator_1.MatPaginator)

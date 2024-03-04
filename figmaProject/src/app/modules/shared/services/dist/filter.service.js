@@ -28,7 +28,7 @@ var FilterService = /** @class */ (function () {
         this.chipMethodSubject.next(chipSpecialityEvent);
     };
     FilterService.prototype.emitFilterSearch = function (search) {
-        this.emitFilter(search);
+        this.filterSubject.next(search);
     };
     FilterService.prototype.emitFilter = function (filter) {
         this.filterSubject.next(filter);

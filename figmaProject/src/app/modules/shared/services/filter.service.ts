@@ -15,8 +15,8 @@ export class FilterService {
   private filterSubject = new Subject<string>()
   private filterSubjectObj = new Subject<object>()
   private filterSubjectVisitObj = new Subject<object>()
-
   private chipMethodSubject = new Subject<void>()
+
   chipMethodCalled$ = this.chipMethodSubject.asObservable()
 
   chipCallMethod(chipSpecialityEvent: any) {
@@ -35,7 +35,7 @@ export class FilterService {
   filterChangedVisit$ = this.filterSubjectVisitObj.asObservable()
 
   emitFilterSearch(search: string) {
-    this.emitFilter(search)
+    this.filterSubject.next(search)
   }
 
   emitFilter(filter: string) {

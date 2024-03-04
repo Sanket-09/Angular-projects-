@@ -55,11 +55,6 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   }) {
     this.filteredDataSource = data.data[0].service_list
     this.dataSource = data.data[0].service_list
-
-    setTimeout(() => {
-      console.log('paginator called')
-      this.filteredDataSource.paginator = this.paginator
-    }, 1000)
   }
 
   filteredDataSubject = new BehaviorSubject<PeriodicElement[]>([])
@@ -243,8 +238,8 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
   ngAfterViewInit() {
-    // this.filteredDataSource.paginator = this.paginator
-    // this.cdRef.detectChanges()
-    // console.log('ng afterView init called')
+    this.filteredDataSource.paginator = this.paginator
+    this.cdRef.detectChanges()
+    console.log('ng afterView init called')
   }
 }
