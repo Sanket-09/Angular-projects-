@@ -101,6 +101,61 @@ export class ApiServiceService {
 
     return apiOriginLink
   }
+
+  postRequest(
+    endPoint: string,
+    sRequestModel: object,
+    showSpinner: boolean = true,
+    sHeaders: any = null,
+    params = ''
+  ): Observable<any> {
+    let apiURL = this.getURL(endPoint);
+    if (!apiURL) {
+      return of({ status: false });
+    }
+    if (params) {
+      const paramsArr = params.toString().split('/');
+      paramsArr.forEach(par => {
+        par = decodeURIComponent(par);
+        const encryptedId = this.encryptionDecryptionService.getEncryptedData(
+          par
+        );
+        const encodedId = encodeURIComponent(encryptedId);
+        apiURL = `${apiURL}${'/'}${encodedId}`;
+      });
+    }
+
+    let postData = sRequestModel;
+    const bodyData = this.encryptionDecryptionService.getEncryptedData(
+      sRequestModel
+    );
+    postData = { bodyData };
+    let requestOptions = this.getHttpOptions();
+
+    return this.http.post(apiURL, postData, requestOptions).pipe(
+      map((result: any) => {
+        // debugger
+        let resultData: any = {};
+        resultData = this.encryptionDecryptionService.getDecryptedData(
+          result.responseObj,
+          // sHeaders
+        );
+        return resultData;
+        // return result;
+      }),
+      catchError((error): Observable<any> => {
+        return throwError(error);
+      }),
+      finalize(() => {
+
+      })
+    );
+  }
+
+
+
+
+
   getRequest(
     endPoint: string,
     id: any = null,

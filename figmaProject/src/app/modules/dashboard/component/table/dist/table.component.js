@@ -14,12 +14,13 @@ var rxjs_1 = require("rxjs");
 var router_1 = require("@angular/router");
 var data_1 = require("../../../shared/services/data");
 var TableComponent = /** @class */ (function () {
-    function TableComponent(tabService, filterService, router, cdRef) {
+    function TableComponent(tabService, filterService, router, cdRef, dashBoardService) {
         var _this = this;
         this.tabService = tabService;
         this.filterService = filterService;
         this.router = router;
         this.cdRef = cdRef;
+        this.dashBoardService = dashBoardService;
         this.activeRoute = core_1.inject(router_1.ActivatedRoute);
         this.filteredDataSubject = new rxjs_1.BehaviorSubject([]);
         this.displayedColumns = [
@@ -58,6 +59,28 @@ var TableComponent = /** @class */ (function () {
             queryParams: queryParams
         });
     };
+    TableComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dashBoardService.getAppointmentTotalList().subscribe(function (data) {
+            console.log(data.data[0].service_list);
+            _this.setTableValue(data);
+            console.log('ngOninit is called');
+        });
+    };
+    TableComponent.prototype.setTableValue = function (data) {
+        var _this = this;
+        this.filteredDataSource = data.data[0].service_list;
+        this.dataSource = data.data[0].service_list;
+        setTimeout(function () {
+            console.log('paginator called');
+            _this.filteredDataSource.paginator = _this.paginator;
+        }, 1000);
+    };
+    // ngDoCheck(): void {
+    //   this.filteredDataSource.paginator = this.paginator
+    //   this.cdRef.detectChanges()
+    //   console.log('ng do check is called')
+    // }
     TableComponent.prototype.ngOnChanges = function (changes) {
         var _this = this;
         this.filterSubscription = this.filterService.filterChanged$.subscribe(function (filter) {
@@ -101,7 +124,6 @@ var TableComponent = /** @class */ (function () {
             this.filteredDataSource.filter = filterValue;
             this.cdRef.detectChanges();
         }
-        // Trigger the filter method to update the MatTable
         this.cdRef.detectChanges();
     };
     TableComponent.prototype.applySpecialityFilter = function (specialities) {
@@ -142,8 +164,9 @@ var TableComponent = /** @class */ (function () {
         this.cdRef.detectChanges();
     };
     TableComponent.prototype.ngAfterViewInit = function () {
-        this.filteredDataSource.paginator = this.paginator;
-        this.cdRef.detectChanges();
+        // this.filteredDataSource.paginator = this.paginator
+        // this.cdRef.detectChanges()
+        // console.log('ng afterView init called')
     };
     __decorate([
         core_1.ViewChild(paginator_1.MatPaginator)

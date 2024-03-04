@@ -8,47 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.FilterContentComponent = void 0;
 var core_1 = require("@angular/core");
-var data_1 = require("../../../shared/services/data");
 var FilterContentComponent = /** @class */ (function () {
-    function FilterContentComponent(FilterService) {
+    function FilterContentComponent(FilterService, dashBoardService) {
         this.FilterService = FilterService;
-        this.allData = data_1.ELEMENT_DATA.filter(function (val) {
-            if (typeof val == 'object') {
-                return true;
-            }
-            else {
-                return false;
-            }
-        });
-        this.pendingData = data_1.ELEMENT_DATA.filter(function (val) {
-            if (val.status == 'Pending') {
-                return true;
-            }
-            else {
-                return false;
-            }
-        });
-        this.resolvedData = data_1.ELEMENT_DATA.filter(function (val) {
-            if (val.status == 'Resolved') {
-                return true;
-            }
-            else {
-                return false;
-            }
-        });
-        this.closedData = data_1.ELEMENT_DATA.filter(function (val) {
-            if (val.status == 'Closed') {
-                return true;
-            }
-            else {
-                return false;
-            }
-        });
-        this.allDataCount = this.allData.length;
-        this.pendingDataCount = this.pendingData.length;
-        this.resolvedDataCount = this.resolvedData.length;
-        this.closedDataCount = this.closedData.length;
+        this.dashBoardService = dashBoardService;
+        this.allDataCount = 0;
+        this.pendingDataCount = 0;
+        this.resolvedDataCount = 0;
+        this.closedDataCount = 0;
         this.currentStatus = new core_1.EventEmitter();
+    }
+    FilterContentComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dashBoardService.getBucketCount().subscribe(function (data) {
+            console.log(data.data);
+            _this.allDataCount = data.data[0].count;
+            _this.pendingDataCount = data.data[1].count;
+            _this.resolvedDataCount = data.data[2].count;
+            _this.closedDataCount = data.data[3].count;
+            _this.initializeCards();
+        });
+    };
+    FilterContentComponent.prototype.initializeCards = function () {
         this.cards = [
             {
                 icon: './../../../../assets/icons-unselected-filter-content/hour-glass.fill.svg',
@@ -79,8 +60,7 @@ var FilterContentComponent = /** @class */ (function () {
                 bgColor: 'white'
             },
         ];
-    }
-    FilterContentComponent.prototype.ngOnInit = function () { };
+    };
     FilterContentComponent.prototype.selectCard = function (card) {
         this.selectedCard = card;
         this.applyFilter(card.value2);

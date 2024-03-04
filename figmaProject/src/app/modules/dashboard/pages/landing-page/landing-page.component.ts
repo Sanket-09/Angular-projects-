@@ -17,6 +17,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms'
+import { DashboardService } from '../../dashboard.service'
+import { ApiServiceService } from 'src/app/modules/shared/services/api.service'
 
 const moment = _moment
 
@@ -46,6 +48,68 @@ export class LandingPageComponent implements OnInit {
   matCardStatusValue: any
   matCardColor = document.querySelectorAll('.mat-card-status')
   matCardStatusColor: string = ''
+  apiData: any
+
+  constructor(
+    private copyIdsnackBar: MatSnackBar,
+    private copyPhonesnackBar: MatSnackBar,
+    private router: Router,
+    private route: ActivatedRoute,
+    private clipboard: Clipboard,
+    private _snackBar: MatSnackBar,
+    private dashBoardService: DashboardService,
+    private apiService: ApiServiceService
+  ) {}
+
+  ngOnInit() {
+    this.route.queryParamMap.subscribe((params) => {
+      const id = params.get('id')
+      console.log(id)
+      this.currentId = id
+
+      this.dashBoardService.getAppointmentTotalList().subscribe((data) => {
+        this.apiData = data.data[0].service_list
+
+        console.log(data.data[0].service_list)
+
+        this.currentElement = this.apiData.find(
+          (element: { id: any }) => element.id == this.currentId
+        )
+        console.log(this.currentElement)
+
+        this.consultedDateControl = new FormControl(null, [Validators.required])
+        this.formGroup = new FormGroup({
+          consultedDate: this.consultedDateControl,
+        })
+
+        this.currentCfId = this.currentElement.cf_id
+        console.log(this.currentCfId)
+
+        this.checkStatus()
+
+        const landingPageHeaderBody = {
+          id: this.currentId,
+          cf_id: this.currentCfId,
+          key: 'hcm_fup_physician',
+          requested_date: this.currentElement.requested_date,
+        }
+
+        this.apiService
+          .postRequest('followup/service/details', landingPageHeaderBody)
+          .subscribe((data) => {
+            console.log(data), (this.currentHeaderData = data)
+          })
+
+      
+      })
+    })
+  }
+
+  assignApiData(service_list: any) {
+    this.apiData = service_list
+    this.checkStatus()
+    console.log(service_list)
+  }
 
   radioNotReqButtonClicked() {
     this.matCardStatusValue = 'Closed'
@@ -83,6 +147,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   private checkStatus(): void {
+    console.log(this.currentElement)
     if (this.currentElement.status === 'Pending') {
       this.selectedTabIndex = 0
       this.currentStatusPending = true
@@ -132,35 +197,9 @@ export class LandingPageComponent implements OnInit {
   }
 
   currentId: any
+  currentCfId: any
   currentElement: any
-
-  constructor(
-    private copyIdsnackBar: MatSnackBar,
-    private copyPhonesnackBar: MatSnackBar,
-    private router: Router,
-    private route: ActivatedRoute,
-    private clipboard: Clipboard,
-    private _snackBar: MatSnackBar
-  ) {}
-
-  ngOnInit() {
-    this.route.queryParamMap.subscribe((params) => {
-      const id = params.get('id')
-      console.log(id)
-      this.currentId = id // or do whatever you want with the id value
-      this.currentElement = ELEMENT_DATA.find(
-        (element) => element.id === this.currentId
-      )
-      console.log(this.currentElement)
-    })
-
-    this.checkStatus()
-
-    this.consultedDateControl = new FormControl(null, [Validators.required])
-    this.formGroup = new FormGroup({
-      consultedDate: this.consultedDateControl,
-    })
-  }
+  currentHeaderData: any
 
   navigateToDashboard() {
     // Navigate to the dashboard route

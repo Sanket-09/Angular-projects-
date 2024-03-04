@@ -32,7 +32,7 @@ var FilterService = /** @class */ (function () {
     };
     FilterService.prototype.emitFilter = function (filter) {
         this.filterSubject.next(filter);
-        this.emitFilterSpeciality(this.currentFilterSpeciality);
+        // this.emitFilterSpeciality(this.currentFilterSpeciality)
     };
     FilterService.prototype.emitFilterSpeciality = function (speciality) {
         this.data = [];

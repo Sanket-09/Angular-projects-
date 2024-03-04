@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  DoCheck,
   EventEmitter,
   Input,
   OnChanges,
@@ -20,13 +21,14 @@ import { ELEMENT_DATA, PeriodicElement } from '../../../shared/services/data'
 import { ChangeDetectorRef } from '@angular/core'
 import { TabService } from '../../../shared/services/currentStatus.service'
 import { MatTabChangeEvent } from '@angular/material/tabs/tab-group'
+import { DashboardService } from '../../dashboard.service'
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements AfterViewInit, OnChanges {
+export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   activeRoute: ActivatedRoute = inject(ActivatedRoute)
 
   getRecord(data: any): void {
@@ -36,6 +38,28 @@ export class TableComponent implements AfterViewInit, OnChanges {
     this.router.navigate(['landing'], {
       queryParams: queryParams,
     })
+  }
+
+  ngOnInit(): void {
+    this.dashBoardService.getAppointmentTotalList().subscribe((data) => {
+      console.log(data.data[0].service_list)
+
+      this.setTableValue(data)
+
+      console.log('ngOninit is called')
+    })
+  }
+
+  setTableValue(data: {
+    data: { service_list: MatTableDataSource<PeriodicElement> }[]
+  }) {
+    this.filteredDataSource = data.data[0].service_list
+    this.dataSource = data.data[0].service_list
+
+    setTimeout(() => {
+      console.log('paginator called')
+      this.filteredDataSource.paginator = this.paginator
+    }, 1000)
   }
 
   filteredDataSubject = new BehaviorSubject<PeriodicElement[]>([])
@@ -49,9 +73,9 @@ export class TableComponent implements AfterViewInit, OnChanges {
     'speciality',
     'visitType',
   ]
+
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
   filteredDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
-
   currentStatus = ''
 
   filterSubscription: Subscription
@@ -63,7 +87,8 @@ export class TableComponent implements AfterViewInit, OnChanges {
     private tabService: TabService,
     private filterService: FilterService,
     private router: Router,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private dashBoardService: DashboardService
   ) {
     this.filterSubscription = this.filterService.filterChanged$.subscribe(
       (filter) => {
@@ -86,6 +111,13 @@ export class TableComponent implements AfterViewInit, OnChanges {
         this.applySearchFilter(filter)
       })
   }
+
+  // ngDoCheck(): void {
+  //   this.filteredDataSource.paginator = this.paginator
+  //   this.cdRef.detectChanges()
+
+  //   console.log('ng do check is called')
+  // }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.filterSubscription = this.filterService.filterChanged$.subscribe(
@@ -139,7 +171,6 @@ export class TableComponent implements AfterViewInit, OnChanges {
       this.filteredDataSource.filter = filterValue
       this.cdRef.detectChanges()
     }
-    // Trigger the filter method to update the MatTable
 
     this.cdRef.detectChanges()
   }
@@ -212,7 +243,8 @@ export class TableComponent implements AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
   ngAfterViewInit() {
-    this.filteredDataSource.paginator = this.paginator
-    this.cdRef.detectChanges()
+    // this.filteredDataSource.paginator = this.paginator
+    // this.cdRef.detectChanges()
+    // console.log('ng afterView init called')
   }
 }

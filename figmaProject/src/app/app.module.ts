@@ -28,7 +28,9 @@ import {
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter'
 import { PageNotFoundComponent } from './modules/dashboard/pages/page-not-found/page-not-found.component'
 import { HttpClientModule } from '@angular/common/http'
-import { SideNavExcessPipe } from './modules/shared/pipes/limit99'
+import { SideNavExcessPipe } from './modules/shared/pipes/limit99';
+import { NullToDashPipe } from './modules/shared/pipes/null-to-dash.pipe';
+import { FullGenderPipe } from './modules/shared/pipes/full-gender.pipe'
 
 // import { BufferComponentComponent } from './modules/component/buffer-component/buffer-component.component';
 
@@ -61,6 +63,8 @@ import { SideNavExcessPipe } from './modules/shared/pipes/limit99'
     LandingPageComponent,
     PageNotFoundComponent,
     SideNavExcessPipe,
+    NullToDashPipe,
+    FullGenderPipe,
 
     // BufferComponentComponent,
   ],

@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.LandingPageComponent = exports.MY_FORMATS = void 0;
 var core_1 = require("@angular/core");
-var data_1 = require("../../../shared/services/data");
 var _moment = require("moment");
 var forms_1 = require("@angular/forms");
 var moment = _moment;
@@ -24,13 +23,15 @@ exports.MY_FORMATS = {
     }
 };
 var LandingPageComponent = /** @class */ (function () {
-    function LandingPageComponent(copyIdsnackBar, copyPhonesnackBar, router, route, clipboard, _snackBar) {
+    function LandingPageComponent(copyIdsnackBar, copyPhonesnackBar, router, route, clipboard, _snackBar, dashBoardService, apiService) {
         this.copyIdsnackBar = copyIdsnackBar;
         this.copyPhonesnackBar = copyPhonesnackBar;
         this.router = router;
         this.route = route;
         this.clipboard = clipboard;
         this._snackBar = _snackBar;
+        this.dashBoardService = dashBoardService;
+        this.apiService = apiService;
         this.physicianServiceBool = false;
         this.physicianServiceNotesBool = false;
         this.matCardStatus = false;
@@ -41,6 +42,43 @@ var LandingPageComponent = /** @class */ (function () {
         this.currentStatusPending = false;
         this.selectedTabIndex = 1;
     }
+    LandingPageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.queryParamMap.subscribe(function (params) {
+            var id = params.get('id');
+            console.log(id);
+            _this.currentId = id;
+            _this.dashBoardService.getAppointmentTotalList().subscribe(function (data) {
+                _this.apiData = data.data[0].service_list;
+                console.log(data.data[0].service_list);
+                _this.currentElement = _this.apiData.find(function (element) { return element.id == _this.currentId; });
+                console.log(_this.currentElement);
+                _this.consultedDateControl = new forms_1.FormControl(null, [forms_1.Validators.required]);
+                _this.formGroup = new forms_1.FormGroup({
+                    consultedDate: _this.consultedDateControl
+                });
+                _this.currentCfId = _this.currentElement.cf_id;
+                console.log(_this.currentCfId);
+                _this.checkStatus();
+                var landingPageHeaderBody = {
+                    id: _this.currentId,
+                    cf_id: _this.currentCfId,
+                    key: 'hcm_fup_physician',
+                    requested_date: _this.currentElement.requested_date
+                };
+                _this.apiService
+                    .postRequest('followup/service/details', landingPageHeaderBody)
+                    .subscribe(function (data) {
+                    console.log(data), (_this.currentHeaderData = data);
+                });
+            });
+        });
+    };
+    LandingPageComponent.prototype.assignApiData = function (service_list) {
+        this.apiData = service_list;
+        this.checkStatus();
+        console.log(service_list);
+    };
     LandingPageComponent.prototype.radioNotReqButtonClicked = function () {
         this.matCardStatusValue = 'Closed';
         this.physicianServiceBool = false;
@@ -66,6 +104,7 @@ var LandingPageComponent = /** @class */ (function () {
         this.checkStatus();
     };
     LandingPageComponent.prototype.checkStatus = function () {
+        console.log(this.currentElement);
         if (this.currentElement.status === 'Pending') {
             this.selectedTabIndex = 0;
             this.currentStatusPending = true;
@@ -113,21 +152,6 @@ var LandingPageComponent = /** @class */ (function () {
         }
         else
             alert('Error');
-    };
-    LandingPageComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.queryParamMap.subscribe(function (params) {
-            var id = params.get('id');
-            console.log(id);
-            _this.currentId = id; // or do whatever you want with the id value
-            _this.currentElement = data_1.ELEMENT_DATA.find(function (element) { return element.id === _this.currentId; });
-            console.log(_this.currentElement);
-        });
-        this.checkStatus();
-        this.consultedDateControl = new forms_1.FormControl(null, [forms_1.Validators.required]);
-        this.formGroup = new forms_1.FormGroup({
-            consultedDate: this.consultedDateControl
-        });
     };
     LandingPageComponent.prototype.navigateToDashboard = function () {
         // Navigate to the dashboard route

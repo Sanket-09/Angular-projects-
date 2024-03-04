@@ -14,10 +14,11 @@
         src="../../../assets/Patient_info.svg"
         alt="patient_icon"
       />
-      {{ currentElement.name }}
+      {{ currentElement.first_name | nullToDash }}
     </div>
     <div class="patientDetailHeaderId">
       <span id="copyId">{{ currentElement.id }}</span>
+      <!-- <span id="copyId">Lorem.</span> -->
 
       <img
         (click)="copyIdfn('Id Copied', 'Ok')"
@@ -37,9 +38,9 @@
         src="../../../assets/Union.svg"
         alt="phone_icon"
       />
-      <span id="copyPhoneNumber" style="margin: 0px 3px">{{
-        currentElement.phoneNumber
-      }}</span>
+      <span id="copyPhoneNumber" style="margin: 0px 3px">
+        {{ currentHeaderData.data.patient.phone }}
+      </span>
       <img
         (click)="copyPhonefn('Phone number Copied', 'Ok')"
         class="headerIcon"
@@ -48,7 +49,9 @@
       />
     </div>
     <div class="patientDetailHeaderId">
-      {{ currentElement.language }}
+      {{
+        currentHeaderData.data.patient.patient_info.language.value | nullToDash
+      }}
     </div>
   </span>
 
@@ -58,13 +61,19 @@
     <div class="patientDetailHeaderName">
       <img
         class="headerIcon"
-        src="../../../assets/Union.svg"
-        alt="phone_icon"
+        src="../../../assets/Gender.svg"
+        alt="gender_icon"
       />
-      {{ currentElement.gender }}
+      {{
+        currentHeaderData.data.patient.patient_info.gender.value
+          | fullGender
+          | nullToDash
+      }}
+      <!-- {{ currentElement.gender }} -->
     </div>
     <div class="patientDetailHeaderId">
-      {{ currentElement.age }}
+      <!-- {{ currentElement.age }} -->
+      {{ currentHeaderData.data.patient.patient_info.age.value | nullToDash }}
     </div>
   </span>
 </mat-toolbar>
@@ -84,7 +93,8 @@
         fitInkBarToContent
       >
         <mat-tab label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pending">
-          <mat-card *ngIf="currentStatusPending" #pendingCard>
+          <!-- <mat-card *ngIf="currentStatusPending" #pendingCard> -->
+          <mat-card #pendingCard>
             <span>
               <img
                 class="matCardSideBorder"
@@ -94,20 +104,24 @@
 
               <strong>
                 <span class="appointmentNo">
-                  Appointment 1 - {{ currentElement.reqDate | date }}
+                  Appointment 1 -
+                  {{ currentElement.requested_date | date | nullToDash }}
                   <span
                     [style.background-color]="matCardStatusColor"
                     class="mat-card-status"
                     *ngIf="matCardStatus"
-                    >{{ matCardStatusValue }}</span
-                  ></span
+                  >
+                    {{ matCardStatusValue }}
+                  </span></span
                 >
 
                 <p>Preferred Consultation Date</p>
               </strong>
 
               <span class="dateFont">
-                {{ currentElement.prefDate | date }}
+                {{
+                  currentElement.physician_requested_date | date | nullToDash
+                }}
               </span>
             </span>
           </mat-card>
@@ -122,11 +136,13 @@
                 alt=""
               />
               <strong
-                >Appointment 1 - {{ currentElement.reqDate | date }}
+                >Appointment 1 -
+                {{ currentElement.reqDate | date | nullToDash }}
                 <p>Preferred Consultation Date</p>
               </strong>
               <span class="dateFont">
-                {{ currentElement.prefDate | date }}
+                <!-- {{ currentElement.prefDate | date }} -->
+                Lorem.
               </span>
             </span>
           </mat-card>
@@ -137,7 +153,8 @@
 
   <mat-drawer-content>
     <div class="drawerContentDiv">
-      Appointment 1 - {{ currentElement.reqDate | date }}
+      Appointment 1 -
+      {{ currentElement.physician_requested_date | date | nullToDash }}
     </div>
 
     <div class="bookingDetails">Booking Details</div>
@@ -145,18 +162,21 @@
     <div class="bookingInfo">
       <div class="bookingInfoRow1">
         Preferred Consultation Date <br />
-        <span class="bookingInfoDetails">{{
-          currentElement.prefDate | date
-        }}</span>
+        <span class="bookingInfoDetails">
+          {{ currentElement.physician_requested_date | date | nullToDash }}
+        </span>
       </div>
       <div class="bookingInfoRow1">
         Physician Visit Type <br />
-        <span class="bookingInfoDetails">{{ currentElement.visitType }}</span>
+        <span class="bookingInfoDetails">
+          {{ currentElement.visit_type | nullToDash }}
+          <!-- id is given, map it to visit type -->
+        </span>
       </div>
       <div class="bookingInfoRow1">
-        Speciality <br /><span class="bookingInfoDetails">{{
-          currentElement.speciality
-        }}</span>
+        Speciality <br /><span class="bookingInfoDetails">
+          {{ currentElement.speciality | nullToDash }}
+        </span>
       </div>
     </div>
 
@@ -167,7 +187,9 @@
       </div>
       <div class="bookingInfoRow1">
         Physician Category <br />
-        <span class="bookingInfoDetails">{{ currentElement.category }}</span>
+        <span class="bookingInfoDetails">
+          {{ currentElement.physician_category | nullToDash }}
+        </span>
       </div>
     </div>
 
@@ -221,7 +243,7 @@
               readonly="true"
               matInput
               [matDatepicker]="picker"
-              [formControl]="consultedDateControl"
+              formControlName="consultedDate"
               class="datePicker"
             />
             <mat-datepicker-toggle
@@ -236,9 +258,11 @@
                 </button>
               </mat-datepicker-actions>
             </mat-datepicker>
-            <mat-error *ngIf="consultedDateControl.hasError('required')"
-              >Consulted Date is required</mat-error
+            <mat-error
+              *ngIf="formGroup.get('consultedDate')?.hasError('required')"
             >
+              Consulted Date is required
+            </mat-error>
           </mat-form-field>
         </form>
       </div>

@@ -13,7 +13,7 @@ export interface PeriodicElement {
   category: string
 }
 
-export const ELEMENT_DATA: PeriodicElement[] = [
+export let ELEMENT_DATA: PeriodicElement[] = [
   {
     status: 'Pending',
     prefDate: new Date('2024-04-01T08:30:00.000Z'),

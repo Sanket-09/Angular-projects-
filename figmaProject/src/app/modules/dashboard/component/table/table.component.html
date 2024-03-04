@@ -1,6 +1,6 @@
 <mat-paginator
   hidePageSize="true"
-  [length]="100"
+  [length]="10"
   [pageSize]="10"
   aria-label="Select page"
 >
@@ -37,7 +37,7 @@
         Preferred Consultation Date <span class="divider"></span>
       </th>
       <td mat-cell *matCellDef="let element">
-        {{ element.prefDate | date : 'mediumDate' }}
+        {{ element.visit_date | date : 'mediumDate' }}
       </td>
     </ng-container>
 
@@ -54,7 +54,7 @@
       <th mat-header-cell *matHeaderCellDef>
         Member Name <span class="divider"></span>
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.first_name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="reqDate">
@@ -62,7 +62,7 @@
         Request Date<span class="divider"></span>
       </th>
       <td mat-cell *matCellDef="let element">
-        {{ element.reqDate | date : 'mediumDate' }}
+        {{ element.requested_date | date : 'mediumDate' }}
       </td>
     </ng-container>
 
@@ -75,7 +75,7 @@
 
     <ng-container matColumnDef="visitType">
       <th mat-header-cell *matHeaderCellDef>Physician Visit Type</th>
-      <td mat-cell *matCellDef="let element">{{ element.visitType }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.visit_type }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

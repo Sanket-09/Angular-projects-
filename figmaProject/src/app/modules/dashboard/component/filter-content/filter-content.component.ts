@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { FilterService } from '../../../shared/services/filter.service'
 import { ELEMENT_DATA, PeriodicElement } from '../../../shared/services/data'
+import { DashboardService } from '../../dashboard.service'
 
 @Component({
   selector: 'app-filter-content',
@@ -8,85 +9,78 @@ import { ELEMENT_DATA, PeriodicElement } from '../../../shared/services/data'
   styleUrls: ['./filter-content.component.scss'],
 })
 export class FilterContentComponent implements OnInit {
-  allData: any = ELEMENT_DATA.filter((val) => {
-    if (typeof val == 'object') {
-      return true
-    } else {
-      return false
-    }
-  })
+  allDataCount: number = 0
+  pendingDataCount: number = 0
+  resolvedDataCount: number = 0
+  closedDataCount: number = 0
+  cards:
+    | {
+        icon: string
+        iconSelected: string
+        value1: number
+        value2: string
+        bgColor: string
+      }[]
+    | undefined
 
-  pendingData: any = ELEMENT_DATA.filter((val) => {
-    if (val.status == 'Pending') {
-      return true
-    } else {
-      return false
-    }
-  })
+  ngOnInit(): void {
+    this.dashBoardService.getBucketCount().subscribe((data) => {
+      console.log(data.data)
 
-  resolvedData: any = ELEMENT_DATA.filter((val) => {
-    if (val.status == 'Resolved') {
-      return true
-    } else {
-      return false
-    }
-  })
+      this.allDataCount = data.data[0].count
+      this.pendingDataCount = data.data[1].count
+      this.resolvedDataCount = data.data[2].count
+      this.closedDataCount = data.data[3].count
 
-  closedData: any = ELEMENT_DATA.filter((val) => {
-    if (val.status == 'Closed') {
-      return true
-    } else {
-      return false
-    }
-  })
-
-  allDataCount: number = this.allData.length
-  pendingDataCount: number = this.pendingData.length
-  resolvedDataCount: number = this.resolvedData.length
-  closedDataCount: number = this.closedData.length
-
-  ngOnInit(): void {}
+      this.initializeCards()
+    })
+  }
 
   totalCount: number | undefined
 
-  constructor(private FilterService: FilterService) {}
+  constructor(
+    private FilterService: FilterService,
+    private dashBoardService: DashboardService
+  ) {}
 
   @Output() currentStatus = new EventEmitter<string>()
 
-  cards = [
-    {
-      icon: './../../../../assets/icons-unselected-filter-content/hour-glass.fill.svg',
-      iconSelected:
-        './../../../../assets/icons-selected-filter-content/hour-glass.fill.svg',
-      value1: this.pendingDataCount,
-      value2: 'Pending',
-      bgColor: 'white',
-    },
-    {
-      icon: './../../../../assets/icons-unselected-filter-content/Recommend.fill.svg',
-      iconSelected:
-        './../../../../assets/icons-selected-filter-content/Recommend.fill.svg',
-      value1: this.resolvedDataCount,
-      value2: 'Resolved',
-      bgColor: 'white',
-    },
-    {
-      icon: './../../../../assets/icons-unselected-filter-content/checkbox.fill.svg',
-      iconSelected:
-        './../../../../assets/icons-selected-filter-content/checkbox.fill.svg',
-      value1: this.closedDataCount,
-      value2: 'Closed',
-      bgColor: 'white',
-    },
-    {
-      icon: './../../../../assets/icons-unselected-filter-content/Group.fill.svg',
-      iconSelected:
-        './../../../../assets/icons-selected-filter-content/Group.fill.svg',
-      value1: this.allDataCount,
-      value2: 'Total Request',
-      bgColor: 'white',
-    },
-  ]
+  initializeCards() {
+    this.cards = [
+      {
+        icon: './../../../../assets/icons-unselected-filter-content/hour-glass.fill.svg',
+        iconSelected:
+          './../../../../assets/icons-selected-filter-content/hour-glass.fill.svg',
+        value1: this.pendingDataCount,
+        value2: 'Pending',
+        bgColor: 'white',
+      },
+      {
+        icon: './../../../../assets/icons-unselected-filter-content/Recommend.fill.svg',
+        iconSelected:
+          './../../../../assets/icons-selected-filter-content/Recommend.fill.svg',
+        value1: this.resolvedDataCount,
+        value2: 'Resolved',
+        bgColor: 'white',
+      },
+      {
+        icon: './../../../../assets/icons-unselected-filter-content/checkbox.fill.svg',
+        iconSelected:
+          './../../../../assets/icons-selected-filter-content/checkbox.fill.svg',
+        value1: this.closedDataCount,
+        value2: 'Closed',
+        bgColor: 'white',
+      },
+      {
+        icon: './../../../../assets/icons-unselected-filter-content/Group.fill.svg',
+        iconSelected:
+          './../../../../assets/icons-selected-filter-content/Group.fill.svg',
+        value1: this.allDataCount,
+        value2: 'Total Request',
+        bgColor: 'white',
+      },
+    ]
+  }
 
   selectedCard: any
   selectedCardIcon: any

@@ -3,17 +3,18 @@
 }
 
 .header {
+  display: flex;
   box-shadow: 0px 2px 3px 0px rgba(0, 19, 51, 0.12);
   color: white;
   height: 64px;
   padding: 12px;
   gap: 4px;
   margin-bottom: 3px;
+  align-items: center;
 }
 
 .back-btn {
-  padding: 10px;
-  margin-top: 8px;
+  padding: 12px;
 }
 
 .separator {
@@ -21,7 +22,6 @@
   width: 1px;
   background-color: #c9cdd4;
   color: #c9cdd4;
-  border: 1px solid #c9cdd4;
 }
 
 .patientDetailHeader {
@@ -62,13 +62,12 @@
 .example-container {
   height: 89%;
   box-shadow: 0px 1px 1px 0px rgba(0, 19, 51, 0.1);
-  padding: 0vw 2vw;
 }
 
 .mat-drawer {
   height: 100%;
   width: 352px;
-  border-radius: 8px;
+  border-radius: 2px;
   margin-top: 0.1vw;
   margin-bottom: 22vw;
   overflow-y: hidden;

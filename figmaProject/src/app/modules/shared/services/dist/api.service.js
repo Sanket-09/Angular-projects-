@@ -98,6 +98,39 @@ var ApiServiceService = /** @class */ (function () {
         }
         return apiOriginLink;
     };
+    ApiServiceService.prototype.postRequest = function (endPoint, sRequestModel, showSpinner, sHeaders, params) {
+        var _this = this;
+        if (showSpinner === void 0) { showSpinner = true; }
+        if (sHeaders === void 0) { sHeaders = null; }
+        if (params === void 0) { params = ''; }
+        var apiURL = this.getURL(endPoint);
+        if (!apiURL) {
+            return rxjs_1.of({ status: false });
+        }
+        if (params) {
+            var paramsArr = params.toString().split('/');
+            paramsArr.forEach(function (par) {
+                par = decodeURIComponent(par);
+                var encryptedId = _this.encryptionDecryptionService.getEncryptedData(par);
+                var encodedId = encodeURIComponent(encryptedId);
+                apiURL = "" + apiURL + '/' + encodedId;
+            });
+        }
+        var postData = sRequestModel;
+        var bodyData = this.encryptionDecryptionService.getEncryptedData(sRequestModel);
+        postData = { bodyData: bodyData };
+        var requestOptions = this.getHttpOptions();
+        return this.http.post(apiURL, postData, requestOptions).pipe(rxjs_1.map(function (result) {
+            // debugger
+            var resultData = {};
+            resultData = _this.encryptionDecryptionService.getDecryptedData(result.responseObj);
+            return resultData;
+            // return result;
+        }), rxjs_1.catchError(function (error) {
+            return rxjs_1.throwError(error);
+        }), rxjs_1.finalize(function () {
+        }));
+    };
     ApiServiceService.prototype.getRequest = function (endPoint, id, showSpinner, sHeaders, params) {
         var _this = this;
         if (id === void 0) { id = null; }
