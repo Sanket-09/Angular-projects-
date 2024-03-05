@@ -12,7 +12,6 @@ var paginator_1 = require("@angular/material/paginator");
 var table_1 = require("@angular/material/table");
 var rxjs_1 = require("rxjs");
 var router_1 = require("@angular/router");
-var data_1 = require("../../../shared/services/data");
 var TableComponent = /** @class */ (function () {
     function TableComponent(tabService, filterService, router, cdRef, dashBoardService) {
         var _this = this;
@@ -32,8 +31,8 @@ var TableComponent = /** @class */ (function () {
             'speciality',
             'visitType',
         ];
-        this.dataSource = new table_1.MatTableDataSource(data_1.ELEMENT_DATA);
-        this.filteredDataSource = new table_1.MatTableDataSource(data_1.ELEMENT_DATA);
+        this.dataSource = new table_1.MatTableDataSource();
+        this.filteredDataSource = new table_1.MatTableDataSource();
         this.currentStatus = '';
         this.filterSubscription = this.filterService.filterChanged$.subscribe(function (filter) {
             _this.applyStatusFilter(filter);
@@ -50,6 +49,10 @@ var TableComponent = /** @class */ (function () {
             this.filterService.filterChangedSearch$.subscribe(function (filter) {
                 _this.applySearchFilter(filter);
             });
+        this.filterSubscriptionCategory =
+            this.filterService.filterChangedCategory$.subscribe(function (filter) {
+                _this.applyCategoryFilter(filter);
+            });
     }
     TableComponent.prototype.getRecord = function (data) {
         console.log(data.id);
@@ -61,16 +64,27 @@ var TableComponent = /** @class */ (function () {
     };
     TableComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dashBoardService.getAppointmentTotalList().subscribe(function (data) {
+        this.dashBoardService
+            .getAppointmentTotalList({
+            currentStatus: 'total'
+        })
+            .subscribe(function (data) {
             console.log(data.data[0].service_list);
+            // Initialize data sources
+            _this.dataSource = new table_1.MatTableDataSource(data.data[0].service_list);
+            _this.filteredDataSource = new table_1.MatTableDataSource(data.data[0].service_list);
+            // Set table value
             _this.setTableValue(data);
-            console.log('ngOninit is called');
+            console.log('ngOnInit is called');
+            // Set paginator for filteredDataSource
+            _this.filteredDataSource.paginator = _this.paginator;
+        });
+        this.dashBoardService.getSpecialityMapId().subscribe(function (data) {
+            console.log(data.data);
+            _this.speicialityMapId = data.data;
         });
     };
-    TableComponent.prototype.setTableValue = function (data) {
-        this.filteredDataSource = data.data[0].service_list;
-        this.dataSource = data.data[0].service_list;
-    };
+    TableComponent.prototype.setTableValue = function (data) { };
     // ngDoCheck(): void {
     //   this.filteredDataSource.paginator = this.paginator
     //   this.cdRef.detectChanges()
@@ -90,50 +104,72 @@ var TableComponent = /** @class */ (function () {
                 _this.applyVisitFilter(filter);
             });
     };
-    TableComponent.prototype.applySearchFilter = function (searchValue) {
-        console.log('type of searchValue is : ' + typeof searchValue);
-        console.log('SearchValue is : ' + searchValue);
-        console.log('SearchValue length is : ' + searchValue.length);
-        this.filteredDataSource.data = this.dataSource.data.filter(function (o) { return o.id.toLowerCase == searchValue.trim().toLowerCase; });
-        this.filteredDataSource._updateChangeSubscription();
-        this.cdRef.detectChanges();
-        // this.filteredDataSource.filter = searchValue
-        // console.log("Filter applied with searchValue  : " + searchValue )
-    };
+    TableComponent.prototype.applySearchFilter = function (searchValue) { };
     TableComponent.prototype.applyStatusFilter = function (filterValue) {
-        if (filterValue.toLowerCase() == 'total request') {
-            // If 'Total Request', show the complete data without filtering
-            this.filteredDataSource.data = this.dataSource.data;
-            this.filteredDataSource.filter = '';
-            this.cdRef.detectChanges();
-        }
-        else {
-            // Otherwise, apply the filter
-            filterValue = filterValue.trim().toLowerCase();
-            // Filter the data
-            var filteredData = this.dataSource.data.filter(function (item) {
-                return item.status.toLowerCase().includes(filterValue);
-            });
-            // Update the filteredDataSource with the filtered data
-            this.filteredDataSource.data = filteredData;
-            this.filteredDataSource.filter = filterValue;
-            this.cdRef.detectChanges();
-        }
-        this.cdRef.detectChanges();
+        var _this = this;
+        if (filterValue == 'Total Request')
+            filterValue = 'total';
+        var response = this.dashBoardService.getAppointmentTotalList({
+            currentStatus: filterValue.toLowerCase()
+        });
+        response.subscribe(function (data) {
+            console.log(data);
+            // Update the data property of filteredDataSource
+            _this.filteredDataSource.data = data.data[0].service_list;
+            console.log('paginator is called');
+            _this.filteredDataSource.paginator = _this.paginator;
+        });
     };
     TableComponent.prototype.applySpecialityFilter = function (specialities) {
-        var selectedSpecialities = specialities.map(function (item) { return item.value; });
-        this.filteredDataSource.filterPredicate = function (data, filter) {
-            var selectedValues = filter.split(',');
-            return selectedValues.includes(data.speciality.trim());
-        };
-        var filteredData = this.dataSource.data.filter(function (item) {
-            return specialities.some(function (speciality) { return item.speciality === speciality.value; });
+        var _this = this;
+        var selectedSpecialities = specialities.map(function (item) { return item.name; });
+        console.log(selectedSpecialities);
+        var response = this.dashBoardService.getAppointmentTotalList({
+            currentCategory: selectedSpecialities
         });
-        this.filteredDataSource.filter = selectedSpecialities.join(',');
-        this.cdRef.detectChanges();
-        this.filteredDataSource.data = this.filteredDataSource.filteredData;
-        this.cdRef.detectChanges();
+        response.subscribe(function (data) {
+            console.log('API Response:', data);
+            // Rest of the code
+            _this.filteredDataSource.data = data.data[0].service_list;
+            _this.filteredDataSource.paginator = _this.paginator;
+        });
+        // response.subscribe((data) => {
+        //   this.filteredDataSource.data = data.data[0].service_list
+        //   this.filteredDataSource.paginator = this.paginator
+        // })
+        // setTimeout(() => {
+        //   // Access the filtered data after the filter is applied
+        //   const filteredData = this.filteredDataSource.filteredData;
+        //   console.log(filteredData);
+        // }, 0);
+    };
+    TableComponent.prototype.applyCategoryFilter = function (specialities) {
+        var _this = this;
+        var selectedSpecialities = specialities.map(function (item) { return item.name; });
+        console.log(selectedSpecialities);
+        var mappingObject = {};
+        this.speicialityMapId.forEach(function (obj) {
+            mappingObject[obj.name] = obj.id;
+        });
+        console.log('mapping object created ', mappingObject);
+        var mapIdData = [];
+        var mapId = specialities.map(function (data) {
+            mapIdData.push(parseInt(mappingObject[data.name]));
+        });
+        console.log('id array is called', mapIdData);
+        var response = this.dashBoardService.getAppointmentTotalList({
+            currentSpeciality: mapIdData
+        });
+        response.subscribe(function (data) {
+            console.log('API Response:', data);
+            // Rest of the code
+            _this.filteredDataSource.data = data.data[0].service_list;
+            _this.filteredDataSource.paginator = _this.paginator;
+        });
+        // response.subscribe((data) => {
+        //   this.filteredDataSource.data = data.data[0].service_list
+        //   this.filteredDataSource.paginator = this.paginator
+        // })
         // setTimeout(() => {
         //   // Access the filtered data after the filter is applied
         //   const filteredData = this.filteredDataSource.filteredData;
@@ -141,22 +177,19 @@ var TableComponent = /** @class */ (function () {
         // }, 0);
     };
     TableComponent.prototype.applyVisitFilter = function (specialities) {
+        var _this = this;
+        console.log('visit filter called');
         var selectedSpecialities = specialities.map(function (item) { return item.value; });
-        // Custom filter predicate
-        this.filteredDataSource.filterPredicate = function (data, filter) {
-            var selectedValues = filter.split(',');
-            return selectedValues.includes(data.visitType.trim());
-        };
-        var filteredDataSource = this.dataSource.data.filter(function (item) {
-            return specialities.some(function (speciality) {
-                return item.visitType.toLowerCase() === speciality.value.toLowerCase();
-            });
+        console.log(selectedSpecialities);
+        var response = this.dashBoardService.getAppointmentTotalList({
+            currentVisitType: selectedSpecialities
         });
-        // Update the filteredDataSource with the filtered data
-        this.filteredDataSource.filter = selectedSpecialities.join(',');
-        this.cdRef.detectChanges();
-        this.filteredDataSource.data = this.filteredDataSource.filteredData;
-        this.cdRef.detectChanges();
+        response.subscribe(function (data) {
+            console.log('API Response:', data);
+            // Rest of the code
+            _this.filteredDataSource.data = data.data[0].service_list;
+            _this.filteredDataSource.paginator = _this.paginator;
+        });
     };
     TableComponent.prototype.ngAfterViewInit = function () {
         this.filteredDataSource.paginator = this.paginator;

@@ -1,7 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { ELEMENT_DATA } from '../../../shared/services/data'
-import { PeriodicElement } from '../../../shared/services/data'
 import { Clipboard } from '@angular/cdk/clipboard'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatTabChangeEvent } from '@angular/material/tabs'
@@ -67,41 +65,46 @@ export class LandingPageComponent implements OnInit {
       console.log(id)
       this.currentId = id
 
-      this.dashBoardService.getAppointmentTotalList().subscribe((data) => {
-        this.apiData = data.data[0].service_list
-
-        console.log(data.data[0].service_list)
-
-        this.currentElement = this.apiData.find(
-          (element: { id: any }) => element.id == this.currentId
-        )
-        console.log(this.currentElement)
-
-        this.consultedDateControl = new FormControl(null, [Validators.required])
-        this.formGroup = new FormGroup({
-          consultedDate: this.consultedDateControl,
+      // Use the object format for getAppointmentTotalList
+      this.dashBoardService
+        .getAppointmentTotalList({
+          currentStatus: 'total',
         })
+        .subscribe((data) => {
+          this.apiData = data.data[0].service_list
 
-        this.currentCfId = this.currentElement.cf_id
-        console.log(this.currentCfId)
+          console.log(data.data[0].service_list)
 
-        this.checkStatus()
+          this.currentElement = this.apiData.find(
+            (element: { id: any }) => element.id == this.currentId
+          )
+          console.log(this.currentElement)
 
-        const landingPageHeaderBody = {
-          id: this.currentId,
-          cf_id: this.currentCfId,
-          key: 'hcm_fup_physician',
-          requested_date: this.currentElement.requested_date,
-        }
-
-        this.apiService
-          .postRequest('followup/service/details', landingPageHeaderBody)
-          .subscribe((data) => {
-            console.log(data), (this.currentHeaderData = data)
+          this.consultedDateControl = new FormControl(null, [
+            Validators.required,
+          ])
+          this.formGroup = new FormGroup({
+            consultedDate: this.consultedDateControl,
           })
 
-      
-      })
+          this.currentCfId = this.currentElement.cf_id
+          console.log(this.currentCfId)
+
+          this.checkStatus()
+
+          const landingPageHeaderBody = {
+            id: this.currentId,
+            cf_id: this.currentCfId,
+            key: 'hcm_fup_physician',
+            requested_date: this.currentElement.requested_date,
+          }
+
+          this.apiService
+            .postRequest('followup/service/details', landingPageHeaderBody)
+            .subscribe((data) => {
+              console.log(data), (this.currentHeaderData = data)
+            })
+        })
     })
   }
 

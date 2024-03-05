@@ -78,7 +78,7 @@ export class FilterDropdownComponent implements OnInit {
     // console.log(this.selectedValues);
     // this.FilterService.currentSelectedValues = this.selectedValues;
     console.log(this.selectedValues + ' selected values of speciality')
-    this.FilterService.emitFilterSpeciality(this.selectedValues)
+    this.FilterService.emitFilterCategory(this.selectedValues)
 
     // this.FilterService.applyFilter();
   }

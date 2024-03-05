@@ -15,12 +15,14 @@ var FilterService = /** @class */ (function () {
         this.filterSubject = new rxjs_1.Subject();
         this.filterSubjectObj = new rxjs_1.Subject();
         this.filterSubjectVisitObj = new rxjs_1.Subject();
+        this.filterSubjectCategoryObj = new rxjs_1.Subject();
         this.chipMethodSubject = new rxjs_1.Subject();
         this.chipMethodCalled$ = this.chipMethodSubject.asObservable();
         this.data = [];
         this.dataVisit = [];
         this.filterChanged$ = this.filterSubject.asObservable();
         this.filterChangedSpeciality$ = this.filterSubjectObj.asObservable();
+        this.filterChangedCategory$ = this.filterSubjectCategoryObj.asObservable();
         this.filterChangedSearch$ = this.filterSubject.asObservable();
         this.filterChangedVisit$ = this.filterSubjectVisitObj.asObservable();
     }
@@ -45,6 +47,24 @@ var FilterService = /** @class */ (function () {
             '  value of event  ' +
             speciality);
         this.filterSubjectObj.next(speciality);
+        // this.currentFilterSpeciality.forEach((obj: { [x: string]: string }) => {
+        //   Object.keys(obj).forEach((key) => {
+        //     console.log('key : ' + key + ' - value : ' + obj[key])
+        //     if (typeof obj[key] === 'string') this.data.push(obj[key])
+        //   })
+        // })
+    };
+    FilterService.prototype.emitFilterCategory = function (speciality) {
+        this.data = [];
+        this.currentFilterSpeciality = speciality;
+        // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
+        // console.log(filterObj);
+        // speciality.push(filterObj);
+        console.log('received event speciality type ' +
+            typeof speciality +
+            '  value of event  ' +
+            speciality);
+        this.filterSubjectCategoryObj.next(speciality);
         // this.currentFilterSpeciality.forEach((obj: { [x: string]: string }) => {
         //   Object.keys(obj).forEach((key) => {
         //     console.log('key : ' + key + ' - value : ' + obj[key])

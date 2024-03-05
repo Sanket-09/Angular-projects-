@@ -9,11 +9,11 @@ import {
   ViewChild,
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { ReplaySubject, Subject } from 'rxjs'
+import { ReplaySubject, Subject, Subscription } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
 import { MatSelect } from '@angular/material/select'
 import { FilterService } from '../../../shared/services/filter.service'
-
+import { DashboardService } from '../../dashboard.service'
 import { Bank, BANKS } from './demo-data'
 
 @Component({
@@ -22,9 +22,17 @@ import { Bank, BANKS } from './demo-data'
   styleUrls: ['./filter-dropdown-category.component.scss'],
 })
 export class FilterDropdownCategoryComponent implements OnInit {
-  protected banks: Bank[] = BANKS
-  selectedValues: string[] = []
   @ViewChild('select') select!: MatSelect
+
+  private subscription: Subscription
+
+  @Output() selectedValuesChange: EventEmitter<string> =
+    new EventEmitter<string>()
+
+  selectedValues: string[] = []
+
+  removedValue: any
+
   allSelected = false
 
   toggleAllSelection() {
@@ -35,7 +43,7 @@ export class FilterDropdownCategoryComponent implements OnInit {
         if (this.allSelected) {
           // Select all options except ngx-mat-select-search
           const banksToSelect = filteredBanks.filter(
-            (bank) => bank.value !== 'ngx-mat-select-search'
+            (bank) => bank.name !== 'ngx-mat-select-search'
           )
           this.bankMultiCtrl.setValue(banksToSelect)
         } else {
@@ -45,20 +53,32 @@ export class FilterDropdownCategoryComponent implements OnInit {
   }
 
   onSelectionChange($event: any) {
+    // this.selectedValuesChange.emit(this.selectedValues.join(','));
+
+    console.log('Event received in specility is : ', $event)
+
     if ($event.isUserInput) {
       if ($event.source.selected) {
         this.selectedValues.push($event.source.value)
+        console.log('this is the selected Values  ', this.selectedValues)
       } else {
         this.selectedValues = this.selectedValues.filter(
           (value) => value !== $event.source.value
         )
       }
     }
+
+    this.cdRef.detectChanges()
+    console.log(this.selectedValues)
   }
 
   logSelectedValues() {
-    console.log(this.selectedValues)
+    // console.log(this.selectedValues);
+    // this.FilterService.currentSelectedValues = this.selectedValues;
+    console.log(this.selectedValues + ' selected values of speciality')
     this.FilterService.emitFilterSpeciality(this.selectedValues)
+
+    // this.FilterService.applyFilter();
   }
 
   cancelAll() {
@@ -66,6 +86,8 @@ export class FilterDropdownCategoryComponent implements OnInit {
     this.bankMultiCtrl.setValue([])
     this.allSelected = false
   }
+
+  protected banks: Bank[] = BANKS
 
   /** control for the selected bank for multi-selection */
   public bankMultiCtrl: FormControl<Bank[] | null> = new FormControl<Bank[]>([])
@@ -79,21 +101,44 @@ export class FilterDropdownCategoryComponent implements OnInit {
     1
   )
 
-  @ViewChild('multiSelect', { static: true })
+  @ViewChild('multiSelect', {
+    static: true,
+  })
   multiSelect!: MatSelect
 
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>()
 
-  constructor(private FilterService: FilterService) {}
+  constructor(
+    private FilterService: FilterService,
+    private cdRef: ChangeDetectorRef,
+    private dashBoardService: DashboardService
+  ) {
+    this.subscription = this.FilterService.chipMethodCalled$.subscribe(
+      (chipEmitList: any) => {
+        this.onChipMethodCalled(chipEmitList)
+      }
+    )
+  }
+
+  specialityList: any
+
+  onChipMethodCalled(chipEmitList: any) {
+    console.log('onChipMethodCalled in spec component : ', chipEmitList)
+    this.selectedValues = [...chipEmitList]
+    console.log('this is selected values : ', this.selectedValues)
+    this.onSelectionChange(chipEmitList)
+    this.cdRef.detectChanges()
+  }
 
   ngOnInit(): void {
+    // listen for search field value changes
+
     this.bankMultiCtrl.setValue([])
 
     // load the initial bank list
     this.filteredBanksMulti.next(this.banks.slice())
 
-    // listen for search field value changes
     this.bankMultiFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
@@ -115,9 +160,7 @@ export class FilterDropdownCategoryComponent implements OnInit {
     }
     // filter the banks
     this.filteredBanksMulti.next(
-      this.banks.filter(
-        (bank) => bank.value.toLowerCase().indexOf(search!) > -1
-      )
+      this.banks.filter((bank) => bank.name.toLowerCase().indexOf(search!) > -1)
     )
   }
 }

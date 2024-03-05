@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { FilterService } from '../../../shared/services/filter.service'
-import { ELEMENT_DATA, PeriodicElement } from '../../../shared/services/data'
+
 import { DashboardService } from '../../dashboard.service'
 
 @Component({
@@ -27,9 +27,9 @@ export class FilterContentComponent implements OnInit {
     this.dashBoardService.getBucketCount().subscribe((data) => {
       console.log(data.data)
 
-      this.allDataCount = data.data[0].count
-      this.pendingDataCount = data.data[1].count
-      this.resolvedDataCount = data.data[2].count
+      this.allDataCount = data.data[2].count
+      this.pendingDataCount = data.data[0].count
+      this.resolvedDataCount = data.data[1].count
       this.closedDataCount = data.data[3].count
 
       this.initializeCards()

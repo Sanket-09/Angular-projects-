@@ -22,9 +22,9 @@ var FilterContentComponent = /** @class */ (function () {
         var _this = this;
         this.dashBoardService.getBucketCount().subscribe(function (data) {
             console.log(data.data);
-            _this.allDataCount = data.data[0].count;
-            _this.pendingDataCount = data.data[1].count;
-            _this.resolvedDataCount = data.data[2].count;
+            _this.allDataCount = data.data[2].count;
+            _this.pendingDataCount = data.data[0].count;
+            _this.resolvedDataCount = data.data[1].count;
             _this.closedDataCount = data.data[3].count;
             _this.initializeCards();
         });
