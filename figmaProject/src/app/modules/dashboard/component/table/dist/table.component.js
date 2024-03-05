@@ -55,7 +55,6 @@ var TableComponent = /** @class */ (function () {
             });
     }
     TableComponent.prototype.getRecord = function (data) {
-        console.log(data.id);
         var queryParams = {};
         queryParams['id'] = data.id; // Create a dictionary containing the query parameter
         this.router.navigate(['landing'], {
@@ -64,23 +63,16 @@ var TableComponent = /** @class */ (function () {
     };
     TableComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dashBoardService
-            .getAppointmentTotalList({
-            currentStatus: 'total'
-        })
-            .subscribe(function (data) {
-            console.log(data.data[0].service_list);
+        this.dashBoardService.getAppointmentTotalList().subscribe(function (data) {
             // Initialize data sources
             _this.dataSource = new table_1.MatTableDataSource(data.data[0].service_list);
             _this.filteredDataSource = new table_1.MatTableDataSource(data.data[0].service_list);
             // Set table value
             _this.setTableValue(data);
-            console.log('ngOnInit is called');
             // Set paginator for filteredDataSource
             _this.filteredDataSource.paginator = _this.paginator;
         });
         this.dashBoardService.getSpecialityMapId().subscribe(function (data) {
-            console.log(data.data);
             _this.speicialityMapId = data.data;
         });
     };
@@ -109,29 +101,29 @@ var TableComponent = /** @class */ (function () {
         var _this = this;
         if (filterValue == 'Total Request')
             filterValue = 'total';
-        var response = this.dashBoardService.getAppointmentTotalList({
+        this.dashBoardService.appointmentHeader.update({
             currentStatus: filterValue.toLowerCase()
         });
+        var response = this.dashBoardService.getAppointmentTotalList();
         response.subscribe(function (data) {
-            console.log(data);
             // Update the data property of filteredDataSource
             _this.filteredDataSource.data = data.data[0].service_list;
-            console.log('paginator is called');
             _this.filteredDataSource.paginator = _this.paginator;
+            _this.dashBoardService.notifyDataUpdated();
         });
     };
     TableComponent.prototype.applySpecialityFilter = function (specialities) {
         var _this = this;
-        var selectedSpecialities = specialities.map(function (item) { return item.name; });
-        console.log(selectedSpecialities);
-        var response = this.dashBoardService.getAppointmentTotalList({
+        var selectedSpecialities = specialities.map(function (item) { return item.value; });
+        this.dashBoardService.appointmentHeader.update({
             currentCategory: selectedSpecialities
         });
+        var response = this.dashBoardService.getAppointmentTotalList();
         response.subscribe(function (data) {
-            console.log('API Response:', data);
             // Rest of the code
             _this.filteredDataSource.data = data.data[0].service_list;
             _this.filteredDataSource.paginator = _this.paginator;
+            _this.dashBoardService.notifyDataUpdated();
         });
         // response.subscribe((data) => {
         //   this.filteredDataSource.data = data.data[0].service_list
@@ -146,25 +138,23 @@ var TableComponent = /** @class */ (function () {
     TableComponent.prototype.applyCategoryFilter = function (specialities) {
         var _this = this;
         var selectedSpecialities = specialities.map(function (item) { return item.name; });
-        console.log(selectedSpecialities);
         var mappingObject = {};
         this.speicialityMapId.forEach(function (obj) {
             mappingObject[obj.name] = obj.id;
         });
-        console.log('mapping object created ', mappingObject);
         var mapIdData = [];
         var mapId = specialities.map(function (data) {
             mapIdData.push(parseInt(mappingObject[data.name]));
         });
-        console.log('id array is called', mapIdData);
-        var response = this.dashBoardService.getAppointmentTotalList({
+        this.dashBoardService.appointmentHeader.update({
             currentSpeciality: mapIdData
         });
+        var response = this.dashBoardService.getAppointmentTotalList();
         response.subscribe(function (data) {
-            console.log('API Response:', data);
             // Rest of the code
             _this.filteredDataSource.data = data.data[0].service_list;
             _this.filteredDataSource.paginator = _this.paginator;
+            _this.dashBoardService.notifyDataUpdated();
         });
         // response.subscribe((data) => {
         //   this.filteredDataSource.data = data.data[0].service_list
@@ -178,23 +168,21 @@ var TableComponent = /** @class */ (function () {
     };
     TableComponent.prototype.applyVisitFilter = function (specialities) {
         var _this = this;
-        console.log('visit filter called');
         var selectedSpecialities = specialities.map(function (item) { return item.value; });
-        console.log(selectedSpecialities);
-        var response = this.dashBoardService.getAppointmentTotalList({
+        this.dashBoardService.appointmentHeader.update({
             currentVisitType: selectedSpecialities
         });
+        var response = this.dashBoardService.getAppointmentTotalList();
         response.subscribe(function (data) {
-            console.log('API Response:', data);
             // Rest of the code
             _this.filteredDataSource.data = data.data[0].service_list;
             _this.filteredDataSource.paginator = _this.paginator;
+            _this.dashBoardService.notifyDataUpdated();
         });
     };
     TableComponent.prototype.ngAfterViewInit = function () {
         this.filteredDataSource.paginator = this.paginator;
         this.cdRef.detectChanges();
-        console.log('ng afterView init called');
     };
     __decorate([
         core_1.ViewChild(paginator_1.MatPaginator)

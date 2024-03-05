@@ -21,13 +21,41 @@ var FilterContentComponent = /** @class */ (function () {
     FilterContentComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.dashBoardService.getBucketCount().subscribe(function (data) {
-            console.log(data.data);
-            _this.allDataCount = data.data[2].count;
-            _this.pendingDataCount = data.data[0].count;
-            _this.resolvedDataCount = data.data[1].count;
-            _this.closedDataCount = data.data[3].count;
+            _this.setMethod(data);
             _this.initializeCards();
+            _this.dashBoardService.dataUpdatedSubject.subscribe(function () {
+                _this.updatedData();
+            });
         });
+    };
+    FilterContentComponent.prototype.updatedData = function () {
+        var _this = this;
+        this.dashBoardService.getBucketCount().subscribe(function (data) {
+            _this.setMethod(data);
+            // Update only the value1 property of each card
+            _this.cards.forEach(function (card) {
+                switch (card.value2) {
+                    case 'Pending':
+                        card.value1 = _this.pendingDataCount;
+                        break;
+                    case 'Resolved':
+                        card.value1 = _this.resolvedDataCount;
+                        break;
+                    case 'Closed':
+                        card.value1 = _this.closedDataCount;
+                        break;
+                    case 'Total Request':
+                        card.value1 = _this.allDataCount;
+                        break;
+                }
+            });
+        });
+    };
+    FilterContentComponent.prototype.setMethod = function (data) {
+        this.allDataCount = data.data.find(function (item) { return item.key === 'total'; }).count;
+        this.pendingDataCount = data.data.find(function (item) { return item.key === 'pending'; }).count;
+        this.resolvedDataCount = data.data.find(function (item) { return item.key === 'resolved'; }).count;
+        this.closedDataCount = data.data.find(function (item) { return item.key === 'closed'; }).count;
     };
     FilterContentComponent.prototype.initializeCards = function () {
         this.cards = [

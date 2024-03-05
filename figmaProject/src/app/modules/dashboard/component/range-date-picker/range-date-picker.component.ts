@@ -27,7 +27,7 @@ export class RangeDatePickerComponent {
       key: index,
       value,
     }))
-    console.log(this.transformedArray)
+   
 
     //  if(event.isUserInput)
     //  {
@@ -74,7 +74,7 @@ export class RangeDatePickerComponent {
 
   showFilter() {
     this.showFilterOptions = !this.showFilterOptions
-    console.log(this.showFilterOptions)
+   
   }
 
   constructor(private FilterService: FilterService) {}

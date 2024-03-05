@@ -22,18 +22,56 @@ export class FilterContentComponent implements OnInit {
         bgColor: string
       }[]
     | undefined
+  currentValue: any
 
   ngOnInit(): void {
     this.dashBoardService.getBucketCount().subscribe((data) => {
-      console.log(data.data)
-
-      this.allDataCount = data.data[2].count
-      this.pendingDataCount = data.data[0].count
-      this.resolvedDataCount = data.data[1].count
-      this.closedDataCount = data.data[3].count
-
+      this.setMethod(data)
       this.initializeCards()
+
+      this.dashBoardService.dataUpdatedSubject.subscribe(() => {
+        this.updatedData()
+      })
     })
+  }
+
+  updatedData() {
+    this.dashBoardService.getBucketCount().subscribe((data) => {
+      this.setMethod(data)
+
+      // Update only the value1 property of each card
+      this.cards!.forEach((card) => {
+        switch (card.value2) {
+          case 'Pending':
+            card.value1 = this.pendingDataCount
+            break
+          case 'Resolved':
+            card.value1 = this.resolvedDataCount
+            break
+          case 'Closed':
+            card.value1 = this.closedDataCount
+            break
+          case 'Total Request':
+            card.value1 = this.allDataCount
+            break
+        }
+      })
+    })
+  }
+
+  setMethod(data: any) {
+    this.allDataCount = data.data.find(
+      (item: any) => item.key === 'total'
+    ).count
+    this.pendingDataCount = data.data.find(
+      (item: any) => item.key === 'pending'
+    ).count
+    this.resolvedDataCount = data.data.find(
+      (item: any) => item.key === 'resolved'
+    ).count
+    this.closedDataCount = data.data.find(
+      (item: any) => item.key === 'closed'
+    ).count
   }
 
   totalCount: number | undefined
@@ -87,7 +125,6 @@ export class FilterContentComponent implements OnInit {
 
   selectCard(card: any) {
     this.selectedCard = card
-
     this.applyFilter(card.value2)
   }
 

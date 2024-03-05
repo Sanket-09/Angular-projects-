@@ -66,7 +66,6 @@ var NavbarComponent = /** @class */ (function () {
         var _this = this;
         this.dashBoardService.getSideNavCount().subscribe(function (data) {
             _this.sideNavData = data.data[0];
-            console.log(_this.sideNavData);
             _this.sideNav[0].notif = _this.sideNavData.CCC_FUP_PHYSICIAN_ESCALATION;
             _this.sideNav[1].notif = _this.sideNavData.CCC_FUP_PHSICIAN_APPOINTMENT;
             _this.sideNav[2].notif = _this.sideNavData.labs;
@@ -81,7 +80,6 @@ var NavbarComponent = /** @class */ (function () {
         this.sideNav.forEach(function (nav) { return (nav.selected = false); }); // Deselect all cards
         sideNav.selected = true; // Select the clicked card
         this.selectedCard = sideNav;
-        console.log(this.sideNavData.data[0]);
     };
     NavbarComponent.prototype.isSelected = function (sideNav) {
         return this.selectedCard === sideNav;

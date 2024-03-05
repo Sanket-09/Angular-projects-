@@ -18,10 +18,18 @@ var FilterChipsComponent = /** @class */ (function () {
         this.separatorKeysCodes = [keycodes_1.ENTER, keycodes_1.COMMA];
         this.fruits = [];
         this.showClearButton = false;
+        this.chipVisit = [];
+        this.chipVisitEmit = [];
         this.chipSpeciality = [];
         this.chipSpecialityEmit = [];
         this.filterService.filterChangedSpeciality$.subscribe(function (speciality) {
             _this.updateFruits(speciality);
+        });
+        this.filterService.filterChangedCategory$.subscribe(function (category) {
+            _this.updateFruits(category);
+        });
+        this.filterService.filterChangedVisit$.subscribe(function (visitType) {
+            _this.updateFruits(visitType);
         });
     }
     FilterChipsComponent.prototype.clearList = function () {
@@ -32,12 +40,21 @@ var FilterChipsComponent = /** @class */ (function () {
         var _this = this;
         this.showClearButton = true;
         this.fruits = [];
-        this.chipSpeciality = [];
+        this.chipVisit = [];
         speciality.forEach(function (obj) {
             Object.keys(obj).forEach(function (key) {
                 if (typeof obj[key] === 'string') {
                     _this.fruits.push({ name: obj[key] });
-                    _this.chipSpeciality.push({ key1: 1, value: obj[key] });
+                    if (obj[key] == 'Escalation' ||
+                        obj[key] == 'Compliance' ||
+                        obj[key] == 'Other Appointments') {
+                        _this.chipVisit.push({ key1: 1, value: obj[key] });
+                    }
+                    if (obj[key] == 'Hospital Visit' ||
+                        obj[key] == 'Tele-consultation' ||
+                        obj[key] == 'Home Visit') {
+                        _this.chipSpeciality.push({ key1: 1, value: obj[key] });
+                    }
                 }
             });
         });
@@ -64,10 +81,11 @@ var FilterChipsComponent = /** @class */ (function () {
         var index = this.fruits.indexOf(fruit);
         if (index >= 0) {
             this.fruits.splice(index, 1);
-            this.chipSpecialityEmit = this.chipSpeciality.filter(function (item) { return item.value !== currentItemDelete; });
-            console.log(this.chipSpecialityEmit);
-            this.filterService.emitFilterSpeciality(this.chipSpecialityEmit);
-            this.filterService.chipCallMethod(this.chipSpecialityEmit);
+            this.chipVisitEmit = this.chipVisit.filter(function (item) { return item.value !== currentItemDelete; });
+            var emitSpeciality = this.chipVisit.map(function (item) { return item.value; });
+            console.log('the emitted chiplist is :  ', this.chipVisitEmit + '   and its type is  : ', typeof this.chipVisitEmit);
+            this.filterService.emitFilterVisit(this.chipVisitEmit);
+            this.filterService.chipCallMethod(this.chipVisitEmit); // i think this is redundant
         }
     };
     __decorate([

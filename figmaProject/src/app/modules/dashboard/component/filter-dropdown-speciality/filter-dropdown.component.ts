@@ -57,12 +57,9 @@ export class FilterDropdownComponent implements OnInit {
   onSelectionChange($event: any) {
     // this.selectedValuesChange.emit(this.selectedValues.join(','));
 
-    console.log('Event received in specility is : ', $event)
-
     if ($event.isUserInput) {
       if ($event.source.selected) {
         this.selectedValues.push($event.source.value)
-        console.log('this is the selected Values  ', this.selectedValues)
       } else {
         this.selectedValues = this.selectedValues.filter(
           (value) => value !== $event.source.value
@@ -71,13 +68,12 @@ export class FilterDropdownComponent implements OnInit {
     }
 
     this.cdRef.detectChanges()
-    console.log(this.selectedValues)
   }
 
   logSelectedValues() {
     // console.log(this.selectedValues);
     // this.FilterService.currentSelectedValues = this.selectedValues;
-    console.log(this.selectedValues + ' selected values of speciality')
+
     this.FilterService.emitFilterCategory(this.selectedValues)
 
     // this.FilterService.applyFilter();
@@ -126,9 +122,8 @@ export class FilterDropdownComponent implements OnInit {
   specialityList: any
 
   onChipMethodCalled(chipEmitList: any) {
-    console.log('onChipMethodCalled in spec component : ', chipEmitList)
     this.selectedValues = [...chipEmitList]
-    console.log('this is selected values : ', this.selectedValues)
+
     this.onSelectionChange(chipEmitList)
     this.cdRef.detectChanges()
   }
@@ -137,8 +132,6 @@ export class FilterDropdownComponent implements OnInit {
     // listen for search field value changes
 
     this.dashBoardService.getSpecialityList().subscribe((data: any) => {
-      console.log(Object.entries(data.data))
-
       for (let i = 0; i < Math.max(BANKS.length, data.data.length); i++) {
         const existingList = BANKS[i]
         const additionalUpdatedList = data.data[i]
@@ -152,8 +145,6 @@ export class FilterDropdownComponent implements OnInit {
           })
         }
       }
-
-      console.log(this.banks)
 
       this.bankMultiCtrl.setValue([])
 

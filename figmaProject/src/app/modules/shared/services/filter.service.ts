@@ -52,12 +52,7 @@ export class FilterService {
     // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
     // console.log(filterObj);
     // speciality.push(filterObj);
-    console.log(
-      'received event speciality type ' +
-        typeof speciality +
-        '  value of event  ' +
-        speciality
-    )
+
     this.filterSubjectObj.next(speciality)
 
     // this.currentFilterSpeciality.forEach((obj: { [x: string]: string }) => {
@@ -75,12 +70,7 @@ export class FilterService {
     // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
     // console.log(filterObj);
     // speciality.push(filterObj);
-    console.log(
-      'received event speciality type ' +
-        typeof speciality +
-        '  value of event  ' +
-        speciality
-    )
+
     this.filterSubjectCategoryObj.next(speciality)
 
     // this.currentFilterSpeciality.forEach((obj: { [x: string]: string }) => {
@@ -98,9 +88,7 @@ export class FilterService {
     // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
     // console.log(filterObj);
     // speciality.push(filterObj);
-    console.log(
-      'received event Visit type ' + typeof visit + '  value of event  ' + visit
-    )
+
     this.filterSubjectVisitObj.next(visit)
 
     // this.currentFilterVisit.forEach((obj: { [x: string]: string }) => {

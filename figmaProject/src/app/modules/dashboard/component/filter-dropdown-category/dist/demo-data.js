@@ -3,7 +3,7 @@ exports.__esModule = true;
 exports.BANKS = void 0;
 /** list of banks */
 exports.BANKS = [
-    { key: 1, name: 'Hospital Visit' },
-    { key: 2, name: 'Tele-consultation' },
-    { key: 3, name: 'Home Visit' },
+    { key: 1, value: 'Hospital Visit' },
+    { key: 2, value: 'Tele-consultation' },
+    { key: 3, value: 'Home Visit' },
 ];

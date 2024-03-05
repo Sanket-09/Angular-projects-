@@ -49,18 +49,12 @@ var LandingPageComponent = /** @class */ (function () {
             console.log(id);
             _this.currentId = id;
             // Use the object format for getAppointmentTotalList
-            _this.dashBoardService
-                .getAppointmentTotalList({
-                currentStatus: 'total'
-            })
-                .subscribe(function (data) {
+            _this.dashBoardService.getAppointmentTotalList().subscribe(function (data) {
                 _this.apiData = data.data[0].service_list;
                 console.log(data.data[0].service_list);
                 _this.currentElement = _this.apiData.find(function (element) { return element.id == _this.currentId; });
                 console.log(_this.currentElement);
-                _this.consultedDateControl = new forms_1.FormControl(null, [
-                    forms_1.Validators.required,
-                ]);
+                _this.consultedDateControl = new forms_1.FormControl(null, [forms_1.Validators.required]);
                 _this.formGroup = new forms_1.FormGroup({
                     consultedDate: _this.consultedDateControl
                 });

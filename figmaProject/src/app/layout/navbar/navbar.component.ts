@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.dashBoardService.getSideNavCount().subscribe((data: any) => {
       this.sideNavData = data.data[0]
-      console.log(this.sideNavData)
+
       this.sideNav[0].notif = this.sideNavData.CCC_FUP_PHYSICIAN_ESCALATION
       this.sideNav[1].notif = this.sideNavData.CCC_FUP_PHSICIAN_APPOINTMENT
       this.sideNav[2].notif = this.sideNavData.labs
@@ -92,8 +92,6 @@ export class NavbarComponent implements OnInit {
     this.sideNav.forEach((nav) => (nav.selected = false)) // Deselect all cards
     sideNav.selected = true // Select the clicked card
     this.selectedCard = sideNav
-
-    console.log(this.sideNavData.data[0])
   }
 
   isSelected(sideNav: any): boolean {

@@ -34,7 +34,6 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   speicialityMapId: any
 
   getRecord(data: any): void {
-    console.log(data.id)
     let queryParams: any = {}
     queryParams['id'] = data.id // Create a dictionary containing the query parameter
     this.router.navigate(['landing'], {
@@ -43,30 +42,21 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this.dashBoardService
-      .getAppointmentTotalList({
-        currentStatus: 'total',
-      })
-      .subscribe((data) => {
-        console.log(data.data[0].service_list)
+    this.dashBoardService.getAppointmentTotalList().subscribe((data) => {
+      // Initialize data sources
+      this.dataSource = new MatTableDataSource(data.data[0].service_list)
+      this.filteredDataSource = new MatTableDataSource(
+        data.data[0].service_list
+      )
 
-        // Initialize data sources
-        this.dataSource = new MatTableDataSource(data.data[0].service_list)
-        this.filteredDataSource = new MatTableDataSource(
-          data.data[0].service_list
-        )
+      // Set table value
+      this.setTableValue(data)
 
-        // Set table value
-        this.setTableValue(data)
-
-        console.log('ngOnInit is called')
-
-        // Set paginator for filteredDataSource
-        this.filteredDataSource.paginator = this.paginator
-      })
+      // Set paginator for filteredDataSource
+      this.filteredDataSource.paginator = this.paginator
+    })
 
     this.dashBoardService.getSpecialityMapId().subscribe((data) => {
-      console.log(data.data)
       this.speicialityMapId = data.data
     })
   }
@@ -160,37 +150,37 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   applyStatusFilter(filterValue: string) {
     if (filterValue == 'Total Request') filterValue = 'total'
 
-    let response = this.dashBoardService.getAppointmentTotalList({
+    this.dashBoardService.appointmentHeader.update({
       currentStatus: filterValue.toLowerCase(),
     })
 
-    response.subscribe((data) => {
-      console.log(data)
+    let response = this.dashBoardService.getAppointmentTotalList()
 
+    response.subscribe((data) => {
       // Update the data property of filteredDataSource
       this.filteredDataSource.data = data.data[0].service_list
 
-      console.log('paginator is called')
       this.filteredDataSource.paginator = this.paginator
+      this.dashBoardService.notifyDataUpdated()
     })
   }
 
   applySpecialityFilter(specialities: any) {
     const selectedSpecialities = specialities.map(
-      (item: { name: any }) => item.name
+      (item: { value: any }) => item.value
     )
 
-    console.log(selectedSpecialities)
-
-    let response = this.dashBoardService.getAppointmentTotalList({
+    this.dashBoardService.appointmentHeader.update({
       currentCategory: selectedSpecialities,
     })
 
+    let response = this.dashBoardService.getAppointmentTotalList()
+
     response.subscribe((data) => {
-      console.log('API Response:', data)
       // Rest of the code
       this.filteredDataSource.data = data.data[0].service_list
       this.filteredDataSource.paginator = this.paginator
+      this.dashBoardService.notifyDataUpdated()
     })
 
     // response.subscribe((data) => {
@@ -212,14 +202,10 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
       (item: { name: any }) => item.name
     )
 
-    console.log(selectedSpecialities)
-
     const mappingObject: any = {}
     this.speicialityMapId.forEach((obj: any) => {
       mappingObject[obj.name] = obj.id
     })
-
-    console.log('mapping object created ', mappingObject)
 
     const mapIdData: any[] = []
 
@@ -227,17 +213,17 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
       mapIdData.push(parseInt(mappingObject[data.name]))
     })
 
-    console.log('id array is called', mapIdData)
-
-    let response = this.dashBoardService.getAppointmentTotalList({
+    this.dashBoardService.appointmentHeader.update({
       currentSpeciality: mapIdData,
     })
 
+    let response = this.dashBoardService.getAppointmentTotalList()
+
     response.subscribe((data) => {
-      console.log('API Response:', data)
       // Rest of the code
       this.filteredDataSource.data = data.data[0].service_list
       this.filteredDataSource.paginator = this.paginator
+      this.dashBoardService.notifyDataUpdated()
     })
 
     // response.subscribe((data) => {
@@ -255,23 +241,21 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   applyVisitFilter(specialities: any) {
-    console.log('visit filter called')
-
     const selectedSpecialities = specialities.map(
       (item: { value: any }) => item.value
     )
 
-    console.log(selectedSpecialities)
-
-    let response = this.dashBoardService.getAppointmentTotalList({
+    this.dashBoardService.appointmentHeader.update({
       currentVisitType: selectedSpecialities,
     })
 
+    let response = this.dashBoardService.getAppointmentTotalList()
+
     response.subscribe((data) => {
-      console.log('API Response:', data)
       // Rest of the code
       this.filteredDataSource.data = data.data[0].service_list
       this.filteredDataSource.paginator = this.paginator
+      this.dashBoardService.notifyDataUpdated()
     })
   }
 
@@ -281,6 +265,5 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
     this.filteredDataSource.paginator = this.paginator
 
     this.cdRef.detectChanges()
-    console.log('ng afterView init called')
   }
 }

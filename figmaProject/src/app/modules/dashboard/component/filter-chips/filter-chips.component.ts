@@ -13,12 +13,12 @@ export interface Fruit {
   name: string
 }
 
-interface chipSpeciality {
+interface chipVisit {
   key1: number
   value: string
 }
 
-interface chipSpecialityEmit {
+interface chipVisitEmit {
   key1: number
   value: string
 }
@@ -40,17 +40,40 @@ export class FilterChipsComponent implements OnInit {
     this.filterService.filterChangedSpeciality$.subscribe((speciality) => {
       this.updateFruits(speciality)
     })
+
+    this.filterService.filterChangedCategory$.subscribe((category) => {
+      this.updateFruits(category)
+    })
+
+    this.filterService.filterChangedVisit$.subscribe((visitType) => {
+      this.updateFruits(visitType)
+    })
   }
 
   updateFruits(speciality: any): void {
     this.showClearButton = true
     this.fruits = []
-    this.chipSpeciality = []
+    this.chipVisit = []
     speciality.forEach((obj: { [x: string]: string }) => {
       Object.keys(obj).forEach((key) => {
         if (typeof obj[key] === 'string') {
           this.fruits.push({ name: obj[key] })
-          this.chipSpeciality.push({ key1: 1, value: obj[key] })
+
+          if (
+            obj[key] == 'Escalation' ||
+            obj[key] == 'Compliance' ||
+            obj[key] == 'Other Appointments'
+          ) {
+            this.chipVisit.push({ key1: 1, value: obj[key] })
+          }
+
+          if (
+            obj[key] == 'Hospital Visit' ||
+            obj[key] == 'Tele-consultation' ||
+            obj[key] == 'Home Visit'
+          ) {
+            this.chipSpeciality.push({ key1: 1, value: obj[key] })
+          }
         }
       })
     })
@@ -67,8 +90,11 @@ export class FilterChipsComponent implements OnInit {
 
   showClearButton: boolean = false
 
-  chipSpeciality: chipSpeciality[] = []
-  chipSpecialityEmit: chipSpecialityEmit[] = []
+  chipVisit: chipVisit[] = []
+  chipVisitEmit: chipVisitEmit[] = []
+
+  chipSpeciality: chipVisit[] = []
+  chipSpecialityEmit: chipVisitEmit[] = []
   // add(event: MatChipInputEvent): void {
   //   console.log(this.selectedValues + "   in input")
   //   const value = (event.value || '').trim();
@@ -96,12 +122,19 @@ export class FilterChipsComponent implements OnInit {
     if (index >= 0) {
       this.fruits.splice(index, 1)
 
-      this.chipSpecialityEmit = this.chipSpeciality.filter(
+      this.chipVisitEmit = this.chipVisit.filter(
         (item) => item.value !== currentItemDelete
       )
-      console.log(this.chipSpecialityEmit)
-      this.filterService.emitFilterSpeciality(this.chipSpecialityEmit)
-      this.filterService.chipCallMethod(this.chipSpecialityEmit)
+
+      const emitSpeciality: string[] = this.chipVisit.map((item) => item.value)
+
+      console.log(
+        'the emitted chiplist is :  ',
+        this.chipVisitEmit + '   and its type is  : ',
+        typeof this.chipVisitEmit
+      )
+      this.filterService.emitFilterVisit(this.chipVisitEmit)
+      this.filterService.chipCallMethod(this.chipVisitEmit) // i think this is redundant
     }
   }
 }

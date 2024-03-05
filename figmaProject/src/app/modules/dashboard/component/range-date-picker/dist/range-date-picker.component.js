@@ -51,7 +51,6 @@ var RangeDatePickerComponent = /** @class */ (function () {
             key: index,
             value: value
         }); });
-        console.log(this.transformedArray);
         //  if(event.isUserInput)
         //  {
         //   console.log("inside event.userinput")
@@ -82,7 +81,6 @@ var RangeDatePickerComponent = /** @class */ (function () {
     };
     RangeDatePickerComponent.prototype.showFilter = function () {
         this.showFilterOptions = !this.showFilterOptions;
-        console.log(this.showFilterOptions);
     };
     RangeDatePickerComponent.prototype.ngOnInit = function () { };
     RangeDatePickerComponent.prototype.submitVisit = function () {

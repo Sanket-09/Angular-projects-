@@ -59,23 +59,19 @@ var FilterDropdownComponent = /** @class */ (function () {
     };
     FilterDropdownComponent.prototype.onSelectionChange = function ($event) {
         // this.selectedValuesChange.emit(this.selectedValues.join(','));
-        console.log('Event received in specility is : ', $event);
         if ($event.isUserInput) {
             if ($event.source.selected) {
                 this.selectedValues.push($event.source.value);
-                console.log('this is the selected Values  ', this.selectedValues);
             }
             else {
                 this.selectedValues = this.selectedValues.filter(function (value) { return value !== $event.source.value; });
             }
         }
         this.cdRef.detectChanges();
-        console.log(this.selectedValues);
     };
     FilterDropdownComponent.prototype.logSelectedValues = function () {
         // console.log(this.selectedValues);
         // this.FilterService.currentSelectedValues = this.selectedValues;
-        console.log(this.selectedValues + ' selected values of speciality');
         this.FilterService.emitFilterCategory(this.selectedValues);
         // this.FilterService.applyFilter();
     };
@@ -85,9 +81,7 @@ var FilterDropdownComponent = /** @class */ (function () {
         this.allSelected = false;
     };
     FilterDropdownComponent.prototype.onChipMethodCalled = function (chipEmitList) {
-        console.log('onChipMethodCalled in spec component : ', chipEmitList);
         this.selectedValues = __spreadArrays(chipEmitList);
-        console.log('this is selected values : ', this.selectedValues);
         this.onSelectionChange(chipEmitList);
         this.cdRef.detectChanges();
     };
@@ -95,7 +89,6 @@ var FilterDropdownComponent = /** @class */ (function () {
         // listen for search field value changes
         var _this = this;
         this.dashBoardService.getSpecialityList().subscribe(function (data) {
-            console.log(Object.entries(data.data));
             for (var i = 0; i < Math.max(demo_data_1.BANKS.length, data.data.length); i++) {
                 var existingList = demo_data_1.BANKS[i];
                 var additionalUpdatedList = data.data[i];
@@ -109,7 +102,6 @@ var FilterDropdownComponent = /** @class */ (function () {
                     });
                 }
             }
-            console.log(_this.banks);
             _this.bankMultiCtrl.setValue([]);
             // load the initial bank list
             _this.filteredBanksMulti.next(_this.banks.slice());

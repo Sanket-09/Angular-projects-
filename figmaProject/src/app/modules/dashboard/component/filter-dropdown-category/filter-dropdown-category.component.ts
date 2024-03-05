@@ -43,7 +43,7 @@ export class FilterDropdownCategoryComponent implements OnInit {
         if (this.allSelected) {
           // Select all options except ngx-mat-select-search
           const banksToSelect = filteredBanks.filter(
-            (bank) => bank.name !== 'ngx-mat-select-search'
+            (bank) => bank.value !== 'ngx-mat-select-search'
           )
           this.bankMultiCtrl.setValue(banksToSelect)
         } else {
@@ -55,12 +55,9 @@ export class FilterDropdownCategoryComponent implements OnInit {
   onSelectionChange($event: any) {
     // this.selectedValuesChange.emit(this.selectedValues.join(','));
 
-    console.log('Event received in specility is : ', $event)
-
     if ($event.isUserInput) {
       if ($event.source.selected) {
         this.selectedValues.push($event.source.value)
-        console.log('this is the selected Values  ', this.selectedValues)
       } else {
         this.selectedValues = this.selectedValues.filter(
           (value) => value !== $event.source.value
@@ -69,13 +66,12 @@ export class FilterDropdownCategoryComponent implements OnInit {
     }
 
     this.cdRef.detectChanges()
-    console.log(this.selectedValues)
   }
 
   logSelectedValues() {
     // console.log(this.selectedValues);
     // this.FilterService.currentSelectedValues = this.selectedValues;
-    console.log(this.selectedValues + ' selected values of speciality')
+
     this.FilterService.emitFilterSpeciality(this.selectedValues)
 
     // this.FilterService.applyFilter();
@@ -124,9 +120,8 @@ export class FilterDropdownCategoryComponent implements OnInit {
   specialityList: any
 
   onChipMethodCalled(chipEmitList: any) {
-    console.log('onChipMethodCalled in spec component : ', chipEmitList)
     this.selectedValues = [...chipEmitList]
-    console.log('this is selected values : ', this.selectedValues)
+
     this.onSelectionChange(chipEmitList)
     this.cdRef.detectChanges()
   }
@@ -160,7 +155,9 @@ export class FilterDropdownCategoryComponent implements OnInit {
     }
     // filter the banks
     this.filteredBanksMulti.next(
-      this.banks.filter((bank) => bank.name.toLowerCase().indexOf(search!) > -1)
+      this.banks.filter(
+        (bank) => bank.value.toLowerCase().indexOf(search!) > -1
+      )
     )
   }
 }

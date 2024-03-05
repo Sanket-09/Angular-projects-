@@ -49,7 +49,7 @@ var FilterDropdownCategoryComponent = /** @class */ (function () {
             .subscribe(function (filteredBanks) {
             if (_this.allSelected) {
                 // Select all options except ngx-mat-select-search
-                var banksToSelect = filteredBanks.filter(function (bank) { return bank.name !== 'ngx-mat-select-search'; });
+                var banksToSelect = filteredBanks.filter(function (bank) { return bank.value !== 'ngx-mat-select-search'; });
                 _this.bankMultiCtrl.setValue(banksToSelect);
             }
             else {
@@ -59,23 +59,19 @@ var FilterDropdownCategoryComponent = /** @class */ (function () {
     };
     FilterDropdownCategoryComponent.prototype.onSelectionChange = function ($event) {
         // this.selectedValuesChange.emit(this.selectedValues.join(','));
-        console.log('Event received in specility is : ', $event);
         if ($event.isUserInput) {
             if ($event.source.selected) {
                 this.selectedValues.push($event.source.value);
-                console.log('this is the selected Values  ', this.selectedValues);
             }
             else {
                 this.selectedValues = this.selectedValues.filter(function (value) { return value !== $event.source.value; });
             }
         }
         this.cdRef.detectChanges();
-        console.log(this.selectedValues);
     };
     FilterDropdownCategoryComponent.prototype.logSelectedValues = function () {
         // console.log(this.selectedValues);
         // this.FilterService.currentSelectedValues = this.selectedValues;
-        console.log(this.selectedValues + ' selected values of speciality');
         this.FilterService.emitFilterSpeciality(this.selectedValues);
         // this.FilterService.applyFilter();
     };
@@ -85,9 +81,7 @@ var FilterDropdownCategoryComponent = /** @class */ (function () {
         this.allSelected = false;
     };
     FilterDropdownCategoryComponent.prototype.onChipMethodCalled = function (chipEmitList) {
-        console.log('onChipMethodCalled in spec component : ', chipEmitList);
         this.selectedValues = __spreadArrays(chipEmitList);
-        console.log('this is selected values : ', this.selectedValues);
         this.onSelectionChange(chipEmitList);
         this.cdRef.detectChanges();
     };
@@ -117,7 +111,7 @@ var FilterDropdownCategoryComponent = /** @class */ (function () {
             search = search.toLowerCase();
         }
         // filter the banks
-        this.filteredBanksMulti.next(this.banks.filter(function (bank) { return bank.name.toLowerCase().indexOf(search) > -1; }));
+        this.filteredBanksMulti.next(this.banks.filter(function (bank) { return bank.value.toLowerCase().indexOf(search) > -1; }));
     };
     __decorate([
         core_1.ViewChild('select')

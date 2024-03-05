@@ -66,45 +66,39 @@ export class LandingPageComponent implements OnInit {
       this.currentId = id
 
       // Use the object format for getAppointmentTotalList
-      this.dashBoardService
-        .getAppointmentTotalList({
-          currentStatus: 'total',
+      this.dashBoardService.getAppointmentTotalList().subscribe((data) => {
+        this.apiData = data.data[0].service_list
+
+        console.log(data.data[0].service_list)
+
+        this.currentElement = this.apiData.find(
+          (element: { id: any }) => element.id == this.currentId
+        )
+        console.log(this.currentElement)
+
+        this.consultedDateControl = new FormControl(null, [Validators.required])
+        this.formGroup = new FormGroup({
+          consultedDate: this.consultedDateControl,
         })
-        .subscribe((data) => {
-          this.apiData = data.data[0].service_list
 
-          console.log(data.data[0].service_list)
+        this.currentCfId = this.currentElement.cf_id
+        console.log(this.currentCfId)
 
-          this.currentElement = this.apiData.find(
-            (element: { id: any }) => element.id == this.currentId
-          )
-          console.log(this.currentElement)
+        this.checkStatus()
 
-          this.consultedDateControl = new FormControl(null, [
-            Validators.required,
-          ])
-          this.formGroup = new FormGroup({
-            consultedDate: this.consultedDateControl,
+        const landingPageHeaderBody = {
+          id: this.currentId,
+          cf_id: this.currentCfId,
+          key: 'hcm_fup_physician',
+          requested_date: this.currentElement.requested_date,
+        }
+
+        this.apiService
+          .postRequest('followup/service/details', landingPageHeaderBody)
+          .subscribe((data) => {
+            console.log(data), (this.currentHeaderData = data)
           })
-
-          this.currentCfId = this.currentElement.cf_id
-          console.log(this.currentCfId)
-
-          this.checkStatus()
-
-          const landingPageHeaderBody = {
-            id: this.currentId,
-            cf_id: this.currentCfId,
-            key: 'hcm_fup_physician',
-            requested_date: this.currentElement.requested_date,
-          }
-
-          this.apiService
-            .postRequest('followup/service/details', landingPageHeaderBody)
-            .subscribe((data) => {
-              console.log(data), (this.currentHeaderData = data)
-            })
-        })
+      })
     })
   }
 

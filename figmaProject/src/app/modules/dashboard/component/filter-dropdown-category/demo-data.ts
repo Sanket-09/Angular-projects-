@@ -1,6 +1,6 @@
 export interface Bank {
   key: number
-  name: string
+  value: string
 }
 
 export interface BankGroup {
@@ -10,7 +10,7 @@ export interface BankGroup {
 
 /** list of banks */
 export const BANKS: Bank[] = [
-  { key: 1, name: 'Hospital Visit' },
-  { key: 2, name: 'Tele-consultation' },
-  { key: 3, name: 'Home Visit' },
+  { key: 1, value: 'Hospital Visit' },
+  { key: 2, value: 'Tele-consultation' },
+  { key: 3, value: 'Home Visit' },
 ]
