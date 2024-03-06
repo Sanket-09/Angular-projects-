@@ -30,36 +30,43 @@ interface chipVisitEmit {
 })
 export class FilterChipsComponent implements OnInit {
   clearList() {
-    this.showClearButton = false
+    this.showClearButton = true
     this.fruits = []
+    this.filterService.emitFilterCategory([])
+    this.filterService.emitFilterSpeciality([])
+    this.filterService.emitFilterVisit([])
   }
 
   dataChip: any
 
   constructor(private filterService: FilterService) {
     this.filterService.filterChangedSpeciality$.subscribe((speciality) => {
-      this.updateFruits(speciality)
-      console.log(speciality)
+      this.updateList(speciality)
     })
 
     this.filterService.filterChangedCategory$.subscribe((category) => {
-      this.updateFruits(category)
-      console.log(category, typeof category)
+      this.updateList(category)
     })
 
     this.filterService.filterChangedVisit$.subscribe((visitType) => {
-      this.updateFruits(visitType)
+      this.updateList(visitType)
     })
   }
 
-  updateFruits(speciality: any): void {
-    this.showClearButton = true
+  updateList(list: any) {
+    this.updateFruits(list)
+  }
 
+  updateFruits(speciality: any): void {
     this.fruits = []
     this.chipVisit = []
     this.chipSpeciality = []
     this.chipCategory = []
     this.allchip = []
+
+    if (speciality.length > 4) {
+      this.showClearButton = true
+    } else this.showClearButton = false
 
     speciality.forEach((obj: { [x: string]: string }) => {
       Object.keys(obj).forEach((key) => {
@@ -128,7 +135,6 @@ export class FilterChipsComponent implements OnInit {
 
   remove(fruit: any): void {
     console.log('the lenght of the array is  ', this.fruits.length)
-    if (this.fruits.length <= 1) this.showClearButton = false
 
     console.log('chip removed called')
     console.log(this.showClearButton)

@@ -45,7 +45,7 @@ export class FilterDropdownComponent implements OnInit {
         if (this.allSelected) {
           // Select all options except ngx-mat-select-search
           const banksToSelect = filteredBanks.filter(
-            (bank) => bank.name !== 'ngx-mat-select-search'
+            (bank) => bank.value !== 'ngx-mat-select-search'
           )
           this.bankMultiCtrl.setValue(banksToSelect)
         } else {
@@ -137,11 +137,11 @@ export class FilterDropdownComponent implements OnInit {
         const additionalUpdatedList = data.data[i]
 
         if (existingList && additionalUpdatedList) {
-          existingList.name = additionalUpdatedList.name
+          existingList.value = additionalUpdatedList.name
         } else if (additionalUpdatedList) {
           BANKS.push({
             key: BANKS.length + i + 1,
-            name: additionalUpdatedList.name,
+            value: additionalUpdatedList.name,
           })
         }
       }
@@ -173,7 +173,9 @@ export class FilterDropdownComponent implements OnInit {
     }
     // filter the banks
     this.filteredBanksMulti.next(
-      this.banks.filter((bank) => bank.name.toLowerCase().indexOf(search!) > -1)
+      this.banks.filter(
+        (bank) => bank.value.toLowerCase().indexOf(search!) > -1
+      )
     )
   }
 }

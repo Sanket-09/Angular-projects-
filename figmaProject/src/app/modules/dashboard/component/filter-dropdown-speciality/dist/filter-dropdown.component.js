@@ -49,7 +49,7 @@ var FilterDropdownComponent = /** @class */ (function () {
             .subscribe(function (filteredBanks) {
             if (_this.allSelected) {
                 // Select all options except ngx-mat-select-search
-                var banksToSelect = filteredBanks.filter(function (bank) { return bank.name !== 'ngx-mat-select-search'; });
+                var banksToSelect = filteredBanks.filter(function (bank) { return bank.value !== 'ngx-mat-select-search'; });
                 _this.bankMultiCtrl.setValue(banksToSelect);
             }
             else {
@@ -93,12 +93,12 @@ var FilterDropdownComponent = /** @class */ (function () {
                 var existingList = demo_data_1.BANKS[i];
                 var additionalUpdatedList = data.data[i];
                 if (existingList && additionalUpdatedList) {
-                    existingList.name = additionalUpdatedList.name;
+                    existingList.value = additionalUpdatedList.name;
                 }
                 else if (additionalUpdatedList) {
                     demo_data_1.BANKS.push({
                         key: demo_data_1.BANKS.length + i + 1,
-                        name: additionalUpdatedList.name
+                        value: additionalUpdatedList.name
                     });
                 }
             }
@@ -126,7 +126,7 @@ var FilterDropdownComponent = /** @class */ (function () {
             search = search.toLowerCase();
         }
         // filter the banks
-        this.filteredBanksMulti.next(this.banks.filter(function (bank) { return bank.name.toLowerCase().indexOf(search) > -1; }));
+        this.filteredBanksMulti.next(this.banks.filter(function (bank) { return bank.value.toLowerCase().indexOf(search) > -1; }));
     };
     __decorate([
         core_1.ViewChild('select')

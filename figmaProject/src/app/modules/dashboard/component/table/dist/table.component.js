@@ -210,14 +210,14 @@ var TableComponent = /** @class */ (function () {
     };
     TableComponent.prototype.applyCategoryFilter = function (specialities) {
         var _this = this;
-        specialities.map(function (item) { return item.name; });
+        specialities.map(function (item) { return item.value; });
         var mappingObject = {};
         this.speicialityMapId.forEach(function (obj) {
             mappingObject[obj.name] = obj.id;
         });
         var mapIdData = [];
         specialities.map(function (data) {
-            mapIdData.push(parseInt(mappingObject[data.name]));
+            mapIdData.push(parseInt(mappingObject[data.value]));
         });
         this.dashBoardService.appointmentHeader.update({
             currentSpeciality: mapIdData

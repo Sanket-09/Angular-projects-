@@ -27,29 +27,37 @@ var FilterChipsComponent = /** @class */ (function () {
         this.allchip = [];
         this.allChipEmit = [];
         this.filterService.filterChangedSpeciality$.subscribe(function (speciality) {
-            _this.updateFruits(speciality);
-            console.log(speciality);
+            _this.updateList(speciality);
         });
         this.filterService.filterChangedCategory$.subscribe(function (category) {
-            _this.updateFruits(category);
-            console.log(category, typeof category);
+            _this.updateList(category);
         });
         this.filterService.filterChangedVisit$.subscribe(function (visitType) {
-            _this.updateFruits(visitType);
+            _this.updateList(visitType);
         });
     }
     FilterChipsComponent.prototype.clearList = function () {
-        this.showClearButton = false;
+        this.showClearButton = true;
         this.fruits = [];
+        this.filterService.emitFilterCategory([]);
+        this.filterService.emitFilterSpeciality([]);
+        this.filterService.emitFilterVisit([]);
+    };
+    FilterChipsComponent.prototype.updateList = function (list) {
+        this.updateFruits(list);
     };
     FilterChipsComponent.prototype.updateFruits = function (speciality) {
         var _this = this;
-        this.showClearButton = true;
         this.fruits = [];
         this.chipVisit = [];
         this.chipSpeciality = [];
         this.chipCategory = [];
         this.allchip = [];
+        if (speciality.length > 4) {
+            this.showClearButton = true;
+        }
+        else
+            this.showClearButton = false;
         speciality.forEach(function (obj) {
             Object.keys(obj).forEach(function (key) {
                 if (typeof obj[key] === 'string') {
@@ -87,8 +95,6 @@ var FilterChipsComponent = /** @class */ (function () {
     // }
     FilterChipsComponent.prototype.remove = function (fruit) {
         console.log('the lenght of the array is  ', this.fruits.length);
-        if (this.fruits.length <= 1)
-            this.showClearButton = false;
         console.log('chip removed called');
         console.log(this.showClearButton);
         var currentItemDelete = fruit.name;

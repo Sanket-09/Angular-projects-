@@ -10,9 +10,8 @@
         <i class="fa fa-times"></i>
       </button>
     </mat-chip>
+    <button class="clearAllBtn" *ngIf="showClearButton" (click)="clearList()">
+      Clear All
+    </button>
   </mat-chip-list>
-
-  <button class="clearAllBtn" *ngIf="showClearButton" (click)="clearList()">
-    Clear All
-  </button>
 </span>

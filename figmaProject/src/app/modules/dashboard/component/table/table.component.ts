@@ -284,7 +284,7 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   applyCategoryFilter(specialities: any) {
-    specialities.map((item: { name: any }) => item.name)
+    specialities.map((item: { value: any }) => item.value)
 
     const mappingObject: any = {}
     this.speicialityMapId.forEach((obj: any) => {
@@ -294,7 +294,7 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
     const mapIdData: any[] = []
 
     specialities.map((data: any) => {
-      mapIdData.push(parseInt(mappingObject[data.name]))
+      mapIdData.push(parseInt(mappingObject[data.value]))
     })
 
     this.dashBoardService.appointmentHeader.update({
