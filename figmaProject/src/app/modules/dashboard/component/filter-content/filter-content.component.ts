@@ -118,6 +118,18 @@ export class FilterContentComponent implements OnInit {
         bgColor: 'white',
       },
     ]
+
+    const preSelectedCard: any = this.cards.find(
+      (card) => card.value2 == 'Total Request'
+    )
+
+    console.log(preSelectedCard)
+
+    this.selectedCard = preSelectedCard
+    this.isSelected(preSelectedCard)
+    this.selectCardIcon(preSelectedCard)
+    this.applyFilter(preSelectedCard.value2)
+    this.isSelectedIcon(preSelectedCard)
   }
 
   selectedCard: any

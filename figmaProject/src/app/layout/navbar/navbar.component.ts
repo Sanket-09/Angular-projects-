@@ -33,6 +33,12 @@ export class NavbarComponent implements OnInit {
       this.sideNav[6].notif = this.sideNavData.dietician
       this.sideNav[7].notif = this.sideNavData.psychologist
     })
+
+    const preSelected = this.sideNav.find(
+      (nav) => nav.viewValue === 'Physician Appointments'
+    )
+
+    this.selectCard(preSelected!)
   }
 
   sideNav: sideNavs[] = [

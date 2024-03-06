@@ -75,6 +75,8 @@ var NavbarComponent = /** @class */ (function () {
             _this.sideNav[6].notif = _this.sideNavData.dietician;
             _this.sideNav[7].notif = _this.sideNavData.psychologist;
         });
+        var preSelected = this.sideNav.find(function (nav) { return nav.viewValue === 'Physician Appointments'; });
+        this.selectCard(preSelected);
     };
     NavbarComponent.prototype.selectCard = function (sideNav) {
         this.sideNav.forEach(function (nav) { return (nav.selected = false); }); // Deselect all cards

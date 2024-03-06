@@ -85,6 +85,11 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   filterSubscriptionCategory: Subscription
   filterSubscriptionVisit: Subscription
   filterSubscriptionSearch: Subscription
+  filterSubscriptionPrefStart: Subscription
+  filterSubscriptionPrefEnd: Subscription
+
+  filterSubscriptionReqStart: Subscription
+  filterSubscriptionReqEnd: Subscription
 
   constructor(
     private tabService: TabService,
@@ -117,6 +122,26 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
     this.filterSubscriptionCategory =
       this.filterService.filterChangedCategory$.subscribe((filter) => {
         this.applyCategoryFilter(filter)
+      })
+
+    this.filterSubscriptionPrefStart =
+      this.filterService.filterChangedPrefDateStart$.subscribe((filter) => {
+        this.applyDateFilterPrefStart(filter)
+      })
+
+    this.filterSubscriptionPrefEnd =
+      this.filterService.filterChangedPrefDateEnd$.subscribe((filter) => {
+        this.applyDateFilterPrefEnd(filter)
+      })
+
+    this.filterSubscriptionReqStart =
+      this.filterService.filterChangedReqDateStart$.subscribe((filter) => {
+        this.applyDateFilterReqStart(filter)
+      })
+
+    this.filterSubscriptionReqEnd =
+      this.filterService.filterChangedReqDateEnd$.subscribe((filter) => {
+        this.applyDateFilterReqEnd(filter)
       })
   }
 
@@ -165,6 +190,67 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
     })
   }
 
+  applyDateFilterPrefStart(startDate: string) {
+    this.dashBoardService.appointmentHeader.update({
+      currentPrefDateStart: startDate,
+    })
+
+    let response = this.dashBoardService.getAppointmentTotalList()
+    response.subscribe((data) => {
+      // Rest of the code
+      this.filteredDataSource.data = data.data[0].service_list
+      this.filteredDataSource.paginator = this.paginator
+      this.dashBoardService.notifyDataUpdated()
+    })
+  }
+
+  applyDateFilterPrefEnd(endDate: string) {
+    this.dashBoardService.appointmentHeader.update({
+      currentPrefDateEnd: endDate,
+    })
+
+    setTimeout(() => {
+      let response = this.dashBoardService.getAppointmentTotalList()
+      response.subscribe((data) => {
+        // Rest of the code
+        this.filteredDataSource.data = data.data[0].service_list
+        this.filteredDataSource.paginator = this.paginator
+        this.dashBoardService.notifyDataUpdated()
+      })
+    }, 200)
+  }
+
+  applyDateFilterReqStart(startDate: string) {
+    this.dashBoardService.appointmentHeader.update({
+      currentReqDateStart: startDate,
+    })
+
+    let response = this.dashBoardService.getAppointmentTotalList()
+    response.subscribe((data) => {
+      // Rest of the code
+      this.filteredDataSource.data = data.data[0].service_list
+      this.filteredDataSource.paginator = this.paginator
+      this.dashBoardService.notifyDataUpdated()
+    })
+  }
+
+  applyDateFilterReqEnd(endDate: string) {
+    console.log(endDate)
+    this.dashBoardService.appointmentHeader.update({
+      currentReqDateEnd: endDate,
+    })
+
+    setTimeout(() => {
+      let response = this.dashBoardService.getAppointmentTotalList()
+      response.subscribe((data) => {
+        // Rest of the code
+        this.filteredDataSource.data = data.data[0].service_list
+        this.filteredDataSource.paginator = this.paginator
+        this.dashBoardService.notifyDataUpdated()
+      })
+    }, 100)
+  }
+
   applySpecialityFilter(specialities: any) {
     const selectedSpecialities = specialities.map(
       (item: { value: any }) => item.value
@@ -198,9 +284,7 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   applyCategoryFilter(specialities: any) {
-    const selectedSpecialities = specialities.map(
-      (item: { name: any }) => item.name
-    )
+    specialities.map((item: { name: any }) => item.name)
 
     const mappingObject: any = {}
     this.speicialityMapId.forEach((obj: any) => {
@@ -209,7 +293,7 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
 
     const mapIdData: any[] = []
 
-    const mapId = specialities.map((data: any) => {
+    specialities.map((data: any) => {
       mapIdData.push(parseInt(mappingObject[data.name]))
     })
 

@@ -8,6 +8,8 @@ import { FormGroup, FormControl } from '@angular/forms'
 import { MatSelectChange } from '@angular/material/select'
 
 import { FilterService } from '../../../shared/services/filter.service'
+import { json } from 'body-parser'
+import { JsonPipe } from '@angular/common'
 
 @Component({
   selector: 'app-range-date-picker',
@@ -22,12 +24,13 @@ export class RangeDatePickerComponent {
   emittedVisitType: any
   transformedArray: any
 
+  handleDateFilterChange(event: any) {}
+
   handleVisitFilterDataChange(event: any) {
     this.transformedArray = event.value.map((value: any, index: any) => ({
       key: index,
       value,
     }))
-   
 
     //  if(event.isUserInput)
     //  {
@@ -70,11 +73,31 @@ export class RangeDatePickerComponent {
     end: new FormControl(),
   })
 
+  range1 = new FormGroup({
+    start1: new FormControl(),
+    end1: new FormControl(),
+  })
+
+  preferredDateChange() {
+    const parsedValue = JSON.parse(JSON.stringify(this.range.value))
+    const startValue = parsedValue.start.substr(0, 10)
+    const endValue = parsedValue.end.substr(0, 10)
+
+    this.FilterService.emitFilterPrefDate(startValue, endValue)
+  }
+
+  requestedDateChange() {
+    const parsedValue1 = JSON.parse(JSON.stringify(this.range1.value))
+    const startValue1 = parsedValue1.start1.substr(0, 10)
+    const endValue1 = parsedValue1.end1.substr(0, 10)
+
+    this.FilterService.emitFilterReqDate(startValue1, endValue1)
+  }
+
   showFilterOptions: boolean = false
 
   showFilter() {
     this.showFilterOptions = !this.showFilterOptions
-   
   }
 
   constructor(private FilterService: FilterService) {}

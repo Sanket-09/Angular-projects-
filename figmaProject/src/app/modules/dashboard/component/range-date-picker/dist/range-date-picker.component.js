@@ -18,6 +18,10 @@ var RangeDatePickerComponent = /** @class */ (function () {
             start: new forms_1.FormControl(),
             end: new forms_1.FormControl()
         });
+        this.range1 = new forms_1.FormGroup({
+            start1: new forms_1.FormControl(),
+            end1: new forms_1.FormControl()
+        });
         this.showFilterOptions = false;
         this.speciality = new forms_1.FormControl();
         // specs: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
@@ -46,6 +50,7 @@ var RangeDatePickerComponent = /** @class */ (function () {
             { key: 3, value: 'Home Visit' },
         ];
     }
+    RangeDatePickerComponent.prototype.handleDateFilterChange = function (event) { };
     RangeDatePickerComponent.prototype.handleVisitFilterDataChange = function (event) {
         this.transformedArray = event.value.map(function (value, index) { return ({
             key: index,
@@ -78,6 +83,18 @@ var RangeDatePickerComponent = /** @class */ (function () {
     RangeDatePickerComponent.prototype.handleFilterDataChange = function ($event) { };
     RangeDatePickerComponent.prototype.handleStatusFilterDataChange = function ($event) {
         this.FilterService.emitFilter($event.value);
+    };
+    RangeDatePickerComponent.prototype.preferredDateChange = function () {
+        var parsedValue = JSON.parse(JSON.stringify(this.range.value));
+        var startValue = parsedValue.start.substr(0, 10);
+        var endValue = parsedValue.end.substr(0, 10);
+        this.FilterService.emitFilterPrefDate(startValue, endValue);
+    };
+    RangeDatePickerComponent.prototype.requestedDateChange = function () {
+        var parsedValue1 = JSON.parse(JSON.stringify(this.range1.value));
+        var startValue1 = parsedValue1.start1.substr(0, 10);
+        var endValue1 = parsedValue1.end1.substr(0, 10);
+        this.FilterService.emitFilterReqDate(startValue1, endValue1);
     };
     RangeDatePickerComponent.prototype.showFilter = function () {
         this.showFilterOptions = !this.showFilterOptions;

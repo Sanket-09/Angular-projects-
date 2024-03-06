@@ -53,6 +53,22 @@ var TableComponent = /** @class */ (function () {
             this.filterService.filterChangedCategory$.subscribe(function (filter) {
                 _this.applyCategoryFilter(filter);
             });
+        this.filterSubscriptionPrefStart =
+            this.filterService.filterChangedPrefDateStart$.subscribe(function (filter) {
+                _this.applyDateFilterPrefStart(filter);
+            });
+        this.filterSubscriptionPrefEnd =
+            this.filterService.filterChangedPrefDateEnd$.subscribe(function (filter) {
+                _this.applyDateFilterPrefEnd(filter);
+            });
+        this.filterSubscriptionReqStart =
+            this.filterService.filterChangedReqDateStart$.subscribe(function (filter) {
+                _this.applyDateFilterReqStart(filter);
+            });
+        this.filterSubscriptionReqEnd =
+            this.filterService.filterChangedReqDateEnd$.subscribe(function (filter) {
+                _this.applyDateFilterReqEnd(filter);
+            });
     }
     TableComponent.prototype.getRecord = function (data) {
         var queryParams = {};
@@ -112,6 +128,63 @@ var TableComponent = /** @class */ (function () {
             _this.dashBoardService.notifyDataUpdated();
         });
     };
+    TableComponent.prototype.applyDateFilterPrefStart = function (startDate) {
+        var _this = this;
+        this.dashBoardService.appointmentHeader.update({
+            currentPrefDateStart: startDate
+        });
+        var response = this.dashBoardService.getAppointmentTotalList();
+        response.subscribe(function (data) {
+            // Rest of the code
+            _this.filteredDataSource.data = data.data[0].service_list;
+            _this.filteredDataSource.paginator = _this.paginator;
+            _this.dashBoardService.notifyDataUpdated();
+        });
+    };
+    TableComponent.prototype.applyDateFilterPrefEnd = function (endDate) {
+        var _this = this;
+        this.dashBoardService.appointmentHeader.update({
+            currentPrefDateEnd: endDate
+        });
+        setTimeout(function () {
+            var response = _this.dashBoardService.getAppointmentTotalList();
+            response.subscribe(function (data) {
+                // Rest of the code
+                _this.filteredDataSource.data = data.data[0].service_list;
+                _this.filteredDataSource.paginator = _this.paginator;
+                _this.dashBoardService.notifyDataUpdated();
+            });
+        }, 200);
+    };
+    TableComponent.prototype.applyDateFilterReqStart = function (startDate) {
+        var _this = this;
+        this.dashBoardService.appointmentHeader.update({
+            currentReqDateStart: startDate
+        });
+        var response = this.dashBoardService.getAppointmentTotalList();
+        response.subscribe(function (data) {
+            // Rest of the code
+            _this.filteredDataSource.data = data.data[0].service_list;
+            _this.filteredDataSource.paginator = _this.paginator;
+            _this.dashBoardService.notifyDataUpdated();
+        });
+    };
+    TableComponent.prototype.applyDateFilterReqEnd = function (endDate) {
+        var _this = this;
+        console.log(endDate);
+        this.dashBoardService.appointmentHeader.update({
+            currentReqDateEnd: endDate
+        });
+        setTimeout(function () {
+            var response = _this.dashBoardService.getAppointmentTotalList();
+            response.subscribe(function (data) {
+                // Rest of the code
+                _this.filteredDataSource.data = data.data[0].service_list;
+                _this.filteredDataSource.paginator = _this.paginator;
+                _this.dashBoardService.notifyDataUpdated();
+            });
+        }, 100);
+    };
     TableComponent.prototype.applySpecialityFilter = function (specialities) {
         var _this = this;
         var selectedSpecialities = specialities.map(function (item) { return item.value; });
@@ -137,13 +210,13 @@ var TableComponent = /** @class */ (function () {
     };
     TableComponent.prototype.applyCategoryFilter = function (specialities) {
         var _this = this;
-        var selectedSpecialities = specialities.map(function (item) { return item.name; });
+        specialities.map(function (item) { return item.name; });
         var mappingObject = {};
         this.speicialityMapId.forEach(function (obj) {
             mappingObject[obj.name] = obj.id;
         });
         var mapIdData = [];
-        var mapId = specialities.map(function (data) {
+        specialities.map(function (data) {
             mapIdData.push(parseInt(mappingObject[data.name]));
         });
         this.dashBoardService.appointmentHeader.update({

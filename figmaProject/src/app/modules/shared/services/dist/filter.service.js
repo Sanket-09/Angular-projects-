@@ -17,6 +17,10 @@ var FilterService = /** @class */ (function () {
         this.filterSubjectVisitObj = new rxjs_1.Subject();
         this.filterSubjectCategoryObj = new rxjs_1.Subject();
         this.chipMethodSubject = new rxjs_1.Subject();
+        this.filterSubjectPrefDateStart = new rxjs_1.Subject();
+        this.filterSubjectPrefDateEnd = new rxjs_1.Subject();
+        this.filterSubjectReqDateStart = new rxjs_1.Subject();
+        this.filterSubjectReqDateEnd = new rxjs_1.Subject();
         this.chipMethodCalled$ = this.chipMethodSubject.asObservable();
         this.data = [];
         this.dataVisit = [];
@@ -25,9 +29,21 @@ var FilterService = /** @class */ (function () {
         this.filterChangedCategory$ = this.filterSubjectCategoryObj.asObservable();
         this.filterChangedSearch$ = this.filterSubject.asObservable();
         this.filterChangedVisit$ = this.filterSubjectVisitObj.asObservable();
+        this.filterChangedPrefDateStart$ = this.filterSubjectPrefDateStart.asObservable();
+        this.filterChangedPrefDateEnd$ = this.filterSubjectPrefDateEnd.asObservable();
+        this.filterChangedReqDateStart$ = this.filterSubjectReqDateStart.asObservable();
+        this.filterChangedReqDateEnd$ = this.filterSubjectReqDateEnd.asObservable();
     }
     FilterService.prototype.chipCallMethod = function (chipSpecialityEvent) {
         this.chipMethodSubject.next(chipSpecialityEvent);
+    };
+    FilterService.prototype.emitFilterPrefDate = function (start, end) {
+        this.filterSubjectPrefDateStart.next(start);
+        this.filterSubjectPrefDateEnd.next(end);
+    };
+    FilterService.prototype.emitFilterReqDate = function (start, end) {
+        this.filterSubjectReqDateStart.next(start);
+        this.filterSubjectReqDateEnd.next(end);
     };
     FilterService.prototype.emitFilterSearch = function (search) {
         this.filterSubject.next(search);

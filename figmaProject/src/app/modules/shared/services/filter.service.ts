@@ -17,6 +17,10 @@ export class FilterService {
   private filterSubjectVisitObj = new Subject<object>()
   private filterSubjectCategoryObj = new Subject<object>()
   private chipMethodSubject = new Subject<void>()
+  private filterSubjectPrefDateStart = new Subject<any>()
+  private filterSubjectPrefDateEnd = new Subject<any>()
+  private filterSubjectReqDateStart = new Subject<any>()
+  private filterSubjectReqDateEnd = new Subject<any>()
 
   chipMethodCalled$ = this.chipMethodSubject.asObservable()
 
@@ -35,6 +39,20 @@ export class FilterService {
   filterChangedCategory$ = this.filterSubjectCategoryObj.asObservable()
   filterChangedSearch$ = this.filterSubject.asObservable()
   filterChangedVisit$ = this.filterSubjectVisitObj.asObservable()
+  filterChangedPrefDateStart$ = this.filterSubjectPrefDateStart.asObservable()
+  filterChangedPrefDateEnd$ = this.filterSubjectPrefDateEnd.asObservable()
+  filterChangedReqDateStart$ = this.filterSubjectReqDateStart.asObservable()
+  filterChangedReqDateEnd$ = this.filterSubjectReqDateEnd.asObservable()
+
+  emitFilterPrefDate(start: string, end: string) {
+    this.filterSubjectPrefDateStart.next(start)
+    this.filterSubjectPrefDateEnd.next(end)
+  }
+
+  emitFilterReqDate(start: string, end: string) {
+    this.filterSubjectReqDateStart.next(start)
+    this.filterSubjectReqDateEnd.next(end)
+  }
 
   emitFilterSearch(search: string) {
     this.filterSubject.next(search)

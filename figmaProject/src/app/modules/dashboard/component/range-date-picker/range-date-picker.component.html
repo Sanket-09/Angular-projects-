@@ -1,6 +1,7 @@
 <span class="top-el">
   <span class="datefilter">
-    <mat-form-field appearance="outline" class="dateRangePickerComponent">
+    <mat-form-field appearance="outline" class="dateRangePickerCompone">
+      <mat-label style="color: #525f75">Preferred Consultation Date</mat-label>
       <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
         <input
           matStartDate
@@ -20,7 +21,12 @@
       <mat-date-range-picker #picker>
         <mat-datepicker-actions>
           <button mat-button matDatepickerCancel>Cancel</button>
-          <button mat-raised-button color="primary" matDatepickerApply>
+          <button
+            mat-raised-button
+            color="primary"
+            matDatepickerApply
+            (click)="preferredDateChange()"
+          >
             Apply
           </button>
         </mat-datepicker-actions>
@@ -49,18 +55,19 @@
 
   <span style="margin-right: 10px">
     <mat-form-field appearance="outline">
-      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+      <mat-label style="color: #525f75">Requested Consultation Date</mat-label>
+      <mat-date-range-input [formGroup]="range1" [rangePicker]="picker">
         <input
           matStartDate
           readonly
-          formControlName="start"
+          formControlName="start1"
           placeholder="Start date"
           style="color: red"
         />
         <input
           matEndDate
           readonly
-          formControlName="end"
+          formControlName="end1"
           placeholder="End date"
         />
       </mat-date-range-input>
@@ -69,7 +76,12 @@
       <mat-date-range-picker #picker>
         <mat-datepicker-actions>
           <button mat-button matDatepickerCancel>Cancel</button>
-          <button mat-raised-button color="primary" matDatepickerApply>
+          <button
+            mat-raised-button
+            color="primary"
+            matDatepickerApply
+            (click)="requestedDateChange()"
+          >
             Apply
           </button>
         </mat-datepicker-actions>

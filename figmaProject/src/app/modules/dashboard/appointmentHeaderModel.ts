@@ -17,6 +17,10 @@ export class AppointmentHeader {
     currentCategory?: string[]
     currentVisitType?: string[]
     currentSpeciality?: string[]
+    currentPrefDateStart?: string
+    currentPrefDateEnd?: string
+    currentReqDateStart?: string
+    currentReqDateEnd?: string
   }): void {
     if (params.currentStatus !== undefined) {
       this.selectedCard = params.currentStatus
@@ -29,6 +33,19 @@ export class AppointmentHeader {
     }
     if (params.currentSpeciality !== undefined) {
       this.hsm_id = params.currentSpeciality
+    }
+    if (params.currentPrefDateStart !== undefined) {
+      this.preferred_date_from = params.currentPrefDateStart
+    }
+    if (params.currentPrefDateEnd !== undefined) {
+      this.preferred_date_to = params.currentPrefDateEnd
+    }
+
+    if (params.currentReqDateStart !== undefined) {
+      this.requested_date_from = params.currentReqDateStart
+    }
+    if (params.currentReqDateEnd !== undefined) {
+      this.requested_date_to = params.currentReqDateEnd
     }
   }
 }

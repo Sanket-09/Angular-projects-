@@ -88,6 +88,13 @@ var FilterContentComponent = /** @class */ (function () {
                 bgColor: 'white'
             },
         ];
+        var preSelectedCard = this.cards.find(function (card) { return card.value2 == 'Total Request'; });
+        console.log(preSelectedCard);
+        this.selectedCard = preSelectedCard;
+        this.isSelected(preSelectedCard);
+        this.selectCardIcon(preSelectedCard);
+        this.applyFilter(preSelectedCard.value2);
+        this.isSelectedIcon(preSelectedCard);
     };
     FilterContentComponent.prototype.selectCard = function (card) {
         this.selectedCard = card;
