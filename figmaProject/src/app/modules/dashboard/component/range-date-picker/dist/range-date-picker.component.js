@@ -9,11 +9,13 @@ exports.__esModule = true;
 exports.RangeDatePickerComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var moment = require("moment");
 var RangeDatePickerComponent = /** @class */ (function () {
-    function RangeDatePickerComponent(FilterService) {
+    function RangeDatePickerComponent(cdRef, FilterService) {
+        var _this = this;
+        this.cdRef = cdRef;
         this.FilterService = FilterService;
         this.selectedValuesChange = new core_1.EventEmitter();
-        this.selectedValues = [];
         this.range = new forms_1.FormGroup({
             start: new forms_1.FormControl(),
             end: new forms_1.FormControl()
@@ -49,24 +51,26 @@ var RangeDatePickerComponent = /** @class */ (function () {
             { key: 2, value: 'Tele-consulation' },
             { key: 3, value: 'Home Visit' },
         ];
+        this.subscription = this.FilterService.chipMethodCalled$.subscribe(function (chipEmitList) {
+            _this.onChipMethodCalled(chipEmitList);
+        });
     }
     RangeDatePickerComponent.prototype.handleDateFilterChange = function (event) { };
-    RangeDatePickerComponent.prototype.handleVisitFilterDataChange = function (event) {
+    RangeDatePickerComponent.prototype.handleVisitFilterDataChange = function (event, action) {
+        if (action === 'remove') {
+            this.bufferArray = this.speciality.value;
+            this.bufferArray = this.bufferArray.filter(function (value) { return value != event; });
+            this.speciality.setValue(this.bufferArray);
+        }
         this.transformedArray = event.value.map(function (value, index) { return ({
             key: index,
             value: value
         }); });
-        //  if(event.isUserInput)
-        //  {
-        //   console.log("inside event.userinput")
-        //   if(event.selected){
-        //     console.log("event selected")
-        //   }
-        //   else{
-        //     console.log("event deselected")
-        //     this.selectedValues = this.selectedValues.filter(value => value !== event.value)
-        //   }
-        //  }
+        console.log(this.speciality.value);
+    };
+    RangeDatePickerComponent.prototype.onChipMethodCalled = function (chipEmitList) {
+        this.handleVisitFilterDataChange(chipEmitList, 'remove');
+        this.cdRef.detectChanges();
     };
     // logObjectProperties(obj: any){
     //   if (typeof obj === 'object' && obj !== null) {
@@ -86,14 +90,15 @@ var RangeDatePickerComponent = /** @class */ (function () {
     };
     RangeDatePickerComponent.prototype.preferredDateChange = function () {
         var parsedValue = JSON.parse(JSON.stringify(this.range.value));
-        var startValue = parsedValue.start.substr(0, 10);
-        var endValue = parsedValue.end.substr(0, 10);
+        console.log(this.range.value);
+        var startValue = moment(parsedValue.start).format('YYYY-MM-DD');
+        var endValue = moment(parsedValue.end).format('YYYY-MM-DD');
         this.FilterService.emitFilterPrefDate(startValue, endValue);
     };
     RangeDatePickerComponent.prototype.requestedDateChange = function () {
         var parsedValue1 = JSON.parse(JSON.stringify(this.range1.value));
-        var startValue1 = parsedValue1.start1.substr(0, 10);
-        var endValue1 = parsedValue1.end1.substr(0, 10);
+        var startValue1 = moment(parsedValue1.start1).format('YYYY-MM-DD');
+        var endValue1 = moment(parsedValue1.end1).format('YYYY-MM-DD');
         this.FilterService.emitFilterReqDate(startValue1, endValue1);
     };
     RangeDatePickerComponent.prototype.showFilter = function () {

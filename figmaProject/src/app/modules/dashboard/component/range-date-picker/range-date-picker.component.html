@@ -120,10 +120,12 @@
   <span class="filterTile1">
     <mat-form-field appearance="outline" class="specialityDropdownContainer">
       <mat-select
+       
         placeholder="Physician Visit Type"
         [formControl]="speciality"
         multiple
-        (selectionChange)="handleVisitFilterDataChange($event)"
+        (selectionChange)="handleVisitFilterDataChange($event , 'add')"
+        #select
       >
         <mat-option
           *ngFor="let physicianVisit of physicianVisitType"
@@ -134,10 +136,18 @@
         <span class="footerBtn">
           <footer>
             <span>
-              <button (click)="cancel()" mat-button class="cancelbtn">
+              <button
+                (click)="cancel(); select.close()"
+                mat-button
+                class="cancelbtn"
+              >
                 Cancel
               </button>
-              <button (click)="submitVisit()" mat-button class="submitbtn">
+              <button
+                (click)="submitVisit(); select.close()"
+                mat-button
+                class="submitbtn"
+              >
                 Apply
               </button>
             </span>

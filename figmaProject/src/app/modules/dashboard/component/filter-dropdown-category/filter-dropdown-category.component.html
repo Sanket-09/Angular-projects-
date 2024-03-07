@@ -1,7 +1,7 @@
 <mat-form-field appearance="outline" class="specialityDropdownContainer">
   <mat-select
     [(ngModel)]="selectedValues"
-    (selectionChange)="onSelectionChange($event)"
+    (selectionChange)="onSelectionChange($event, 'add')"
     [formControl]="bankMultiCtrl"
     placeholder="Physician Category"
     [multiple]="true"
@@ -31,10 +31,18 @@
     <span class="footerBtn">
       <footer>
         <span>
-          <button mat-button class="cancelbtn" (click)="cancelAll()">
+          <button
+            mat-button
+            class="cancelbtn"
+            (click)="cancelAll(); select.close()"
+          >
             Cancel
           </button>
-          <button mat-button class="submitbtn" (click)="logSelectedValues()">
+          <button
+            mat-button
+            class="submitbtn"
+            (click)="logSelectedValues(); select.close()"
+          >
             Apply
           </button>
         </span>

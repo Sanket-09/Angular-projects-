@@ -1,5 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import {
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -30,16 +31,17 @@ interface chipVisitEmit {
 })
 export class FilterChipsComponent implements OnInit {
   clearList() {
-    this.showClearButton = true
+    this.showClearButton = false
     this.fruits = []
     this.filterService.emitFilterCategory([])
     this.filterService.emitFilterSpeciality([])
     this.filterService.emitFilterVisit([])
   }
 
-  dataChip: any
-
-  constructor(private filterService: FilterService) {
+  constructor(
+    private filterService: FilterService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.filterService.filterChangedSpeciality$.subscribe((speciality) => {
       this.updateList(speciality)
     })
@@ -58,19 +60,17 @@ export class FilterChipsComponent implements OnInit {
   }
 
   updateFruits(speciality: any): void {
-    this.fruits = []
-    this.chipVisit = []
-    this.chipSpeciality = []
-    this.chipCategory = []
-    this.allchip = []
-
-    if (speciality.length > 4) {
-      this.showClearButton = true
-    } else this.showClearButton = false
+    // this.fruits = []
+    // this.chipVisit = []
+    // this.chipSpeciality = []
+    // this.chipCategory = []
 
     speciality.forEach((obj: { [x: string]: string }) => {
       Object.keys(obj).forEach((key) => {
-        if (typeof obj[key] === 'string') {
+        if (
+          typeof obj[key] === 'string' &&
+          !this.fruits.find((o: any) => o.name == obj[key])
+        ) {
           this.fruits.push({ name: obj[key] })
 
           if (
@@ -79,23 +79,22 @@ export class FilterChipsComponent implements OnInit {
             obj[key] == 'Other Appointments'
           ) {
             this.chipVisit.push({ key1: 1, value: obj[key] })
-            this.allchip.push({ key1: 1, value: obj[key] })
-          }
-
-          if (
+          } else if (
             obj[key] == 'Hospital Visit' ||
             obj[key] == 'Tele-consultation' ||
             obj[key] == 'Home Visit'
           ) {
             this.chipSpeciality.push({ key1: 1, value: obj[key] })
-            this.allchip.push({ key1: 1, value: obj[key] })
           } else {
             this.chipCategory.push({ key1: 1, value: obj[key] })
-            this.allchip.push({ key1: 1, value: obj[key] })
           }
         }
       })
     })
+
+    if (this.fruits.length > 4) {
+      this.showClearButton = true
+    } else this.showClearButton = false
   }
 
   ngOnInit(): void {}
@@ -110,16 +109,11 @@ export class FilterChipsComponent implements OnInit {
   showClearButton: boolean = false
 
   chipVisit: chipVisit[] = []
-  chipVisitEmit: chipVisitEmit[] = []
 
   chipSpeciality: chipVisit[] = []
-  chipSpecialityEmit: chipVisitEmit[] = []
 
   chipCategory: chipVisit[] = []
-  chipCategoryEmit: chipVisitEmit[] = []
 
-  allchip: chipVisit[] = []
-  allChipEmit: chipVisitEmit[] = []
   // add(event: MatChipInputEvent): void {
   //   console.log(this.selectedValues + "   in input")
   //   const value = (event.value || '').trim();
@@ -133,15 +127,9 @@ export class FilterChipsComponent implements OnInit {
   //   event.chipInput!.clear();
   // }
 
-  remove(fruit: any): void {
-    console.log('the lenght of the array is  ', this.fruits.length)
-
-    console.log('chip removed called')
-    console.log(this.showClearButton)
-
-    const currentItemDelete = fruit.name
-    console.log('item deleted is :  ', currentItemDelete)
-    const index = this.fruits.indexOf(fruit)
+  remove(fruit: any, i: any): void {
+    let currentItemDelete = fruit.name
+    let index = i
 
     if (index >= 0) {
       this.fruits.splice(index, 1)
@@ -151,64 +139,32 @@ export class FilterChipsComponent implements OnInit {
         currentItemDelete == 'Compliance' ||
         currentItemDelete == 'Other Appointments'
       ) {
-        this.chipVisitEmit = this.chipVisit.filter(
-          (item) => item.value !== currentItemDelete
+        this.chipVisit = this.chipVisit.filter(
+          (item: { value: any }) => item.value !== currentItemDelete
         )
-
-        this.allChipEmit = this.allchip.filter(
-          (item) => item.value !== currentItemDelete
-        )
+        this.filterService.emitFilterVisit(this.chipVisit)
+        this.filterService.chipCallMethod(currentItemDelete)
       } else if (
         currentItemDelete == 'Hospital Visit' ||
         currentItemDelete == 'Home Visit' ||
         currentItemDelete == 'Tele-consultation'
       ) {
-        this.chipSpecialityEmit = this.chipSpeciality.filter(
-          (item) => item.value !== currentItemDelete
+        this.chipSpeciality = this.chipSpeciality.filter(
+          (item: { value: any }) => item.value !== currentItemDelete
         )
-
-        this.allChipEmit = this.allchip.filter(
-          (item) => item.value !== currentItemDelete
-        )
+        this.filterService.emitFilterSpeciality(this.chipSpeciality)
+        this.filterService.chipCallMethod(currentItemDelete)
       } else {
-        this.chipCategoryEmit = this.chipCategory.filter(
-          (item) => item.value !== currentItemDelete
+        this.chipCategory = this.chipCategory.filter(
+          (item: { value: any }) => item.value !== currentItemDelete
         )
-
-        this.allChipEmit = this.allchip.filter(
-          (item) => item.value !== currentItemDelete
-        )
+        this.filterService.emitFilterCategory(this.chipCategory)
+        this.filterService.chipCallMethod(currentItemDelete)
       }
 
-      const emitCategory: string[] = this.chipVisit.map((item) => item.value)
-
-      console.log(
-        'the emitted chiplist is :  ',
-        this.chipVisitEmit + '   and its type is  : ',
-        typeof this.chipVisitEmit
-      )
-
-      if (
-        currentItemDelete == 'Escalation' ||
-        currentItemDelete == 'Compliance' ||
-        currentItemDelete == 'Other Appointments'
-      )
-        this.filterService.emitFilterVisit(this.chipVisitEmit)
-      else if (
-        currentItemDelete == 'Hospital Visit' ||
-        currentItemDelete == 'Home Visit' ||
-        currentItemDelete == 'Tele-consultation'
-      )
-        this.filterService.emitFilterSpeciality(this.chipSpecialityEmit)
-      else {
-        console.log(
-          'rmeoveed element from catgegory  :  ',
-          this.chipCategoryEmit
-        )
-        this.filterService.emitFilterCategory(this.chipCategoryEmit)
-      }
-
-      this.filterService.chipCallMethod(this.chipVisitEmit)
+      setTimeout(() => {
+        this.cdr.detectChanges()
+      }, 100)
     }
   }
 }

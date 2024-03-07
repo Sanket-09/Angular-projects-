@@ -123,8 +123,6 @@ export class FilterContentComponent implements OnInit {
       (card) => card.value2 == 'Total Request'
     )
 
-    console.log(preSelectedCard)
-
     this.selectedCard = preSelectedCard
     this.isSelected(preSelectedCard)
     this.selectCardIcon(preSelectedCard)

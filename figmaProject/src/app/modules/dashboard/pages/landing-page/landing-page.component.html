@@ -1,4 +1,4 @@
-<mat-toolbar class="header">
+<mat-toolbar class="header" *ngIf="apiData">
   <span class="back-btn">
     <a href="#"
       ><img src="../../../assets/Left.arrow.svg" alt="back button"
@@ -78,7 +78,7 @@
   </span>
 </mat-toolbar>
 
-<mat-drawer-container class="example-container">
+<mat-drawer-container class="example-container" *ngIf="apiData">
   <mat-drawer mode="side" opened>
     <div class="drawerDiv">Service Requested</div>
     <div class="drawerDiv3">
@@ -151,7 +151,7 @@
     </div>
   </mat-drawer>
 
-  <mat-drawer-content>
+  <mat-drawer-content *ngIf="currentElement">
     <div class="drawerContentDiv">
       Appointment 1 -
       {{ currentElement.physician_requested_date | date | nullToDash }}

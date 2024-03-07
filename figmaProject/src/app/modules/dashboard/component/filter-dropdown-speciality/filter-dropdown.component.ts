@@ -31,7 +31,8 @@ export class FilterDropdownComponent implements OnInit {
   @Output() selectedValuesChange: EventEmitter<string> =
     new EventEmitter<string>()
 
-  selectedValues: string[] = []
+  selectedValues: any
+  something: any
 
   removedValue: any
 
@@ -54,17 +55,17 @@ export class FilterDropdownComponent implements OnInit {
       })
   }
 
-  onSelectionChange($event: any) {
+  onSelectionChange($event: any, action: string) {
     // this.selectedValuesChange.emit(this.selectedValues.join(','));
 
-    if ($event.isUserInput) {
-      if ($event.source.selected) {
-        this.selectedValues.push($event.source.value)
-      } else {
-        this.selectedValues = this.selectedValues.filter(
-          (value) => value !== $event.source.value
-        )
-      }
+    if (action == 'remove') {
+      console.log($event)
+      console.log(this.selectedValues)
+      this.something = this.selectedValues.filter(
+        (value: { value: any }) => value.value !== $event
+      )
+
+      this.selectedValues = this.something
     }
 
     this.cdRef.detectChanges()
@@ -122,9 +123,8 @@ export class FilterDropdownComponent implements OnInit {
   specialityList: any
 
   onChipMethodCalled(chipEmitList: any) {
-    this.selectedValues = [...chipEmitList]
+    this.onSelectionChange(chipEmitList, 'remove')
 
-    this.onSelectionChange(chipEmitList)
     this.cdRef.detectChanges()
   }
 

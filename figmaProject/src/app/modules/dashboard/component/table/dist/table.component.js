@@ -98,20 +98,6 @@ var TableComponent = /** @class */ (function () {
     //   this.cdRef.detectChanges()
     //   console.log('ng do check is called')
     // }
-    TableComponent.prototype.ngOnChanges = function (changes) {
-        var _this = this;
-        this.filterSubscription = this.filterService.filterChanged$.subscribe(function (filter) {
-            _this.applyStatusFilter(filter);
-        });
-        this.filterSubscriptionSpeciality =
-            this.filterService.filterChangedSpeciality$.subscribe(function (filter) {
-                _this.applySpecialityFilter(filter);
-            });
-        this.filterSubscriptionVisit =
-            this.filterService.filterChangedVisit$.subscribe(function (filter) {
-                _this.applyVisitFilter(filter);
-            });
-    };
     TableComponent.prototype.applySearchFilter = function (searchValue) { };
     TableComponent.prototype.applyStatusFilter = function (filterValue) {
         var _this = this;
@@ -183,7 +169,7 @@ var TableComponent = /** @class */ (function () {
                 _this.filteredDataSource.paginator = _this.paginator;
                 _this.dashBoardService.notifyDataUpdated();
             });
-        }, 100);
+        }, 200);
     };
     TableComponent.prototype.applySpecialityFilter = function (specialities) {
         var _this = this;

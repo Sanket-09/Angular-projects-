@@ -11,7 +11,6 @@ var core_1 = require("@angular/core");
 var rxjs_1 = require("rxjs");
 var FilterService = /** @class */ (function () {
     function FilterService() {
-        this.currentSelectedValues = [];
         this.filterSubject = new rxjs_1.Subject();
         this.filterSubjectObj = new rxjs_1.Subject();
         this.filterSubjectVisitObj = new rxjs_1.Subject();
@@ -22,8 +21,6 @@ var FilterService = /** @class */ (function () {
         this.filterSubjectReqDateStart = new rxjs_1.Subject();
         this.filterSubjectReqDateEnd = new rxjs_1.Subject();
         this.chipMethodCalled$ = this.chipMethodSubject.asObservable();
-        this.data = [];
-        this.dataVisit = [];
         this.filterChanged$ = this.filterSubject.asObservable();
         this.filterChangedSpeciality$ = this.filterSubjectObj.asObservable();
         this.filterChangedCategory$ = this.filterSubjectCategoryObj.asObservable();
@@ -53,8 +50,6 @@ var FilterService = /** @class */ (function () {
         // this.emitFilterSpeciality(this.currentFilterSpeciality)
     };
     FilterService.prototype.emitFilterSpeciality = function (speciality) {
-        this.data = [];
-        this.currentFilterSpeciality = speciality;
         // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
         // console.log(filterObj);
         // speciality.push(filterObj);
@@ -67,8 +62,6 @@ var FilterService = /** @class */ (function () {
         // })
     };
     FilterService.prototype.emitFilterCategory = function (speciality) {
-        this.data = [];
-        this.currentFilterSpeciality = speciality;
         // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
         // console.log(filterObj);
         // speciality.push(filterObj);
@@ -81,8 +74,6 @@ var FilterService = /** @class */ (function () {
         // })
     };
     FilterService.prototype.emitFilterVisit = function (visit) {
-        this.dataVisit = [];
-        this.currentFilterVisit = visit;
         // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
         // console.log(filterObj);
         // speciality.push(filterObj);
@@ -93,11 +84,6 @@ var FilterService = /** @class */ (function () {
         //     if (typeof obj[key] === 'string') this.dataVisit.push(obj[key])
         //   })
         // })
-    };
-    FilterService.prototype.applyFilter = function () {
-        this.emitFilterSpeciality(this.currentSelectedValues);
-        this.emitFilter(this.currentFilterStatus);
-        this.emitFilterVisit(this.currentFilterVisit);
     };
     FilterService = __decorate([
         core_1.Injectable({

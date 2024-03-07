@@ -1,8 +1,8 @@
 <span style="display: flex">
   <mat-chip-list #chipList aria-label="Fruit selection">
     <mat-chip
-      *ngFor="let fruit of fruits"
-      (removed)="remove(fruit)"
+      *ngFor="let fruit of fruits; let i = index"
+      (removed)="remove(fruit, i)"
       selectable="false"
     >
       {{ fruit.name }}

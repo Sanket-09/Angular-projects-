@@ -5,11 +5,6 @@ import { BehaviorSubject, Subject } from 'rxjs'
   providedIn: 'root',
 })
 export class FilterService {
-  totalNo: number | undefined
-  currentFilterStatus!: string
-  currentSelectedValues: string[] = []
-  currentFilterType: string | undefined
-
   constructor() {}
 
   private filterSubject = new Subject<string>()
@@ -27,12 +22,6 @@ export class FilterService {
   chipCallMethod(chipSpecialityEvent: any) {
     this.chipMethodSubject.next(chipSpecialityEvent)
   }
-
-  currentFilterSpeciality: any
-  currentFilterVisit: any
-
-  data: string[] = []
-  dataVisit: string[] = []
 
   filterChanged$ = this.filterSubject.asObservable()
   filterChangedSpeciality$ = this.filterSubjectObj.asObservable()
@@ -64,15 +53,10 @@ export class FilterService {
   }
 
   emitFilterSpeciality(speciality: any) {
-    this.data = []
-    this.currentFilterSpeciality = speciality
-
     // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
     // console.log(filterObj);
     // speciality.push(filterObj);
-
     this.filterSubjectObj.next(speciality)
-
     // this.currentFilterSpeciality.forEach((obj: { [x: string]: string }) => {
     //   Object.keys(obj).forEach((key) => {
     //     console.log('key : ' + key + ' - value : ' + obj[key])
@@ -82,15 +66,10 @@ export class FilterService {
   }
 
   emitFilterCategory(speciality: any) {
-    this.data = []
-    this.currentFilterSpeciality = speciality
-
     // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
     // console.log(filterObj);
     // speciality.push(filterObj);
-
     this.filterSubjectCategoryObj.next(speciality)
-
     // this.currentFilterSpeciality.forEach((obj: { [x: string]: string }) => {
     //   Object.keys(obj).forEach((key) => {
     //     console.log('key : ' + key + ' - value : ' + obj[key])
@@ -100,26 +79,15 @@ export class FilterService {
   }
 
   emitFilterVisit(visit: any) {
-    this.dataVisit = []
-    this.currentFilterVisit = visit
-
     // const filterObj = {"key": Math.random() , "value" : this.currentFilter }
     // console.log(filterObj);
     // speciality.push(filterObj);
-
     this.filterSubjectVisitObj.next(visit)
-
     // this.currentFilterVisit.forEach((obj: { [x: string]: string }) => {
     //   Object.keys(obj).forEach((key) => {
     //     console.log('key : ' + key + ' - value : ' + obj[key])
     //     if (typeof obj[key] === 'string') this.dataVisit.push(obj[key])
     //   })
     // })
-  }
-
-  applyFilter() {
-    this.emitFilterSpeciality(this.currentSelectedValues)
-    this.emitFilter(this.currentFilterStatus)
-    this.emitFilterVisit(this.currentFilterVisit)
   }
 }

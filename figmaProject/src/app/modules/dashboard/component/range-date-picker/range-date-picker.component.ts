@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Output,
@@ -10,6 +11,8 @@ import { MatSelectChange } from '@angular/material/select'
 import { FilterService } from '../../../shared/services/filter.service'
 import { json } from 'body-parser'
 import { JsonPipe } from '@angular/common'
+import * as moment from 'moment'
+import { Subscription, buffer } from 'rxjs'
 
 @Component({
   selector: 'app-range-date-picker',
@@ -20,31 +23,36 @@ export class RangeDatePickerComponent {
   @Output() selectedValuesChange: EventEmitter<string> =
     new EventEmitter<string>()
 
-  selectedValues: string[][] = []
+  selectedValues: any
   emittedVisitType: any
+  bufferArray: any
   transformedArray: any
+
+  private subscription: Subscription
 
   handleDateFilterChange(event: any) {}
 
-  handleVisitFilterDataChange(event: any) {
+  handleVisitFilterDataChange(event: any, action: string) {
+    if (action === 'remove') {
+      this.bufferArray = this.speciality.value
+
+      this.bufferArray = this.bufferArray.filter((value: any) => value != event)
+
+      this.speciality.setValue(this.bufferArray)
+    }
+
     this.transformedArray = event.value.map((value: any, index: any) => ({
       key: index,
       value,
     }))
 
-    //  if(event.isUserInput)
-    //  {
+    console.log(this.speciality.value)
+  }
 
-    //   console.log("inside event.userinput")
-    //   if(event.selected){
-    //     console.log("event selected")
+  onChipMethodCalled(chipEmitList: any) {
+    this.handleVisitFilterDataChange(chipEmitList, 'remove')
 
-    //   }
-    //   else{
-    //     console.log("event deselected")
-    //     this.selectedValues = this.selectedValues.filter(value => value !== event.value)
-    //   }
-    //  }
+    this.cdRef.detectChanges()
   }
 
   // logObjectProperties(obj: any){
@@ -80,16 +88,17 @@ export class RangeDatePickerComponent {
 
   preferredDateChange() {
     const parsedValue = JSON.parse(JSON.stringify(this.range.value))
-    const startValue = parsedValue.start.substr(0, 10)
-    const endValue = parsedValue.end.substr(0, 10)
+    console.log(this.range.value)
+    const startValue = moment(parsedValue.start).format('YYYY-MM-DD')
+    const endValue = moment(parsedValue.end).format('YYYY-MM-DD')
 
     this.FilterService.emitFilterPrefDate(startValue, endValue)
   }
 
   requestedDateChange() {
     const parsedValue1 = JSON.parse(JSON.stringify(this.range1.value))
-    const startValue1 = parsedValue1.start1.substr(0, 10)
-    const endValue1 = parsedValue1.end1.substr(0, 10)
+    const startValue1 = moment(parsedValue1.start1).format('YYYY-MM-DD')
+    const endValue1 = moment(parsedValue1.end1).format('YYYY-MM-DD')
 
     this.FilterService.emitFilterReqDate(startValue1, endValue1)
   }
@@ -100,7 +109,16 @@ export class RangeDatePickerComponent {
     this.showFilterOptions = !this.showFilterOptions
   }
 
-  constructor(private FilterService: FilterService) {}
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    private FilterService: FilterService
+  ) {
+    this.subscription = this.FilterService.chipMethodCalled$.subscribe(
+      (chipEmitList: any) => {
+        this.onChipMethodCalled(chipEmitList)
+      }
+    )
+  }
 
   ngOnInit(): void {}
 

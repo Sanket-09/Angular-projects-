@@ -28,7 +28,7 @@ import { DashboardService } from '../../dashboard.service'
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements AfterViewInit, OnChanges, OnInit {
+export class TableComponent implements AfterViewInit, OnInit {
   activeRoute: ActivatedRoute = inject(ActivatedRoute)
 
   speicialityMapId: any
@@ -87,7 +87,6 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
   filterSubscriptionSearch: Subscription
   filterSubscriptionPrefStart: Subscription
   filterSubscriptionPrefEnd: Subscription
-
   filterSubscriptionReqStart: Subscription
   filterSubscriptionReqEnd: Subscription
 
@@ -151,24 +150,6 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
 
   //   console.log('ng do check is called')
   // }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.filterSubscription = this.filterService.filterChanged$.subscribe(
-      (filter) => {
-        this.applyStatusFilter(filter)
-      }
-    )
-
-    this.filterSubscriptionSpeciality =
-      this.filterService.filterChangedSpeciality$.subscribe((filter) => {
-        this.applySpecialityFilter(filter)
-      })
-
-    this.filterSubscriptionVisit =
-      this.filterService.filterChangedVisit$.subscribe((filter) => {
-        this.applyVisitFilter(filter)
-      })
-  }
 
   applySearchFilter(searchValue: string) {}
 
@@ -248,7 +229,7 @@ export class TableComponent implements AfterViewInit, OnChanges, OnInit {
         this.filteredDataSource.paginator = this.paginator
         this.dashBoardService.notifyDataUpdated()
       })
-    }, 100)
+    }, 200)
   }
 
   applySpecialityFilter(specialities: any) {
