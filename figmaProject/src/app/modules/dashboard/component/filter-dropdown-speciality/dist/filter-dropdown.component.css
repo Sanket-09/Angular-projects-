@@ -125,3 +125,16 @@ footer {
 ::ng-deep .customCheckbox .mat-checkbox-frame {
   border-radius: 4px !important;
 }
+
+.mat-option[aria-disabled=true].contains-mat-select-search {
+  position: relative;
+  padding: 0;
+}
+
+.mat-checkbox {
+  margin-top: 5px;
+  padding-left: 16px;
+  font: Mulish;
+  font-size: 12px;
+  color: #001333;
+}

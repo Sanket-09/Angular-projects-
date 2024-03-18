@@ -1,7 +1,7 @@
 <mat-form-field appearance="outline" class="specialityDropdownContainer">
   <mat-select
     [(ngModel)]="selectedValues"
-    (selectionChange)="onSelectionChange($event , 'add')"
+    (selectionChange)="onSelectionChange($event, 'add')"
     [formControl]="bankMultiCtrl"
     placeholder="Speciality"
     [multiple]="true"
@@ -15,12 +15,6 @@
         placeholderLabel="Find speciality"
         noEntriesFoundLabel="'no matching speciality found'"
       >
-        <div
-          class="mat-select-search-custom-header-content"
-          style="display: flex; justify-content: center"
-        >
-          No Matching Speciality Found
-        </div>
       </ngx-mat-select-search>
     </mat-option>
 

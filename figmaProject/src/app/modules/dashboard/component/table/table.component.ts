@@ -51,6 +51,7 @@ export class TableComponent implements AfterViewInit, OnInit {
 
       // Set table value
       this.setTableValue(data)
+      console.log(data)
 
       // Set paginator for filteredDataSource
       this.filteredDataSource.paginator = this.paginator

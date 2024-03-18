@@ -1,0 +1,73 @@
+<p>Below text is interpolated using double curly brackets</p>
+<strong>{{ currentCustomer }}</strong>
+
+<h4>Types of binding are</h4>
+<ul>
+  <li>Interpolation</li>
+  <br />
+  <li>
+    Property Binding
+    <ul>
+      <li>Helps set values for properties of HTML elements or directives.</li>
+      <li>
+        Use property binding to do things such as toggle button features, set
+        paths programmatically, and share values between components.
+      </li>
+      <li>
+        Property binding moves a value in one direction, from a component's
+        property into a target element property.
+      </li>
+      <li>
+        To bind to an element's property, enclose it in square brackets, [],
+        which identifies the property as a target property.
+      </li>
+      <img alt="item" [src]="itemImageUrl" />
+    </ul>
+  </li>
+  <br />
+  <li>
+    Attribute Binding
+    <ul>
+      <li>
+        Attribute binding syntax resembles property binding, but instead of an
+        element property between brackets, you precede the name of the attribute
+        with the prefix attr, followed by a dot
+      </li>
+      <li>
+        <button type="button" [style.background-color]="buttonColor">
+          {{ actionName }}
+        </button>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Event Binding
+    <ul>
+      <li>
+        <button type="button" (myClick)="clickMessage = $event" clickable>
+          click with myClick
+        </button>
+        {{ clickMessage.value }}
+      </li>
+    </ul>
+  </li>
+  <li>
+    Two Way binding
+    <ul>
+      <li>
+        Listen for events and update values simultaneously between parent and
+        child components.
+      </li>
+      <li>Combination of event and property binding</li>
+      <li>
+        <app-two-way-data-binding [(size)]="fontSizePx">
+        </app-two-way-data-binding>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+  Bindings always have two parts: a target which will receive the bound value,
+  and a template expression which produces a value from the model.
+</p>

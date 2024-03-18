@@ -62,30 +62,30 @@ export class ApiServiceService {
       case 'user/get-token-by-secrete-key':
         apiOriginLink = `${environment.apiOriginPmpLink}${environment.pmpURL}${sEndPoint}`
         break
-      case 'lab/service/count':
-      case 'lab/service/list':
-      case 'dietician/service/count':
-      case 'dietician/service/list':
-      case 'psychologist/service/count':
-      case 'psychologist/service/list':
+      case 'lab/service/count': //needed
+      case 'lab/service/list': //needed
+      case 'dietician/service/count': //needed
+      case 'dietician/service/list': //needed
+      case 'psychologist/service/count': //needed
+      case 'psychologist/service/list': //needed
       case 'followup/service/specialty/all':
       case 'followup/service/sidbar/count':
       case 'followup/service/log':
       case 'followup/service/snooze':
       case 'followup/service/service_request':
-      case 'physiotherapy/service/dashboard-count':
-      case 'physiotherapy/service/physiotherapy-list':
-      case 'physician-escalation/service/count':
-      case 'physician-escalation/service/list':
-      case 'physician-appointment/service/count':
-      case 'physician-appointment/service/list':
+      case 'physiotherapy/service/dashboard-count': //needed
+      case 'physiotherapy/service/physiotherapy-list': //needed
+      case 'physician-escalation/service/count': //needed
+      case 'physician-escalation/service/list': //needed
+      case 'physician-appointment/service/count': //done
+      case 'physician-appointment/service/list': //done
       case 'discharge/patient':
       case 'discharge/presigned-url/':
       case 'followup/service/search':
-      case 'nursing-care/service/list':
-      case 'nursing-care/service/count':
-      case 'nursing-home-visit/service/list':
-      case 'nursing-home-visit/service/count':
+      case 'nursing-care/service/list': //needed
+      case 'nursing-care/service/count': //needed
+      case 'nursing-home-visit/service/list': //needed
+      case 'nursing-home-visit/service/count': //needed
       case 'followup/service/getsnooze':
       case 'followup/service/details':
         apiOriginLink = `${environment.apiOriginSrdLink}${environment.srdURL}${sEndPoint}`
@@ -109,52 +109,44 @@ export class ApiServiceService {
     sHeaders: any = null,
     params = ''
   ): Observable<any> {
-    let apiURL = this.getURL(endPoint);
+    let apiURL = this.getURL(endPoint)
     if (!apiURL) {
-      return of({ status: false });
+      return of({ status: false })
     }
     if (params) {
-      const paramsArr = params.toString().split('/');
-      paramsArr.forEach(par => {
-        par = decodeURIComponent(par);
-        const encryptedId = this.encryptionDecryptionService.getEncryptedData(
-          par
-        );
-        const encodedId = encodeURIComponent(encryptedId);
-        apiURL = `${apiURL}${'/'}${encodedId}`;
-      });
+      const paramsArr = params.toString().split('/')
+      paramsArr.forEach((par) => {
+        par = decodeURIComponent(par)
+        const encryptedId =
+          this.encryptionDecryptionService.getEncryptedData(par)
+        const encodedId = encodeURIComponent(encryptedId)
+        apiURL = `${apiURL}${'/'}${encodedId}`
+      })
     }
 
-    let postData = sRequestModel;
-    const bodyData = this.encryptionDecryptionService.getEncryptedData(
-      sRequestModel
-    );
-    postData = { bodyData };
-    let requestOptions = this.getHttpOptions();
+    let postData = sRequestModel
+    const bodyData =
+      this.encryptionDecryptionService.getEncryptedData(sRequestModel)
+    postData = { bodyData }
+    let requestOptions = this.getHttpOptions()
 
     return this.http.post(apiURL, postData, requestOptions).pipe(
       map((result: any) => {
         // debugger
-        let resultData: any = {};
+        let resultData: any = {}
         resultData = this.encryptionDecryptionService.getDecryptedData(
-          result.responseObj,
+          result.responseObj
           // sHeaders
-        );
-        return resultData;
+        )
+        return resultData
         // return result;
       }),
       catchError((error): Observable<any> => {
-        return throwError(error);
+        return throwError(error)
       }),
-      finalize(() => {
-
-      })
-    );
+      finalize(() => {})
+    )
   }
-
-
-
-
 
   getRequest(
     endPoint: string,

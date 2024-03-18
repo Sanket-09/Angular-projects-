@@ -1,0 +1,7 @@
+<app-hero-child
+  (newItemEvent)="addItem($event)"
+  [item]="currentItem"
+></app-hero-child>
+<ul>
+  <li *ngFor="let item of items">{{ item }}</li>
+</ul>

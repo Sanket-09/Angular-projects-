@@ -85,6 +85,7 @@ var TableComponent = /** @class */ (function () {
             _this.filteredDataSource = new table_1.MatTableDataSource(data.data[0].service_list);
             // Set table value
             _this.setTableValue(data);
+            console.log(data);
             // Set paginator for filteredDataSource
             _this.filteredDataSource.paginator = _this.paginator;
         });

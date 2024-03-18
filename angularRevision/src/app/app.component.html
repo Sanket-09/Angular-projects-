@@ -1,0 +1,104 @@
+<h2>LifeCycle Hooks</h2>
+
+<ul>
+  <li>
+    <h3>OnChanges</h3>
+    Respond when Angular sets or resets data-bound input properties. <br />The
+    method receives a SimpleChanges object of current and previous property
+    values. <br />
+    <strong>Costly and happens frequently</strong> <br />
+    If your component has no inputs or you use it without providing any inputs,
+    the framework will not call ngOnChanges().
+  </li>
+
+  <li>
+    <h3>OnInit</h3>
+    Initialize the directive or component after Angular first displays the
+    data-bound properties and sets the directive or component's input
+    properties. <br />ngOnInit() is still called even when ngOnChanges()
+  </li>
+
+  <li>
+    <h3>DoCheck</h3>
+    Detect and act upon changes that Angular can't or won't detect on its own.
+    <br />
+    Called immediately after ngOnChanges() on every change detection run, and
+    immediately after ngOnInit() on the first run.
+  </li>
+
+  <li>
+    <h3>AfterContentInit()</h3>
+    Content Projection <br />
+    Called once after the first ngDoCheck().
+  </li>
+
+  <li>
+    <h3>ngAfterContentChecked()</h3>
+
+    Respond after Angular checks the content projected into the directive or
+    component.
+  </li>
+
+  <li>
+    <h3>ngAfterViewInit()</h3>
+
+    Respond after Angular initializes the component's views and child views, or
+    the view that contains the directive.
+  </li>
+
+  <li>
+    <h3>ngAfterViewChecked()</h3>
+    Respond after Angular checks the component's views and child views, or the
+    view that contains the directive.
+  </li>
+
+  <li>
+    <h3>ngOnDestroy()</h3>
+
+    Cleanup just before Angular destroys the directive or component. Unsubscribe
+    Observables and detach event handlers to avoid memory leaks.
+  </li>
+</ul>
+
+<br /><br />
+
+<h2>Parent - Child Interactions</h2>
+<app-hero-parent></app-hero-parent>
+<br /><br />
+
+<h2>Content Projection</h2>
+<ul>
+  <li>
+    <h4>Single Slot content projection</h4>
+    Accepts content from a single source
+    <app-basic-component
+      ><p>
+        Is content projection cool? , this line goes to replace the ngContent
+      </p>
+    </app-basic-component>
+  </li>
+  <li>
+    <h4>Multi Slot content projection</h4>
+    accept content from multiple source <br />
+    Each slot can specify a CSS selector that determines which content goes into
+    that slot. <br />
+    You accomplish this task by using the select attribute of ng-content
+    <app-multi-content-projection>
+      <p question>This is using the question selector</p>
+      <p>This is the default selector</p>
+    </app-multi-content-projection>
+  </li>
+  <li>
+    <h4>Conditional content projection</h4>
+    render projected content only when specific conditions are met <br />
+    component to accept an <strong>ng-template </strong>element that contains
+    the content you want to conditionally render.
+    <ng-template appExampleZippyContent>
+      It depends on what you do with it.
+    </ng-template>
+  </li>
+</ul>
+<br /><br />
+
+<h2>Templates</h2>
+<app-templates></app-templates>

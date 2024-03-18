@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   eid: 'pLlYbBzmRxco94qOx8yXVwdFJ0Dco829iZj12QuI59ibbb3=KhtGPgH6eUd80xkAvT7srW1h6lCfNiaSEMn/+',
   token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NDEiLCJ1c2VybmFtZSI6IklOVEVSTi1VU0VSIiwibWV0YWlkIjoiMzUzIiwiYXBwX2tleSI6ImhjbV9zcmQiLCJhcHBpZCI6MTQ0LCJpYXQiOjE3MDk3ODQ1MjIsImV4cCI6MTcwOTgyMDUyMn0._NkMoTAXWDkiOAYVcDKAeqTRdNS_DPLfLjJ98Ted0uI',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NDEiLCJ1c2VybmFtZSI6IklOVEVSTi1VU0VSIiwibWV0YWlkIjoiMzUzIiwiYXBwX2tleSI6ImhlYXBzXzM2MF9oY21zIiwiYXBwaWQiOjExLCJpYXQiOjE3MTA1MDAxNzYsImV4cCI6MTcxMDUzNjE3Nn0.uIXaDc8Lit1B7ntN-qtr_F2n1O8a4sw73Z3DqaXK0Y8',
   metaid: '353',
   apiOriginCccLink: 'https://dev.in.heaps.ai',
   apiOriginPmpLink: 'https://dev.in.heaps.ai',
