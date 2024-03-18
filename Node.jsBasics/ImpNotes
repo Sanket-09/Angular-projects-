@@ -1,0 +1,135 @@
+## Nodejs is SINGLE THREADED, EVENT DRIVEN and NON BLOCKING
+
+## REPL
+
+Read the user input
+Evaluate the user input
+Print the user input
+Loop - return and wait for the new input
+
+'\_' 'underscore' is a special variable which stores the result of the previous operation/expression
+
+when a code is executed line by line in a single thread , then it is know as synchronous application
+fs.readFileSync is synchronous
+
+synchronous code are blocking code
+
+Just because a function is taking a callback function in its argument, it doesnt make that function as asynchronous
+
+## BRIEF OVERVIEW OF HOW THE WEB WORKS
+
+Send a request with the address of the server
+Server will respond with the data asked for
+AKA Client Server architecture
+
+DNS - Domain name server
+Special server acting like phone book dictionary of the internet
+DOMAIN NAME IS NOT THE REAL ADDRESS OF THE WEB application
+DNS stores the list of domain names and their IP address
+
+TCP - Transfer control protocol
+Communication protocol of how the data moves on the internet
+TCP/IP Connection is made
+
+The request we send to a server is HTTP
+
+Request has request headers
+it has various meta data information
+Depending of the type of request, we send body accordingly
+
+## HTTP vs HTTPS
+
+HTTPS is secured using TSL/SSL
+
+The webpage will now be sent using HTTP response from the server
+We dont have how a HTTP Request will look like but we do have the access to how the response
+would look like
+
+The server will send back an html file,
+so when we receive the html page then that html will be scanned for its resources
+such as css file , assets, js file
+then the browser will make multiple request to use the associated required files
+
+## TCP/IP
+
+Defines how data travels acorss the web
+TCP converts the data into packets,
+reassembles the data upon reaching its address
+
+## HOW REQ/RES works
+
+Types of URl
+Files based URL
+Resource based URL - we use request handlers
+We create request handlers using routing
+
+fallback routes for non required ending point of routes
+
+In nodejs we cannot directly use static files ( Eg - static assets , script files , css , assets images etc)
+
+## SETTING UP RESPONSE HEADERS
+
+200 is the default status code
+if we do not specify which status code we want on a certain event then it will 200 by default
+You should always set the status code before the response.end() method.
+
+response.writeHead(<status-code> , <Response>)
+
+eg- should be in key:value pair
+
+response.writeHead(200, {
+'Content-Type' : 'text/html',
+'my-header' : ' hellow world '
+});
+
+you can also create your own custom header
+
+## WORKING WITH JSON DATA
+
+JSON DATA vs JS DATA
+
+In json data, the key in key value pair are enclosed in double inverted comma
+
+JSON.parse()
+takes in JSON data as parameter and returns JS Object
+
+## PARSING QUERY STRING FROM URL
+
+import the URL Package
+
+url has a method called parse
+url.parse() has a second parameter of boolean type
+if the boolean is set as true then it will parse the query strings as well
+
+let x = url.parse(request.url , true)
+
+this will return a url object having a query and pathname property
+so how to get them ?
+The ans is object destructuring syntax
+
+The variable name which we speicify inside the destructuring syntax should be exactly same as property required
+
+eg - the property we need are query and pathname then the object destructuring would look like
+
+let{query, pathname} = url.parse(request.url, true)
+
+## CREATING CUSTOM MODULES
+
+Modules are used to make the funcitons more modular
+multiple files would then be able to use the same function in their scope
+
+## EVENT DRIVEN ARCHITECTURE
+
+Event Emitter --> Event Listener --> Event Handler
+
+const server = http.createServer(); // this is event emitter
+
+server.listen(8000, ()=>{
+console.log("This is event listener")
+})
+
+server.on('request' , (req,res)=>{
+console.log("this callback function is the event handler")
+})
+
+## THE SERVER OBJECT INHERITS ALL THE EVENT EMITTING AND LISTENING LOGIC FROM THE EVENT EMITTER CLASS
