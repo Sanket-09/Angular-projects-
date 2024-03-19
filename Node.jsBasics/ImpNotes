@@ -214,3 +214,61 @@ Regualar dependency - If the working of our application / code we are writing de
 Dev dependency - Helps us in the development process , eg code formatter , auto saver etc
 
 ## ARCHITECTURE OF NODEJS RUNTIME
+
+Node dependency are libraries which node relies on to work properly
+Most important dependency are V8 engine
+V8 engine is responsible for executing the javascript code
+V8 converts the javascript code into machine code
+
+LIBUV - is an open source library dealing with async input and output
+Also implements event loop and thread pool
+LIBUV is completely written in CPP
+
+## PROCESS , THREAD , AND THREAD POOL
+
+PROCESS
+A process is what facilitates the execution of a program
+program in execution is called as process
+By default every process by default has one single main thread
+
+THREAD
+A thread in a process is responsible for executing the program code
+Node js programs are executed inside one single thread
+A thread is where the code of the program gets executed
+Nodejs programs are executed in one single thread
+
+All the top level code , ie not in callback function
+will be executed in the main thread
+
+All other code which runs async like fs
+are executed in the background i.e thread pool
+
+All the heavy task which cannot be handled by main thread/event loop
+are offloaded to thread pool as main thread is supposed to be non blocking in nature
+
+There can be upto 1024 threads inside a thread pool
+
+EXPENSIVE TASK like dealing with file , DNS looksups, crytpo hashing are heavy and are taken up by thread pool.
+
+## HOW THE EVENT LOOP WORKS - IMPORTANT
+
+All the top level code gets executed in the main thread
+
+Async methods are provided to the thread pool
+thread of a thread pool is very different from the main thread
+eg - timer , file read etc
+
+In event loop functions wait for their execution
+
+THE EVENT LOOP RECEIVES EVENT WHENEVER SOMETHING IMPORTANT HAPPENS
+
+Event loop has multiple phases
+
+---
+
+Javascript is a single threaded , asynchronous, non-blocking, concurrent language
+Javascript has one call stack and can do one thing at a time
+
+CALL STACK
+EVENT LOOP
+CALLBACK QUEUE
