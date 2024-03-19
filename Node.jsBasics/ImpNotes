@@ -133,3 +133,84 @@ console.log("this callback function is the event handler")
 })
 
 ## THE SERVER OBJECT INHERITS ALL THE EVENT EMITTING AND LISTENING LOGIC FROM THE EVENT EMITTER CLASS
+
+## EMITTING AND HANDLING CUSTOM EVENTS
+
+Event emitters can emit named events
+
+## UNDERSTANDING STREAMS IN NODE.JS
+
+How does fs.readFile and fs.writeFile work?
+
+In fs.readFile the data is read from the source
+then it is stored in a readBuffer until all the data is copied into it
+and then the data is read by fs.readFile
+
+Similarly in the fs.writeFile, a write buffer is created
+
+IN ABOVE CASE
+THE PROBLEM IS IF WE READ A LARGE FILE and IF IT IS COMPLETELY READ THEN IT WILL BE STORED IN THE
+SYSTEM MEMORY
+
+## fs.readStream in this the read buffer will be there but a stream will be created where we could read the data piece by piece, unlike fs.readFile which read the whole data all at once
+
+Eg - Netflix , Youtube , aka buffering is stringStream
+
+Streaming makes the data processing more efficient in terms of memory
+it has advantage in terms of performance and time as well
+
+## THERE ARE FOUR DIFFERENT TYPES OF STREAM
+
+## READABLE
+
+streams from where we can read or consume data chunk by chunk, eg - reading from filesystem
+streams are instance of event emitter class
+in readAble streams, we can emit and listen to many events including
+
+DATA EVENT - emitted when there is a new new chunk of data is read and ready to use
+END DATA - emitted when there is no more data to consume
+
+## WRITABLE
+
+streams to which we can write data
+eg - httpResponse
+
+DRAIN EVENT - when the writable stream internal buffer is empty
+FINISH EVENT - after calling of the end method when all data is flushed into the hidden system
+
+## DUPLEX
+
+Both readable and writable at the same time
+there are less common
+eg - web socket
+
+## TRANSFORM
+
+Are duplex streams but can modify the data when it is being read or written
+
+## Functions to use on a stream
+
+PIPE - helps to plugs stream together , using pipe we can read and write at the same time
+READ - when we want to read each chunk from the readble stream one after other
+
+## BACK-PRESSURE
+
+HAppens response cannot send the data as fast as it is receiving the data
+solve it using pipe method
+
+## Pipe method is only available on readable streams, this fixes back-pressure
+
+Pipe method fixes the problem of back-pressure
+Makes the code more modular
+for pipe method there should be a readable source , in that pipe method we need to pass a writable destination i.e. writable stream, duplex stream, transform stream
+
+## NPM
+
+NPM is a command line interface as well as a repository from which you can install open source packages
+
+## TYPES OF PACKAGES
+
+Regualar dependency - If the working of our application / code we are writing depends
+Dev dependency - Helps us in the development process , eg code formatter , auto saver etc
+
+## ARCHITECTURE OF NODEJS RUNTIME

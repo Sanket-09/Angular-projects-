@@ -52,21 +52,26 @@
 // ************************HTTP REQUEST AND RESPONSE****************
 
 const fs = require('fs')
-const http = require('http')
+const http = require('http') //required to create a server
 const readline = require('readline') //require('readline') returns an object
-const url = require('url') //returns an urk object
+const url = require('url') //returns an url object
+const events = require('events')
 const replaceHtml = require('./modules/replaceHTML')
+const user = require('./modules/user')
 
-const html = fs.readFileSync('./Template/index.html', 'utf-8')
-let products = JSON.parse(fs.readFileSync('./Data/product.json', 'utf-8'))
+const html = fs.readFileSync('./Template/index.html', 'utf-8') //this is how you insert html in backend
+let products = JSON.parse(fs.readFileSync('./Data/product.json', 'utf-8')) // converting json object to js object
 const productListHTML = fs.readFileSync('./Template/productList.html', 'utf-8')
 const productDetailHTML = fs.readFileSync(
   './Template/product-details.html',
   'utf-8'
 )
 
-const server = http.createServer((req, res) => {
+const server = http.createServer()
+
+server.on('request', (req, res) => {
   let { query, pathname: path } = url.parse(req.url, true)
+  //initialising extraction of query parameters
 
   // let path = req.url;
 
@@ -84,13 +89,14 @@ const server = http.createServer((req, res) => {
     res.end(html.replace('{{%CONTENT%}}', 'You are in Contact Page'))
   } else if (path.toLocaleLowerCase() === '/products') {
     if (!query.id) {
+      //used when the url doesnt has any query then it will show all product page
       let productHTMLArray = products.map((prod) => {
-        return replaceHtml(productListHTML, prod)
+        return replaceHtml(productListHTML, prod) //converted into js object
       })
-      res.writeHead(200)
+      res.writeHead(200) //send response as 200 OK
       res.end(html.replace('{{%CONTENT%}}', productHTMLArray))
     } else {
-      let prod = products[query.id]
+      let prod = products[query.id] //if there is a query in the url having id then
       let productDetailResponseHTML = replaceHtml(productDetailHTML, prod)
       res.end(html.replace('{{%CONTENT%}}', productDetailResponseHTML))
     }
@@ -101,5 +107,19 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(8000, '127.0.0.1', () => {
-  console.log('The server has been started')
+  console.log('The server has been started at port 8000')
 })
+
+let myEmitter = new user() //here myEmitter is storing an instance of eventEmitter class
+
+myEmitter.on('User Created', (id, name) => {
+  console.log(`A new user with id ${id} and name ${name} is created!!!!!!`)
+})
+
+myEmitter.on('User Created', (id, name) => {
+  console.log(
+    `A new user2 with id ${id} and name ${name} is added in the database!!!`
+  )
+})
+
+myEmitter.emit('User Created', 270, 'Sanket')
