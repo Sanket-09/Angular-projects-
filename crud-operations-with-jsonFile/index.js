@@ -1,13 +1,15 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
+
 // create our express app
 const app = express()
+
 // middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-// route
 
+// route
 const routes = require('./route/route')
 app.use('/', routes)
 
