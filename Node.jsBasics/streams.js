@@ -18,7 +18,7 @@ server.listen(8000, '127.0.0.1', () => {
 //   })
 // })
 
-// //here we will use a readable and writable stream
+//here we will use a readable and writable stream
 // server.on('request', (req, res) => {
 //   let readableStream = fs.createReadStream(
 //     './assetTextFiles/large-file.txt',
@@ -38,7 +38,7 @@ server.listen(8000, '127.0.0.1', () => {
 //   })
 // })
 
-//third solution using the pipe method
+// //third solution using the pipe method
 server.on('request', (req, res) => {
   let rs = fs.createReadStream('./assetTextFiles/large-file.txt', 'utf-8')
   rs.pipe(res) //res is a writable stream

@@ -221,7 +221,6 @@ V8 engine is responsible for executing the javascript code
 V8 converts the javascript code into machine code
 
 LIBUV - is an open source library dealing with async input and output
-Also implements event loop and thread pool
 LIBUV is completely written in CPP
 
 ## PROCESS , THREAD , AND THREAD POOL
@@ -240,7 +239,7 @@ Nodejs programs are executed in one single thread
 All the top level code , ie not in callback function
 will be executed in the main thread
 
-All other code which runs async like fs
+All other code which runs async like file system (fs)
 are executed in the background i.e thread pool
 
 All the heavy task which cannot be handled by main thread/event loop
@@ -264,7 +263,7 @@ THE EVENT LOOP RECEIVES EVENT WHENEVER SOMETHING IMPORTANT HAPPENS
 
 Event loop has multiple phases
 
----
+## The programs in the the callback queue are pushed into the main thread only when the Main thread is empty and has completed executing all the top level function which are non blocking in nature.
 
 Javascript is a single threaded , asynchronous, non-blocking, concurrent language
 Javascript has one call stack and can do one thing at a time
@@ -272,3 +271,70 @@ Javascript has one call stack and can do one thing at a time
 CALL STACK
 EVENT LOOP
 CALLBACK QUEUE
+
+## Lec 28 EVENT LOOP NODE.JS
+
+Event loop is where all the callback functions wait for their execution
+
+Event loop offloads a callback function, which is doing some heavy task like file reading, to the thread pool
+
+An event loop has multiple phases
+and each phase has a callback queue
+each phase has its own callback queue
+
+FOUR MOST IMPORTANT PHASES OF AN EVENT LOOP
+
+# FIRST PHASE
+
+## Expired Timers
+
+When a timer expires then the callback function attached to the timer will be stored in this phase of the callback queue
+eg - setTimeout() , setInterval()
+as soon as the main thread is empty then the programs in the callback queue are executed by the event loop
+
+Lets say a timer expires when one of of the other phase is executing then the event loop will execute teh timer only when it cycles back to the first phase
+
+# THE CALLBACKS IN EACH QUEUE IS PROCESSED ONE BY ONE AND THEN ONLY THEY WILL MOVE ONTO NEXT PHASE
+
+# SECOND PHASE
+
+## Polling and IO Tasks
+
+Polling means looking for new IO events which are ready to be executed
+Most of the code that we write in our node.js application that gets executed in the second phase of the event loop
+
+# THIRD PHASE
+
+## CALLBACK FUNCTION ATTACH TO SETIMMEDIATE IS STORED
+
+It is a special type of timer that we can to use the callback just after IO Polling
+It is similar to setTimeout but with 0 time delay
+
+# FOURTH PHASE
+
+## CALLBACK ATTACHED TO CLOSE EVENT ARE STORED
+
+APART FROM THESE THERE ARE
+
+-- MICROTASK QUEUE - Related to resolved promises
+Only store callback function related to resolved promise
+can be executed anywhere after any phase, it just needs to be a resolved promise
+
+-- NEXTTICK QUEUE
+process.nexttick function executes just after the currently executing function
+can store callback for any function
+can be executed after any one of the above 4 phases
+
+above two are not related to the event loop
+
+## EVENT LOOP IN PRACTICAL
+
+⏱️ The event loop is responsible for executing asynchronous code in Node.js, ensuring efficient utilization of resources.
+🔄 The event loop has four phases: expired timers, IO-related tasks, set immediate functions, and close callbacks.
+📥 Callback functions attached to expired timers are stored in the first phase and executed in the main thread.
+🌐 IO-related tasks’ callback functions are stored in the second phase and executed after the IO task is completed.
+🕒 Set immediate functions’ callback functions are stored in the third phase and executed immediately.
+🔒 Close callbacks’ functions are stored in the fourth phase and executed before the next tick of the event loop.
+⚠️ There is a known bug in Node.js where set immediate functions may not always expire before other timers, causing unpredictable execution order.
+
+## ONCE THE EXECUTION OF THE CURRENTLY EXECUTING PHASE IS COMPLETE THEN IF THERE IS ANY CALLBACK FUNCTION IN THE MICROTASK QUEUE OR PROCESS.NEXTTICK QUEUE THAT WILL BE EXECUTED NEXT
