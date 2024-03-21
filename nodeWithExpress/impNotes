@@ -1,0 +1,51 @@
+## WHAT IS A WEB API
+
+What is a static website ?
+Generally has html,css and js file only
+There is no work done on the server and has no backend code
+
+Dynamic website usually built on the server // often called as web application
+they contain a database
+have a backend application running
+We build website , generate template which has css,html, and js and the genereated template is loaded by browser alongwith databse fetched data
+This is called server side rendering
+
+## API
+
+Piece of software which can be used by another piece of software to exchange information
+
+Types of API
+
+1 - fs and http
+modules in nodeJS are also API
+
+2 - Browser and DOM API
+Like fetch and getElementById
+
+3 -
+A class in programming language containing methods and properties
+
+## REST ARCHITECTURE
+
+It is a architectural style for providing standards between computer system on the web
+
+Principals
+1 - Separate APIs into logical resources
+2 - Expose structured/unstructured based URL
+
+Endpoints should only contain a resources(noun) and use HTTP methods for action
+GET
+POST
+PUT - The client is supposed to send the entire updated object
+PATCH - Only supposed to send part of the object that is changed
+DELETE - ID should be part of the URL
+
+req/res both should contain JSON data generally
+We do response formatting before req,res
+
+JSend JSON Data
+
+REST API Must be stateless
+All state is handled on the client and not on the server
+
+Server should never remember the previous request inorder to process the current request

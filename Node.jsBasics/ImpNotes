@@ -338,3 +338,12 @@ above two are not related to the event loop
 ⚠️ There is a known bug in Node.js where set immediate functions may not always expire before other timers, causing unpredictable execution order.
 
 ## ONCE THE EXECUTION OF THE CURRENTLY EXECUTING PHASE IS COMPLETE THEN IF THERE IS ANY CALLBACK FUNCTION IN THE MICROTASK QUEUE OR PROCESS.NEXTTICK QUEUE THAT WILL BE EXECUTED NEXT
+
+## EXPRESS JS
+
+It is a free and open source web application framework for nodejs
+Helps us develop nodejs application
+simplifies nodejs expressions
+It provides built in classes and functions
+
+Things like complex routing, easy handling of request and response , server side rendering is made simple

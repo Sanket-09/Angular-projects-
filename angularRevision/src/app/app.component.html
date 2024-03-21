@@ -102,3 +102,8 @@
 
 <h2>Templates</h2>
 <app-templates></app-templates>
+
+<h3>Two way data binding example using ngModel</h3>
+<input type="text" [(ngModel)]="value" />
+<p>Text is highlighted using custom directive</p>
+<span appHighlighter>{{ value }}</span>

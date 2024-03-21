@@ -11,6 +11,8 @@ import { ConditionalContentProjectionComponent } from './components/content-proj
 import { AsyncPipe, NgComponentOutlet } from '@angular/common';
 import { TemplatesComponent } from './components/templates/templates.component';
 import { TwoWayDataBindingComponent } from './components/templates/two-way-data-binding/two-way-data-binding.component'
+import { FormsModule } from '@angular/forms';
+import { HighlighterDirective } from './highlighter.directive'
 
 @NgModule({
   declarations: [
@@ -22,8 +24,10 @@ import { TwoWayDataBindingComponent } from './components/templates/two-way-data-
     ConditionalContentProjectionComponent,
     TemplatesComponent,
     TwoWayDataBindingComponent,
+    HighlighterDirective,
+
   ],
-  imports: [BrowserModule, AppRoutingModule, NgComponentOutlet, AsyncPipe],
+  imports: [BrowserModule, AppRoutingModule, NgComponentOutlet, AsyncPipe , FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

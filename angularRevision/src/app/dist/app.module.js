@@ -17,6 +17,9 @@ var basic_component_component_1 = require("./components/content-projection/basic
 var multi_content_projection_component_1 = require("./components/content-projection/multi-content-projection/multi-content-projection.component");
 var conditional_content_projection_component_1 = require("./components/content-projection/conditional-content-projection/conditional-content-projection.component");
 var common_1 = require("@angular/common");
+var templates_component_1 = require("./components/templates/templates.component");
+var two_way_data_binding_component_1 = require("./components/templates/two-way-data-binding/two-way-data-binding.component");
+var forms_1 = require("@angular/forms");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -29,8 +32,10 @@ var AppModule = /** @class */ (function () {
                 basic_component_component_1.BasicComponentComponent,
                 multi_content_projection_component_1.MultiContentProjectionComponent,
                 conditional_content_projection_component_1.ConditionalContentProjectionComponent,
+                templates_component_1.TemplatesComponent,
+                two_way_data_binding_component_1.TwoWayDataBindingComponent,
             ],
-            imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, common_1.NgComponentOutlet, common_1.AsyncPipe],
+            imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, common_1.NgComponentOutlet, common_1.AsyncPipe, forms_1.FormsModule],
             providers: [],
             bootstrap: [app_component_1.AppComponent]
         })
