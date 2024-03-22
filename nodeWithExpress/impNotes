@@ -49,3 +49,24 @@ REST API Must be stateless
 All state is handled on the client and not on the server
 
 Server should never remember the previous request inorder to process the current request
+
+## ROUTE PARAMETERS
+
+are named URL segments that are used to capture values specified at their position in the URL
+eg - movies/en/:id
+here id is a route parameter
+
+## PUT vs PATCH
+
+Both are methods used to update the data
+
+PUT is a method of modifying resource where the client sends data that updates the entire resource
+
+PATCH is a method of modifying resource where the cleint sends PARTIAL data that is to be updated without modifying the entire data.
+
+## WE USE OBJECT.ASSIGN TO MERGE TWO OBJECTS
+
+If they have different properties then a new object will be created and it will have properties of both the objects
+
+But if they have even 1 similarity
+then that property in the first object will the updated and its value will be set with the value of that property in the second object

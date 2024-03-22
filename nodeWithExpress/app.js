@@ -32,6 +32,57 @@ app.post('/api/v1/movies', (req, res) => {
   })
 })
 
+//API HAVING ROUTE PARAMETER
+app.get('/api/v1/movies/:id', (req, res) => {
+  const currentId = req.params.id * 1 //multiplying the id with 1 to change it to number from string
+  //to make a parameter optional , add a question mark
+
+  const currentMovie = movies.find((obj) => {
+    return obj.id === currentId
+  })
+
+  if (!currentMovie)
+    return res.status(404).json({
+      status: 'Not found',
+      data: {
+        movie: 'Movie with ID ' + currentId + ' not found',
+      },
+    })
+
+  res.status(200).json({
+    status: 'Sucess',
+    data: {
+      movie: currentMovie,
+    },
+  })
+})
+
+app.patch('/api/v1/movies/:id', (req, res) => {
+  const currId = req.params.id * 1
+  const currMovieToUpdate = movies.find((el) => el.id === currId)
+
+  if (!currMovieToUpdate) {
+    return res.status(404).json({
+      status: 'Not found',
+      message: 'Movie with ID ' + currId + ' not found',
+    })
+  }
+
+  let index = movies.indexOf(currMovieToUpdate) //this will return the index of the current movie
+
+  const updatedMovieObject = Object.assign(currMovieToUpdate, req.body)
+  movies[index] = currMovieToUpdate
+
+  fs.writeFile('/data/movies.json', JSON.stringify(movies), (err, val) => {
+    res.status(200).json({
+      status: 'Success',
+      data: {
+        movie: currMovieToUpdate,
+      },
+    })
+  })
+})
+
 const port = 3000
 
 app.listen(port, () => {

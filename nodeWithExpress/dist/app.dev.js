@@ -35,6 +35,53 @@ app.post('/api/v1/movies', function (req, res) {
       }
     });
   });
+}); //API HAVING ROUTE PARAMETER
+
+app.get('/api/v1/movies/:id', function (req, res) {
+  var currentId = req.params.id * 1; //multiplying the id with 1 to change it to number from string
+  //to make a parameter optional , add a question mark
+
+  var currentMovie = movies.find(function (obj) {
+    return obj.id === currentId;
+  });
+  if (!currentMovie) return res.status(404).json({
+    status: 'Not found',
+    data: {
+      movie: 'Movie with ID ' + currentId + ' not found'
+    }
+  });
+  res.status(200).json({
+    status: 'Sucess',
+    data: {
+      movie: currentMovie
+    }
+  });
+});
+app.patch('/api/v1/movies/:id', function (req, res) {
+  var currId = req.params.id * 1;
+  var currMovieToUpdate = movies.find(function (el) {
+    return el.id === currId;
+  });
+
+  if (!currMovieToUpdate) {
+    return res.status(404).json({
+      status: 'Not found',
+      message: 'Movie with ID ' + currId + ' not found'
+    });
+  }
+
+  var index = movies.indexOf(currMovieToUpdate); //this will return the index of the current movie
+
+  var updatedMovieObject = Object.assign(currMovieToUpdate, req.body);
+  movies[index] = currMovieToUpdate;
+  fs.writeFile('/data/movies.json', JSON.stringify(movies), function (err, val) {
+    res.status(200).json({
+      status: 'Success',
+      data: {
+        movie: currMovieToUpdate
+      }
+    });
+  });
 });
 var port = 3000;
 app.listen(port, function () {
