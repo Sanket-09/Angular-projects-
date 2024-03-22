@@ -5,14 +5,29 @@ var express = require('express'); //returns a function
 
 var fs = require('fs');
 
+var morgan = require('morgan');
+
 var app = express(); //stores the object
 
-app.use(express.json()); //route handler functions
+var logger = function logger(req, res, next) {
+  console.log('Custom middleware called');
+  next(); //need to call next else request will be stuck
+};
+
+app.use(express.json());
+app.use(morgan('dev')); //this has parenthesis because this function will return a function which will then be used
+
+app.use(logger);
+app.use(function (req, res, next) {
+  req.requestedAt = new Date().toISOString();
+  next();
+}); //route handler functions
 
 var getAllMovies = function getAllMovies(req, res) {
   //the callback function is known as route handler
   res.status(200).json({
     status: 'success',
+    requestedAt: req.requestedAt,
     count: movies.length,
     data: {
       movies: movies //formatted the data using json jsend formatting
@@ -124,8 +139,12 @@ var movies = JSON.parse(fs.readFileSync('data/movies.json')); // app.get('/api/v
 // //DELETE REQUEST
 // app.delete('/api/v1/movies/:id', deleteMovie)
 
-app.route('/api/v1/movies').get(getAllMovies).post(createMovie);
-app.route('/api/v1/movies/:id').get(getMovieById).patch(patchMovie)["delete"](deleteMovie);
+var moviesRouter = express.Router(); //returns a middleware
+
+moviesRouter.route('/').get(getAllMovies).post(createMovie);
+moviesRouter.route('/:id').get(getMovieById).patch(patchMovie)["delete"](deleteMovie);
+app.use('/api/v1/movies', moviesRouter); //mounting middleware to path
+
 var port = 3000;
 app.listen(port, function () {
   console.log('server has started');

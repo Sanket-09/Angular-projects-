@@ -85,3 +85,13 @@ req and res will be used to process the data,
 middleware can manipulate the req and res object data, it works after receiving the req and before sending the res
 order of execution of middleware is same as how their position is defined in the code
 In express the order of the code matters a lot
+
+## A middleware function has
+
+--> Request Object
+--> Response Object
+--> next method
+
+## THE ORDER IN WHICH MIDDLEWARE ARE DEFINED MATTERS A LOT IN NODE
+
+Route handlers are also kind of middleware
