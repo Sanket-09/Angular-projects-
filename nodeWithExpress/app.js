@@ -4,9 +4,8 @@ const fs = require('fs')
 const app = express() //stores the object
 app.use(express.json())
 
-let movies = JSON.parse(fs.readFileSync('data/movies.json'))
-
-app.get('/api/v1/movies', (req, res) => {
+//route handler functions
+const getAllMovies = (req, res) => {
   //the callback function is known as route handler
   res.status(200).json({
     status: 'success',
@@ -15,25 +14,9 @@ app.get('/api/v1/movies', (req, res) => {
       movies: movies, //formatted the data using json jsend formatting
     },
   })
-})
+}
 
-app.post('/api/v1/movies', (req, res) => {
-  const newId = movies[movies.length - 1].id + 1
-  const newMovie = Object.assign({ id: newId }, req.body) //object.assign combines two objects
-  movies.push(newMovie)
-
-  fs.writeFile('./data/movies.json', JSON.stringify(movies), (err, val) => {
-    res.status(201).json({
-      status: ' Success ',
-      data: {
-        movie: newMovie,
-      },
-    })
-  })
-})
-
-//API HAVING ROUTE PARAMETER
-app.get('/api/v1/movies/:id', (req, res) => {
+const getMovieById = (req, res) => {
   const currentId = req.params.id * 1 //multiplying the id with 1 to change it to number from string
   //to make a parameter optional , add a question mark
 
@@ -55,9 +38,24 @@ app.get('/api/v1/movies/:id', (req, res) => {
       movie: currentMovie,
     },
   })
-})
+}
 
-app.patch('/api/v1/movies/:id', (req, res) => {
+const createMovie = (req, res) => {
+  const newId = movies[movies.length - 1].id + 1
+  const newMovie = Object.assign({ id: newId }, req.body) //object.assign combines two objects
+  movies.push(newMovie)
+
+  fs.writeFile('./data/movies.json', JSON.stringify(movies), (err, val) => {
+    res.status(201).json({
+      status: ' Success ',
+      data: {
+        movie: newMovie,
+      },
+    })
+  })
+}
+
+const patchMovie = (req, res) => {
   const currId = req.params.id * 1
   const currMovieToUpdate = movies.find((el) => el.id === currId)
 
@@ -81,7 +79,60 @@ app.patch('/api/v1/movies/:id', (req, res) => {
       },
     })
   })
-})
+}
+
+const deleteMovie = (req, res) => {
+  const idDelete = req.params.id * 1
+  const movieToDelete = movies.find((el) => {
+    return el.id === idDelete
+  })
+
+  if (!movieToDelete) {
+    return res.status(404).json({
+      status: 'Failed',
+      data: {
+        message: 'Movie with ID ' + idDelete + ' not found',
+      },
+    })
+  }
+
+  const indexDelete = movies.indexOf(movieToDelete)
+
+  movies.splice(indexDelete, 1) //mutates the original array
+
+  fs.writeFile('./data/movies.json', JSON.stringify(movies), (err, val) => {
+    res.status(204).json({
+      status: 'Success',
+      data: {
+        movie: null,
+      },
+    })
+  })
+}
+
+let movies = JSON.parse(fs.readFileSync('data/movies.json'))
+
+// app.get('/api/v1/movies', getAllMovies)
+
+// app.post('/api/v1/movies', createMovie)
+
+// //Get single movie
+// //API HAVING ROUTE PARAMETER
+// app.get('/api/v1/movies/:id', getMovieById)
+
+// //PATCH REQUEST
+// app.patch('/api/v1/movies/:id', patchMovie)
+
+// //DELETE REQUEST
+// app.delete('/api/v1/movies/:id', deleteMovie)
+
+app.route('/api/v1/movies').get(getAllMovies).post(createMovie)
+
+app
+  .route('/api/v1/movies/:id')
+  .get(getMovieById)
+  .patch(patchMovie)
+  .delete(deleteMovie)
 
 const port = 3000
 

@@ -70,3 +70,18 @@ If they have different properties then a new object will be created and it will 
 
 But if they have even 1 similarity
 then that property in the first object will the updated and its value will be set with the value of that property in the second object
+
+## HOW EXPRESS ACTUALLY WORKS
+
+in the app.json
+
+app.use(express.json())
+express.json() is a middleware which adds a request body to the request object
+
+In betweent the request is received and response is sent ->
+
+1 - Whenver express receives reqeust/response from the app , express creates a request and response object
+req and res will be used to process the data,
+middleware can manipulate the req and res object data, it works after receiving the req and before sending the res
+order of execution of middleware is same as how their position is defined in the code
+In express the order of the code matters a lot
