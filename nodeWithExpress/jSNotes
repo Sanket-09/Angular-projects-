@@ -1,0 +1,65 @@
+## PROMISES
+
+States in a promise
+-> Resolved
+-> Rejected
+-> Pending
+
+syntax
+
+let p = new Promise((resolve , reject) => {
+let a = 1 + 1;
+
+    if(a==2)
+    {
+    resolve('Success')
+    }
+
+    else
+    {
+    reject('Failed')
+    }
+
+})
+
+## USING .then to interact with promise
+
+p.then((message) => {
+console.log('this is in the then ' + message);
+}).catch((message)=>{
+console.log("this is in the catch method " + message)
+})
+
+# CALLBACKS VS PROMISES
+
+Promise.all([]) //takes in input of all the promises that you want to evaluate and then call the methods
+
+all the promises in the parameter will run at the same time
+
+Lets say we want to output when one of the promises are completed
+we use
+Promise.race([list of promises])
+
+## ASYNC AWAIT
+
+used when to avoid nesting of .then and .catch
+
+inside async functions there are calls to other function which are prefixed by await
+the await block of code is executed and below code waits until that block of code is executed
+then when the current await function gives a resposne the code below it starts executing
+
+# how to catch error in async await ?
+
+## using TRY/CATCH block
+
+try{
+
+}
+
+catch(error){
+
+}
+
+## make sure to wrap code inisde of an function and name async keyword at the beginning of the funciton definition and use await before the functions you call inside the async block
+
+## INVERSION OF CONTROL due to CALLBACK HELL

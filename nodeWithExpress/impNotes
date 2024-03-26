@@ -95,3 +95,5 @@ In express the order of the code matters a lot
 ## THE ORDER IN WHICH MIDDLEWARE ARE DEFINED MATTERS A LOT IN NODE
 
 Route handlers are also kind of middleware
+
+
