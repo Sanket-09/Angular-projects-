@@ -32,6 +32,20 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
+//static method to login user
+userSchema.statics.login = async function (email, password) {
+  const user = await this.findOne({ email: email }) //this is used to refer to the user model in the databse
+
+  if (user) {
+    const auth = await bcrypt.compare(password, user.password) //comparing the password in database and the use entered password
+
+    if (auth) return user
+    throw Error('Incorrect Password')
+  }
+
+  throw Error('Incorrect email')
+}
+
 const User = mongoose.model('user', userSchema) //parameter 1 : what we want to call out model, should be singular form of the name of the database
 
 module.exports = User

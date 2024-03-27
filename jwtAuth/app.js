@@ -2,6 +2,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const authRoute = require('./routes/authRoutes.js')
 const cookieParser = require('cookie-parser')
+const {
+  requireAuth,
+  checkCurrentUser,
+} = require('./middleware/authMiddleware.js')
 
 const app = express()
 app.use(express.json()) //parses into javascript object so that we can access it
@@ -29,8 +33,9 @@ mongoose
   .catch((err) => console.log(err))
 
 // routes
+app.get('*', checkCurrentUser)
 app.get('/', (req, res) => res.render('home'))
-app.get('/smoothies', (req, res) => res.render('smoothies'))
+app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'))
 app.use(authRoute)
 
 // //set cookies
