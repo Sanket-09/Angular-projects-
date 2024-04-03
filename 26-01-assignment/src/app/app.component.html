@@ -1,36 +1,40 @@
 <!-- app.component.html -->
 
+<div *ngIf="!showAddItem && showHomePage">
+  <a href="http://localhost:4200/"
+    ><div class="logo">
+      <img src="../favicon.ico" alt="Your Logo" /></div
+  ></a>
 
-<div *ngIf="!showAddItem  && showHomePage">
-  <a href="http://localhost:4200/"><div class="logo">
-    <img src="../favicon.ico" alt="Your Logo" />
-  </div></a>
-  
-
-  <h1 style="font-family: sans-serif" id="EditForm">Lorem ipsum dolor sit amet.</h1>
+  <h1 style="font-family: sans-serif" id="EditForm">
+    Lorem ipsum dolor sit amet.
+  </h1>
 
   <p style="font-family: sans-serif">
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic fugit
     delectus, odio illo quidem quam laborum consequuntur distinctio voluptatem
     labore aliquam perferendis accusantium consequatur vel quis, voluptas
-    exercitationem enim! Illo. Lorem ipsum dolor sit amet consectetur
+    exercitationem enim! Illo. Lorem ipsumz dolor sit amet consectetur
     adipisicing elit. Porro commodi, totam cupiditate atque laborum a
     exercitationem voluptas rem impedit minima labore excepturi magnam iusto
     soluta non dolorum voluptates quisquam nisi.
   </p>
 
   <!-- Grid -->
-  <router-outlet></router-outlet> 
+  <router-outlet></router-outlet>
 
-  <div >
+  <div>
     <div class="grid-container">
       <div class="grid-item" *ngFor="let item of gridItems; let i = index">
         <div class="card" (click)="editItem(item.id)">
-          
           <!-- Nested Grid for Image and Information -->
           <div class="nested-grid">
             <div class="upper-half">
-              <img src="{{ item.image }}" alt="Card Image" class="nested-image" />
+              <img
+                src="{{ item.image }}"
+                alt="Card Image"
+                class="nested-image"
+              />
               <div class="overlay">
                 <p>Marketing Rights: {{ item.marketingRights }}</p>
               </div>
@@ -47,25 +51,13 @@
       </div>
     </div>
     <button (click)="navigateToAddItem()" class="button-3">Add New Item</button>
-   
   </div>
-
-
-  
-
 </div>
-
-
-
 
 <div *ngIf="showAddItem">
   <app-add-item></app-add-item>
 </div>
 
 <div *ngIf="showEditItem">
-   
   <app-edit-item></app-edit-item>
 </div>
-
-
-  

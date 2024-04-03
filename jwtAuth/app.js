@@ -1,7 +1,11 @@
 const express = require('express')
+const consola = require('consola')
+const cors = require('cors')
+const dotenv = require('dotenv')
+const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
 const authRoute = require('./routes/authRoutes.js')
-const cookieParser = require('cookie-parser')
+
 const {
   requireAuth,
   checkCurrentUser,

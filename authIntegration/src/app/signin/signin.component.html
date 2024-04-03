@@ -1,0 +1,12 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h2>Log In</h2>
+    <label for="email">Email</label>
+    <input type="text" formControlName="email" required />
+    <div *ngIf="loginForm.get('email')?.errors" class="email error">{{ errors.email }}</div>
+  
+    <label for="password">Password</label>
+    <input type="password" formControlName="password" required />
+    <div *ngIf="loginForm.get('password')?.errors" class="password error">{{ errors.password }}</div>
+  
+    <button type="submit">Sign in</button>
+  </form>

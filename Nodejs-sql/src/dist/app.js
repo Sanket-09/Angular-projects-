@@ -11,9 +11,12 @@ var AppClass = /** @class */ (function () {
     }
     AppClass.prototype._init = function () {
         dotenv.config({ path: './env/' + 'dev.env' });
+        //configuring dotenv to load the environment variables from the dev.env file located in the ./env/ directory.
         this.app.use(body_parser_1["default"].json({ limit: '50mb' }));
         //support application/x-www-form-urlencoded post data
         this.app.use(body_parser_1["default"].urlencoded({ extended: false, limit: '50mb' }));
+        /* adds another body-parser middleware to parse URL-encoded bodies (like the ones from HTML forms), with a limit of 50mb.
+        The extended: false option means that the URL-encoded data will be parsed with the querystring library. */
         // dbUtility.connect()
         this.app.use('/api/v1', index_router_1.baseRouter);
         //Not Found Routers

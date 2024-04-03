@@ -1,0 +1,32 @@
+<span *ngFor="let items of data">
+  <div>
+    <h3>{{ items.id }}</h3>
+    <img src="{{ items.imageURL }}" alt="" />
+    <h4>{{ items.addedBy }}</h4>
+    <h4>{{ items.createdDate | date }}</h4>
+    <h4>{{ items.markettingRights }}</h4>
+  </div>
+</span>
+
+<br />
+
+<button (click)="buttonClicked()">Add User</button>
+
+<input type="text" [(ngModel)]="imageURL" />
+<input type="text" [(ngModel)]="addedBy" />
+<input type="date" [(ngModel)]="createdDate" />
+<input type="text" [(ngModel)]="markettingRights" />
+
+<br />
+<br />
+
+<button (click)="deleteId()">Delete</button>
+<input type="text" [(ngModel)]="idToDelete" />
+
+<br />
+<br />
+
+<button (click)="editId()">Edit</button>
+<input type="text" [(ngModel)]="idToEdit" />
+<input type="text" [(ngModel)]="nameToEdit" />
+<input type="text" [(ngModel)]="emailToEdit" />

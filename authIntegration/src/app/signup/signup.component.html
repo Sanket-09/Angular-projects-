@@ -1,0 +1,14 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <h2>Sign up</h2>
+  <label for="email">Email</label>
+  <input type="text" formControlName="email" required />
+  <div *ngIf="errors.email" class="email error">{{ errors.email }}</div>
+
+  <label for="password">Password</label>
+  <input type="password" formControlName="password" required />
+  <div *ngIf="errors.password" class="password error">
+    {{ errors.password }}
+  </div>
+
+  <button type="submit">Sign up</button>
+</form>
