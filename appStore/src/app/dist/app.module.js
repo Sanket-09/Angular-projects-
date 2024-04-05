@@ -16,6 +16,11 @@ var material_module_1 = require("./material/material.module");
 var header_component_1 = require("./components/header/header.component");
 var home_component_1 = require("./pages/home/home.component");
 var product_header_component_1 = require("./pages/home/component/product-header/product-header.component");
+var filter_component_1 = require("./pages/home/component/filter/filter.component");
+var product_box_component_1 = require("./pages/home/component/product-box/product-box.component");
+var cart_component_1 = require("./pages/cart/cart.component");
+var service_worker_1 = require("@angular/service-worker");
+var environment_1 = require("../environments/environment");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -26,12 +31,19 @@ var AppModule = /** @class */ (function () {
                 header_component_1.HeaderComponent,
                 home_component_1.HomeComponent,
                 product_header_component_1.ProductHeaderComponent,
+                filter_component_1.FilterComponent,
+                product_box_component_1.ProductBoxComponent,
+                cart_component_1.CartComponent,
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 app_routing_module_1.AppRoutingModule,
                 animations_1.BrowserAnimationsModule,
                 material_module_1.MaterialModule,
+                service_worker_1.ServiceWorkerModule.register('ngsw-worker.js', {
+                    enabled: environment_1.environment.production,
+                    registrationStrategy: 'registerWhenStable:30000'
+                }),
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]
