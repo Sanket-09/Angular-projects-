@@ -9,7 +9,8 @@ import { HeaderComponent } from './components/header/header.component'
 import { HomeComponent } from './pages/home/home.component'
 import { ProductHeaderComponent } from './pages/home/component/product-header/product-header.component';
 import { FilterComponent } from './pages/home/component/filter/filter.component';
-import { ProductBoxComponent } from './pages/home/component/product-box/product-box.component'
+import { ProductBoxComponent } from './pages/home/component/product-box/product-box.component';
+import { CartComponent } from './pages/cart/cart.component'
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ProductBoxComponent } from './pages/home/component/product-box/product-
     ProductHeaderComponent,
     FilterComponent,
     ProductBoxComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,8 +10,10 @@ exports.AppRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var home_component_1 = require("./pages/home/home.component");
+var cart_component_1 = require("./pages/cart/cart.component");
 var routes = [
     { path: 'home', component: home_component_1.HomeComponent },
+    { path: 'cart', component: cart_component_1.CartComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 var AppRoutingModule = /** @class */ (function () {
