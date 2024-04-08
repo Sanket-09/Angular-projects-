@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
+import { loadStripe } from '@stripe/stripe-js'
 import { Cart, CartItem } from 'src/app/models/cart.model'
 import { CartService } from 'src/app/services/cart.service'
 
@@ -8,7 +10,7 @@ import { CartService } from 'src/app/services/cart.service'
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.cartService.cart.subscribe((_cart: Cart) => {
@@ -17,8 +19,19 @@ export class CartComponent implements OnInit {
     })
   }
 
-  onCheckout() {
-    throw new Error('Method not implemented.')
+  onCheckout(): void {
+    this.http
+      .post('http://localhost:4242/checkout', {
+        items: this.cart.items,
+      })
+      .subscribe(async (res: any) => {
+        let stripe = await loadStripe(
+          'pk_test_51P3EwSSFU85WlZULf8bSgiQHSGxoIynWGva7gvY5nEdXyzu7ktrj218J2P2f57DGpr06OF4ZT7VYVd4AT2SRHqYA006vjD1931'
+        )
+        stripe?.redirectToCheckout({
+          sessionId: res.id,
+        })
+      })
   }
 
   onRemoveFromCart(item: CartItem) {
