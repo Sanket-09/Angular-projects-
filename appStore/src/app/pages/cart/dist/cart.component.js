@@ -9,15 +9,23 @@ exports.__esModule = true;
 exports.CartComponent = void 0;
 var core_1 = require("@angular/core");
 var CartComponent = /** @class */ (function () {
-    function CartComponent() {
+    function CartComponent(cartService) {
+        this.cartService = cartService;
         this.cart = {
             items: [
                 {
                     product: 'https://picsum.photos/900',
                     name: 'Sneakers',
                     price: 450,
-                    quantity: 10,
+                    quantity: 7,
                     id: 1
+                },
+                {
+                    product: 'https://picsum.photos/1000',
+                    name: 'Aglets',
+                    price: 125,
+                    quantity: 4,
+                    id: 2
                 },
             ]
         };
@@ -32,7 +40,29 @@ var CartComponent = /** @class */ (function () {
         ];
     }
     CartComponent.prototype.ngOnInit = function () {
-        this.datasource = this.cart.items;
+        var _this = this;
+        this.cartService.cart.subscribe(function (_cart) {
+            _this.cart = _cart;
+            _this.datasource = _this.cart.items;
+        });
+    };
+    CartComponent.prototype.onCheckout = function () {
+        throw new Error('Method not implemented.');
+    };
+    CartComponent.prototype.onRemoveFromCart = function (item) {
+        this.cartService.removeFromCart(item);
+    };
+    CartComponent.prototype.onClearCart = function () {
+        this.cartService.clearCart();
+    };
+    CartComponent.prototype.getTotal = function (items) {
+        return this.cartService.getTotal(items);
+    };
+    CartComponent.prototype.onAddQuantity = function (item) {
+        this.cartService.addToCart(item);
+    };
+    CartComponent.prototype.onRemoveQuantity = function (item) {
+        this.cartService.removeQuantity(item);
     };
     CartComponent = __decorate([
         core_1.Component({

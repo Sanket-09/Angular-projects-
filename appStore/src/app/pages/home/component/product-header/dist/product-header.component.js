@@ -11,15 +11,19 @@ var core_1 = require("@angular/core");
 var ProductHeaderComponent = /** @class */ (function () {
     function ProductHeaderComponent() {
         this.columnsCountChange = new core_1.EventEmitter();
+        this.itemsCountChange = new core_1.EventEmitter();
+        this.sortChange = new core_1.EventEmitter();
         this.itemsShowCount = 12;
         this.sort = 'desc';
     }
     ProductHeaderComponent.prototype.ngOnInit = function () { };
     ProductHeaderComponent.prototype.onSortUpdated = function (newSort) {
         this.sort = newSort;
+        this.sortChange.emit(newSort);
     };
     ProductHeaderComponent.prototype.onItemsUpdated = function (count) {
         this.itemsShowCount = count;
+        this.itemsCountChange.emit(count);
     };
     ProductHeaderComponent.prototype.onColumnsUpdated = function (colsNum) {
         this.columnsCountChange.emit(colsNum);
@@ -27,6 +31,12 @@ var ProductHeaderComponent = /** @class */ (function () {
     __decorate([
         core_1.Output()
     ], ProductHeaderComponent.prototype, "columnsCountChange");
+    __decorate([
+        core_1.Output()
+    ], ProductHeaderComponent.prototype, "itemsCountChange");
+    __decorate([
+        core_1.Output()
+    ], ProductHeaderComponent.prototype, "sortChange");
     ProductHeaderComponent = __decorate([
         core_1.Component({
             selector: 'app-product-header',

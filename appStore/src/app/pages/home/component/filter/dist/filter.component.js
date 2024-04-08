@@ -9,13 +9,25 @@ exports.__esModule = true;
 exports.FilterComponent = void 0;
 var core_1 = require("@angular/core");
 var FilterComponent = /** @class */ (function () {
-    function FilterComponent() {
+    function FilterComponent(storeService) {
+        this.storeService = storeService;
         this.showCategory = new core_1.EventEmitter();
-        this.categories = ['shoes', 'tank-tops', 'shirt'];
     }
-    FilterComponent.prototype.ngOnInit = function () { };
+    FilterComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.categoriesSubscription = this.storeService
+            .getAllCategories()
+            .subscribe(function (response) {
+            _this.categories = response;
+        });
+    };
     FilterComponent.prototype.onShowCategory = function (category) {
         this.showCategory.emit(category);
+    };
+    FilterComponent.prototype.ngOnDestroy = function () {
+        if (this.categoriesSubscription) {
+            this.categoriesSubscription.unsubscribe();
+        }
     };
     __decorate([
         core_1.Output()

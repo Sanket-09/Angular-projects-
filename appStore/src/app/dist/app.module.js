@@ -21,6 +21,9 @@ var product_box_component_1 = require("./pages/home/component/product-box/produc
 var cart_component_1 = require("./pages/cart/cart.component");
 var service_worker_1 = require("@angular/service-worker");
 var environment_1 = require("../environments/environment");
+var cart_service_1 = require("./services/cart.service");
+var store_service_1 = require("./services/store.service");
+var http_1 = require("@angular/common/http");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -44,8 +47,9 @@ var AppModule = /** @class */ (function () {
                     enabled: environment_1.environment.production,
                     registrationStrategy: 'registerWhenStable:30000'
                 }),
+                http_1.HttpClientModule,
             ],
-            providers: [],
+            providers: [cart_service_1.CartService, store_service_1.StoreService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

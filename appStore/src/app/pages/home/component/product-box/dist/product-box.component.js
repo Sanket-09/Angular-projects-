@@ -10,9 +10,19 @@ exports.ProductBoxComponent = void 0;
 var core_1 = require("@angular/core");
 var ProductBoxComponent = /** @class */ (function () {
     function ProductBoxComponent() {
+        this.addToCart = new core_1.EventEmitter();
         this.fullwidthMode = false;
     }
+    ProductBoxComponent.prototype.onAddToCart = function () {
+        this.addToCart.emit(this.product);
+    };
     ProductBoxComponent.prototype.ngOnInit = function () { };
+    __decorate([
+        core_1.Output()
+    ], ProductBoxComponent.prototype, "addToCart");
+    __decorate([
+        core_1.Input()
+    ], ProductBoxComponent.prototype, "product");
     __decorate([
         core_1.Input()
     ], ProductBoxComponent.prototype, "fullwidthMode");

@@ -12,6 +12,9 @@ import { ProductBoxComponent } from './pages/home/component/product-box/product-
 import { CartComponent } from './pages/cart/cart.component'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { environment } from '../environments/environment'
+import { CartService } from './services/cart.service'
+import { StoreService } from './services/store.service'
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -33,8 +36,9 @@ import { environment } from '../environments/environment'
 
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [CartService, StoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
