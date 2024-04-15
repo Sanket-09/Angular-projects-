@@ -7,7 +7,8 @@ import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.com
 import { TutorialDetailsComponent } from './components/tutorial-details/tutorial-details.component'
 import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component'
 import { FormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { TutorialsPublishedComponent } from './components/tutorials-published/tutorials-published.component'
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http'
     AddTutorialComponent,
     TutorialDetailsComponent,
     TutorialsListComponent,
+    TutorialsPublishedComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

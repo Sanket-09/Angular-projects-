@@ -15,6 +15,10 @@ export class TutorialService {
     return this.http.get<Tutorial[]>(baseUrl)
   }
 
+  getAllPublished(): Observable<Tutorial[]> {
+    return this.http.get<Tutorial[]>(`${baseUrl}/published`)
+  }
+
   get(id: any): Observable<Tutorial> {
     return this.http.get<Tutorial>(`${baseUrl}/${id}`)
   }

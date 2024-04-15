@@ -16,6 +16,9 @@ var TutorialService = /** @class */ (function () {
     TutorialService.prototype.getAll = function () {
         return this.http.get(baseUrl);
     };
+    TutorialService.prototype.getAllPublished = function () {
+        return this.http.get(baseUrl + "/published");
+    };
     TutorialService.prototype.get = function (id) {
         return this.http.get(baseUrl + "/" + id);
     };
