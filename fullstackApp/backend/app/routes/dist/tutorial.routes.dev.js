@@ -8,7 +8,9 @@ module.exports = function (app) {
 
   router.post('/', tutorials.create); // Retrieve all Tutorials
 
-  router.get('/', tutorials.findAll); // Retrieve all published Tutorials
+  router.get('/', tutorials.findAll); // filter data
+
+  router.get('/currentCategory', tutorials.filterData); // Retrieve all published Tutorials
 
   router.get('/published', tutorials.findAllPublished); // Retrieve a single Tutorial with id
 

@@ -37,16 +37,6 @@ var TutorialsPublishedComponent = /** @class */ (function () {
         this.currentTutorial = tutorial;
         this.currentIndex = index;
     };
-    TutorialsPublishedComponent.prototype.removeAllTutorials = function () {
-        var _this = this;
-        this.tutorialService.deleteAll().subscribe({
-            next: function (res) {
-                console.log(res);
-                _this.refreshList();
-            },
-            error: function (e) { return console.error(e); }
-        });
-    };
     TutorialsPublishedComponent.prototype.searchTitle = function () {
         var _this = this;
         this.currentTutorial = {};

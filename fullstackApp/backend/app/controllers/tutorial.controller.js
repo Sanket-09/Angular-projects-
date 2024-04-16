@@ -32,6 +32,39 @@ exports.create = (req, res) => {
     })
 }
 
+exports.filterData = (req, res) => {
+  const description = req.query.category
+  var condition
+
+  if (description !== 'Show All') {
+    condition = description
+      ? { description: { [Op.iLike]: `%${description}%` } }
+      : null
+
+    Tutorial.findAll({ where: condition })
+      .then((data) => {
+        res.send(data)
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || 'Some error occurred while retrieving tutorials.',
+        })
+      })
+  } else {
+    Tutorial.findAll()
+      .then((data) => {
+        res.send(data)
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || 'Some error occurred while retrieving tutorials.',
+        })
+      })
+  }
+}
+
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title

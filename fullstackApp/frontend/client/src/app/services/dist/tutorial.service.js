@@ -16,6 +16,9 @@ var TutorialService = /** @class */ (function () {
     TutorialService.prototype.getAll = function () {
         return this.http.get(baseUrl);
     };
+    TutorialService.prototype.getSortedData = function (currentCategory) {
+        return this.http.get(baseUrl + "/currentCategory?category=" + currentCategory);
+    };
     TutorialService.prototype.getAllPublished = function () {
         return this.http.get(baseUrl + "/published");
     };

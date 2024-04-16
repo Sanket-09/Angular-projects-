@@ -30,6 +30,34 @@ exports.create = function (req, res) {
       message: err.message || 'Some error occurred while creating the Tutorial.'
     });
   });
+};
+
+exports.filterData = function (req, res) {
+  var description = req.query.category;
+  var condition;
+
+  if (description !== 'Show All') {
+    condition = description ? {
+      description: _defineProperty({}, Op.iLike, "%".concat(description, "%"))
+    } : null;
+    Tutorial.findAll({
+      where: condition
+    }).then(function (data) {
+      res.send(data);
+    })["catch"](function (err) {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving tutorials.'
+      });
+    });
+  } else {
+    Tutorial.findAll().then(function (data) {
+      res.send(data);
+    })["catch"](function (err) {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving tutorials.'
+      });
+    });
+  }
 }; // Retrieve all Tutorials from the database.
 
 

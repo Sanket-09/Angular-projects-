@@ -16,6 +16,13 @@ var tutorial_details_component_1 = require("./components/tutorial-details/tutori
 var tutorials_list_component_1 = require("./components/tutorials-list/tutorials-list.component");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/common/http");
+var tutorials_published_component_1 = require("./components/tutorials-published/tutorials-published.component");
+var animations_1 = require("@angular/platform-browser/animations");
+var form_field_1 = require("@angular/material/form-field");
+var select_1 = require("@angular/material/select");
+var input_1 = require("@angular/material/input");
+var button_1 = require("@angular/material/button");
+var menu_1 = require("@angular/material/menu");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -26,8 +33,21 @@ var AppModule = /** @class */ (function () {
                 add_tutorial_component_1.AddTutorialComponent,
                 tutorial_details_component_1.TutorialDetailsComponent,
                 tutorials_list_component_1.TutorialsListComponent,
+                tutorials_published_component_1.TutorialsPublishedComponent,
             ],
-            imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, forms_1.FormsModule, http_1.HttpClientModule],
+            imports: [
+                platform_browser_1.BrowserModule,
+                app_routing_module_1.AppRoutingModule,
+                forms_1.FormsModule,
+                http_1.HttpClientModule,
+                animations_1.BrowserAnimationsModule,
+                form_field_1.MatFormFieldModule,
+                select_1.MatSelectModule,
+                input_1.MatInputModule,
+                forms_1.FormsModule,
+                button_1.MatButtonModule,
+                menu_1.MatMenuModule,
+            ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]
         })

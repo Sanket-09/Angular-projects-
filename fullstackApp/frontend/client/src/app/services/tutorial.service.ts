@@ -15,6 +15,12 @@ export class TutorialService {
     return this.http.get<Tutorial[]>(baseUrl)
   }
 
+  getSortedData(currentCategory: any): Observable<Tutorial[]> {
+    return this.http.get<Tutorial[]>(
+      `${baseUrl}/currentCategory?category=${currentCategory}`
+    )
+  }
+
   getAllPublished(): Observable<Tutorial[]> {
     return this.http.get<Tutorial[]>(`${baseUrl}/published`)
   }

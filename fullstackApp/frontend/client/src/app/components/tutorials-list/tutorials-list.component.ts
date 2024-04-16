@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { Tutorial } from 'src/app/models/tutorial.model'
 import { TutorialService } from '../../services/tutorial.service'
+import { FormsModule } from '@angular/forms'
+import { MatInputModule } from '@angular/material/input'
+import { MatSelectModule } from '@angular/material/select'
+import { MatFormFieldModule } from '@angular/material/form-field'
 
 @Component({
   selector: 'app-tutorials-list',
@@ -12,6 +16,9 @@ export class TutorialsListComponent implements OnInit {
   currentTutorial: Tutorial = {}
   currentIndex = -1
   title = ''
+  categories: (string | undefined)[] = []
+  selectedValue: any
+  currentCategory: any
 
   constructor(private tutorialService: TutorialService) {}
 
@@ -24,6 +31,11 @@ export class TutorialsListComponent implements OnInit {
       next: (data) => {
         this.tutorials = data
         console.log(data)
+
+        this.categories = [...new Set(data.map((movie) => movie.description))]
+        this.categories.push('Show All')
+        this.categories.reverse()
+        console.log(this.categories)
       },
       error: (e) => console.error(e),
     })
@@ -57,9 +69,17 @@ export class TutorialsListComponent implements OnInit {
     this.tutorialService.findByTitle(this.title).subscribe({
       next: (data) => {
         this.tutorials = data
-        console.log(data)
       },
       error: (e) => console.error(e),
+    })
+  }
+
+  onCategoryChange($event: any) {
+    this.tutorialService.getSortedData(this.currentCategory).subscribe({
+      next: (data) => {
+        this.tutorials = data
+      },
+      error: (e) => console.log(e),
     })
   }
 }

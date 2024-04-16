@@ -3,3 +3,11 @@
     max-width: 750px;
     margin: auto;
   }
+
+.mat-form-field{
+  margin-bottom: 0px !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
